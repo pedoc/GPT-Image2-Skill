@@ -30,3 +30,10 @@ __pycache__/
 
 # OS / build
 .cache/
+build/
+dist/
+*.egg-info/
+
+# Claude Code runtime state (OMC-style)
+.omc/
+.claude/state/

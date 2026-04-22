@@ -46,6 +46,8 @@ The PEP 723 header pulls `httpx` + `python-dotenv` automatically on first run; n
 
 All of the images below were produced in one shot by the skill at `--quality high`, with no manual edits. Prompt texts live under [`docs/`](docs/) so you can reproduce them.
 
+### Commercial & editorial design
+
 <table>
 <tr>
 <td width="50%" valign="top">
@@ -76,6 +78,37 @@ All of the images below were produced in one shot by the skill at `--quality hig
 <img src="docs/example-character-sheet.png" alt="Cyberpunk engineer character reference sheet" />
 <br><strong>Character reference sheet with cross-view consistency</strong><br>
 <em>Neo-Shanghai 2085 — front/side/back three-view, six-expression grid, jacket / utility-belt / AR-glasses / boots callouts, five-swatch color palette, worldview panel. Face shape, hairstyle, and outfit stay identical across views.</em>
+</td>
+</tr>
+</table>
+
+### Research-paper figures
+
+Paper-ready figures for ML/AI publications. Muted academic palette, flat vector style, crisp labels — the kind of Figure 1 you'd send to NeurIPS, ICML, or ICLR camera-ready.
+
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/example-transformer-arch.png" alt="Transformer encoder-decoder architecture diagram" />
+<br><strong>Transformer architecture block diagram</strong><br>
+<em>Encoder / decoder dual-stack with residual connections, multi-head self-attention, cross-attention with "keys, values" link, positional encoding, Linear → Softmax head. Camera-ready Vaswani-style layout.</em>
+</td>
+<td width="50%" valign="top">
+<img src="docs/example-rag-pipeline.png" alt="Retrieval-Augmented Generation pipeline diagram" />
+<br><strong>RAG systems diagram</strong><br>
+<em>Six-stage left-to-right pipeline: user query → embedding encoder → vector store → retrieved passages → frozen LLM → grounded answer with inline citation. Offline / online regions marked with dashed outlines.</em>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<img src="docs/example-safety-taxonomy.png" alt="LLM prompt-attack landscape taxonomy tree" />
+<br><strong>LLM safety taxonomy tree</strong><br>
+<em>3:4 hierarchy diagram of prompt-attack landscape: root → failure modes (competing objectives / mismatched generalization / internal safety collapse) × attack surfaces (chat prompt / tool return / retrieval corpus / multi-turn). Academic citation style.</em>
+</td>
+<td valign="top">
+<img src="docs/example-diffusion-chain.png" alt="Denoising diffusion forward and reverse chain" />
+<br><strong>Diffusion forward / reverse chain</strong><br>
+<em>Canonical DDPM-style figure: top chain shows progressive Gaussian noise corruption x₀ → x_T; bottom chain shows learned reverse denoising with ε_θ(x_t, t) blocks between frames. Loop-closing arrows label "T diffusion steps" and "sample x₀".</em>
 </td>
 </tr>
 </table>

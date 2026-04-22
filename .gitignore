@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+.uv-cache/
+
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Generated images (callers write outputs next to where they invoke the script)
+*.png
+*.jpg
+*.jpeg
+*.webp
+!docs/*.png
+!docs/*.jpg
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS / build
+.cache/

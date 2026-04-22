@@ -69,9 +69,9 @@ Requires `uv` and Python ≥ 3.11. Dependencies (`httpx`, `python-dotenv`) auto-
 
 ## 3. Showcase
 
-All images produced one-shot at `--quality high`. Every prompt + its source is in [`references/gallery.md`](references/gallery.md); captions below name the origin so you can trace it.
+All images produced one-shot at `--quality high`. Every prompt is in [`references/gallery.md`](references/gallery.md); captions below credit the original source so you can trace it.
 
-### Editorial posters & typography (portrait)
+### Chinese typography & posters
 
 <table>
 <tr>
@@ -82,34 +82,49 @@ All images produced one-shot at `--quality high`. Every prompt + its source is i
 <td valign="top"><img src="docs/example-museum-infographic.png" alt="Museum-catalog infographic (唐代襦裙)" /><br><em>Museum-catalog infographic (唐代襦裙) · community (<a href="https://x.com/MrLarus/status/2045504669401653414">@MrLarus</a>)</em></td>
 <td valign="top"><img src="docs/example-song-dynasty-feed.png" alt="Song Dynasty social-media feed (宋朝朋友圈)" /><br><em>Song Dynasty social-media feed (宋朝朋友圈) · community (<a href="https://x.com/Panda20230902/status/2045385588065313057">@Panda20230902</a>)</em></td>
 </tr>
-<tr>
-<td valign="top"><img src="docs/example-saul-bass-poster.png" alt="Saul-Bass-style thriller poster — THE LAST HEIR" /><br><em>Saul-Bass-style thriller poster · original (Bass lineage)</em></td>
-<td valign="top"><img src="docs/example-manga-relationship.png" alt="A Tale of Two Cities manga relationship map" /><br><em>Manga relationship map — <em>A Tale of Two Cities</em> · community (<a href="https://x.com/cht0001/status/2046920121239908380">@cht0001</a>)</em></td>
-</tr>
 </table>
 
-### Product, food & knowledge cards (portrait)
+### Editorial & design posters
 
 <table>
 <tr>
-<td width="50%" valign="top"><img src="docs/example-encyclopedia-panda.png" alt="Giant Panda field-guide infographic" /><br><em>Encyclopedia field guide (Giant Panda) · community (<a href="https://x.com/MrLarus/status/2046231542817497392">@MrLarus</a>)</em></td>
+<td width="50%" valign="top"><img src="docs/example-saul-bass-poster.png" alt="Saul-Bass-style thriller poster — THE LAST HEIR" /><br><em>Saul-Bass-style thriller poster · original (Bass lineage)</em></td>
+<td width="50%" valign="top"><img src="docs/example-manga-relationship.png" alt="A Tale of Two Cities manga relationship map" /><br><em>Manga relationship map — <em>A Tale of Two Cities</em> · community (<a href="https://x.com/cht0001/status/2046920121239908380">@cht0001</a>)</em></td>
+</tr>
+</table>
+
+### Infographics & field guides
+
+<table>
+<tr>
+<td colspan="2" align="center" valign="top"><img src="docs/example-encyclopedia-panda.png" alt="Giant Panda encyclopedia-style infographic" width="55%" /><br><em>Encyclopedia field guide (Giant Panda) · community (<a href="https://x.com/MrLarus/status/2046231542817497392">@MrLarus</a>)</em></td>
+</tr>
+</table>
+
+### Product & food photography
+
+<table>
+<tr>
 <td width="50%" valign="top"><img src="docs/example-product-chocolate-wafer.png" alt="Chocolate wafer JSON-style product render" /><br><em>Chocolate wafer product render (JSON-style) · community (<a href="https://x.com/mehvishs25/status/2020693181730598932">@mehvishs25</a>)</em></td>
-</tr>
-<tr>
-<td colspan="2" align="center" valign="top"><img src="docs/example-food-salad-explosion.png" alt="Salad explosion food photography" width="55%" /><br><em>Salad-explosion food photography (JSON-style) · community (<a href="https://x.com/ChillaiKalan__">@ChillaiKalan__</a>)</em></td>
+<td width="50%" valign="top"><img src="docs/example-food-salad-explosion.png" alt="Salad explosion food photography" /><br><em>Salad-explosion food photo (JSON-style) · community (<a href="https://x.com/ChillaiKalan__">@ChillaiKalan__</a>)</em></td>
 </tr>
 </table>
 
-### Games & photorealism (landscape)
+### Gaming landscapes
 
 <table>
 <tr>
-<td width="50%" valign="top"><img src="docs/example-hitman-openai.png" alt="Hitman-style gameplay at OpenAI HQ" /><br><em>Hitman-style gameplay (OpenAI HQ) · community (<a href="https://x.com/flowersslop/status/2044734896321532390">@flowersslop</a>)</em></td>
+<td width="50%" valign="top"><img src="docs/example-hitman-openai.png" alt="Hitman-style gameplay at OpenAI HQ" /><br><em>Hitman gameplay — OpenAI HQ · community (<a href="https://x.com/flowersslop/status/2044734896321532390">@flowersslop</a>)</em></td>
 <td width="50%" valign="top"><img src="docs/example-gta6-beach.png" alt="GTA 6 Vice City beach gameplay" /><br><em>GTA 6 gameplay — Vice City beach · community (<a href="https://x.com/WolfRiccardo/status/2041187268711321735">@WolfRiccardo</a>)</em></td>
 </tr>
+</table>
+
+### Photorealism & reportage
+
+<table>
 <tr>
-<td valign="top"><img src="docs/example-photoreal-subway.png" alt="RAW iPhone subway photorealism" /><br><em>RAW iPhone — 42nd Street subway · community (<a href="https://x.com/WolfRiccardo/status/2041192232623972441">@WolfRiccardo</a>)</em></td>
-<td valign="top"><img src="docs/example-handwritten-notebook.png" alt="Handwritten notebook flatlay" /><br><em>Handwritten notebook flatlay · community (<a href="https://x.com/patrickassale/status/2044569086013718958">@patrickassale</a>)</em></td>
+<td width="50%" valign="top"><img src="docs/example-photoreal-subway.png" alt="RAW iPhone subway photorealism" /><br><em>RAW iPhone — 42nd Street subway · community (<a href="https://x.com/WolfRiccardo/status/2041192232623972441">@WolfRiccardo</a>)</em></td>
+<td width="50%" valign="top"><img src="docs/example-handwritten-notebook.png" alt="Handwritten notebook flatlay" /><br><em>Handwritten notebook flatlay · community (<a href="https://x.com/patrickassale/status/2044569086013718958">@patrickassale</a>)</em></td>
 </tr>
 <tr>
 <td valign="top"><img src="docs/example-chess-midgame.png" alt="Chess board mid-game photorealism" /><br><em>Chess board mid-game · community (<a href="https://x.com/EddGorenstein/status/2046923077993259196">@EddGorenstein</a>)</em></td>
@@ -117,7 +132,7 @@ All images produced one-shot at `--quality high`. Every prompt + its source is i
 </tr>
 </table>
 
-### Cinematic & animation (landscape)
+### Cinematic & animation
 
 <table>
 <tr>
@@ -140,7 +155,7 @@ All images produced one-shot at `--quality high`. Every prompt + its source is i
 </tr>
 </table>
 
-### Research paper figures (landscape)
+### Research paper figures
 
 <table>
 <tr>
@@ -170,39 +185,36 @@ All images produced one-shot at `--quality high`. Every prompt + its source is i
 
 ---
 
-## Ecosystem
+## Acknowledgements
 
-Drop-in for the broader agent ecosystem. Known-working integrations:
+This skill stands on the shoulders of the GPT Image 2 creator community. Every showcase image credits its source inline; consolidated list below.
 
-| Runtime | Trigger | Install hint |
-|---|---|---|
-| **Claude Code** | `/gpt-image …` or natural language | `~/.claude/skills/gpt-image/` |
-| **Claude.ai Skills** | built-in skill picker | upload repo zip via the UI |
-| **Codex** | `/gpt-image …` | drop under Codex's skills dir |
-| **OpenCode** | auto-discovery on image-gen intent | drop under OpenCode's skills dir |
-| **Cursor Agent** | `/gpt-image …` | paste [`SKILL.md`](SKILL.md) as system prompt |
-| **Aider** | direct invoke | `/run uv run scripts/generate.py …` |
-| **Hermes** | auto-discovery | per Hermes skill conventions |
-| **Plain shell** | `uv run scripts/generate.py …` | zero agent needed |
-
-Not listed? Any runtime that can execute a Python script and read `~/.env` works — the script has no SDK pin, no venv, just PEP 723 inline deps.
-
-### Upstream credits
-
+**Upstream model**
 - **OpenAI** — the `gpt-image-2` model itself (`/v1/images/generations`, `/v1/images/edits`).
-- [`ZeroLu/awesome-gpt-image`](https://github.com/ZeroLu/awesome-gpt-image) — 56 community-curated editorial prompts under CC BY 4.0; per-entry `@handle` attribution preserved in [`references/gallery.md`](references/gallery.md).
-- **Research-figure prompts** — original contributions, paper inspirations cited per-entry (Vaswani, Lewis, Ho, Kaplan / Hoffmann, Madaan, Clark, Yao, Wu et al., Greshake, …).
 
-### Reference files
+**Prompt-gallery upstream**
+- [`ZeroLu/awesome-gpt-image`](https://github.com/ZeroLu/awesome-gpt-image) — 56 community-curated editorial prompts, CC BY 4.0; per-entry `@handle` attribution preserved in [`references/gallery.md`](references/gallery.md).
+- [`ResearAI/AutoFigure`](https://github.com/ResearAI/AutoFigure) — related project on LLM-based scientific figure generation (different architecture: review-refine loop).
 
-| Need | File |
-|---|---|
-| Full flag table | [`SKILL.md`](SKILL.md) |
-| 69 prompt templates with attribution | [`references/gallery.md`](references/gallery.md) |
-| 12 prompt-craft principles | [`references/craft.md`](references/craft.md) |
-| The script | [`scripts/generate.py`](scripts/generate.py) |
+**Community creators cited per-image**
+- [卡尔的AI沃茨 (WeChat)](https://mp.weixin.qq.com/s/ASxig6mFVYxrIE8-8Fthew) — tea poster, music player, e-commerce app, 16-panel anime expression grid
+- [@MrLarus](https://x.com/MrLarus) — museum-catalog infographic, encyclopedia field guide, GTA 6 template, character relationship diagrams
+- [@akokoi1](https://x.com/akokoi1) — 1980s propaganda poster
+- [@Panda20230902](https://x.com/Panda20230902) — Song Dynasty social-media feed
+- [@flowersslop](https://x.com/flowersslop) — Hitman / OpenAI HQ gameplay, GTA San Andreas
+- [@WolfRiccardo](https://x.com/WolfRiccardo) — GTA 6 gameplay, RAW iPhone subway
+- [@patrickassale](https://x.com/patrickassale) — handwritten notebook photo, Apple Park keynote
+- [@EddGorenstein](https://x.com/EddGorenstein) — chess board mid-game
+- [@AIimagined](https://x.com/AIimagined) — 360° equirectangular panorama
+- [@mehvishs25](https://x.com/mehvishs25) — JSON-style product render
+- [@ChillaiKalan__](https://x.com/ChillaiKalan__) — JSON-style food photography
+- [@cht0001](https://x.com/cht0001) — manga relationship map for literature
+- [@MANISH1027512](https://x.com/MANISH1027512) — character reference sheet format
+- [@icreatelife](https://x.com/icreatelife) — 360° panorama + Codex 3D viewer workflow
+- [@PANewsLab](https://x.com/PANewsLab) — Chinese person-profile poster template
 
-**API-key resolution** (later wins): process env → `./.env` → `~/.env`.
+**Research-figure paper inspirations** (each prompt in `references/gallery.md` cites the paper)
+Vaswani et al. 2017 (Transformer) · Lewis et al. 2020 (RAG) · Ho et al. 2020 (DDPM) · Kaplan et al. 2020 / Hoffmann et al. 2022 (scaling laws / Chinchilla) · Madaan et al. 2023 (Self-Refine) · Clark et al. 2019 (BERT attention) · Yao et al. 2022 (ReAct) · Wu et al. 2023 (AutoGen) · Liang et al. 2023 (HELM) · Greshake et al. 2023 (indirect prompt injection)
 
 ---
 

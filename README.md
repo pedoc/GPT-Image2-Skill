@@ -91,6 +91,22 @@ All images produced one-shot at `--quality high`. Every prompt is in [`reference
 <td width="50%" valign="top"><img src="docs/example-saul-bass-poster.png" alt="Saul-Bass-style thriller poster — THE LAST HEIR" /><br><em>Saul-Bass-style thriller poster · original (Bass lineage)</em></td>
 <td width="50%" valign="top"><img src="docs/example-manga-relationship.png" alt="A Tale of Two Cities manga relationship map" /><br><em>Manga relationship map — <em>A Tale of Two Cities</em> · community (<a href="https://x.com/cht0001/status/2046920121239908380">@cht0001</a>)</em></td>
 </tr>
+<tr>
+<td valign="top"><img src="docs/example-vogue-cover.png" alt="Vogue-style fashion magazine cover" /><br><em>Vogue-style fashion magazine cover · original</em></td>
+<td valign="top"><img src="docs/example-pulp-scifi-cover.png" alt="1950s Astounding Stories pulp cover" /><br><em>1950s sci-fi pulp cover (Astounding Stories) · original</em></td>
+</tr>
+</table>
+
+### Anime & manga
+
+<table>
+<tr>
+<td width="50%" valign="top"><img src="docs/example-anime-jjk-action.png" alt="MAPPA-style anime action still (Jujutsu Kaisen aesthetic)" /><br><em>MAPPA-style anime action still · aesthetic ref: Jujutsu Kaisen</em></td>
+<td width="50%" valign="top"><img src="docs/example-anime-naruto-clash.png" alt="Naruto-style ninja battle clash" /><br><em>Shōnen battle key-visual · aesthetic ref: Naruto Shippuden</em></td>
+</tr>
+<tr>
+<td colspan="2" align="center" valign="top"><img src="docs/example-manga-spread.png" alt="Shōnen manga two-page spread — basketball slam dunk" width="85%" /><br><em>Shōnen manga two-page spread (basketball dunk) · original, Slam-Dunk tradition</em></td>
+</tr>
 </table>
 
 ### Infographics & field guides

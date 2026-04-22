@@ -6,12 +6,19 @@ license: CC BY 4.0 (prompt patterns attributed to original authors)
 
 # gpt-image
 
-General image generation/editing CLI for OpenAI's `gpt-image-2`. Designed for agents: all API parameters are first-class flags on `scripts/generate.py`, defaults are sane, output is a file on disk. The skill auto-loads when Claude detects an image-generation intent — no slash command needed.
+General image generation/editing CLI for OpenAI's `gpt-image-2`. Designed for agents: all API parameters are first-class flags, defaults are sane, output is a file on disk. The skill auto-loads when Claude detects an image-generation intent — no slash command needed.
 
 ## One-line usage
 
 ```bash
-uv run ~/.claude/skills/gpt-image/scripts/generate.py -p "PROMPT" [-f OUT] [-i REF...] [-m MASK] [options]
+# As a Claude Code plugin (installed via /plugin install):
+uv run "$CLAUDE_PLUGIN_ROOT/skills/gpt-image/scripts/generate.py" -p "PROMPT" [-f OUT] [-i REF...] [-m MASK] [options]
+
+# As a direct CLI (installed via uvx or uv tool install):
+uvx --from git+https://github.com/wuyoscar/gpt_image_2_skill gpt-image -p "PROMPT" [-f OUT] [-i REF...] [-m MASK] [options]
+
+# Or once installed globally:
+gpt-image -p "PROMPT" [-f OUT] [-i REF...] [-m MASK] [options]
 ```
 
 Reads `OPENAI_API_KEY` from env. Writes to `OUT` (or auto-named `YYYY-MM-DD-HH-MM-SS-<slug>.png` in `./fig/` or cwd). Prints output path(s) on stdout. Exit 0 on success, 1 on API error, 2 on bad args / missing key.

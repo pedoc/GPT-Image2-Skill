@@ -1,73 +1,46 @@
 # gpt-2-image-skill
 
-A portable **Agent Skill + CLI** for OpenAI **GPT Image 2** (`gpt-image-2`). Works with Claude Code, Codex CLI, OpenCode, Cursor Agent, Aider, and plain shell — anywhere you can run `uv`.
+OpenAI GPT Image 2 skill — curated prompt templates + CLI. Set `OPENAI_API_KEY` in env (or `~/.env`) before use.
 
-Comes with a curated prompt gallery for the hard stuff: dense Chinese typography, photorealism, posters, infographics, character sheets, research-paper figures, image editing.
+## Install
 
+**Claude Code** (plugin):
 
----
-
-## 1. Skill Quick Start
-
-Once installed, invoke the skill with the same slash command in any SKILL.md-aware agent:
-
-```
-/gpt-image a photorealistic convenience store at 10pm, 1024x1024
-
-/gpt-image Design a 3:4 tea poster with exact Chinese copy
-"山川茶事" / "冷泡系列" / "中杯 16 元" / "大杯 19 元"
-
-/gpt-image colorize ./fig/manga-page.jpg and translate the text to Chinese
-
-/gpt-image combine fig/cat.png and fig/kfc_logo.png into a collab poster
+```shell
+/plugin marketplace add wuyoscar/gpt_image_2_skill
+/plugin install gpt-image@wuyoscar-skills
 ```
 
-Compatible with:
-
-- **Claude Code**
-- **Codex**
-- **OpenCode**
-- Any SKILL.md-aware runtime
-
-### Tips
-
-- Put displayed text in **quotes** — agents preserve it verbatim.
-- State **aspect / size** upfront (`3:4`, `2K`, `landscape`, `portrait`, `4K`).
-- Name a **reference image path** to flip to edit mode; add a **mask** for inpainting.
-- Default `--quality` is `high` — say "use quality low" for cheap iteration.
-
----
-
-## 2. Install
-
-### Option A — Skill-aware agent (auto-discovery)
+**Codex / other SKILL.md-aware agent** — clone into the agent's skills directory:
 
 ```bash
-git clone https://github.com/wuyoscar/gpt_image_2_skill ~/.claude/skills/gpt-image
-export OPENAI_API_KEY=sk-...
+git clone https://github.com/wuyoscar/gpt_image_2_skill.git
 ```
 
-Restart the agent and it will surface the skill on any image-gen intent.
+Point the agent at `skills/gpt-image/SKILL.md` inside the clone.
 
-| Runtime | Install path |
-|---|---|
-| Claude Code | `~/.claude/skills/<name>/SKILL.md` |
-| Claude.ai Skills | upload `.zip` of this repo via the UI |
-| OpenCode / Hermes | check the project docs for their skills dir |
+**Build your own custom skill on top** — use the [skill-creator](https://github.com/anthropics/claude-skills) skill:
 
-### Option B — Standalone CLI anywhere
+```
+/skill-creator
+> Please help me create a skill based on https://github.com/wuyoscar/gpt_image_2_skill
+```
+
+**CLI anywhere** (no agent needed):
 
 ```bash
-git clone https://github.com/wuyoscar/gpt_image_2_skill ~/tools/gpt-image
-export OPENAI_API_KEY=sk-...
-uv run ~/tools/gpt-image/scripts/generate.py -p "a cat astronaut"
+uvx --from git+https://github.com/wuyoscar/gpt_image_2_skill gpt-image -p "a cat astronaut"
+
+# or install to PATH
+uv tool install git+https://github.com/wuyoscar/gpt_image_2_skill
+gpt-image -p "a cat astronaut"
 ```
 
-Requires `uv` and Python ≥ 3.11. Dependencies (`httpx`, `python-dotenv`) auto-install on first run via PEP 723 inline metadata — no pip install, no venv.
+Requires [`uv`](https://github.com/astral-sh/uv) + Python ≥ 3.11. Deps auto-install.
 
 ---
 
-## 3. Showcase
+## Showcase
 
 All images produced one-shot at `--quality high`. Every prompt is in [`references/gallery.md`](references/gallery.md); captions below credit the original source so you can trace it.
 

@@ -34,13 +34,27 @@ Reads `OPENAI_API_KEY` from env. Writes to `OUT` (or auto-named `YYYY-MM-DD-HH-M
 | `--input-fidelity` | `low` \| `high` | — | edits | Controls how closely the output tracks the reference. Supported on `gpt-image-1` and `gpt-image-1.5`; silently ignored by `gpt-image-2` (already high fidelity by default). |
 | `--model` | str | `gpt-image-2` | both | Model ID. Fallbacks: `gpt-image-1.5`, `gpt-image-1`, `gpt-image-1-mini`. |
 | `--size` | literal / shortcut | `1024x1024` | both | Literals: `1024x1024`, `1536x1024`, `1024x1536`, `2048x2048`, `2048x1152`, `3840x2160`, `2160x3840`, or any 16-px multiple up to 3840 max edge (3:1 ratio cap, 655k–8.3M total pixels). Shortcuts: `1k` `2k` `4k` `portrait` `landscape` `square` `wide` `tall`. |
-| `--quality` | `auto` \| `low` \| `medium` \| `high` | `high` | both | Cost roughly 10× per step. `low` ≈ $0.005/img, `medium` ≈ $0.04, `high` ≈ $0.17. We default to `high` because gpt-image-2's typography and fine-detail rendering degrade noticeably below it. Override to `low` for quick iterations. |
+| `--quality` | `auto` \| `low` \| `medium` \| `high` | `high` | both | Cost roughly 10× per step. `low` ≈ $0.005/img, `medium` ≈ $0.04, `high` ≈ $0.17. CLI default stays `high`, but agents should choose deliberately: `low` for cheap drafts / large sweeps, `medium` for normal exploration, `high` for final assets, typography, Chinese text, diagrams, or anything shipping-facing. |
 | `-n, --n` | int | `1` | both | Number of images to return. `>1` suffixes filenames `_0`, `_1`, … |
 | `--background` | `auto` \| `opaque` | API default | generations only | `opaque` disables transparent background. |
 | `--moderation` | `auto` \| `low` | API default | generations only | `low` relaxes content filter where policy allows. |
 | `--format` | `png` \| `jpeg` \| `webp` | `png` | both | Response encoding. |
 | `--compression` | int 0–100 | — | both | JPEG/WebP compression. Ignored for PNG. |
 | `--user` | str | — | both | Optional end-user identifier for OpenAI abuse tracking. |
+
+## Budget / quality policy for agents
+
+Use `--quality` as the budget dial. There is no separate `--budget` flag in this CLI.
+
+- `low` — cheap draft mode. Use for broad prompt exploration, collecting many variants, gallery mining, rough composition checks, or when the user explicitly wants low cost / fast iteration.
+- `medium` — balanced mode. Use for normal one-off exploration, style probing, or cases where readability matters but the output is not yet final.
+- `high` — shipping / report mode. Use for Chinese text, posters, infographics, paper figures, dense labels, multi-panel layouts, banners, or any asset likely to be kept.
+
+Rule of thumb for autonomous agents:
+- If the user asks for **many variants**, **cheap**, **draft**, **explore**, or **collect**, start with `low`.
+- If the user asks for **polished but still exploratory**, use `medium`.
+- If the user asks for **final**, **fancy**, **hero**, **paper figure**, **poster**, **diagram**, or **exact text**, use `high`.
+- If unsure, keep the CLI default `high` for text-heavy / delivery-facing outputs; otherwise prefer `medium` during exploration.
 
 ## Endpoint selection (official OpenAI cookbook pattern)
 

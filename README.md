@@ -121,7 +121,7 @@ Under the hood: `POST /v1/images/edits` (multipart form), the official endpoint 
 | `-m, --mask` | path (PNG, alpha) | — | edits | Opaque = preserved, transparent = regenerated. Requires `-i`. |
 | `--input-fidelity` | `low` · `high` | — | edits | Supported on `gpt-image-1`/`1.5`; silently ignored by `gpt-image-2`. |
 | `--size` | `1k` · `2k` · `4k` · `portrait` · `landscape` · `square` · `wide` · `tall` · literal `1024x1024` etc. | `1024x1024` | both | Literals must be 16-px multiples, max edge 3840, 3:1 cap, 655k–8.3M total pixels. |
-| `--quality` | `auto` · `low` · `medium` · `high` | `high` | both | Typography and fine detail degrade noticeably below `high`. |
+| `--quality` | `auto` · `low` · `medium` · `high` | `high` | both | This is the practical budget dial: `low` for cheap drafts / large sweeps, `medium` for normal exploration, `high` for final text-heavy or shipping-facing assets. |
 | `-n, --n` | int | 1 | both | Batch generation. `n>1` suffixes filenames `_0`, `_1`, … |
 | `--background` | `auto` · `opaque` | API default | generations | `opaque` disables transparency. |
 | `--moderation` | `auto` · `low` | API default | generations | `low` relaxes the content filter where policy allows. |
@@ -129,6 +129,16 @@ Under the hood: `POST /v1/images/edits` (multipart form), the official endpoint 
 | `--compression` | 0–100 | — | both | JPEG/WebP only. |
 
 </details>
+
+### Budget / quality guide
+
+There is no separate `budget` flag here — use `--quality` as the budget knob.
+
+- `low` = cheap draft / collect / many variants
+- `medium` = normal exploration / style probing
+- `high` = final posters, Chinese text, diagrams, paper figures, banners
+
+If you are generating dozens of candidates, start at `low` and only rerun finalists at `high`.
 
 Exit codes: `0` success · `1` API/refusal error (full response body echoed to stderr) · `2` bad args or missing `OPENAI_API_KEY`.
 
@@ -621,7 +631,6 @@ open("docs/example-gta6-beach.png", "wb").write(base64.b64decode(result.data[0].
 
 ---
 
-
 #### No. 8 · Dark-fantasy swamp boss hunt
 
 <img src="docs/example-original-dark-fantasy-hunt.png" width="720" alt="Dark-fantasy swamp boss hunt"/>
@@ -658,11 +667,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-original-dark-fantasy-hunt.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Model: gpt-image-2
 ```
 
 </details>
@@ -705,18 +709,13 @@ import base64
 open("docs/example-original-epic-fellowship-bridge.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Model: gpt-image-2
-```
-
 </details>
 
 #### No. 10 · Retro Japanese town pixel RPG
 
 <img src="docs/example-community-reddit-10-retro-japan-rpg.png" width="560" alt="Retro Japanese town pixel RPG"/>
 
-<sub>Gaming · `landscape` · `1536x1024`</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1kozn4u/retro_video_games_in_japan_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -750,18 +749,13 @@ import base64
 open("docs/example-community-reddit-10-retro-japan-rpg.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Source Link: https://www.reddit.com/r/midjourney/comments/1kozn4u/retro_video_games_in_japan_prompts_included/
-```
-
 </details>
 
 #### No. 11 · Cyberpunk Europe action HUD
 
 <img src="docs/example-community-reddit-12-cyberpunk-europe-action.png" width="560" alt="Cyberpunk Europe action HUD"/>
 
-<sub>Gaming · `landscape` · `1536x1024`</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1kzzy77/cyberpunk_video_games_in_european_cities_prompts/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -795,18 +789,13 @@ import base64
 open("docs/example-community-reddit-12-cyberpunk-europe-action.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Source Link: https://www.reddit.com/r/midjourney/comments/1kzzy77/cyberpunk_video_games_in_european_cities_prompts/
-```
-
 </details>
 
 #### No. 12 · Anime open-world adventure HUD
 
 <img src="docs/example-community-reddit-06-anime-open-world.png" width="560" alt="Anime open-world adventure HUD"/>
 
-<sub>Gaming · `landscape` · `1536x1024`</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1lh2l98/anime_style_video_games_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -840,18 +829,13 @@ import base64
 open("docs/example-community-reddit-06-anime-open-world.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Source Link: https://www.reddit.com/r/midjourney/comments/1lh2l98/anime_style_video_games_prompts_included/
-```
-
 </details>
 
 #### No. 13 · Low-poly samurai strategy village
 
 <img src="docs/example-community-reddit-11-lowpoly-samurai-strategy.png" width="560" alt="Low-poly samurai strategy village"/>
 
-<sub>Gaming · `landscape` · `1536x1024`</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1l2d5dr/lowpoly_strategy_video_games_in_japan_prompts/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -883,11 +867,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-community-reddit-11-lowpoly-samurai-strategy.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Source Link: https://www.reddit.com/r/midjourney/comments/1l2d5dr/lowpoly_strategy_video_games_in_japan_prompts/
 ```
 
 </details>
@@ -1174,12 +1153,11 @@ open("docs/example-ghibli-cottage.png", "wb").write(base64.b64decode(result.data
 
 ---
 
-
 #### No. 19 · VHS grocery-store chaos still
 
 <img src="docs/example-community-reddit-09-vhs-grocery-chaos.png" width="560" alt="VHS grocery-store chaos still"/>
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+<sub>Cinematic & Animation · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1211,11 +1189,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-community-reddit-09-vhs-grocery-chaos.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Source Link: https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/
 ```
 
 </details>
@@ -1281,12 +1254,11 @@ open("docs/example-character-sheet.png", "wb").write(base64.b64decode(result.dat
 
 ---
 
-
 #### No. 21 · Elven archer sketchbook concept sheet
 
 <img src="docs/example-community-reddit-08-elven-archer-sheet.png" width="560" alt="Elven archer sketchbook concept sheet"/>
 
-<sub>Character Design · `portrait` · `1024x1536`</sub>
+<sub>Character Design · `portrait` · `1024x1536` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1jrcpan/fantasy_concept_arts_with_v7_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1318,11 +1290,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-community-reddit-08-elven-archer-sheet.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Source Link: https://www.reddit.com/r/midjourney/comments/1jrcpan/fantasy_concept_arts_with_v7_prompts_included/
 ```
 
 </details>
@@ -1730,12 +1697,11 @@ open("docs/example-boston-poster.png", "wb").write(base64.b64decode(result.data[
 
 ---
 
-
 #### No. 28 · Epic silhouette worldbuilding poster
 
 <img src="docs/example-community-xhs-01-epic-silhouette-poster.png" width="560" alt="Epic silhouette worldbuilding poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e324cd0000000021039ca9)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1769,18 +1735,13 @@ import base64
 open("docs/example-community-xhs-01-epic-silhouette-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Source Link: https://www.xiaohongshu.com/explore/69e324cd0000000021039ca9
-```
-
 </details>
 
 #### No. 29 · Dual-exposure narrative poster
 
 <img src="docs/example-community-xhs-06-dual-exposure-poster.png" width="560" alt="Dual-exposure narrative poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e7a01700000000230153f3)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1814,18 +1775,13 @@ import base64
 open("docs/example-community-xhs-06-dual-exposure-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Source Link: https://www.xiaohongshu.com/explore/69e7a01700000000230153f3
-```
-
 </details>
 
 #### No. 30 · Journey to the West silhouette epic poster
 
 <img src="docs/example-community-xhs-10-journey-west-silhouette.png" width="560" alt="Journey to the West silhouette epic poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e78cd4000000002103bdd3)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1857,11 +1813,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-community-xhs-10-journey-west-silhouette.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Source Link: https://www.xiaohongshu.com/explore/69e78cd4000000002103bdd3
 ```
 
 </details>
@@ -2041,12 +1992,11 @@ open("docs/example-pixel-sprite-cars.png", "wb").write(base64.b64decode(result.d
 
 ---
 
-
 #### No. 35 · Pixel art breakfast still life
 
 <img src="docs/example-community-reddit-05-pixel-breakfast.png" width="560" alt="Pixel art breakfast still life"/>
 
-<sub>Pixel Art · `1k` · `1k`</sub>
+<sub>Pixel Art · `1k` · `1k` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1jmodcx/animated_pixel_art_food_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2078,11 +2028,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-community-reddit-05-pixel-breakfast.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Source Link: https://www.reddit.com/r/midjourney/comments/1jmodcx/animated_pixel_art_food_prompts_included/
 ```
 
 </details>
@@ -2130,12 +2075,11 @@ open("docs/example-isometric-cafe.png", "wb").write(base64.b64decode(result.data
 
 ---
 
-
 #### No. 37 · Isometric fantasy village map
 
 <img src="docs/example-community-reddit-03-isometric-fantasy-village.png" width="560" alt="Isometric fantasy village map"/>
 
-<sub>Isometric · `1k` · `1k`</sub>
+<sub>Isometric · `1k` · `1k` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1hkqr4x/isometric_maps_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2167,11 +2111,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-community-reddit-03-isometric-fantasy-village.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Source Link: https://www.reddit.com/r/midjourney/comments/1hkqr4x/isometric_maps_prompts_included/
 ```
 
 </details>
@@ -2444,12 +2383,11 @@ open("docs/example-food-salad-explosion.png", "wb").write(base64.b64decode(resul
 
 ---
 
-
 #### No. 41 · Universal commercial poster template
 
 <img src="docs/example-community-xhs-07-aurora-oolong-poster.png" width="560" alt="Universal commercial poster template"/>
 
-<sub>Product & Food · `portrait` · `1024x1536`</sub>
+<sub>Product & Food · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e7878300000000230050bb)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2481,11 +2419,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-community-xhs-07-aurora-oolong-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Source Link: https://www.xiaohongshu.com/explore/69e7878300000000230050bb
 ```
 
 </details>
@@ -2898,12 +2831,11 @@ open("docs/example-encyclopedia-panda.png", "wb").write(base64.b64decode(result.
 
 ---
 
-
 #### No. 49 · Weekend Seoul travel guide poster
 
 <img src="docs/example-community-xhs-09-seoul-travel-guide.png" width="560" alt="Weekend Seoul travel guide poster"/>
 
-<sub>Infographics & Field Guides · `portrait` · `1024x1536`</sub>
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e8cd0d0000000023007215)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2937,18 +2869,13 @@ import base64
 open("docs/example-community-xhs-09-seoul-travel-guide.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Source Link: https://www.xiaohongshu.com/explore/69e8cd0d0000000023007215
-```
-
 </details>
 
 #### No. 50 · Modular encyclopedia infographic card
 
 <img src="docs/example-community-xhs-02-snow-leopard-encyclopedia-card.png" width="560" alt="Modular encyclopedia infographic card"/>
 
-<sub>Infographics & Field Guides · `portrait` · `1024x1536`</sub>
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e832170000000023012116)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2982,18 +2909,13 @@ import base64
 open("docs/example-community-xhs-02-snow-leopard-encyclopedia-card.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Source Link: https://www.xiaohongshu.com/explore/69e832170000000023012116
-```
-
 </details>
 
 #### No. 51 · Xiaohongshu cooking tutorial card
 
 <img src="docs/example-community-xhs-08-cooking-tutorial-card.png" width="560" alt="Xiaohongshu cooking tutorial card"/>
 
-<sub>Infographics & Field Guides · `portrait` · `1024x1536`</sub>
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e8eeed0000000021004a54)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3025,11 +2947,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-community-xhs-08-cooking-tutorial-card.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Source Link: https://www.xiaohongshu.com/explore/69e8eeed0000000021004a54
 ```
 
 </details>
@@ -3883,11 +3800,6 @@ import base64
 open("docs/example-original-memory-router-figure.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Model: gpt-image-2
-```
-
 </details>
 
 #### No. 64 · Frontier Safety Eval Loop
@@ -3928,18 +3840,13 @@ import base64
 open("docs/example-original-frontier-safety-eval-loop.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Model: gpt-image-2
-```
-
 </details>
 
 #### No. 65 · ICLR-style method figure
 
 <img src="docs/example-community-xhs-03-hmr-iclr-figure.png" width="560" alt="ICLR-style method figure"/>
 
-<sub>Research Paper Figures · `landscape` · `1536x1024`</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69d396140000000023012282)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3973,18 +3880,13 @@ import base64
 open("docs/example-community-xhs-03-hmr-iclr-figure.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
-**Other**
-```text
-Source Link: https://www.xiaohongshu.com/explore/69d396140000000023012282
-```
-
 </details>
 
 #### No. 66 · Minimal research illustration prompt
 
 <img src="docs/example-community-xhs-05-llm-agent-research-illustration.png" width="560" alt="Minimal research illustration prompt"/>
 
-<sub>Research Paper Figures · `landscape` · `1536x1024`</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/67e414010000000007037315)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4016,11 +3918,6 @@ result = client.images.generate(
 
 import base64
 open("docs/example-community-xhs-05-llm-agent-research-illustration.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Source Link: https://www.xiaohongshu.com/explore/67e414010000000007037315
 ```
 
 </details>
@@ -4243,7 +4140,7 @@ open("docs/example-openai-comic-pet.png", "wb").write(base64.b64decode(result.da
 |---|---|
 | <img src="docs/example-chess-midgame.png" width="420" alt="Chess mid-game original"/> | <img src="docs/example-edit-chess-winter.png" width="420" alt="Chess mid-game restyled as winter scene"/> |
 
-<sub>Edit Endpoint Showcase · `square` · `1024x1024`</sub>
+<sub>Edit Endpoint Showcase · `square` · `1024x1024` · Author: [OpenAI cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4277,12 +4174,6 @@ result = client.images.edit(
 
 import base64
 open("docs/example-edit-chess-winter.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-**Other**
-```text
-Endpoint: /v1/images/edits
-Source Link: https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb
 ```
 
 </details>
@@ -4357,7 +4248,6 @@ open("docs/example-prompt-injection-flow.png", "wb").write(base64.b64decode(resu
 </details>
 
 ---
-
 
 ### 📱 UI/UX Mockups
 
@@ -6404,8 +6294,6 @@ Per-entry source links are **inline with every community entry** above. This sec
 - [`YouMind-OpenLab/awesome-gpt-image-2`](https://github.com/YouMind-OpenLab/awesome-gpt-image-2) — the numbered-gallery layout is modeled after their README.
 - [`EvoLinkAI/awesome-gpt-image-2-prompts`](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts) — gap-filling prompts for Watercolor / Ink / Isometric / Cyberpunk.
 - [`ResearAI/AutoFigure`](https://github.com/ResearAI/AutoFigure) — related LLM scientific-figure project that inspired our Research Figures category.
-
-
 
 ---
 

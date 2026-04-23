@@ -128,8 +128,8 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--quality", default="high", choices=["auto", "low", "medium", "high"],
-        help="Rendering fidelity (cost scales ~10× per step). Default high — gpt-image-2's "
-             "typography and scene density degrade noticeably below high.",
+        help="Rendering fidelity / budget knob (cost scales ~10× per step). Default high. "
+             "Use low for cheap drafts, medium for normal exploration, high for final text-heavy or shipping-facing assets.",
     )
     p.add_argument("-n", "--n", type=int, default=1, help="Number of images to return. Default 1.")
     p.add_argument(

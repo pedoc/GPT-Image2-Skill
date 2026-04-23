@@ -12,24 +12,33 @@
   <img src="docs/gptimage2skill-banner.png" alt="GPTImage2Skill banner" width="100%"/>
 </p>
 
+<p align="center"><sub>Compact prompt report for posters, games, research figures, collectible-style visuals, and agent-ready GPT-o1 image-tool calls.</sub></p>
+
 ---
 
 ## 📥 Install
 
-### Claude Code
+<details>
+<summary>Claude Code</summary>
 
 ```text
 /plugin marketplace add wuyoscar/gpt_image_2_skill
 /plugin install gpt-image@wuyoscar-skills
 ```
 
-### Codex
+</details>
+
+<details>
+<summary>Codex</summary>
 
 ```text
 $skill-installer https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/gpt-image
 ```
 
-### Manual skill install
+</details>
+
+<details>
+<summary>Manual skill install</summary>
 
 ```bash
 git clone https://github.com/wuyoscar/gpt_image_2_skill.git
@@ -38,7 +47,10 @@ mkdir -p ~/.codex/skills
 ln -s "$PWD/skills/gpt-image" ~/.codex/skills/gpt-image
 ```
 
-### CLI
+</details>
+
+<details>
+<summary>CLI</summary>
 
 ```bash
 uvx --from git+https://github.com/wuyoscar/gpt_image_2_skill gpt-image -p "a cat astronaut"
@@ -48,13 +60,31 @@ uv tool install git+https://github.com/wuyoscar/gpt_image_2_skill
 gpt-image -p "a cat astronaut"
 ```
 
+</details>
 
+<details>
+<summary>Update</summary>
+
+```bash
+# plugin: use Claude Code's update flow
+# codex skill: rerun the installer
+# manual git clone
+cd gpt_image_2_skill && git pull
+
+# CLI
+uv tool upgrade gpt-image-cli
+```
+
+</details>
 
 Reads `OPENAI_API_KEY` from the environment or `~/.env`.
 
 ---
 
 ## ⚡ Quick Usage
+
+<details>
+<summary>CLI quick usage</summary>
 
 After install, every gallery entry below can be copy-pasted as `gpt-image -p "…"` or, in Claude Code, requested in natural language: *"generate the Boston Spring poster from the skill gallery"*.
 
@@ -106,6 +136,8 @@ Exit codes: `0` success · `1` API/refusal error (full response body echoed to s
 
 ---
 
+</details>
+
 ## 📖 Prompting Fundamentals
 
 <details>
@@ -131,36 +163,990 @@ Distilled from OpenAI's [official GPT Image prompting guide](https://github.com/
 
 ## 🎨 Prompt Gallery
 
-**100 prompts** across 25 style groups, with every image below produced one-shot at `--quality high` (plus one edit-endpoint demonstration). Each entry includes the full **Prompt + CLI command + equivalent OpenAI SDK call** so you can run it three ways: copy the prompt, paste the bash, or drop the Python snippet into a notebook. Community-authored prompts link back to the original tweet or WeChat article; credit stays with the author.
-
-Categories:
+**120 prompts / examples**, numbered in the order shown below and grouped directly by category. Outside-source items keep a visible **Source Link**.
 
 <table>
-  <tr><td>📝 <a href="#-typography--posters">Typography &amp; Posters</a></td><td>🎌 <a href="#-anime--manga">Anime &amp; Manga</a></td></tr>
-  <tr><td>🎨 <a href="#-illustration">Illustration</a></td><td>💧 <a href="#-watercolor">Watercolor</a></td></tr>
-  <tr><td>🖌️ <a href="#-ink--chinese">Ink &amp; Chinese</a></td><td>🕹️ <a href="#-pixel-art">Pixel Art</a></td></tr>
-  <tr><td>📐 <a href="#-isometric">Isometric</a></td><td>🤖 <a href="#-retro--cyberpunk">Retro &amp; Cyberpunk</a></td></tr>
-  <tr><td>📦 <a href="#-product--food">Product &amp; Food</a></td><td>🎮 <a href="#-gaming">Gaming</a></td></tr>
-  <tr><td>📷 <a href="#-photography">Photography</a></td><td>🎬 <a href="#-cinematic--animation">Cinematic &amp; Animation</a></td></tr>
-  <tr><td>👤 <a href="#-character-design">Character Design</a></td><td>📊 <a href="#-infographics--field-guides">Infographics &amp; Field Guides</a></td></tr>
-  <tr><td>📚 <a href="#-research-paper-figures">Research Paper Figures</a></td><td>🏢 <a href="#-official-openai-cookbook-examples">Official OpenAI Cookbook</a></td></tr>
-  <tr><td>✨ <a href="#-edit-endpoint-showcase">Edit Endpoint Showcase</a></td><td>📱 <a href="#-uiux-mockups">UI/UX Mockups</a></td></tr>
-  <tr><td>📊 <a href="#-data-visualization">Data Visualization</a></td><td>⚙️ <a href="#-technical-illustration">Technical Illustration</a></td></tr>
-  <tr><td>🏛️ <a href="#-architecture--interior">Architecture &amp; Interior</a></td><td>🔬 <a href="#-scientific--educational">Scientific &amp; Educational</a></td></tr>
-  <tr><td>👗 <a href="#-fashion--editorial-photography">Fashion &amp; Editorial</a></td><td>🎨 <a href="#-fine-art-painting-styles">Fine Art Painting</a></td></tr>
-  <tr><td>✏️ <a href="#-illustration-styles-we-dont-have">More Illustration Styles</a></td><td>🎥 <a href="#-cinematic-film-references">Cinematic Film References</a></td></tr>
-  <tr><td colspan="2">🌌 <a href="#-niche--emerging-styles">Niche &amp; Emerging Styles</a></td></tr>
+  <tr>
+    <td>🎌 <a href="#-anime--manga">Anime &amp; Manga</a></td>
+    <td>🎮 <a href="#-gaming">Gaming</a></td>
+    <td>🤖 <a href="#-retro--cyberpunk">Retro &amp; Cyberpunk</a></td>
+    <td>🎬 <a href="#-cinematic--animation">Cinematic &amp; Animation</a></td>
+  </tr>
+  <tr>
+    <td>👤 <a href="#-character-design">Character Design</a></td>
+    <td>📝 <a href="#-typography--posters">Typography &amp; Posters</a></td>
+    <td>🎨 <a href="#-illustration">Illustration</a></td>
+    <td>💧 <a href="#-watercolor">Watercolor</a></td>
+  </tr>
+  <tr>
+    <td>🖌️ <a href="#-ink--chinese">Ink &amp; Chinese</a></td>
+    <td>🕹️ <a href="#-pixel-art">Pixel Art</a></td>
+    <td>📐 <a href="#-isometric">Isometric</a></td>
+    <td>📦 <a href="#-product--food">Product &amp; Food</a></td>
+  </tr>
+  <tr>
+    <td>📷 <a href="#-photography">Photography</a></td>
+    <td>📊 <a href="#-infographics--field-guides">Infographics &amp; Field Guides</a></td>
+    <td>📚 <a href="#-research-paper-figures">Research Paper Figures</a></td>
+    <td>🏢 <a href="#-official-openai-cookbook-examples">Official OpenAI Cookbook</a></td>
+  </tr>
+  <tr>
+    <td>✨ <a href="#-edit-endpoint-showcase">Edit Endpoint Showcase</a></td>
+    <td>📱 <a href="#-uiux-mockups">UI/UX Mockups</a></td>
+    <td>📊 <a href="#-data-visualization">Data Visualization</a></td>
+    <td>⚙️ <a href="#-technical-illustration">Technical Illustration</a></td>
+  </tr>
+  <tr>
+    <td>🏛️ <a href="#-architecture--interior">Architecture &amp; Interior</a></td>
+    <td>🔬 <a href="#-scientific--educational">Scientific &amp; Educational</a></td>
+    <td>👗 <a href="#-fashion--editorial-photography">Fashion &amp; Editorial</a></td>
+    <td>🎨 <a href="#-fine-art-painting-styles">Fine Art Painting</a></td>
+  </tr>
+  <tr>
+    <td>✏️ <a href="#-illustration-styles-we-dont-have">More Illustration Styles</a></td>
+    <td>🎥 <a href="#-cinematic-film-references">Cinematic Film References</a></td>
+    <td colspan="2">🌌 <a href="#-niche--emerging-styles">Niche &amp; Emerging Styles</a></td>
+  </tr>
 </table>
 
 ---
 
+### 🎌 Anime & Manga
+
+#### No. 1 · MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)
+
+<img src="docs/example-anime-jjk-action.png" width="620" alt="MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)"/>
+
+<sub>Anime & Manga · `landscape` · `1536x1024`</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+An anime action still in the visual style of MAPPA's Jujutsu Kaisen (2020 TV anime). Landscape 16:9.
+
+A silver-white-haired young man in a dark navy school-uniform jacket, a blue blindfold across his eyes, in a mid-fight stance — one palm extended outward releasing a swirling dense-blue energy sphere with lightning-like crackles around its edge. Opposite him, a demonic shadow creature made of liquid black mass with multiple eyes lunges from the right.
+
+Backdrop: ruined urban street at dusk, shattered asphalt, cracked neon kanji sign "呪術" in split red LED, destroyed vehicles, rubble suspended mid-air by the shockwave, rain particles caught mid-flight.
+
+Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp line-art, rim-light on both figures, motion-blur streaks around the energy sphere. Palette of deep navy, electric cyan, crimson splashes. Kinetic-impact composition in the tradition of JJK's Shibuya arc.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'An anime action still in the visual style of MAPPA'\''s Jujutsu Kaisen (2020 TV anime). Landscape 16:9.
+
+A silver-white-haired young man in a dark navy school-uniform jacket, a blue blindfold across his eyes, in a mid-fight stance — one palm extended outward releasing a swirling dense-blue energy sphere with lightning-like crackles around its edge. Opposite him, a demonic shadow creature made of liquid black mass with multiple eyes lunges from the right.
+
+Backdrop: ruined urban street at dusk, shattered asphalt, cracked neon kanji sign "呪術" in split red LED, destroyed vehicles, rubble suspended mid-air by the shockwave, rain particles caught mid-flight.
+
+Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp line-art, rim-light on both figures, motion-blur streaks around the energy sphere. Palette of deep navy, electric cyan, crimson splashes. Kinetic-impact composition in the tradition of JJK'\''s Shibuya arc.' \
+  --size landscape --quality high \
+  -f docs/example-anime-jjk-action.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""An anime action still in the visual style of MAPPA's Jujutsu Kaisen (2020 TV anime). Landscape 16:9.
+
+A silver-white-haired young man in a dark navy school-uniform jacket, a blue blindfold across his eyes, in a mid-fight stance — one palm extended outward releasing a swirling dense-blue energy sphere with lightning-like crackles around its edge. Opposite him, a demonic shadow creature made of liquid black mass with multiple eyes lunges from the right.
+
+Backdrop: ruined urban street at dusk, shattered asphalt, cracked neon kanji sign "呪術" in split red LED, destroyed vehicles, rubble suspended mid-air by the shockwave, rain particles caught mid-flight.
+
+Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp line-art, rim-light on both figures, motion-blur streaks around the energy sphere. Palette of deep navy, electric cyan, crimson splashes. Kinetic-impact composition in the tradition of JJK's Shibuya arc.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-anime-jjk-action.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 2 · Shōnen battle key-visual (Naruto-Shippuden aesthetic)
+
+<img src="docs/example-anime-naruto-clash.png" width="620" alt="Shōnen battle key-visual (Naruto-Shippuden aesthetic)"/>
+
+<sub>Anime & Manga · `landscape` · `1536x1024`</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A shōnen anime battle key-visual in the visual style of Studio Pierrot's Naruto Shippuden. Landscape 16:9.
+
+Two ninja figures clash mid-air at the exact instant their signature jutsu collide — a glowing blue spiral of swirling chakra on the left fighter's right palm, a crackling white lightning blade on the right fighter's right palm. The collision point sends a circular shockwave outward.
+
+Both fighters wear hitai-ate forehead protectors, jounin-style tactical vests with scroll pouches, ninja sandals. Left: spiky blond hair, whisker cheek marks, focused snarl, blue eyes. Right: dark hair, one red sharingan-like eye with three tomoe, calm expression.
+
+Backdrop: nighttime valley, cracked earth, giant uprooted trees mid-crash, moonlit clouds parting, sakura petals caught in the shockwave.
+
+Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective, strong speed lines radiating from the collision, anime-action key-frame quality, digital 2D cel shading, saturated but not neon, visible genga-quality line-art, dramatic backlight.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "A shōnen anime battle key-visual in the visual style of Studio Pierrot's Naruto Shippuden. Landscape 16:9.
+
+Two ninja figures clash mid-air at the exact instant their signature jutsu collide — a glowing blue spiral of swirling chakra on the left fighter's right palm, a crackling white lightning blade on the right fighter's right palm. The collision point sends a circular shockwave outward.
+
+Both fighters wear hitai-ate forehead protectors, jounin-style tactical vests with scroll pouches, ninja sandals. Left: spiky blond hair, whisker cheek marks, focused snarl, blue eyes. Right: dark hair, one red sharingan-like eye with three tomoe, calm expression.
+
+Backdrop: nighttime valley, cracked earth, giant uprooted trees mid-crash, moonlit clouds parting, sakura petals caught in the shockwave.
+
+Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective, strong speed lines radiating from the collision, anime-action key-frame quality, digital 2D cel shading, saturated but not neon, visible genga-quality line-art, dramatic backlight." \
+  --size landscape --quality high \
+  -f docs/example-anime-naruto-clash.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A shōnen anime battle key-visual in the visual style of Studio Pierrot's Naruto Shippuden. Landscape 16:9.
+
+Two ninja figures clash mid-air at the exact instant their signature jutsu collide — a glowing blue spiral of swirling chakra on the left fighter's right palm, a crackling white lightning blade on the right fighter's right palm. The collision point sends a circular shockwave outward.
+
+Both fighters wear hitai-ate forehead protectors, jounin-style tactical vests with scroll pouches, ninja sandals. Left: spiky blond hair, whisker cheek marks, focused snarl, blue eyes. Right: dark hair, one red sharingan-like eye with three tomoe, calm expression.
+
+Backdrop: nighttime valley, cracked earth, giant uprooted trees mid-crash, moonlit clouds parting, sakura petals caught in the shockwave.
+
+Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective, strong speed lines radiating from the collision, anime-action key-frame quality, digital 2D cel shading, saturated but not neon, visible genga-quality line-art, dramatic backlight.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-anime-naruto-clash.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 3 · Shōnen manga two-page spread (basketball slam dunk)
+
+<img src="docs/example-manga-spread.png" width="620" alt="Shōnen manga two-page spread (basketball slam dunk)"/>
+
+<sub>Anime & Manga · `landscape` · `1536x1024`</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A black-and-white shōnen manga two-page spread (landscape 16:9 as a single composition, with a faint centre-gutter line). High-contrast ink plus screentone, Weekly Shōnen Jump basketball-manga tradition (Inoue's Slam Dunk / Fujimaki's Kuroko no Basuke).
+
+Composition: 5 irregular panels plus one large diagonal panel spanning both pages at bottom-right for the climactic slam dunk.
+
+- Top-left: close-up of the protagonist's intense eyes, sweat beading, headband tied tight
+- Top-centre: wide shot of a packed high-school gymnasium, scoreboard reading "42 — 40 · 4Q 0:03"
+- Top-right: rival team captain's shocked face, mouth agape
+- Centre-left: protagonist leaping skyward with both hands gripping a basketball
+- Centre-right-small: sound-effect katakana "バッ" in thick black letters
+- Large diagonal bottom-right (half of both pages): protagonist slamming the ball through the hoop, rim bending, massive ink-brushed kanji "決" (decide) filling the negative space
+
+Art direction: professional mangaka quality — confident inking, dramatic screentone gradients, speed lines radiating from the dunk, varied line-weights, off-white paper texture with faint page-edge shading.
+
+Dialogue balloons intentionally blank; only the two sound effects are visible.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'A black-and-white shōnen manga two-page spread (landscape 16:9 as a single composition, with a faint centre-gutter line). High-contrast ink plus screentone, Weekly Shōnen Jump basketball-manga tradition (Inoue'\''s Slam Dunk / Fujimaki'\''s Kuroko no Basuke).
+
+Composition: 5 irregular panels plus one large diagonal panel spanning both pages at bottom-right for the climactic slam dunk.
+
+- Top-left: close-up of the protagonist'\''s intense eyes, sweat beading, headband tied tight
+- Top-centre: wide shot of a packed high-school gymnasium, scoreboard reading "42 — 40 · 4Q 0:03"
+- Top-right: rival team captain'\''s shocked face, mouth agape
+- Centre-left: protagonist leaping skyward with both hands gripping a basketball
+- Centre-right-small: sound-effect katakana "バッ" in thick black letters
+- Large diagonal bottom-right (half of both pages): protagonist slamming the ball through the hoop, rim bending, massive ink-brushed kanji "決" (decide) filling the negative space
+
+Art direction: professional mangaka quality — confident inking, dramatic screentone gradients, speed lines radiating from the dunk, varied line-weights, off-white paper texture with faint page-edge shading.
+
+Dialogue balloons intentionally blank; only the two sound effects are visible.' \
+  --size landscape --quality high \
+  -f docs/example-manga-spread.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A black-and-white shōnen manga two-page spread (landscape 16:9 as a single composition, with a faint centre-gutter line). High-contrast ink plus screentone, Weekly Shōnen Jump basketball-manga tradition (Inoue's Slam Dunk / Fujimaki's Kuroko no Basuke).
+
+Composition: 5 irregular panels plus one large diagonal panel spanning both pages at bottom-right for the climactic slam dunk.
+
+- Top-left: close-up of the protagonist's intense eyes, sweat beading, headband tied tight
+- Top-centre: wide shot of a packed high-school gymnasium, scoreboard reading "42 — 40 · 4Q 0:03"
+- Top-right: rival team captain's shocked face, mouth agape
+- Centre-left: protagonist leaping skyward with both hands gripping a basketball
+- Centre-right-small: sound-effect katakana "バッ" in thick black letters
+- Large diagonal bottom-right (half of both pages): protagonist slamming the ball through the hoop, rim bending, massive ink-brushed kanji "決" (decide) filling the negative space
+
+Art direction: professional mangaka quality — confident inking, dramatic screentone gradients, speed lines radiating from the dunk, varied line-weights, off-white paper texture with faint page-edge shading.
+
+Dialogue balloons intentionally blank; only the two sound effects are visible.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-manga-spread.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 4 · Manga relationship map — *A Tale of Two Cities*
+
+<img src="docs/example-manga-relationship.png" width="460" alt="Manga relationship map — *A Tale of Two Cities*"/>
+
+<sub>Anime & Manga · `portrait` · `1024x1536` · Author: [@cht0001](https://x.com/cht0001)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A manga-style illustration showing the person-relationship map for "A Tale of Two Cities" by Charles Dickens. Single full-frame composition, monochrome ink + screentone, classic shōjo / historical-manga aesthetic.
+
+Characters as small portrait panels connected by labeled relationship lines:
+- Charles Darnay ↔ Lucie Manette: "marriage"
+- Sydney Carton → Lucie: "unrequited love → ultimate sacrifice"
+- Lucie ↔ Dr. Manette: "father / daughter"
+- Madame Defarge → Darnay family: "vengeance"
+- Monsieur & Madame Defarge: "husband / wife, revolutionaries"
+- Jarvis Lorry → Manette family: "loyal banker & guardian"
+- Miss Pross → Lucie: "devoted protector"
+
+Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 18th-century Paris (guillotine silhouette) / London (Tower of London). Monochrome black-ink linework with grey screentone shading.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'A manga-style illustration showing the person-relationship map for "A Tale of Two Cities" by Charles Dickens. Single full-frame composition, monochrome ink + screentone, classic shōjo / historical-manga aesthetic.
+
+Characters as small portrait panels connected by labeled relationship lines:
+- Charles Darnay ↔ Lucie Manette: "marriage"
+- Sydney Carton → Lucie: "unrequited love → ultimate sacrifice"
+- Lucie ↔ Dr. Manette: "father / daughter"
+- Madame Defarge → Darnay family: "vengeance"
+- Monsieur & Madame Defarge: "husband / wife, revolutionaries"
+- Jarvis Lorry → Manette family: "loyal banker & guardian"
+- Miss Pross → Lucie: "devoted protector"
+
+Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 18th-century Paris (guillotine silhouette) / London (Tower of London). Monochrome black-ink linework with grey screentone shading.' \
+  --size portrait --quality high \
+  -f docs/example-manga-relationship.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A manga-style illustration showing the person-relationship map for "A Tale of Two Cities" by Charles Dickens. Single full-frame composition, monochrome ink + screentone, classic shōjo / historical-manga aesthetic.
+
+Characters as small portrait panels connected by labeled relationship lines:
+- Charles Darnay ↔ Lucie Manette: "marriage"
+- Sydney Carton → Lucie: "unrequited love → ultimate sacrifice"
+- Lucie ↔ Dr. Manette: "father / daughter"
+- Madame Defarge → Darnay family: "vengeance"
+- Monsieur & Madame Defarge: "husband / wife, revolutionaries"
+- Jarvis Lorry → Manette family: "loyal banker & guardian"
+- Miss Pross → Lucie: "devoted protector"
+
+Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 18th-century Paris (guillotine silhouette) / London (Tower of London). Monochrome black-ink linework with grey screentone shading.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/example-manga-relationship.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 5 · 16-panel anime expression grid
+
+<img src="docs/example-anime-expression-grid.png" width="460" alt="16-panel anime expression grid"/>
+
+<sub>Anime & Manga (character consistency) · `square` · `1024x1024` · Author: [source article →](https://mp.weixin.qq.com/s/ASxig6mFVYxrIE8-8Fthew)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her face shape, hairstyle, and clothing must remain highly consistent across all panels. The 16 expressions should include: happy, sad, angry, surprised, shy, speechless, evil grin, contemplative, curious, proud, wronged, disdainful, confused, scared, crying, and a heart expression.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her face shape, hairstyle, and clothing must remain highly consistent across all panels. The 16 expressions should include: happy, sad, angry, surprised, shy, speechless, evil grin, contemplative, curious, proud, wronged, disdainful, confused, scared, crying, and a heart expression." \
+  --size square --quality high \
+  -f docs/example-anime-expression-grid.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her face shape, hairstyle, and clothing must remain highly consistent across all panels. The 16 expressions should include: happy, sad, angry, surprised, shy, speechless, evil grin, contemplative, curious, proud, wronged, disdainful, confused, scared, crying, and a heart expression.""",
+    size="1024x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-anime-expression-grid.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+### 🎮 Gaming
+
+#### No. 6 · Hitman gameplay — OpenAI HQ
+
+<img src="docs/example-hitman-openai.png" width="620" alt="Hitman gameplay — OpenAI HQ"/>
+
+<sub>Gaming · `landscape` · `1536x1024` · Author: [@flowersslop](https://x.com/flowersslop)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6 without getting caught
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6 without getting caught" \
+  --size landscape --quality high \
+  -f docs/example-hitman-openai.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6 without getting caught""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-hitman-openai.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 7 · GTA 6 gameplay — Vice City beach
+
+<img src="docs/example-gta6-beach.png" width="620" alt="GTA 6 gameplay — Vice City beach"/>
+
+<sub>Gaming · `landscape` · `1536x1024` · Author: [@WolfRiccardo](https://x.com/WolfRiccardo)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a stationary 4k monitor. (There's a slight blurriness in the image, as it feels like it was taken handheld). A wide, bright environment. Realistic details. The character is walking on the beach with /:dog.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a stationary 4k monitor. (There's a slight blurriness in the image, as it feels like it was taken handheld). A wide, bright environment. Realistic details. The character is walking on the beach with /:dog." \
+  --size landscape --quality high \
+  -f docs/example-gta6-beach.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a stationary 4k monitor. (There's a slight blurriness in the image, as it feels like it was taken handheld). A wide, bright environment. Realistic details. The character is walking on the beach with /:dog.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-gta6-beach.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+
+#### No. 8 · Dark-fantasy swamp boss hunt
+
+<img src="docs/example-original-dark-fantasy-hunt.png" width="720" alt="Dark-fantasy swamp boss hunt"/>
+
+
+<details>
+<summary>📝 Prompt · ⚡ CLI</summary>
+
+**Prompt**
+```text
+Create an original AAA dark-fantasy action RPG screenshot. A silver-haired monster hunter in layered leather armor stands in a ruined marsh at blue hour, sword drawn toward a huge winged swamp beast rising from mist. Cinematic over-the-shoulder framing, believable HUD with health, stamina, potion icons, quest text, and minimap. Wet stones, dead trees, torchlight, moonlit fog, subtle alchemy glyphs, highly detailed materials, dramatic but readable composition, premium next-gen game look, 16:9 landscape.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create an original AAA dark-fantasy action RPG screenshot. A silver-haired monster hunter in layered leather armor stands in a ruined marsh at blue hour, sword drawn toward a huge winged swamp beast rising from mist. Cinematic over-the-shoulder framing, believable HUD with health, stamina, potion icons, quest text, and minimap. Wet stones, dead trees, torchlight, moonlit fog, subtle alchemy glyphs, highly detailed materials, dramatic but readable composition, premium next-gen game look, 16:9 landscape.' \
+  --size landscape --quality high \
+  -f docs/example-original-dark-fantasy-hunt.png
+```
+
+</details>
+
+#### No. 9 · Epic fellowship bridge approach
+
+<img src="docs/example-original-epic-fellowship-bridge.png" width="720" alt="Epic fellowship bridge approach"/>
+
+
+<details>
+<summary>📝 Prompt · ⚡ CLI</summary>
+
+**Prompt**
+```text
+Create an original epic fantasy RPG key-art screenshot. A small fellowship of travelers crosses a colossal ancient stone bridge toward a luminous mountain city at sunrise. One ranger leads, a mage carries a lantern, a dwarf-like smith bears a hammer, and banners whip in the wind. Vast valley below, waterfalls, golden clouds, weathered masonry, cinematic scale, subtle HUD quest marker and compass, richly detailed armor and environment, AAA fantasy adventure tone, 16:9 landscape, highly detailed and uplifting.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create an original epic fantasy RPG key-art screenshot. A small fellowship of travelers crosses a colossal ancient stone bridge toward a luminous mountain city at sunrise. One ranger leads, a mage carries a lantern, a dwarf-like smith bears a hammer, and banners whip in the wind. Vast valley below, waterfalls, golden clouds, weathered masonry, cinematic scale, subtle HUD quest marker and compass, richly detailed armor and environment, AAA fantasy adventure tone, 16:9 landscape, highly detailed and uplifting.' \
+  --size landscape --quality high \
+  -f docs/example-original-epic-fellowship-bridge.png
+```
+
+</details>
+
+#### No. 10 · Retro Japanese town pixel RPG
+
+<img src="docs/example-community-reddit-10-retro-japan-rpg.png" width="560" alt="Retro Japanese town pixel RPG"/>
+
+*Source Link: [Retro Video Games In Japan (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1kozn4u/retro_video_games_in_japan_prompts_included/)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Create an isometric pixel-art RPG screenshot of a traditional Japanese village during cherry blossom season. Sakura petals drift through the air, a samurai player character practices sword moves in the square, villagers watch nearby, and the interface includes an inventory panel, stamina gauge, skill cooldown timers, and subtle quest UI. Cozy retro console feeling, soft ambient pastel lighting, crisp pixel details, 16:9 gameplay composition.
+```
+
+Source excerpt used:
+
+```text
+Isometric pixel art depiction of a traditional Japanese village during cherry blossom season, sakura petals gently falling, with RPG HUD, inventory, stamina, cooldown timers, and soft ambient pastel lighting.
+```
+
+</details>
+
+#### No. 11 · Cyberpunk Europe action HUD
+
+<img src="docs/example-community-reddit-12-cyberpunk-europe-action.png" width="560" alt="Cyberpunk Europe action HUD"/>
+
+*Source Link: [Cyberpunk Video Games In European Cities (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1kzzy77/cyberpunk_video_games_in_european_cities_prompts/)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Create a third-person cyberpunk action game screenshot set in a neon-soaked European capital at night. The protagonist has glowing cybernetic implants and stands on rain-slick streets near a famous landmark while holograms, drones, and flying traffic crowd the skyline. Add a polished game HUD with health bar, ammo count, radar, stealth/energy meters, and mission overlays. Vivid cyan-magenta palette, wet reflections, cinematic intensity, 16:9.
+```
+
+Source excerpt used:
+
+```text
+Third-person cyberpunk game scene in a neon-lit European capital with holograms, rain reflections, drones, glowing implants, and a dynamic HUD with health, ammo, radar, and mission overlays.
+```
+
+</details>
+
+#### No. 12 · Anime open-world adventure HUD
+
+<img src="docs/example-community-reddit-06-anime-open-world.png" width="560" alt="Anime open-world adventure HUD"/>
+
+*Source Link: [Anime Style Video Games (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1lh2l98/anime_style_video_games_prompts_included/)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Create a third-person over-the-shoulder screenshot from a nostalgic anime-style open-world adventure game. The protagonist stands in a lush forest with detailed foliage and vibrant shading, drawing a bow toward distant enemies. Add a clean on-screen HUD: quest log, compass at the top, character portrait and status effects at bottom left, subtle rain droplets on screen, and sun rays filtering through trees. Keep the composition dynamic, the forest immersive, and the UI believable like a premium action-RPG screenshot.
+```
+
+Source excerpt used:
+
+```text
+Third-person over-the-shoulder anime-style open-world adventure in a lush forest, with quest log, compass, status effects, rain droplets on screen, and the protagonist aiming a bow.
+```
+
+</details>
+
+#### No. 13 · Low-poly samurai strategy village
+
+<img src="docs/example-community-reddit-11-lowpoly-samurai-strategy.png" width="560" alt="Low-poly samurai strategy village"/>
+
+*Source Link: [Low-Poly Strategy Video Games In Japan (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1l2d5dr/lowpoly_strategy_video_games_in_japan_prompts/)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Create an isometric low-poly strategy game screenshot of a mountainous Japanese village with rice terraces, torii gates, samurai and archer units in formation, and a tactical RTS interface. Include unit selection boxes, resource counters for rice and wood, fog-of-war minimap, command overlays, and warm daylight with soft shadows. Stylized but readable, modern indie strategy game key art, 16:9.
+```
+
+Source excerpt used:
+
+```text
+Isometric low poly view of a mountainous Japanese village with rice terraces and torii gates, RTS interface, unit selection boxes, resource counters, minimap with fog of war, archers and samurai in formation.
+```
+
+</details>
+### 🤖 Retro & Cyberpunk
+
+#### No. 14 · Cyberpunk mecha girl over sea fortress
+
+<img src="docs/example-cyberpunk-mecha.png" width="620" alt="Cyberpunk mecha girl over sea fortress"/>
+
+<sub>Retro & Cyberpunk · `landscape` · `1536x1024` · Author: [archive →](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar, standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind, a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes, moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor, 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes, cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic. Format 16:9.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar, standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind, a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes, moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor, 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes, cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic. Format 16:9." \
+  --size landscape --quality high \
+  -f docs/example-cyberpunk-mecha.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar, standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind, a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes, moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor, 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes, cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic. Format 16:9.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-cyberpunk-mecha.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+### 🎬 Cinematic & Animation
+
+#### No. 15 · Pixar-style 3D animation still (kitten)
+
+<img src="docs/example-pixar-kitchen.png" width="620" alt="Pixar-style 3D animation still (kitten)"/>
+
+<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A Pixar-quality 3D animation still, landscape 16:9. Cinematic feature-film look, warm studio lighting.
+
+Scene: a cozy apartment kitchen at dawn. A small orange tabby kitten sits on the countertop reaching a paw toward a rising soufflé in the oven; oven glow lighting the scene from below. Soft morning light through linen curtains. A wooden chopping board with a half-peeled lemon, a copper whisk with a small cloud of flour still airborne, a tiny succulent in a clay pot.
+
+Character: kitten with expressive, slightly oversized eyes (classic Pixar proportions), individually sculpted whiskers, believable fur with micro-groom direction, curious-slightly-worried expression.
+
+Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'A Pixar-quality 3D animation still, landscape 16:9. Cinematic feature-film look, warm studio lighting.
+
+Scene: a cozy apartment kitchen at dawn. A small orange tabby kitten sits on the countertop reaching a paw toward a rising soufflé in the oven; oven glow lighting the scene from below. Soft morning light through linen curtains. A wooden chopping board with a half-peeled lemon, a copper whisk with a small cloud of flour still airborne, a tiny succulent in a clay pot.
+
+Character: kitten with expressive, slightly oversized eyes (classic Pixar proportions), individually sculpted whiskers, believable fur with micro-groom direction, curious-slightly-worried expression.
+
+Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.' \
+  --size landscape --quality high \
+  -f docs/example-pixar-kitchen.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A Pixar-quality 3D animation still, landscape 16:9. Cinematic feature-film look, warm studio lighting.
+
+Scene: a cozy apartment kitchen at dawn. A small orange tabby kitten sits on the countertop reaching a paw toward a rising soufflé in the oven; oven glow lighting the scene from below. Soft morning light through linen curtains. A wooden chopping board with a half-peeled lemon, a copper whisk with a small cloud of flour still airborne, a tiny succulent in a clay pot.
+
+Character: kitten with expressive, slightly oversized eyes (classic Pixar proportions), individually sculpted whiskers, believable fur with micro-groom direction, curious-slightly-worried expression.
+
+Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-pixar-kitchen.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 16 · 1940s film-noir still
+
+<img src="docs/example-noir-detective.png" width="620" alt="1940s film-noir still"/>
+
+<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A 1940s film-noir black-and-white movie still, landscape 16:9, high contrast. Shot on 35mm with visible grain.
+
+Scene: a detective in trench coat and fedora stands alone at a rain-soaked street corner at 2 a.m., cigarette in hand, smoke curling upward. Wet cobblestones reflecting a single buzzing street lamp. A "HOTEL" neon sign on brick facade with letters "HOTE_" (the L flickered out). A vintage 1946 sedan parked at the curb, tail-lights glowing through drizzle.
+
+Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'A 1940s film-noir black-and-white movie still, landscape 16:9, high contrast. Shot on 35mm with visible grain.
+
+Scene: a detective in trench coat and fedora stands alone at a rain-soaked street corner at 2 a.m., cigarette in hand, smoke curling upward. Wet cobblestones reflecting a single buzzing street lamp. A "HOTEL" neon sign on brick facade with letters "HOTE_" (the L flickered out). A vintage 1946 sedan parked at the curb, tail-lights glowing through drizzle.
+
+Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".' \
+  --size landscape --quality high \
+  -f docs/example-noir-detective.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A 1940s film-noir black-and-white movie still, landscape 16:9, high contrast. Shot on 35mm with visible grain.
+
+Scene: a detective in trench coat and fedora stands alone at a rain-soaked street corner at 2 a.m., cigarette in hand, smoke curling upward. Wet cobblestones reflecting a single buzzing street lamp. A "HOTEL" neon sign on brick facade with letters "HOTE_" (the L flickered out). A vintage 1946 sedan parked at the curb, tail-lights glowing through drizzle.
+
+Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-noir-detective.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 17 · Professional 6-panel film storyboard
+
+<img src="docs/example-storyboard.png" width="620" alt="Professional 6-panel film storyboard"/>
+
+<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A 6-panel film storyboard laid out as a 3×2 grid, landscape 16:9 overall. Each panel is a rectangular pencil-and-marker sketch with a white margin border and a small information strip underneath.
+
+Scene: a chase through a rainy Tokyo alleyway, ending in a rooftop jump.
+
+Panel 1 — WIDE establishing: wet neon alleyway, runner entering from left; kanji signage on both walls. Info: "PANEL 1 · EXT. ALLEY · NIGHT · WIDE / static / 2s"
+Panel 2 — OTS tracking: runner mid-stride from behind; pursuer silhouette 10 m back. Info: "PANEL 2 · OTS TRACKING / follow-cam / pan-L 45° / 3s"
+Panel 3 — Close-up: runner's face, sweat, eyes darting up toward fire escape. Info: "PANEL 3 · CU RUNNER / static / 1.5s / SFX: breath"
+Panel 4 — Low angle: runner leaping onto fire-escape ladder; rain streaks. Info: "PANEL 4 · LOW ANGLE / tilt-up 30° / 2s"
+Panel 5 — Wide aerial: runner silhouetted against neon skyline, about to leap rooftops. Info: "PANEL 5 · WIDE AERIAL / crane-down / 4s"
+Panel 6 — Match cut: runner's boots landing on wet rooftop; splash. Info: "PANEL 6 · MATCH CUT CU / static / 1s / SFX: splash"
+
+Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'A 6-panel film storyboard laid out as a 3×2 grid, landscape 16:9 overall. Each panel is a rectangular pencil-and-marker sketch with a white margin border and a small information strip underneath.
+
+Scene: a chase through a rainy Tokyo alleyway, ending in a rooftop jump.
+
+Panel 1 — WIDE establishing: wet neon alleyway, runner entering from left; kanji signage on both walls. Info: "PANEL 1 · EXT. ALLEY · NIGHT · WIDE / static / 2s"
+Panel 2 — OTS tracking: runner mid-stride from behind; pursuer silhouette 10 m back. Info: "PANEL 2 · OTS TRACKING / follow-cam / pan-L 45° / 3s"
+Panel 3 — Close-up: runner'\''s face, sweat, eyes darting up toward fire escape. Info: "PANEL 3 · CU RUNNER / static / 1.5s / SFX: breath"
+Panel 4 — Low angle: runner leaping onto fire-escape ladder; rain streaks. Info: "PANEL 4 · LOW ANGLE / tilt-up 30° / 2s"
+Panel 5 — Wide aerial: runner silhouetted against neon skyline, about to leap rooftops. Info: "PANEL 5 · WIDE AERIAL / crane-down / 4s"
+Panel 6 — Match cut: runner'\''s boots landing on wet rooftop; splash. Info: "PANEL 6 · MATCH CUT CU / static / 1s / SFX: splash"
+
+Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.' \
+  --size landscape --quality high \
+  -f docs/example-storyboard.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A 6-panel film storyboard laid out as a 3×2 grid, landscape 16:9 overall. Each panel is a rectangular pencil-and-marker sketch with a white margin border and a small information strip underneath.
+
+Scene: a chase through a rainy Tokyo alleyway, ending in a rooftop jump.
+
+Panel 1 — WIDE establishing: wet neon alleyway, runner entering from left; kanji signage on both walls. Info: "PANEL 1 · EXT. ALLEY · NIGHT · WIDE / static / 2s"
+Panel 2 — OTS tracking: runner mid-stride from behind; pursuer silhouette 10 m back. Info: "PANEL 2 · OTS TRACKING / follow-cam / pan-L 45° / 3s"
+Panel 3 — Close-up: runner's face, sweat, eyes darting up toward fire escape. Info: "PANEL 3 · CU RUNNER / static / 1.5s / SFX: breath"
+Panel 4 — Low angle: runner leaping onto fire-escape ladder; rain streaks. Info: "PANEL 4 · LOW ANGLE / tilt-up 30° / 2s"
+Panel 5 — Wide aerial: runner silhouetted against neon skyline, about to leap rooftops. Info: "PANEL 5 · WIDE AERIAL / crane-down / 4s"
+Panel 6 — Match cut: runner's boots landing on wet rooftop; splash. Info: "PANEL 6 · MATCH CUT CU / static / 1s / SFX: splash"
+
+Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-storyboard.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 18 · Studio-Ghibli-style animation still
+
+<img src="docs/example-ghibli-cottage.png" width="620" alt="Studio-Ghibli-style animation still"/>
+
+<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wooden cottage sits on a grassy hillside overlooking a valley at golden hour. A child stands barefoot at the cottage doorway waving to a small furry forest spirit half-hidden in the meadow grass. A distant train cuts across the valley floor, swallows dip overhead.
+
+Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki's Delivery Service", not a 3D render.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wooden cottage sits on a grassy hillside overlooking a valley at golden hour. A child stands barefoot at the cottage doorway waving to a small furry forest spirit half-hidden in the meadow grass. A distant train cuts across the valley floor, swallows dip overhead.
+
+Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki'\''s Delivery Service", not a 3D render.' \
+  --size landscape --quality high \
+  -f docs/example-ghibli-cottage.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wooden cottage sits on a grassy hillside overlooking a valley at golden hour. A child stands barefoot at the cottage doorway waving to a small furry forest spirit half-hidden in the meadow grass. A distant train cuts across the valley floor, swallows dip overhead.
+
+Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki's Delivery Service", not a 3D render.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-ghibli-cottage.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+
+#### No. 19 · VHS grocery-store chaos still
+
+<img src="docs/example-community-reddit-09-vhs-grocery-chaos.png" width="560" alt="VHS grocery-store chaos still"/>
+
+*Source Link: [tried to push the new image model with an insanely complicated prompt and it... just did it](https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Create a chaotic security-camera still from a 1990s grocery store. A man in full medieval armor is frozen mid-sprint stealing several rotisserie chickens past the dairy section. Overhead fluorescent lights reflect off the armor. The floor is baby-blue tile. Add a timestamp reading "08/13/96 04:44 AM" and a wall poster saying "NEW! TOASTER STRUDELS!". Make it low-fidelity, absurd, slightly intense, with motion blur, VHS color bleed, surveillance noise, and authentic analog-store lighting.
+```
+
+Source excerpt used:
+
+```text
+A security cam still from a 1990s grocery store showing a man in full medieval armor stealing rotisserie chickens, timestamp 08/13/96 04:44 AM, VHS color bleed.
+```
+
+</details>
+### 👤 Character Design
+
+#### No. 20 · Official character reference sheet
+
+<img src="docs/example-character-sheet.png" width="620" alt="Official character reference sheet"/>
+
+<sub>Character Design · `landscape` · `1536x1024` · Author: [@MANISH1027512](https://x.com/MANISH1027512)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Based on this character and background, please create a character reference sheet similar to official setting materials.
+- Includes three-view drawings: front view, side view, and back view
+- Add variations of the character's facial expressions
+- Break down and display detailed parts of the clothing and equipment
+- Add a color palette
+- Include a brief explanation of the worldview setting
+- Overall, use an organized layout (white background, illustration style)
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "Based on this character and background, please create a character reference sheet similar to official setting materials.
+- Includes three-view drawings: front view, side view, and back view
+- Add variations of the character's facial expressions
+- Break down and display detailed parts of the clothing and equipment
+- Add a color palette
+- Include a brief explanation of the worldview setting
+- Overall, use an organized layout (white background, illustration style)" \
+  --size landscape --quality high \
+  -f docs/example-character-sheet.png
+```
+
+**OpenAI Python SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Based on this character and background, please create a character reference sheet similar to official setting materials.
+- Includes three-view drawings: front view, side view, and back view
+- Add variations of the character's facial expressions
+- Break down and display detailed parts of the clothing and equipment
+- Add a color palette
+- Include a brief explanation of the worldview setting
+- Overall, use an organized layout (white background, illustration style)""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/example-character-sheet.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+
+#### No. 21 · Elven archer sketchbook concept sheet
+
+<img src="docs/example-community-reddit-08-elven-archer-sheet.png" width="560" alt="Elven archer sketchbook concept sheet"/>
+
+*Source Link: [Fantasy Concept Arts with V7 (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1jrcpan/fantasy_concept_arts_with_v7_prompts_included/)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Create a fantasy concept art sketchbook page centered on a mystical elven archer with flowing robes. Render the main figure in loose graphite strokes with precise ink detailing. Surround the hero sketch with side views exploring cloak variations, a half-finished bow study with measurements, thumbnail action poses, handwritten annotations about enchanted embroidery patterns, and faint watercolor tests bleeding into the margins in forest-green and silver. The page should feel like a real art director's development sheet: exploratory, beautiful, readable, and richly tactile.
+```
+
+Source excerpt used:
+
+```text
+A mystical elven archer with flowing robes, drawn in loose graphite strokes with ink detailing, side views, cloak variations, annotations, bow study, and faint watercolor tests in the margins.
+```
+
+</details>
 ### 📝 Typography & Posters
 
-#### No. 1 · Chinese tea launch poster
+#### No. 22 · Chinese tea launch poster
 
 <img src="docs/example-tea-poster.png" width="460" alt="Chinese tea launch poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536` · Author: original</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -243,7 +1229,7 @@ open("docs/example-tea-poster.png", "wb").write(base64.b64decode(result.data[0].
 
 ---
 
-#### No. 2 · 1980s propaganda poster
+#### No. 23 · 1980s propaganda poster
 
 <img src="docs/example-propaganda-poster.png" width="460" alt="1980s propaganda poster"/>
 
@@ -285,11 +1271,11 @@ open("docs/example-propaganda-poster.png", "wb").write(base64.b64decode(result.d
 
 ---
 
-#### No. 3 · Saul-Bass-style thriller movie poster
+#### No. 24 · Saul-Bass-style thriller movie poster
 
 <img src="docs/example-saul-bass-poster.png" width="460" alt="Saul-Bass-style thriller movie poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536` · Author: original (Bass lineage)</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -354,11 +1340,11 @@ open("docs/example-saul-bass-poster.png", "wb").write(base64.b64decode(result.da
 
 ---
 
-#### No. 4 · Vogue-style fashion magazine cover
+#### No. 25 · Vogue-style fashion magazine cover
 
 <img src="docs/example-vogue-cover.png" width="460" alt="Vogue-style fashion magazine cover"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536` · Author: original</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -447,11 +1433,11 @@ open("docs/example-vogue-cover.png", "wb").write(base64.b64decode(result.data[0]
 
 ---
 
-#### No. 5 · 1950s Astounding Stories pulp cover
+#### No. 26 · 1950s Astounding Stories pulp cover
 
 <img src="docs/example-pulp-scifi-cover.png" width="460" alt="1950s Astounding Stories pulp cover"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536` · Author: original</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -516,7 +1502,7 @@ open("docs/example-pulp-scifi-cover.png", "wb").write(base64.b64decode(result.da
 
 ---
 
-#### No. 6 · Boston Spring 2026 city poster
+#### No. 27 · Boston Spring 2026 city poster
 
 <img src="docs/example-boston-poster.png" width="460" alt="Boston Spring 2026 city poster"/>
 
@@ -558,335 +1544,72 @@ open("docs/example-boston-poster.png", "wb").write(base64.b64decode(result.data[
 
 ---
 
-### 🎌 Anime & Manga
 
-#### No. 7 · MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)
+#### No. 28 · Epic silhouette worldbuilding poster
 
-<img src="docs/example-anime-jjk-action.png" width="620" alt="MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)"/>
+<img src="docs/example-community-xhs-01-epic-silhouette-poster.png" width="560" alt="Epic silhouette worldbuilding poster"/>
 
-<sub>Anime & Manga · `landscape` · `1536x1024` · Author: original</sub>
+*Source Link: [被image-2震住了，直接封神](https://www.xiaohongshu.com/explore/69e324cd0000000021039ca9)*
 
 <details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+<summary>📝 Adapted prompt</summary>
 
-**Prompt**
 ```text
-An anime action still in the visual style of MAPPA's Jujutsu Kaisen (2020 TV anime). Landscape 16:9.
-
-A silver-white-haired young man in a dark navy school-uniform jacket, a blue blindfold across his eyes, in a mid-fight stance — one palm extended outward releasing a swirling dense-blue energy sphere with lightning-like crackles around its edge. Opposite him, a demonic shadow creature made of liquid black mass with multiple eyes lunges from the right.
-
-Backdrop: ruined urban street at dusk, shattered asphalt, cracked neon kanji sign "呪術" in split red LED, destroyed vehicles, rubble suspended mid-air by the shockwave, rain particles caught mid-flight.
-
-Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp line-art, rim-light on both figures, motion-blur streaks around the energy sphere. Palette of deep navy, electric cyan, crimson splashes. Kinetic-impact composition in the tradition of JJK's Shibuya arc.
+Design a collector's-edition epic poster for an original fantasy theme called "The Celestial Archive". The outer silhouette is a graceful side profile of a lone archivist, and inside that silhouette a complete world naturally grows: observatories, floating stairways, bridges, ancient libraries, moons, towers, relics, and distant pilgrims. Make it feel like a narrative silhouette composition rather than a collage. Style: cinematic poster fused with dreamy watercolor illustration, quiet and majestic, sacred and nostalgic, with paper grain, soft mist, brush-edge texture, elegant negative space, and a discreet signature "WHY" integrated naturally as part of the layout.
 ```
 
-**CLI**
-```bash
-gpt-image \
-  -p 'An anime action still in the visual style of MAPPA'\''s Jujutsu Kaisen (2020 TV anime). Landscape 16:9.
+Source excerpt used:
 
-A silver-white-haired young man in a dark navy school-uniform jacket, a blue blindfold across his eyes, in a mid-fight stance — one palm extended outward releasing a swirling dense-blue energy sphere with lightning-like crackles around its edge. Opposite him, a demonic shadow creature made of liquid black mass with multiple eyes lunges from the right.
-
-Backdrop: ruined urban street at dusk, shattered asphalt, cracked neon kanji sign "呪術" in split red LED, destroyed vehicles, rubble suspended mid-air by the shockwave, rain particles caught mid-flight.
-
-Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp line-art, rim-light on both figures, motion-blur streaks around the energy sphere. Palette of deep navy, electric cyan, crimson splashes. Kinetic-impact composition in the tradition of JJK'\''s Shibuya arc.' \
-  --size landscape --quality high \
-  -f docs/example-anime-jjk-action.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""An anime action still in the visual style of MAPPA's Jujutsu Kaisen (2020 TV anime). Landscape 16:9.
-
-A silver-white-haired young man in a dark navy school-uniform jacket, a blue blindfold across his eyes, in a mid-fight stance — one palm extended outward releasing a swirling dense-blue energy sphere with lightning-like crackles around its edge. Opposite him, a demonic shadow creature made of liquid black mass with multiple eyes lunges from the right.
-
-Backdrop: ruined urban street at dusk, shattered asphalt, cracked neon kanji sign "呪術" in split red LED, destroyed vehicles, rubble suspended mid-air by the shockwave, rain particles caught mid-flight.
-
-Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp line-art, rim-light on both figures, motion-blur streaks around the energy sphere. Palette of deep navy, electric cyan, crimson splashes. Kinetic-impact composition in the tradition of JJK's Shibuya arc.""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-anime-jjk-action.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```text
+收藏版史诗海报，人物侧脸剪影中生长出完整世界观与经典场景。整体偏电影海报+梦幻水彩插画风，安静、宏大、神圣、怀旧。
 ```
 
 </details>
 
----
+#### No. 29 · Dual-exposure narrative poster
 
-#### No. 8 · Shōnen battle key-visual (Naruto-Shippuden aesthetic)
+<img src="docs/example-community-xhs-06-dual-exposure-poster.png" width="560" alt="Dual-exposure narrative poster"/>
 
-<img src="docs/example-anime-naruto-clash.png" width="620" alt="Shōnen battle key-visual (Naruto-Shippuden aesthetic)"/>
-
-<sub>Anime & Manga · `landscape` · `1536x1024` · Author: original</sub>
+*Source Link: [GPT Image 2 双重曝光风格](https://www.xiaohongshu.com/explore/69e7a01700000000230153f3)*
 
 <details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+<summary>📝 Adapted prompt</summary>
 
-**Prompt**
 ```text
-A shōnen anime battle key-visual in the visual style of Studio Pierrot's Naruto Shippuden. Landscape 16:9.
-
-Two ninja figures clash mid-air at the exact instant their signature jutsu collide — a glowing blue spiral of swirling chakra on the left fighter's right palm, a crackling white lightning blade on the right fighter's right palm. The collision point sends a circular shockwave outward.
-
-Both fighters wear hitai-ate forehead protectors, jounin-style tactical vests with scroll pouches, ninja sandals. Left: spiky blond hair, whisker cheek marks, focused snarl, blue eyes. Right: dark hair, one red sharingan-like eye with three tomoe, calm expression.
-
-Backdrop: nighttime valley, cracked earth, giant uprooted trees mid-crash, moonlit clouds parting, sakura petals caught in the shockwave.
-
-Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective, strong speed lines radiating from the collision, anime-action key-frame quality, digital 2D cel shading, saturated but not neon, visible genga-quality line-art, dramatic backlight.
+Create a high-aesthetic collector poster in a "silhouette universe / dual-exposure narrative" style for an original theme called "Moonlit Dragon Court". Choose the most symbolic outer contour yourself — not a bottle or hourglass, but a more resonant form like a mask, archway, wing, throne, face profile, or luminous gate. Inside and around that contour, let a complete theme world naturally unfold: palaces, bridges, moonlit water, dragon motifs, relics, banners, distant figures, and layered atmospheric depth. The image must feel like a premium novel/anime poster: elegant, mythic, poetic, not cluttered, not collage-like, with strong visual memory and restrained luxurious design.
 ```
 
-**CLI**
-```bash
-gpt-image \
-  -p "A shōnen anime battle key-visual in the visual style of Studio Pierrot's Naruto Shippuden. Landscape 16:9.
+Source excerpt used:
 
-Two ninja figures clash mid-air at the exact instant their signature jutsu collide — a glowing blue spiral of swirling chakra on the left fighter's right palm, a crackling white lightning blade on the right fighter's right palm. The collision point sends a circular shockwave outward.
-
-Both fighters wear hitai-ate forehead protectors, jounin-style tactical vests with scroll pouches, ninja sandals. Left: spiky blond hair, whisker cheek marks, focused snarl, blue eyes. Right: dark hair, one red sharingan-like eye with three tomoe, calm expression.
-
-Backdrop: nighttime valley, cracked earth, giant uprooted trees mid-crash, moonlit clouds parting, sakura petals caught in the shockwave.
-
-Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective, strong speed lines radiating from the collision, anime-action key-frame quality, digital 2D cel shading, saturated but not neon, visible genga-quality line-art, dramatic backlight." \
-  --size landscape --quality high \
-  -f docs/example-anime-naruto-clash.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""A shōnen anime battle key-visual in the visual style of Studio Pierrot's Naruto Shippuden. Landscape 16:9.
-
-Two ninja figures clash mid-air at the exact instant their signature jutsu collide — a glowing blue spiral of swirling chakra on the left fighter's right palm, a crackling white lightning blade on the right fighter's right palm. The collision point sends a circular shockwave outward.
-
-Both fighters wear hitai-ate forehead protectors, jounin-style tactical vests with scroll pouches, ninja sandals. Left: spiky blond hair, whisker cheek marks, focused snarl, blue eyes. Right: dark hair, one red sharingan-like eye with three tomoe, calm expression.
-
-Backdrop: nighttime valley, cracked earth, giant uprooted trees mid-crash, moonlit clouds parting, sakura petals caught in the shockwave.
-
-Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective, strong speed lines radiating from the collision, anime-action key-frame quality, digital 2D cel shading, saturated but not neon, visible genga-quality line-art, dramatic backlight.""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-anime-naruto-clash.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```text
+高审美的“轮廓宇宙 / 收藏版叙事海报”风格作品……让完整主题世界自然生长在象征性轮廓之中。
 ```
 
 </details>
 
----
+#### No. 30 · Journey to the West silhouette epic poster
 
-#### No. 9 · Shōnen manga two-page spread (basketball slam dunk)
+<img src="docs/example-community-xhs-10-journey-west-silhouette.png" width="560" alt="Journey to the West silhouette epic poster"/>
 
-<img src="docs/example-manga-spread.png" width="620" alt="Shōnen manga two-page spread (basketball slam dunk)"/>
-
-<sub>Anime & Manga · `landscape` · `1536x1024` · Author: original (Slam-Dunk tradition)</sub>
+*Source Link: [image-2提示词-四大名著，只能说太牛X](https://www.xiaohongshu.com/explore/69e78cd4000000002103bdd3)*
 
 <details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+<summary>📝 Adapted prompt</summary>
 
-**Prompt**
 ```text
-A black-and-white shōnen manga two-page spread (landscape 16:9 as a single composition, with a faint centre-gutter line). High-contrast ink plus screentone, Weekly Shōnen Jump basketball-manga tradition (Inoue's Slam Dunk / Fujimaki's Kuroko no Basuke).
-
-Composition: 5 irregular panels plus one large diagonal panel spanning both pages at bottom-right for the climactic slam dunk.
-
-- Top-left: close-up of the protagonist's intense eyes, sweat beading, headband tied tight
-- Top-centre: wide shot of a packed high-school gymnasium, scoreboard reading "42 — 40 · 4Q 0:03"
-- Top-right: rival team captain's shocked face, mouth agape
-- Centre-left: protagonist leaping skyward with both hands gripping a basketball
-- Centre-right-small: sound-effect katakana "バッ" in thick black letters
-- Large diagonal bottom-right (half of both pages): protagonist slamming the ball through the hoop, rim bending, massive ink-brushed kanji "決" (decide) filling the negative space
-
-Art direction: professional mangaka quality — confident inking, dramatic screentone gradients, speed lines radiating from the dunk, varied line-weights, off-white paper texture with faint page-edge shading.
-
-Dialogue balloons intentionally blank; only the two sound effects are visible.
+Create a collector-edition epic narrative poster for 《西游记》. Use a giant elegant side-profile silhouette as the outer contour, and let the interior grow into a complete Journey to the West world: Monkey King, monk, pig and sand monk, flaming mountain, heavenly palace, demons, magic staff, clouds, temples, mountains, relics, and symbolic motifs. Not a collage but a refined silhouette-filled narrative composition, blending cinematic poster design with dreamy watercolor illustration, soft atmospheric perspective, paper grain, restrained layout, large breathing space, poetic and legendary mood. Add a subtle refined signature mark “WHY” integrated into the poster design.
 ```
 
-**CLI**
-```bash
-gpt-image \
-  -p 'A black-and-white shōnen manga two-page spread (landscape 16:9 as a single composition, with a faint centre-gutter line). High-contrast ink plus screentone, Weekly Shōnen Jump basketball-manga tradition (Inoue'\''s Slam Dunk / Fujimaki'\''s Kuroko no Basuke).
+Source excerpt used:
 
-Composition: 5 irregular panels plus one large diagonal panel spanning both pages at bottom-right for the climactic slam dunk.
-
-- Top-left: close-up of the protagonist'\''s intense eyes, sweat beading, headband tied tight
-- Top-centre: wide shot of a packed high-school gymnasium, scoreboard reading "42 — 40 · 4Q 0:03"
-- Top-right: rival team captain'\''s shocked face, mouth agape
-- Centre-left: protagonist leaping skyward with both hands gripping a basketball
-- Centre-right-small: sound-effect katakana "バッ" in thick black letters
-- Large diagonal bottom-right (half of both pages): protagonist slamming the ball through the hoop, rim bending, massive ink-brushed kanji "決" (decide) filling the negative space
-
-Art direction: professional mangaka quality — confident inking, dramatic screentone gradients, speed lines radiating from the dunk, varied line-weights, off-white paper texture with faint page-edge shading.
-
-Dialogue balloons intentionally blank; only the two sound effects are visible.' \
-  --size landscape --quality high \
-  -f docs/example-manga-spread.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""A black-and-white shōnen manga two-page spread (landscape 16:9 as a single composition, with a faint centre-gutter line). High-contrast ink plus screentone, Weekly Shōnen Jump basketball-manga tradition (Inoue's Slam Dunk / Fujimaki's Kuroko no Basuke).
-
-Composition: 5 irregular panels plus one large diagonal panel spanning both pages at bottom-right for the climactic slam dunk.
-
-- Top-left: close-up of the protagonist's intense eyes, sweat beading, headband tied tight
-- Top-centre: wide shot of a packed high-school gymnasium, scoreboard reading "42 — 40 · 4Q 0:03"
-- Top-right: rival team captain's shocked face, mouth agape
-- Centre-left: protagonist leaping skyward with both hands gripping a basketball
-- Centre-right-small: sound-effect katakana "バッ" in thick black letters
-- Large diagonal bottom-right (half of both pages): protagonist slamming the ball through the hoop, rim bending, massive ink-brushed kanji "決" (decide) filling the negative space
-
-Art direction: professional mangaka quality — confident inking, dramatic screentone gradients, speed lines radiating from the dunk, varied line-weights, off-white paper texture with faint page-edge shading.
-
-Dialogue balloons intentionally blank; only the two sound effects are visible.""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-manga-spread.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```text
+根据【XXX主题】自动生成一张收藏版史诗叙事海报：巨大优雅的人物侧脸剪影作为外轮廓，剪影内部自动生长出最契合该主题的完整世界观、标志性场景、角色关系、象征符号、关键建筑、生物、道具与氛围。
 ```
 
 </details>
-
----
-
-#### No. 10 · Manga relationship map — *A Tale of Two Cities*
-
-<img src="docs/example-manga-relationship.png" width="460" alt="Manga relationship map — *A Tale of Two Cities*"/>
-
-<sub>Anime & Manga · `portrait` · `1024x1536` · Author: [@cht0001](https://x.com/cht0001)</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-A manga-style illustration showing the person-relationship map for "A Tale of Two Cities" by Charles Dickens. Single full-frame composition, monochrome ink + screentone, classic shōjo / historical-manga aesthetic.
-
-Characters as small portrait panels connected by labeled relationship lines:
-- Charles Darnay ↔ Lucie Manette: "marriage"
-- Sydney Carton → Lucie: "unrequited love → ultimate sacrifice"
-- Lucie ↔ Dr. Manette: "father / daughter"
-- Madame Defarge → Darnay family: "vengeance"
-- Monsieur & Madame Defarge: "husband / wife, revolutionaries"
-- Jarvis Lorry → Manette family: "loyal banker & guardian"
-- Miss Pross → Lucie: "devoted protector"
-
-Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 18th-century Paris (guillotine silhouette) / London (Tower of London). Monochrome black-ink linework with grey screentone shading.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p 'A manga-style illustration showing the person-relationship map for "A Tale of Two Cities" by Charles Dickens. Single full-frame composition, monochrome ink + screentone, classic shōjo / historical-manga aesthetic.
-
-Characters as small portrait panels connected by labeled relationship lines:
-- Charles Darnay ↔ Lucie Manette: "marriage"
-- Sydney Carton → Lucie: "unrequited love → ultimate sacrifice"
-- Lucie ↔ Dr. Manette: "father / daughter"
-- Madame Defarge → Darnay family: "vengeance"
-- Monsieur & Madame Defarge: "husband / wife, revolutionaries"
-- Jarvis Lorry → Manette family: "loyal banker & guardian"
-- Miss Pross → Lucie: "devoted protector"
-
-Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 18th-century Paris (guillotine silhouette) / London (Tower of London). Monochrome black-ink linework with grey screentone shading.' \
-  --size portrait --quality high \
-  -f docs/example-manga-relationship.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""A manga-style illustration showing the person-relationship map for "A Tale of Two Cities" by Charles Dickens. Single full-frame composition, monochrome ink + screentone, classic shōjo / historical-manga aesthetic.
-
-Characters as small portrait panels connected by labeled relationship lines:
-- Charles Darnay ↔ Lucie Manette: "marriage"
-- Sydney Carton → Lucie: "unrequited love → ultimate sacrifice"
-- Lucie ↔ Dr. Manette: "father / daughter"
-- Madame Defarge → Darnay family: "vengeance"
-- Monsieur & Madame Defarge: "husband / wife, revolutionaries"
-- Jarvis Lorry → Manette family: "loyal banker & guardian"
-- Miss Pross → Lucie: "devoted protector"
-
-Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 18th-century Paris (guillotine silhouette) / London (Tower of London). Monochrome black-ink linework with grey screentone shading.""",
-    size="1024x1536",
-    quality="high",
-)
-
-import base64
-open("docs/example-manga-relationship.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
-#### No. 11 · 16-panel anime expression grid
-
-<img src="docs/example-anime-expression-grid.png" width="460" alt="16-panel anime expression grid"/>
-
-<sub>Anime & Manga (character consistency) · `square` · `1024x1024` · Author: [source article →](https://mp.weixin.qq.com/s/ASxig6mFVYxrIE8-8Fthew)</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her face shape, hairstyle, and clothing must remain highly consistent across all panels. The 16 expressions should include: happy, sad, angry, surprised, shy, speechless, evil grin, contemplative, curious, proud, wronged, disdainful, confused, scared, crying, and a heart expression.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p "Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her face shape, hairstyle, and clothing must remain highly consistent across all panels. The 16 expressions should include: happy, sad, angry, surprised, shy, speechless, evil grin, contemplative, curious, proud, wronged, disdainful, confused, scared, crying, and a heart expression." \
-  --size square --quality high \
-  -f docs/example-anime-expression-grid.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her face shape, hairstyle, and clothing must remain highly consistent across all panels. The 16 expressions should include: happy, sad, angry, surprised, shy, speechless, evil grin, contemplative, curious, proud, wronged, disdainful, confused, scared, crying, and a heart expression.""",
-    size="1024x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-anime-expression-grid.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
 ### 🎨 Illustration
 
-#### No. 12 · Vintage Amalfi Coast travel poster
+#### No. 31 · Vintage Amalfi Coast travel poster
 
 <img src="docs/example-amalfi-poster.png" width="460" alt="Vintage Amalfi Coast travel poster"/>
 
@@ -930,7 +1653,7 @@ open("docs/example-amalfi-poster.png", "wb").write(base64.b64decode(result.data[
 
 ### 💧 Watercolor
 
-#### No. 13 · Dreamy watercolor — young woman at lily pond
+#### No. 32 · Dreamy watercolor — young woman at lily pond
 
 <img src="docs/example-watercolor-lily-pond.png" width="460" alt="Dreamy watercolor — young woman at lily pond"/>
 
@@ -974,7 +1697,7 @@ open("docs/example-watercolor-lily-pond.png", "wb").write(base64.b64decode(resul
 
 ### 🖌️ Ink & Chinese
 
-#### No. 14 · Chinese ink-wash mountain landscape
+#### No. 33 · Chinese ink-wash mountain landscape
 
 <img src="docs/example-ink-landscape.png" width="460" alt="Chinese ink-wash mountain landscape"/>
 
@@ -1018,7 +1741,7 @@ open("docs/example-ink-landscape.png", "wb").write(base64.b64decode(result.data[
 
 ### 🕹️ Pixel Art
 
-#### No. 15 · Pixel art car sprite sheet
+#### No. 34 · Pixel art car sprite sheet
 
 <img src="docs/example-pixel-sprite-cars.png" width="460" alt="Pixel art car sprite sheet"/>
 
@@ -1060,9 +1783,30 @@ open("docs/example-pixel-sprite-cars.png", "wb").write(base64.b64decode(result.d
 
 ---
 
+
+#### No. 35 · Pixel art breakfast still life
+
+<img src="docs/example-community-reddit-05-pixel-breakfast.png" width="560" alt="Pixel art breakfast still life"/>
+
+*Source Link: [Animated Pixel Art Food (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1jmodcx/animated_pixel_art_food_prompts_included/)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Create a nostalgic pixel-art breakfast still life. Show a tall stack of fluffy golden pancakes drizzled with glossy maple syrup, topped with strawberries and blueberries, with pixelated steam rising into the air. The plate sits on a pastel tablecloth and a hot cup of coffee rests in the background. Use rich breakfast colors, careful lighting, and delicious texture detail while staying true to clean, readable pixel art.
+```
+
+Source excerpt used:
+
+```text
+A pixel art still life featuring fluffy pancakes with maple syrup, strawberries, blueberries, pixelated steam, a pastel tablecloth, and coffee in the background.
+```
+
+</details>
 ### 📐 Isometric
 
-#### No. 16 · Isometric miniature cafe district
+#### No. 36 · Isometric miniature cafe district
 
 <img src="docs/example-isometric-cafe.png" width="460" alt="Isometric miniature cafe district"/>
 
@@ -1104,53 +1848,30 @@ open("docs/example-isometric-cafe.png", "wb").write(base64.b64decode(result.data
 
 ---
 
-### 🤖 Retro & Cyberpunk
 
-#### No. 17 · Cyberpunk mecha girl over sea fortress
+#### No. 37 · Isometric fantasy village map
 
-<img src="docs/example-cyberpunk-mecha.png" width="620" alt="Cyberpunk mecha girl over sea fortress"/>
+<img src="docs/example-community-reddit-03-isometric-fantasy-village.png" width="560" alt="Isometric fantasy village map"/>
 
-<sub>Retro & Cyberpunk · `landscape` · `1536x1024` · Author: [archive →](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
+*Source Link: [Isometric Maps (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1hkqr4x/isometric_maps_prompts_included/)*
 
 <details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+<summary>📝 Adapted prompt</summary>
 
-**Prompt**
 ```text
-A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar, standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind, a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes, moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor, 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes, cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic. Format 16:9.
+Create a vibrant isometric fantasy village map with a clean grid-based layout using 3x3 meter tiles. Include wooden houses with thatched roofs, cobblestone paths, and a central stone fountain. One corner of the map rises into a small grassy hill about 2 meters high with stairs connecting to the lower ground. Keep the isometric angle precise and game-ready. Warm sunlight sends clear rays and long shadows across the rooftops. Make the scene readable like a handcrafted strategy-game map, with crisp tile logic, charming environmental detail, and rich but controlled color.
 ```
 
-**CLI**
-```bash
-gpt-image \
-  -p "A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar, standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind, a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes, moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor, 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes, cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic. Format 16:9." \
-  --size landscape --quality high \
-  -f docs/example-cyberpunk-mecha.png
-```
+Source excerpt used:
 
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar, standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind, a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes, moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor, 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes, cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic. Format 16:9.""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-cyberpunk-mecha.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```text
+A vibrant isometric fantasy village featuring a grid-based layout with 3x3 meter tiles, wooden houses, cobblestone paths, a central fountain, a small hill, and warm lighting.
 ```
 
 </details>
-
----
-
 ### 📦 Product & Food
 
-#### No. 18 · 3D product box from dieline
+#### No. 38 · 3D product box from dieline
 
 <img src="docs/example-product-dieline-box.png" width="460" alt="3D product box from dieline"/>
 
@@ -1192,7 +1913,7 @@ open("docs/example-product-dieline-box.png", "wb").write(base64.b64decode(result
 
 ---
 
-#### No. 19 · Chocolate wafer product render (JSON-style)
+#### No. 39 · Chocolate wafer product render (JSON-style)
 
 <img src="docs/example-product-chocolate-wafer.png" width="460" alt="Chocolate wafer product render (JSON-style)"/>
 
@@ -1309,7 +2030,7 @@ open("docs/example-product-chocolate-wafer.png", "wb").write(base64.b64decode(re
 
 ---
 
-#### No. 20 · Salad-explosion food photography (JSON-style)
+#### No. 40 · Salad-explosion food photography (JSON-style)
 
 <img src="docs/example-food-salad-explosion.png" width="460" alt="Salad-explosion food photography (JSON-style)"/>
 
@@ -1417,95 +2138,30 @@ open("docs/example-food-salad-explosion.png", "wb").write(base64.b64decode(resul
 
 ---
 
-### 🎮 Gaming
 
-#### No. 21 · Hitman gameplay — OpenAI HQ
+#### No. 41 · Universal commercial poster template
 
-<img src="docs/example-hitman-openai.png" width="620" alt="Hitman gameplay — OpenAI HQ"/>
+<img src="docs/example-community-xhs-07-aurora-oolong-poster.png" width="560" alt="Universal commercial poster template"/>
 
-<sub>Gaming · `landscape` · `1536x1024` · Author: [@flowersslop](https://x.com/flowersslop)</sub>
+*Source Link: [GPT Image-2 全面开放！收好这些通用提示词](https://www.xiaohongshu.com/explore/69e7878300000000230050bb)*
 
 <details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+<summary>📝 Adapted prompt</summary>
 
-**Prompt**
 ```text
-A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6 without getting caught
+Design a high-end commercial poster for a product called "Aurora Oolong Cold Brew". Minimalist style, clean frame, centered hero bottle and tea glass, soft studio lighting, realistic material textures, elegant condensation details, generous negative space, premium brand visual language, cinematic light and shadow, refined packaging typography, and ultra-detailed finish. Make it feel like a luxury beverage campaign that could run in a subway lightbox or fashion magazine.
 ```
 
-**CLI**
-```bash
-gpt-image \
-  -p "A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6 without getting caught" \
-  --size landscape --quality high \
-  -f docs/example-hitman-openai.png
-```
+Source excerpt used:
 
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6 without getting caught""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-hitman-openai.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```text
+商业海报：一张高端质感的[产品名称]广告海报，极简风格，主体居中构图，柔和工作室灯光，真实材质质感，背景留白。
 ```
 
 </details>
-
----
-
-#### No. 22 · GTA 6 gameplay — Vice City beach
-
-<img src="docs/example-gta6-beach.png" width="620" alt="GTA 6 gameplay — Vice City beach"/>
-
-<sub>Gaming · `landscape` · `1536x1024` · Author: [@WolfRiccardo](https://x.com/WolfRiccardo)</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a stationary 4k monitor. (There's a slight blurriness in the image, as it feels like it was taken handheld). A wide, bright environment. Realistic details. The character is walking on the beach with /:dog.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p "GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a stationary 4k monitor. (There's a slight blurriness in the image, as it feels like it was taken handheld). A wide, bright environment. Realistic details. The character is walking on the beach with /:dog." \
-  --size landscape --quality high \
-  -f docs/example-gta6-beach.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a stationary 4k monitor. (There's a slight blurriness in the image, as it feels like it was taken handheld). A wide, bright environment. Realistic details. The character is walking on the beach with /:dog.""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-gta6-beach.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
 ### 📷 Photography
 
-#### No. 23 · RAW iPhone — 42nd Street subway
+#### No. 42 · RAW iPhone — 42nd Street subway
 
 <img src="docs/example-photoreal-subway.png" width="620" alt="RAW iPhone — 42nd Street subway"/>
 
@@ -1547,7 +2203,7 @@ open("docs/example-photoreal-subway.png", "wb").write(base64.b64decode(result.da
 
 ---
 
-#### No. 24 · Handwritten notebook flatlay
+#### No. 43 · Handwritten notebook flatlay
 
 <img src="docs/example-handwritten-notebook.png" width="620" alt="Handwritten notebook flatlay"/>
 
@@ -1589,7 +2245,7 @@ open("docs/example-handwritten-notebook.png", "wb").write(base64.b64decode(resul
 
 ---
 
-#### No. 25 · Chess board mid-tournament game
+#### No. 44 · Chess board mid-tournament game
 
 <img src="docs/example-chess-midgame.png" width="620" alt="Chess board mid-tournament game"/>
 
@@ -1637,7 +2293,7 @@ open("docs/example-chess-midgame.png", "wb").write(base64.b64decode(result.data[
 
 ---
 
-#### No. 26 · 360° equirectangular jungle panorama
+#### No. 45 · 360° equirectangular jungle panorama
 
 <img src="docs/example-panorama-jungle.png" width="620" alt="360° equirectangular jungle panorama"/>
 
@@ -1691,310 +2347,9 @@ open("docs/example-panorama-jungle.png", "wb").write(base64.b64decode(result.dat
 
 ---
 
-### 🎬 Cinematic & Animation
-
-#### No. 27 · Pixar-style 3D animation still (kitten)
-
-<img src="docs/example-pixar-kitchen.png" width="620" alt="Pixar-style 3D animation still (kitten)"/>
-
-<sub>Cinematic & Animation · `landscape` · `1536x1024` · Author: original</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-A Pixar-quality 3D animation still, landscape 16:9. Cinematic feature-film look, warm studio lighting.
-
-Scene: a cozy apartment kitchen at dawn. A small orange tabby kitten sits on the countertop reaching a paw toward a rising soufflé in the oven; oven glow lighting the scene from below. Soft morning light through linen curtains. A wooden chopping board with a half-peeled lemon, a copper whisk with a small cloud of flour still airborne, a tiny succulent in a clay pot.
-
-Character: kitten with expressive, slightly oversized eyes (classic Pixar proportions), individually sculpted whiskers, believable fur with micro-groom direction, curious-slightly-worried expression.
-
-Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p 'A Pixar-quality 3D animation still, landscape 16:9. Cinematic feature-film look, warm studio lighting.
-
-Scene: a cozy apartment kitchen at dawn. A small orange tabby kitten sits on the countertop reaching a paw toward a rising soufflé in the oven; oven glow lighting the scene from below. Soft morning light through linen curtains. A wooden chopping board with a half-peeled lemon, a copper whisk with a small cloud of flour still airborne, a tiny succulent in a clay pot.
-
-Character: kitten with expressive, slightly oversized eyes (classic Pixar proportions), individually sculpted whiskers, believable fur with micro-groom direction, curious-slightly-worried expression.
-
-Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.' \
-  --size landscape --quality high \
-  -f docs/example-pixar-kitchen.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""A Pixar-quality 3D animation still, landscape 16:9. Cinematic feature-film look, warm studio lighting.
-
-Scene: a cozy apartment kitchen at dawn. A small orange tabby kitten sits on the countertop reaching a paw toward a rising soufflé in the oven; oven glow lighting the scene from below. Soft morning light through linen curtains. A wooden chopping board with a half-peeled lemon, a copper whisk with a small cloud of flour still airborne, a tiny succulent in a clay pot.
-
-Character: kitten with expressive, slightly oversized eyes (classic Pixar proportions), individually sculpted whiskers, believable fur with micro-groom direction, curious-slightly-worried expression.
-
-Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-pixar-kitchen.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
-#### No. 28 · 1940s film-noir still
-
-<img src="docs/example-noir-detective.png" width="620" alt="1940s film-noir still"/>
-
-<sub>Cinematic & Animation · `landscape` · `1536x1024` · Author: original</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-A 1940s film-noir black-and-white movie still, landscape 16:9, high contrast. Shot on 35mm with visible grain.
-
-Scene: a detective in trench coat and fedora stands alone at a rain-soaked street corner at 2 a.m., cigarette in hand, smoke curling upward. Wet cobblestones reflecting a single buzzing street lamp. A "HOTEL" neon sign on brick facade with letters "HOTE_" (the L flickered out). A vintage 1946 sedan parked at the curb, tail-lights glowing through drizzle.
-
-Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p 'A 1940s film-noir black-and-white movie still, landscape 16:9, high contrast. Shot on 35mm with visible grain.
-
-Scene: a detective in trench coat and fedora stands alone at a rain-soaked street corner at 2 a.m., cigarette in hand, smoke curling upward. Wet cobblestones reflecting a single buzzing street lamp. A "HOTEL" neon sign on brick facade with letters "HOTE_" (the L flickered out). A vintage 1946 sedan parked at the curb, tail-lights glowing through drizzle.
-
-Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".' \
-  --size landscape --quality high \
-  -f docs/example-noir-detective.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""A 1940s film-noir black-and-white movie still, landscape 16:9, high contrast. Shot on 35mm with visible grain.
-
-Scene: a detective in trench coat and fedora stands alone at a rain-soaked street corner at 2 a.m., cigarette in hand, smoke curling upward. Wet cobblestones reflecting a single buzzing street lamp. A "HOTEL" neon sign on brick facade with letters "HOTE_" (the L flickered out). A vintage 1946 sedan parked at the curb, tail-lights glowing through drizzle.
-
-Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-noir-detective.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
-#### No. 29 · Professional 6-panel film storyboard
-
-<img src="docs/example-storyboard.png" width="620" alt="Professional 6-panel film storyboard"/>
-
-<sub>Cinematic & Animation · `landscape` · `1536x1024` · Author: original</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-A 6-panel film storyboard laid out as a 3×2 grid, landscape 16:9 overall. Each panel is a rectangular pencil-and-marker sketch with a white margin border and a small information strip underneath.
-
-Scene: a chase through a rainy Tokyo alleyway, ending in a rooftop jump.
-
-Panel 1 — WIDE establishing: wet neon alleyway, runner entering from left; kanji signage on both walls. Info: "PANEL 1 · EXT. ALLEY · NIGHT · WIDE / static / 2s"
-Panel 2 — OTS tracking: runner mid-stride from behind; pursuer silhouette 10 m back. Info: "PANEL 2 · OTS TRACKING / follow-cam / pan-L 45° / 3s"
-Panel 3 — Close-up: runner's face, sweat, eyes darting up toward fire escape. Info: "PANEL 3 · CU RUNNER / static / 1.5s / SFX: breath"
-Panel 4 — Low angle: runner leaping onto fire-escape ladder; rain streaks. Info: "PANEL 4 · LOW ANGLE / tilt-up 30° / 2s"
-Panel 5 — Wide aerial: runner silhouetted against neon skyline, about to leap rooftops. Info: "PANEL 5 · WIDE AERIAL / crane-down / 4s"
-Panel 6 — Match cut: runner's boots landing on wet rooftop; splash. Info: "PANEL 6 · MATCH CUT CU / static / 1s / SFX: splash"
-
-Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p 'A 6-panel film storyboard laid out as a 3×2 grid, landscape 16:9 overall. Each panel is a rectangular pencil-and-marker sketch with a white margin border and a small information strip underneath.
-
-Scene: a chase through a rainy Tokyo alleyway, ending in a rooftop jump.
-
-Panel 1 — WIDE establishing: wet neon alleyway, runner entering from left; kanji signage on both walls. Info: "PANEL 1 · EXT. ALLEY · NIGHT · WIDE / static / 2s"
-Panel 2 — OTS tracking: runner mid-stride from behind; pursuer silhouette 10 m back. Info: "PANEL 2 · OTS TRACKING / follow-cam / pan-L 45° / 3s"
-Panel 3 — Close-up: runner'\''s face, sweat, eyes darting up toward fire escape. Info: "PANEL 3 · CU RUNNER / static / 1.5s / SFX: breath"
-Panel 4 — Low angle: runner leaping onto fire-escape ladder; rain streaks. Info: "PANEL 4 · LOW ANGLE / tilt-up 30° / 2s"
-Panel 5 — Wide aerial: runner silhouetted against neon skyline, about to leap rooftops. Info: "PANEL 5 · WIDE AERIAL / crane-down / 4s"
-Panel 6 — Match cut: runner'\''s boots landing on wet rooftop; splash. Info: "PANEL 6 · MATCH CUT CU / static / 1s / SFX: splash"
-
-Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.' \
-  --size landscape --quality high \
-  -f docs/example-storyboard.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""A 6-panel film storyboard laid out as a 3×2 grid, landscape 16:9 overall. Each panel is a rectangular pencil-and-marker sketch with a white margin border and a small information strip underneath.
-
-Scene: a chase through a rainy Tokyo alleyway, ending in a rooftop jump.
-
-Panel 1 — WIDE establishing: wet neon alleyway, runner entering from left; kanji signage on both walls. Info: "PANEL 1 · EXT. ALLEY · NIGHT · WIDE / static / 2s"
-Panel 2 — OTS tracking: runner mid-stride from behind; pursuer silhouette 10 m back. Info: "PANEL 2 · OTS TRACKING / follow-cam / pan-L 45° / 3s"
-Panel 3 — Close-up: runner's face, sweat, eyes darting up toward fire escape. Info: "PANEL 3 · CU RUNNER / static / 1.5s / SFX: breath"
-Panel 4 — Low angle: runner leaping onto fire-escape ladder; rain streaks. Info: "PANEL 4 · LOW ANGLE / tilt-up 30° / 2s"
-Panel 5 — Wide aerial: runner silhouetted against neon skyline, about to leap rooftops. Info: "PANEL 5 · WIDE AERIAL / crane-down / 4s"
-Panel 6 — Match cut: runner's boots landing on wet rooftop; splash. Info: "PANEL 6 · MATCH CUT CU / static / 1s / SFX: splash"
-
-Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-storyboard.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
-#### No. 30 · Studio-Ghibli-style animation still
-
-<img src="docs/example-ghibli-cottage.png" width="620" alt="Studio-Ghibli-style animation still"/>
-
-<sub>Cinematic & Animation · `landscape` · `1536x1024` · Author: original</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wooden cottage sits on a grassy hillside overlooking a valley at golden hour. A child stands barefoot at the cottage doorway waving to a small furry forest spirit half-hidden in the meadow grass. A distant train cuts across the valley floor, swallows dip overhead.
-
-Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki's Delivery Service", not a 3D render.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p 'A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wooden cottage sits on a grassy hillside overlooking a valley at golden hour. A child stands barefoot at the cottage doorway waving to a small furry forest spirit half-hidden in the meadow grass. A distant train cuts across the valley floor, swallows dip overhead.
-
-Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki'\''s Delivery Service", not a 3D render.' \
-  --size landscape --quality high \
-  -f docs/example-ghibli-cottage.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wooden cottage sits on a grassy hillside overlooking a valley at golden hour. A child stands barefoot at the cottage doorway waving to a small furry forest spirit half-hidden in the meadow grass. A distant train cuts across the valley floor, swallows dip overhead.
-
-Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki's Delivery Service", not a 3D render.""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-ghibli-cottage.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
-### 👤 Character Design
-
-#### No. 31 · Official character reference sheet
-
-<img src="docs/example-character-sheet.png" width="620" alt="Official character reference sheet"/>
-
-<sub>Character Design · `landscape` · `1536x1024` · Author: [@MANISH1027512](https://x.com/MANISH1027512)</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-Based on this character and background, please create a character reference sheet similar to official setting materials.
-- Includes three-view drawings: front view, side view, and back view
-- Add variations of the character's facial expressions
-- Break down and display detailed parts of the clothing and equipment
-- Add a color palette
-- Include a brief explanation of the worldview setting
-- Overall, use an organized layout (white background, illustration style)
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p "Based on this character and background, please create a character reference sheet similar to official setting materials.
-- Includes three-view drawings: front view, side view, and back view
-- Add variations of the character's facial expressions
-- Break down and display detailed parts of the clothing and equipment
-- Add a color palette
-- Include a brief explanation of the worldview setting
-- Overall, use an organized layout (white background, illustration style)" \
-  --size landscape --quality high \
-  -f docs/example-character-sheet.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""Based on this character and background, please create a character reference sheet similar to official setting materials.
-- Includes three-view drawings: front view, side view, and back view
-- Add variations of the character's facial expressions
-- Break down and display detailed parts of the clothing and equipment
-- Add a color palette
-- Include a brief explanation of the worldview setting
-- Overall, use an organized layout (white background, illustration style)""",
-    size="1536x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-character-sheet.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
 ### 📊 Infographics & Field Guides
 
-#### No. 32 · Song Dynasty social-media feed
+#### No. 46 · Song Dynasty social-media feed
 
 <img src="docs/example-song-dynasty-feed.png" width="460" alt="Song Dynasty social-media feed"/>
 
@@ -2036,7 +2391,7 @@ open("docs/example-song-dynasty-feed.png", "wb").write(base64.b64decode(result.d
 
 ---
 
-#### No. 33 · Museum catalog disassembly infographic (唐代襦裙)
+#### No. 47 · Museum catalog disassembly infographic (唐代襦裙)
 
 <img src="docs/example-museum-infographic.png" width="460" alt="Museum catalog disassembly infographic (唐代襦裙)"/>
 
@@ -2123,7 +2478,7 @@ open("docs/example-museum-infographic.png", "wb").write(base64.b64decode(result.
 
 ---
 
-#### No. 34 · Encyclopedia field guide (Giant Panda)
+#### No. 48 · Encyclopedia field guide (Giant Panda)
 
 <img src="docs/example-encyclopedia-panda.png" width="460" alt="Encyclopedia field guide (Giant Panda)"/>
 
@@ -2213,15 +2568,78 @@ open("docs/example-encyclopedia-panda.png", "wb").write(base64.b64decode(result.
 
 ---
 
+
+#### No. 49 · Weekend Seoul travel guide poster
+
+<img src="docs/example-community-xhs-09-seoul-travel-guide.png" width="560" alt="Weekend Seoul travel guide poster"/>
+
+*Source Link: [GPT image 2生成旅游攻略图让人惊叹](https://www.xiaohongshu.com/explore/69e8cd0d0000000023007215)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Generate a polished one-page Chinese travel guide poster for a fast weekend trip from Nanjing to Seoul in May. Use LARGE highly legible Chinese text, short phrases only, and no paragraph blocks. Focus on shopping, skincare, and a stylish Seongsu-dong route. Layout: big title, 4 modules only (行程 / 区域推荐 / 购物清单 / 美妆护肤), each with 2 to 4 short bullet points, plus a small cute route map with icons. Clean editorial infographic style, soft pastel colors, neat spacing, high readability, modern Xiaohongshu travel card aesthetic. Avoid tiny text, avoid dense explanations, avoid garbled characters.
+```
+
+Source excerpt used:
+
+```text
+帮我生成一张5月份周末从南京到首尔的特种兵旅游攻略，重点是逛街，皮肤管理。
+```
+
+</details>
+
+#### No. 50 · Modular encyclopedia infographic card
+
+<img src="docs/example-community-xhs-02-snow-leopard-encyclopedia-card.png" width="560" alt="Modular encyclopedia infographic card"/>
+
+*Source Link: [GPT image 2牛逼！！！！附指令](https://www.xiaohongshu.com/explore/69e832170000000023012116)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Generate a high-quality vertical science encyclopedia card about "雪豹 Snow Leopard". It should feel like a collectible modular knowledge infographic rather than a normal poster. Include one beautiful hero illustration, several zoomed-in detail callouts, rounded information modules, clear title hierarchy, compact encyclopedia content, rating cards, and a Top 5 facts module. Suggested sections: basic profile, habitat, appearance, hunting behavior, conservation risks, climate adaptation, suitable environment, and quick scorecard. Visual style: clean light background, soft palette, subtle shadows, refined icons, rounded info boxes, dense but readable information, polished editorial layout, high collection value.
+```
+
+Source excerpt used:
+
+```text
+请根据【主题】生成一张高质量竖版「科普百科图」……图鉴感、百科感、信息结构感、收藏感的模块化科普信息图。
+```
+
+</details>
+
+#### No. 51 · Xiaohongshu cooking tutorial card
+
+<img src="docs/example-community-xhs-08-cooking-tutorial-card.png" width="560" alt="Xiaohongshu cooking tutorial card"/>
+
+*Source Link: [GPT-Image-2 提示词：家常菜料理图](https://www.xiaohongshu.com/explore/69e8eeed0000000021004a54)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Create a Xiaohongshu-style viral cooking tutorial image in a 3:4 vertical layout for homemade scallion oil noodles. Cozy home-cooking vibe, warm inviting lifestyle aesthetic, 4 to 6 step grid layout, clean spacing, realistic food photography, soft natural lighting, slight film tone, warm color grading, visible oil sheen, steam, sauce texture, and hands interacting with the food. Add small Chinese annotations such as 切葱, 熬油, 拌面, 出锅. Avoid overcrowding or excessive text.
+```
+
+Source excerpt used:
+
+```text
+Create a Xiaohongshu-style viral cooking tutorial image (3:4 vertical), cozy home cooking vibe, 4–6 step grid layout, soft natural lighting, warm color grading, realistic food photography, small Chinese annotations like 切块 / 搅拌 / 下锅 / 翻炒.
+```
+
+</details>
 ### 📚 Research Paper Figures
 
 A dedicated sub-library for ML/AI papers. Twelve templates covering architecture diagrams, plots, heatmaps, sankeys, timelines, traces, and security flows. Use these when you need NeurIPS-quality figures in one shot.
 
-#### No. 35 · Transformer encoder–decoder architecture
+#### No. 52 · Transformer encoder–decoder architecture
 
 <img src="docs/example-transformer-arch.png" width="620" alt="Transformer encoder–decoder architecture"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original · **Cites:** Vaswani et al., 2017</sub>
+<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Vaswani et al., 2017</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2277,11 +2695,11 @@ open("docs/example-transformer-arch.png", "wb").write(base64.b64decode(result.da
 
 ---
 
-#### No. 36 · Retrieval-Augmented Generation pipeline
+#### No. 53 · Retrieval-Augmented Generation pipeline
 
 <img src="docs/example-rag-pipeline.png" width="620" alt="Retrieval-Augmented Generation pipeline"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original · **Cites:** Lewis et al., 2020</sub>
+<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Lewis et al., 2020</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2352,11 +2770,11 @@ open("docs/example-rag-pipeline.png", "wb").write(base64.b64decode(result.data[0
 
 ---
 
-#### No. 37 · Multi-agent LLM system architecture
+#### No. 54 · Multi-agent LLM system architecture
 
 <img src="docs/example-agent-architecture.png" width="620" alt="Multi-agent LLM system architecture"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original · **Cites:** AutoGen (Wu 2023), LangGraph, Anthropic Managed Agents</sub>
+<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** AutoGen (Wu 2023), LangGraph, Anthropic Managed Agents</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2430,11 +2848,11 @@ open("docs/example-agent-architecture.png", "wb").write(base64.b64decode(result.
 
 ---
 
-#### No. 38 · Denoising diffusion forward/reverse chain
+#### No. 55 · Denoising diffusion forward/reverse chain
 
 <img src="docs/example-diffusion-chain.png" width="620" alt="Denoising diffusion forward/reverse chain"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original · **Cites:** Ho et al., 2020</sub>
+<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Ho et al., 2020</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2496,11 +2914,11 @@ open("docs/example-diffusion-chain.png", "wb").write(base64.b64decode(result.dat
 
 ---
 
-#### No. 39 · Empirical scaling laws plot
+#### No. 56 · Empirical scaling laws plot
 
 <img src="docs/example-scaling-curves.png" width="620" alt="Empirical scaling laws plot"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original · **Cites:** Kaplan 2020 / Chinchilla (Hoffmann 2022)</sub>
+<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Kaplan 2020 / Chinchilla (Hoffmann 2022)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2565,11 +2983,11 @@ open("docs/example-scaling-curves.png", "wb").write(base64.b64decode(result.data
 
 ---
 
-#### No. 40 · Benchmark comparison heatmap
+#### No. 57 · Benchmark comparison heatmap
 
 <img src="docs/example-benchmark-heatmap.png" width="620" alt="Benchmark comparison heatmap"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original · **Cites:** HELM (Liang 2023)</sub>
+<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** HELM (Liang 2023)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2634,11 +3052,11 @@ open("docs/example-benchmark-heatmap.png", "wb").write(base64.b64decode(result.d
 
 ---
 
-#### No. 41 · Ablation bar chart with error bars
+#### No. 58 · Ablation bar chart with error bars
 
 <img src="docs/example-ablation-bars.png" width="620" alt="Ablation bar chart with error bars"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original</sub>
+<sub>Research Figures · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2712,11 +3130,11 @@ open("docs/example-ablation-bars.png", "wb").write(base64.b64decode(result.data[
 
 ---
 
-#### No. 42 · LLM pretraining data-mixture sankey
+#### No. 59 · LLM pretraining data-mixture sankey
 
 <img src="docs/example-data-sankey.png" width="620" alt="LLM pretraining data-mixture sankey"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original</sub>
+<sub>Research Figures · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2784,11 +3202,11 @@ open("docs/example-data-sankey.png", "wb").write(base64.b64decode(result.data[0]
 
 ---
 
-#### No. 43 · Multi-head attention heatmaps
+#### No. 60 · Multi-head attention heatmaps
 
 <img src="docs/example-attention-heatmap.png" width="620" alt="Multi-head attention heatmaps"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original · **Cites:** Clark et al., 2019</sub>
+<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Clark et al., 2019</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2862,11 +3280,11 @@ open("docs/example-attention-heatmap.png", "wb").write(base64.b64decode(result.d
 
 ---
 
-#### No. 44 · Frontier LLM family tree (2018–2026)
+#### No. 61 · Frontier LLM family tree (2018–2026)
 
 <img src="docs/example-model-timeline.png" width="620" alt="Frontier LLM family tree (2018–2026)"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · Author: original</sub>
+<sub>Research Figures · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2934,11 +3352,11 @@ open("docs/example-model-timeline.png", "wb").write(base64.b64decode(result.data
 
 ---
 
-#### No. 45 · ReAct reasoning trace
+#### No. 62 · ReAct reasoning trace
 
 <img src="docs/example-react-trace.png" width="460" alt="ReAct reasoning trace"/>
 
-<sub>Research Figures · `portrait` · `1024x1536` · Author: original · **Cites:** Yao et al., 2022</sub>
+<sub>Research Figures · `portrait` · `1024x1536` · **Cites:** Yao et al., 2022</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3025,106 +3443,98 @@ open("docs/example-react-trace.png", "wb").write(base64.b64decode(result.data[0]
 
 </details>
 
----
+#### No. 63 · Memory Router for Multimodal Agents
 
-#### No. 46 · Algorithm pseudocode block (Self-Refine)
+<img src="docs/example-original-memory-router-figure.png" width="720" alt="Memory Router for Multimodal Agents"/>
 
-<img src="docs/example-algorithm-box.png" width="460" alt="Algorithm pseudocode block (Self-Refine)"/>
-
-<sub>Research Figures · `portrait` · `1024x1536` · Author: original · **Cites:** Madaan et al., 2023</sub>
 
 <details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+<summary>📝 Prompt · ⚡ CLI</summary>
 
 **Prompt**
 ```text
-Portrait 3:4 figure of a LaTeX algorithm2e-style pseudocode block, centered with thin slate-gray border and warm-copper top hairline.
-
-Header bold serif: "Algorithm 1  Self-Refine: iterative response improvement".
-Under a thin divider, italic lines: "Require: LLM M, input prompt x, max iterations T, scalar judge J, margin ε" / "Ensure: refined output y*".
-
-9 numbered pseudocode lines, crisp monospace, bold keywords, italic variables, inline gray-italic comments on the right:
-
-1: y_0 ← M(x)                                            ▷ initial draft
-2: for t ← 1, 2, ..., T do
-3:   f_t ← M( concat(x, y_{t-1}, "give feedback") )      ▷ self-feedback
-4:   y_t ← M( concat(x, y_{t-1}, f_t, "refine") )        ▷ refined draft
-5:   if J(y_t) ≥ J(y_{t-1}) − ε then
-6:     break                                             ▷ early stop: no gain
-7:   end if
-8: end for
-9: return y* ← argmax_{y_0, ..., y_t} J(y)               ▷ pick best by judge
-
-Caption outside the box: "Figure 2. Pseudocode of the Self-Refine procedure. Madaan et al., 2023."
+Design a premium conference-paper figure for an imaginary method called Memory Router for Multimodal Agents. Landscape layout, pure white background, large readable labels, elegant vector-clean boxes and curved arrows, tasteful teal slate and amber palette. Top strip shows the failure mode of a crowded baseline pipeline with red warning accents. Main panel shows User Query, Planner, Retriever, Tool Executor, Memory Router, Working Memory, Long-term Memory, Verifier, and a feedback loop. Beautiful spacing, crisp legend, subtle depth, polished academic styling, highly detailed but uncluttered.
 ```
 
 **CLI**
 ```bash
 gpt-image \
-  -p 'Portrait 3:4 figure of a LaTeX algorithm2e-style pseudocode block, centered with thin slate-gray border and warm-copper top hairline.
-
-Header bold serif: "Algorithm 1  Self-Refine: iterative response improvement".
-Under a thin divider, italic lines: "Require: LLM M, input prompt x, max iterations T, scalar judge J, margin ε" / "Ensure: refined output y*".
-
-9 numbered pseudocode lines, crisp monospace, bold keywords, italic variables, inline gray-italic comments on the right:
-
-1: y_0 ← M(x)                                            ▷ initial draft
-2: for t ← 1, 2, ..., T do
-3:   f_t ← M( concat(x, y_{t-1}, "give feedback") )      ▷ self-feedback
-4:   y_t ← M( concat(x, y_{t-1}, f_t, "refine") )        ▷ refined draft
-5:   if J(y_t) ≥ J(y_{t-1}) − ε then
-6:     break                                             ▷ early stop: no gain
-7:   end if
-8: end for
-9: return y* ← argmax_{y_0, ..., y_t} J(y)               ▷ pick best by judge
-
-Caption outside the box: "Figure 2. Pseudocode of the Self-Refine procedure. Madaan et al., 2023."' \
-  --size portrait --quality high \
-  -f docs/example-algorithm-box.png
-```
-
-**OpenAI Python SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""Portrait 3:4 figure of a LaTeX algorithm2e-style pseudocode block, centered with thin slate-gray border and warm-copper top hairline.
-
-Header bold serif: "Algorithm 1  Self-Refine: iterative response improvement".
-Under a thin divider, italic lines: "Require: LLM M, input prompt x, max iterations T, scalar judge J, margin ε" / "Ensure: refined output y*".
-
-9 numbered pseudocode lines, crisp monospace, bold keywords, italic variables, inline gray-italic comments on the right:
-
-1: y_0 ← M(x)                                            ▷ initial draft
-2: for t ← 1, 2, ..., T do
-3:   f_t ← M( concat(x, y_{t-1}, "give feedback") )      ▷ self-feedback
-4:   y_t ← M( concat(x, y_{t-1}, f_t, "refine") )        ▷ refined draft
-5:   if J(y_t) ≥ J(y_{t-1}) − ε then
-6:     break                                             ▷ early stop: no gain
-7:   end if
-8: end for
-9: return y* ← argmax_{y_0, ..., y_t} J(y)               ▷ pick best by judge
-
-Caption outside the box: "Figure 2. Pseudocode of the Self-Refine procedure. Madaan et al., 2023."""",
-    size="1024x1536",
-    quality="high",
-)
-
-import base64
-open("docs/example-algorithm-box.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+  -p 'Design a premium conference-paper figure for an imaginary method called Memory Router for Multimodal Agents. Landscape layout, pure white background, large readable labels, elegant vector-clean boxes and curved arrows, tasteful teal slate and amber palette. Top strip shows the failure mode of a crowded baseline pipeline with red warning accents. Main panel shows User Query, Planner, Retriever, Tool Executor, Memory Router, Working Memory, Long-term Memory, Verifier, and a feedback loop. Beautiful spacing, crisp legend, subtle depth, polished academic styling, highly detailed but uncluttered.' \
+  --size landscape --quality high \
+  -f docs/example-original-memory-router-figure.png
 ```
 
 </details>
 
----
+#### No. 64 · Frontier Safety Eval Loop
 
+<img src="docs/example-original-frontier-safety-eval-loop.png" width="720" alt="Frontier Safety Eval Loop"/>
+
+
+<details>
+<summary>📝 Prompt · ⚡ CLI</summary>
+
+**Prompt**
+```text
+Create a beautiful research flowchart for an AI safety benchmark pipeline called Frontier Safety Eval Loop. Landscape figure, white background, large typography, vector-like shapes, soft indigo, coral, sage, and graphite palette. Show stages Prompt Suite, Model Runs, Judge Models, Human Audit, Failure Taxonomy, Patch Queue, and Re-run. Use clean swimlanes, numbered callouts, compact legends, and premium paper-ready styling. High detail, excellent color harmony, generous whitespace, no clutter, conference-quality diagram.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a beautiful research flowchart for an AI safety benchmark pipeline called Frontier Safety Eval Loop. Landscape figure, white background, large typography, vector-like shapes, soft indigo, coral, sage, and graphite palette. Show stages Prompt Suite, Model Runs, Judge Models, Human Audit, Failure Taxonomy, Patch Queue, and Re-run. Use clean swimlanes, numbered callouts, compact legends, and premium paper-ready styling. High detail, excellent color harmony, generous whitespace, no clutter, conference-quality diagram.' \
+  --size landscape --quality high \
+  -f docs/example-original-frontier-safety-eval-loop.png
+```
+
+</details>
+
+#### No. 65 · ICLR-style method figure
+
+<img src="docs/example-community-xhs-03-hmr-iclr-figure.png" width="560" alt="ICLR-style method figure"/>
+
+*Source Link: [参考计算机顶会ICLR风格的AI绘图初步尝试](https://www.xiaohongshu.com/explore/69d396140000000023012282)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Create a polished ICLR-style Figure 1 for an imaginary method called "Hierarchical Memory Routing for Long-Context Multimodal Reasoning (HMR)". The top band shows the failure mode of naive long-context multimodal processing: one overcrowded horizontal token stream mixing text, image patches, retrieved documents, tool traces, and audio snippets, with red-orange warning accents for interference, attention dilution, memory collision, and quadratic compute cost. A clean horizontal divider separates the main lower panel, which presents the HMR framework as a spacious modular loop. Center: a Reasoning Controller with stages Observe_t to Update_t. Left: a three-level Memory Hierarchy with working cache, episodic memory, and semantic knowledge base. Right: Multimodal Streams entering selectively through routing paths. Bottom right: sparse experts activated only when needed. White background, vector-clean styling, neutral gray plus cool accents, minimal but legible labels, conference-paper clarity, no poster aesthetics.
+```
+
+Source excerpt used:
+
+```text
+为ICLR论文生成一幅高质量的Figure 1，聚焦于“Hierarchical Memory Routing for Long-Context Multimodal Reasoning”。
+```
+
+</details>
+
+#### No. 66 · Minimal research illustration prompt
+
+<img src="docs/example-community-xhs-05-llm-agent-research-illustration.png" width="560" alt="Minimal research illustration prompt"/>
+
+*Source Link: [GPT4o 还真能画科研配图啊！！！提示词见正文](https://www.xiaohongshu.com/explore/67e414010000000007037315)*
+
+<details>
+<summary>📝 Adapted prompt</summary>
+
+```text
+Draw a research-paper illustration showing a closed-loop LLM agent system. The left side begins with a user prompt, then flows into a planner, tool-use engine, retrieval module, memory buffer, and a final verifier that feeds corrections back into the system. Use a restrained academic palette of blue, slate, and orange accents. Style it like a clean paper illustration: vector-like blocks, precise arrows, sparse labels, balanced whitespace, and a clear Figure 1 narrative from problem input to verified output.
+```
+
+Source excerpt used:
+
+```text
+给我画一张论文的科研配图。「配图的文字描述」。
+```
+
+</details>
 ### 🏢 Official OpenAI Cookbook Examples
 
 Verbatim prompts from OpenAI's [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb). We regenerated each with our CLI at `--quality high` so you can compare your results against an independent run of the same prompt. Prompts are **exactly** as published by OpenAI.
 
-#### No. 47 · Automatic coffee machine infographic
+#### No. 67 · Automatic coffee machine infographic
 
 <img src="docs/example-openai-coffee-infographic.png" width="460" alt="Automatic coffee machine infographic"/>
 
@@ -3172,7 +3582,7 @@ open("docs/example-openai-coffee-infographic.png", "wb").write(base64.b64decode(
 
 ---
 
-#### No. 48 · Photorealistic elderly sailor
+#### No. 68 · Photorealistic elderly sailor
 
 <img src="docs/example-openai-sailor.png" width="460" alt="Photorealistic elderly sailor"/>
 
@@ -3226,7 +3636,7 @@ open("docs/example-openai-sailor.png", "wb").write(base64.b64decode(result.data[
 
 ---
 
-#### No. 49 · Minimalist bakery logo — Field & Flour
+#### No. 69 · Minimalist bakery logo — Field & Flour
 
 <img src="docs/example-openai-logo-bakery.png" width="460" alt="Minimalist bakery logo — Field & Flour"/>
 
@@ -3277,7 +3687,7 @@ open("docs/example-openai-logo-bakery.png", "wb").write(base64.b64decode(result.
 
 ---
 
-#### No. 50 · 4-panel pet comic strip
+#### No. 70 · 4-panel pet comic strip
 
 <img src="docs/example-openai-comic-pet.png" width="460" alt="4-panel pet comic strip"/>
 
@@ -3333,7 +3743,7 @@ open("docs/example-openai-comic-pet.png", "wb").write(base64.b64decode(result.da
 
 ### ✨ Edit Endpoint Showcase
 
-#### No. 51 · Chess board → winter evening (edit via `/v1/images/edits`) 🆕
+#### No. 71 · Chess board → winter evening (edit via `/v1/images/edits`) 🆕
 
 | Before (from No. 25) | After — edited with a single text prompt |
 |---|---|
@@ -3362,15 +3772,15 @@ client.images.edit(
 ```
 </details>
 
-**Endpoint:** `POST /v1/images/edits` · **Size:** `1024x1024` · **Author:** original (adapted from OpenAI cookbook §4 edit pattern) · [source →](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
+**Endpoint:** `POST /v1/images/edits` · **Size:** `1024x1024` · [source →](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
 
 ---
 
-#### No. 52 · Indirect prompt-injection attack flow
+#### No. 72 · Indirect prompt-injection attack flow
 
 <img src="docs/example-prompt-injection-flow.png" width="620" alt="Indirect prompt-injection attack flow"/>
 
-<sub>Research Figures (security) · `landscape` · `1536x1024` · Author: original · **Cites:** Greshake et al., 2023</sub>
+<sub>Research Figures (security) · `landscape` · `1536x1024` · **Cites:** Greshake et al., 2023</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3435,18 +3845,14 @@ open("docs/example-prompt-injection-flow.png", "wb").write(base64.b64decode(resu
 
 ---
 
-## 🚀 The Next 48 — Categories we built out (#53–#100)
-
-Each entry below is Claude × Codex × Gemini co-designed and generated one-shot at `--quality high`. Every entry shows **Prompt + CLI command + equivalent OpenAI SDK call** so you can run it three different ways — copy the prompt, paste the bash, or drop the Python snippet into a notebook.
-
 
 ### 📱 UI/UX Mockups
 
-#### No. 53 · Mobile Budgeting App Mockup
+#### No. 73 · Mobile Budgeting App Mockup
 
 <img src="docs/example-mobile-budgeting-app-neobank.png" width="460" alt="Mobile Budgeting App Mockup"/>
 
-<sub>UI/UX Mockups · `portrait` · `1024x1536` · Author: original (Codex design session)</sub>
+<sub>UI/UX Mockups · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3484,11 +3890,11 @@ open("docs/example-mobile-budgeting-app-neobank.png", "wb").write(base64.b64deco
 
 ---
 
-#### No. 54 · Desktop Operations Dashboard
+#### No. 74 · Desktop Operations Dashboard
 
 <img src="docs/example-desktop-analytics-dashboard-operations.png" width="620" alt="Desktop Operations Dashboard"/>
 
-<sub>UI/UX Mockups · `landscape` · `1536x1024` · Author: original (Codex design session)</sub>
+<sub>UI/UX Mockups · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3526,11 +3932,11 @@ open("docs/example-desktop-analytics-dashboard-operations.png", "wb").write(base
 
 ---
 
-#### No. 55 · Design System Card Set
+#### No. 75 · Design System Card Set
 
 <img src="docs/example-design-system-component-card-set.png" width="460" alt="Design System Card Set"/>
 
-<sub>UI/UX Mockups · `square` · `1024x1024` · Author: original (Codex design session)</sub>
+<sub>UI/UX Mockups · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3568,11 +3974,11 @@ open("docs/example-design-system-component-card-set.png", "wb").write(base64.b64
 
 ---
 
-#### No. 56 · Web3 Wallet Interface Concept
+#### No. 76 · Web3 Wallet Interface Concept
 
 <img src="docs/example-web3-wallet-app-concept.png" width="460" alt="Web3 Wallet Interface Concept"/>
 
-<sub>UI/UX Mockups · `portrait` · `1024x1536` · Author: original (Codex design session)</sub>
+<sub>UI/UX Mockups · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3610,11 +4016,11 @@ open("docs/example-web3-wallet-app-concept.png", "wb").write(base64.b64decode(re
 
 ---
 
-#### No. 57 · Health Tracker App Mockup
+#### No. 77 · Health Tracker App Mockup
 
 <img src="docs/example-health-tracker-wellness-app.png" width="460" alt="Health Tracker App Mockup"/>
 
-<sub>UI/UX Mockups · `portrait` · `1024x1536` · Author: original (Codex design session)</sub>
+<sub>UI/UX Mockups · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3654,11 +4060,11 @@ open("docs/example-health-tracker-wellness-app.png", "wb").write(base64.b64decod
 
 ### 📊 Data Visualization
 
-#### No. 58 · Small Multiples Climate Grid
+#### No. 78 · Small Multiples Climate Grid
 
 <img src="docs/example-small-multiples-climate-grid.png" width="620" alt="Small Multiples Climate Grid"/>
 
-<sub>Data Visualization · `wide` · `2048x1152` · Author: original (Codex design session)</sub>
+<sub>Data Visualization · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3696,11 +4102,11 @@ open("docs/example-small-multiples-climate-grid.png", "wb").write(base64.b64deco
 
 ---
 
-#### No. 59 · Network Graph Collaboration Map
+#### No. 79 · Network Graph Collaboration Map
 
 <img src="docs/example-network-graph-collaboration-map.png" width="620" alt="Network Graph Collaboration Map"/>
 
-<sub>Data Visualization · `landscape` · `1536x1024` · Author: original (Codex design session)</sub>
+<sub>Data Visualization · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3738,11 +4144,11 @@ open("docs/example-network-graph-collaboration-map.png", "wb").write(base64.b64d
 
 ---
 
-#### No. 60 · Chord Diagram of Energy Flows
+#### No. 80 · Chord Diagram of Energy Flows
 
 <img src="docs/example-chord-diagram-energy-flows.png" width="460" alt="Chord Diagram of Energy Flows"/>
 
-<sub>Data Visualization · `square` · `1024x1024` · Author: original (Codex design session)</sub>
+<sub>Data Visualization · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3780,11 +4186,11 @@ open("docs/example-chord-diagram-energy-flows.png", "wb").write(base64.b64decode
 
 ---
 
-#### No. 61 · Treemap Budget Allocation
+#### No. 81 · Treemap Budget Allocation
 
 <img src="docs/example-treemap-startup-budget-allocation.png" width="620" alt="Treemap Budget Allocation"/>
 
-<sub>Data Visualization · `landscape` · `1536x1024` · Author: original (Codex design session)</sub>
+<sub>Data Visualization · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3822,11 +4228,11 @@ open("docs/example-treemap-startup-budget-allocation.png", "wb").write(base64.b6
 
 ---
 
-#### No. 62 · Geographic Choropleth Yield Map
+#### No. 82 · Geographic Choropleth Yield Map
 
 <img src="docs/example-geographic-choropleth-harvest-yield.png" width="620" alt="Geographic Choropleth Yield Map"/>
 
-<sub>Data Visualization · `wide` · `2048x1152` · Author: original (Codex design session)</sub>
+<sub>Data Visualization · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3866,11 +4272,11 @@ open("docs/example-geographic-choropleth-harvest-yield.png", "wb").write(base64.
 
 ### ⚙️ Technical Illustration
 
-#### No. 63 · Mechanical Watch Exploded View
+#### No. 83 · Mechanical Watch Exploded View
 
 <img src="docs/example-mechanical-watch-exploded-view.png" width="460" alt="Mechanical Watch Exploded View"/>
 
-<sub>Technical Illustration · `square` · `1024x1024` · Author: original (Codex design session)</sub>
+<sub>Technical Illustration · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3908,11 +4314,11 @@ open("docs/example-mechanical-watch-exploded-view.png", "wb").write(base64.b64de
 
 ---
 
-#### No. 64 · Rocket Cutaway Diagram
+#### No. 84 · Rocket Cutaway Diagram
 
 <img src="docs/example-rocket-cutaway-launch-vehicle.png" width="320" alt="Rocket Cutaway Diagram"/>
 
-<sub>Technical Illustration · `tall` · `2160x3840` · Author: original (Codex design session)</sub>
+<sub>Technical Illustration · `tall` · `2160x3840`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3950,11 +4356,11 @@ open("docs/example-rocket-cutaway-launch-vehicle.png", "wb").write(base64.b64dec
 
 ---
 
-#### No. 65 · Mechanical Keyboard Exploded Assembly
+#### No. 85 · Mechanical Keyboard Exploded Assembly
 
 <img src="docs/example-mechanical-keyboard-exploded-assembly.png" width="620" alt="Mechanical Keyboard Exploded Assembly"/>
 
-<sub>Technical Illustration · `wide` · `2048x1152` · Author: original (Codex design session)</sub>
+<sub>Technical Illustration · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3992,11 +4398,11 @@ open("docs/example-mechanical-keyboard-exploded-assembly.png", "wb").write(base6
 
 ---
 
-#### No. 66 · Car Powertrain Transparent Cutaway
+#### No. 86 · Car Powertrain Transparent Cutaway
 
 <img src="docs/example-car-powertrain-transparent-cutaway.png" width="620" alt="Car Powertrain Transparent Cutaway"/>
 
-<sub>Technical Illustration · `landscape` · `1536x1024` · Author: original (Codex design session)</sub>
+<sub>Technical Illustration · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4034,11 +4440,11 @@ open("docs/example-car-powertrain-transparent-cutaway.png", "wb").write(base64.b
 
 ---
 
-#### No. 67 · Smartphone Internals Layered View
+#### No. 87 · Smartphone Internals Layered View
 
 <img src="docs/example-smartphone-internals-layered-view.png" width="460" alt="Smartphone Internals Layered View"/>
 
-<sub>Technical Illustration · `portrait` · `1024x1536` · Author: original (Codex design session)</sub>
+<sub>Technical Illustration · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4078,11 +4484,11 @@ open("docs/example-smartphone-internals-layered-view.png", "wb").write(base64.b6
 
 ### 🏛️ Architecture & Interior
 
-#### No. 68 · Japanese Minimalist Living Room
+#### No. 88 · Japanese Minimalist Living Room
 
 <img src="docs/example-japanese-minimalist-living-room-render.png" width="620" alt="Japanese Minimalist Living Room"/>
 
-<sub>Architecture & Interior · `landscape` · `1536x1024` · Author: original (Codex design session)</sub>
+<sub>Architecture & Interior · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4120,11 +4526,11 @@ open("docs/example-japanese-minimalist-living-room-render.png", "wb").write(base
 
 ---
 
-#### No. 69 · Brutalist Concrete Museum Atrium
+#### No. 89 · Brutalist Concrete Museum Atrium
 
 <img src="docs/example-brutalist-concrete-museum-atrium.png" width="620" alt="Brutalist Concrete Museum Atrium"/>
 
-<sub>Architecture & Interior · `wide` · `2048x1152` · Author: original (Codex design session)</sub>
+<sub>Architecture & Interior · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4162,11 +4568,11 @@ open("docs/example-brutalist-concrete-museum-atrium.png", "wb").write(base64.b64
 
 ---
 
-#### No. 70 · Mid-Century Modern Office
+#### No. 90 · Mid-Century Modern Office
 
 <img src="docs/example-mid-century-modern-office-studio.png" width="620" alt="Mid-Century Modern Office"/>
 
-<sub>Architecture & Interior · `landscape` · `1536x1024` · Author: original (Codex design session)</sub>
+<sub>Architecture & Interior · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4204,11 +4610,11 @@ open("docs/example-mid-century-modern-office-studio.png", "wb").write(base64.b64
 
 ---
 
-#### No. 71 · Biophilic Biotech Lab
+#### No. 91 · Biophilic Biotech Lab
 
 <img src="docs/example-biophilic-biotech-lab-render.png" width="620" alt="Biophilic Biotech Lab"/>
 
-<sub>Architecture & Interior · `wide` · `2048x1152` · Author: original (Codex design session)</sub>
+<sub>Architecture & Interior · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4246,11 +4652,11 @@ open("docs/example-biophilic-biotech-lab-render.png", "wb").write(base64.b64deco
 
 ---
 
-#### No. 72 · Gothic Cathedral Interior
+#### No. 92 · Gothic Cathedral Interior
 
 <img src="docs/example-gothic-cathedral-interior-render.png" width="320" alt="Gothic Cathedral Interior"/>
 
-<sub>Architecture & Interior · `tall` · `2160x3840` · Author: original (Codex design session)</sub>
+<sub>Architecture & Interior · `tall` · `2160x3840`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4290,11 +4696,11 @@ open("docs/example-gothic-cathedral-interior-render.png", "wb").write(base64.b64
 
 ### 🔬 Scientific & Educational
 
-#### No. 73 · Anatomy Poster
+#### No. 93 · Anatomy Poster
 
 <img src="docs/example-human-anatomy-muscular-poster.png" width="320" alt="Anatomy Poster"/>
 
-<sub>Scientific & Educational · `tall` · `2160x3840` · Author: original (Codex design session)</sub>
+<sub>Scientific & Educational · `tall` · `2160x3840`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4332,11 +4738,11 @@ open("docs/example-human-anatomy-muscular-poster.png", "wb").write(base64.b64dec
 
 ---
 
-#### No. 74 · Periodic Table Spectral Variant
+#### No. 94 · Periodic Table Spectral Variant
 
 <img src="docs/example-periodic-table-spectral-variant.png" width="620" alt="Periodic Table Spectral Variant"/>
 
-<sub>Scientific & Educational · `wide` · `2048x1152` · Author: original (Codex design session)</sub>
+<sub>Scientific & Educational · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4374,11 +4780,11 @@ open("docs/example-periodic-table-spectral-variant.png", "wb").write(base64.b64d
 
 ---
 
-#### No. 75 · Tree of Life Poster
+#### No. 95 · Tree of Life Poster
 
 <img src="docs/example-tree-of-life-phylogeny-poster.png" width="460" alt="Tree of Life Poster"/>
 
-<sub>Scientific & Educational · `square` · `1024x1024` · Author: original (Codex design session)</sub>
+<sub>Scientific & Educational · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4416,11 +4822,11 @@ open("docs/example-tree-of-life-phylogeny-poster.png", "wb").write(base64.b64dec
 
 ---
 
-#### No. 76 · Weather Systems Diagram
+#### No. 96 · Weather Systems Diagram
 
 <img src="docs/example-weather-systems-fronts-diagram.png" width="620" alt="Weather Systems Diagram"/>
 
-<sub>Scientific & Educational · `landscape` · `1536x1024` · Author: original (Codex design session)</sub>
+<sub>Scientific & Educational · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4458,11 +4864,11 @@ open("docs/example-weather-systems-fronts-diagram.png", "wb").write(base64.b64de
 
 ---
 
-#### No. 77 · Geological Strata Cross-Section
+#### No. 97 · Geological Strata Cross-Section
 
 <img src="docs/example-geological-strata-cross-section.png" width="620" alt="Geological Strata Cross-Section"/>
 
-<sub>Scientific & Educational · `wide` · `2048x1152` · Author: original (Codex design session)</sub>
+<sub>Scientific & Educational · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4502,11 +4908,11 @@ open("docs/example-geological-strata-cross-section.png", "wb").write(base64.b64d
 
 ### 👗 Fashion Editorial
 
-#### No. 78 · Urban Streetwear Lookbook: Shibuya Night
+#### No. 98 · Urban Streetwear Lookbook: Shibuya Night
 
 <img src="docs/example-streetwear-tokyo-lookbook.png" width="460" alt="Urban Streetwear Lookbook: Shibuya Night"/>
 
-<sub>Fashion Editorial · `portrait` · `1024x1536` · Author: original (Gemini design session)</sub>
+<sub>Fashion Editorial · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4544,11 +4950,11 @@ open("docs/example-streetwear-tokyo-lookbook.png", "wb").write(base64.b64decode(
 
 ---
 
-#### No. 79 · Avant-Garde Haute Couture Runway
+#### No. 99 · Avant-Garde Haute Couture Runway
 
 <img src="docs/example-haute-couture-sculptural-runway.png" width="320" alt="Avant-Garde Haute Couture Runway"/>
 
-<sub>Fashion Editorial · `tall` · `2160x3840` · Author: original (Gemini design session)</sub>
+<sub>Fashion Editorial · `tall` · `2160x3840`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4586,11 +4992,11 @@ open("docs/example-haute-couture-sculptural-runway.png", "wb").write(base64.b64d
 
 ---
 
-#### No. 80 · Y2K Revival: Cyber-Pop Studio Session
+#### No. 100 · Y2K Revival: Cyber-Pop Studio Session
 
 <img src="docs/example-y2k-revival-cyber-pop.png" width="460" alt="Y2K Revival: Cyber-Pop Studio Session"/>
 
-<sub>Fashion Editorial · `square` · `1024x1024` · Author: original (Gemini design session)</sub>
+<sub>Fashion Editorial · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4628,11 +5034,11 @@ open("docs/example-y2k-revival-cyber-pop.png", "wb").write(base64.b64decode(resu
 
 ---
 
-#### No. 81 · Old Money Aesthetic: Equestrian Estate
+#### No. 101 · Old Money Aesthetic: Equestrian Estate
 
 <img src="docs/example-old-money-equestrian-estate.png" width="620" alt="Old Money Aesthetic: Equestrian Estate"/>
 
-<sub>Fashion Editorial · `landscape` · `1536x1024` · Author: original (Gemini design session)</sub>
+<sub>Fashion Editorial · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4670,11 +5076,11 @@ open("docs/example-old-money-equestrian-estate.png", "wb").write(base64.b64decod
 
 ---
 
-#### No. 82 · Avant-Garde: Organic Surrealism
+#### No. 102 · Avant-Garde: Organic Surrealism
 
 <img src="docs/example-avant-garde-organic-high-fashion.png" width="460" alt="Avant-Garde: Organic Surrealism"/>
 
-<sub>Fashion Editorial · `portrait` · `1024x1536` · Author: original (Gemini design session)</sub>
+<sub>Fashion Editorial · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4714,11 +5120,11 @@ open("docs/example-avant-garde-organic-high-fashion.png", "wb").write(base64.b64
 
 ### 🎨 Fine Art Painting
 
-#### No. 83 · Vibrant Impasto: Floral Rhythms
+#### No. 103 · Vibrant Impasto: Floral Rhythms
 
 <img src="docs/example-impasto-floral-swirls.png" width="460" alt="Vibrant Impasto: Floral Rhythms"/>
 
-<sub>Fine Art Painting · `square` · `1024x1024` · Author: original (Gemini design session)</sub>
+<sub>Fine Art Painting · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4756,11 +5162,11 @@ open("docs/example-impasto-floral-swirls.png", "wb").write(base64.b64decode(resu
 
 ---
 
-#### No. 84 · Impressionist Lineage: River at Dusk
+#### No. 104 · Impressionist Lineage: River at Dusk
 
 <img src="docs/example-impressionist-river-dusk.png" width="620" alt="Impressionist Lineage: River at Dusk"/>
 
-<sub>Fine Art Painting · `wide` · `2048x1152` · Author: original (Gemini design session)</sub>
+<sub>Fine Art Painting · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4798,11 +5204,11 @@ open("docs/example-impressionist-river-dusk.png", "wb").write(base64.b64decode(r
 
 ---
 
-#### No. 85 · Mid-Century Modern: The Blue Pool
+#### No. 105 · Mid-Century Modern: The Blue Pool
 
 <img src="docs/example-hockney-california-backyard.png" width="620" alt="Mid-Century Modern: The Blue Pool"/>
 
-<sub>Fine Art Painting · `landscape` · `1536x1024` · Author: original (Gemini design session)</sub>
+<sub>Fine Art Painting · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4840,11 +5246,11 @@ open("docs/example-hockney-california-backyard.png", "wb").write(base64.b64decod
 
 ---
 
-#### No. 86 · Color Field Abstract: Crimson and Ochre
+#### No. 106 · Color Field Abstract: Crimson and Ochre
 
 <img src="docs/example-rothko-color-field-meditation.png" width="320" alt="Color Field Abstract: Crimson and Ochre"/>
 
-<sub>Fine Art Painting · `tall` · `2160x3840` · Author: original (Gemini design session)</sub>
+<sub>Fine Art Painting · `tall` · `2160x3840`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4882,11 +5288,11 @@ open("docs/example-rothko-color-field-meditation.png", "wb").write(base64.b64dec
 
 ---
 
-#### No. 87 · Social Realism: The Great Foundry
+#### No. 107 · Social Realism: The Great Foundry
 
 <img src="docs/example-rivera-social-industrial-mural.png" width="620" alt="Social Realism: The Great Foundry"/>
 
-<sub>Fine Art Painting · `wide` · `2048x1152` · Author: original (Gemini design session)</sub>
+<sub>Fine Art Painting · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4926,11 +5332,11 @@ open("docs/example-rivera-social-industrial-mural.png", "wb").write(base64.b64de
 
 ### ✏️ More Illustration Styles
 
-#### No. 88 · Flat Design: Modern Wellness
+#### No. 108 · Flat Design: Modern Wellness
 
 <img src="docs/example-flat-design-editorial-wellness.png" width="460" alt="Flat Design: Modern Wellness"/>
 
-<sub>Illustration · `square` · `1024x1024` · Author: original (Gemini design session)</sub>
+<sub>Illustration · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4968,11 +5374,11 @@ open("docs/example-flat-design-editorial-wellness.png", "wb").write(base64.b64de
 
 ---
 
-#### No. 89 · Chibi Style: The Starry Bakery
+#### No. 109 · Chibi Style: The Starry Bakery
 
 <img src="docs/example-chibi-kawaii-bakery.png" width="460" alt="Chibi Style: The Starry Bakery"/>
 
-<sub>Illustration · `square` · `1024x1024` · Author: original (Gemini design session)</sub>
+<sub>Illustration · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5010,11 +5416,11 @@ open("docs/example-chibi-kawaii-bakery.png", "wb").write(base64.b64decode(result
 
 ---
 
-#### No. 90 · Low-Poly Geometric: Alpine Sunset
+#### No. 110 · Low-Poly Geometric: Alpine Sunset
 
 <img src="docs/example-low-poly-mountain-voyage.png" width="620" alt="Low-Poly Geometric: Alpine Sunset"/>
 
-<sub>Illustration · `landscape` · `1536x1024` · Author: original (Gemini design session)</sub>
+<sub>Illustration · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5052,11 +5458,11 @@ open("docs/example-low-poly-mountain-voyage.png", "wb").write(base64.b64decode(r
 
 ---
 
-#### No. 91 · Sticker Design: Cyber-Explorer Club
+#### No. 111 · Sticker Design: Cyber-Explorer Club
 
 <img src="docs/example-holographic-sticker-badge.png" width="460" alt="Sticker Design: Cyber-Explorer Club"/>
 
-<sub>Illustration · `square` · `1024x1024` · Author: original (Gemini design session)</sub>
+<sub>Illustration · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5094,11 +5500,11 @@ open("docs/example-holographic-sticker-badge.png", "wb").write(base64.b64decode(
 
 ---
 
-#### No. 92 · Risograph Print: City Shadows
+#### No. 112 · Risograph Print: City Shadows
 
 <img src="docs/example-risograph-urban-landscape.png" width="460" alt="Risograph Print: City Shadows"/>
 
-<sub>Illustration · `portrait` · `1024x1536` · Author: original (Gemini design session)</sub>
+<sub>Illustration · `portrait` · `1024x1536`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5138,11 +5544,11 @@ open("docs/example-risograph-urban-landscape.png", "wb").write(base64.b64decode(
 
 ### 🎥 Cinematic Film References
 
-#### No. 93 · Symmetric Pastel: The Grand Conservatory
+#### No. 113 · Symmetric Pastel: The Grand Conservatory
 
 <img src="docs/example-anderson-symmetric-pastel-hotel.png" width="620" alt="Symmetric Pastel: The Grand Conservatory"/>
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024` · Author: original (Gemini design session)</sub>
+<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5180,11 +5586,11 @@ open("docs/example-anderson-symmetric-pastel-hotel.png", "wb").write(base64.b64d
 
 ---
 
-#### No. 94 · Monolithic Scifi: The Obsidian Gate
+#### No. 114 · Monolithic Scifi: The Obsidian Gate
 
 <img src="docs/example-villeneuve-monolithic-desert.png" width="620" alt="Monolithic Scifi: The Obsidian Gate"/>
 
-<sub>Cinematic & Animation · `wide` · `2048x1152` · Author: original (Gemini design session)</sub>
+<sub>Cinematic & Animation · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5222,11 +5628,11 @@ open("docs/example-villeneuve-monolithic-desert.png", "wb").write(base64.b64deco
 
 ---
 
-#### No. 95 · Dreamscape: The Floating Garden
+#### No. 115 · Dreamscape: The Floating Garden
 
 <img src="docs/example-miyazaki-floating-island-garden.png" width="620" alt="Dreamscape: The Floating Garden"/>
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024` · Author: original (Gemini design session)</sub>
+<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5264,11 +5670,11 @@ open("docs/example-miyazaki-floating-island-garden.png", "wb").write(base64.b64d
 
 ---
 
-#### No. 96 · Slow Cinema: The Misty Orchard
+#### No. 116 · Slow Cinema: The Misty Orchard
 
 <img src="docs/example-tarkovsky-misty-dacha-morning.png" width="620" alt="Slow Cinema: The Misty Orchard"/>
 
-<sub>Cinematic & Animation · `wide` · `2048x1152` · Author: original (Gemini design session)</sub>
+<sub>Cinematic & Animation · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5306,11 +5712,11 @@ open("docs/example-tarkovsky-misty-dacha-morning.png", "wb").write(base64.b64dec
 
 ---
 
-#### No. 97 · Neo-Noir: The Orange Fog
+#### No. 117 · Neo-Noir: The Orange Fog
 
 <img src="docs/example-blade-runner-neo-noir-orange.png" width="620" alt="Neo-Noir: The Orange Fog"/>
 
-<sub>Cinematic & Animation · `wide` · `2048x1152` · Author: original (Gemini design session)</sub>
+<sub>Cinematic & Animation · `wide` · `2048x1152`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5350,11 +5756,11 @@ open("docs/example-blade-runner-neo-noir-orange.png", "wb").write(base64.b64deco
 
 ### 🌌 Niche & Emerging
 
-#### No. 98 · Generative Art: Flow Field #42
+#### No. 118 · Generative Art: Flow Field #42
 
 <img src="docs/example-generative-flow-field-particles.png" width="460" alt="Generative Art: Flow Field #42"/>
 
-<sub>Niche & Emerging · `square` · `1024x1024` · Author: original (Gemini design session)</sub>
+<sub>Niche & Emerging · `square` · `1024x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5392,11 +5798,11 @@ open("docs/example-generative-flow-field-particles.png", "wb").write(base64.b64d
 
 ---
 
-#### No. 99 · 90s OVA: The Cyber-Terminal
+#### No. 119 · 90s OVA: The Cyber-Terminal
 
 <img src="docs/example-90s-anime-cyber-terminal.png" width="620" alt="90s OVA: The Cyber-Terminal"/>
 
-<sub>Niche & Emerging · `landscape` · `1536x1024` · Author: original (Gemini design session)</sub>
+<sub>Niche & Emerging · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5434,11 +5840,11 @@ open("docs/example-90s-anime-cyber-terminal.png", "wb").write(base64.b64decode(r
 
 ---
 
-#### No. 100 · Vaporwave: The Abandoned Mall
+#### No. 120 · Vaporwave: The Abandoned Mall
 
 <img src="docs/example-vaporwave-mall-fountain.png" width="620" alt="Vaporwave: The Abandoned Mall"/>
 
-<sub>Niche & Emerging · `landscape` · `1536x1024` · Author: original (Gemini design session)</sub>
+<sub>Niche & Emerging · `landscape` · `1536x1024`</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5476,494 +5882,11 @@ open("docs/example-vaporwave-mall-fountain.png", "wb").write(base64.b64decode(re
 
 ---
 
-## 🌐 Community Prompt Picks
-Curated from real community posts on **Reddit** and **Xiaohongshu**. Each remake preserves the original **author handle / ID**, **post title**, and **source link** so attribution stays visible.
-
-- Manifest: [docs/community-prompt-picks.json](docs/community-prompt-picks.json)
-- Index: [docs/community-prompt-index.md](docs/community-prompt-index.md)
-- Coverage: Realism & Photography (2), Maps & Game Worlds (3), Game Screenshots (3), Concept Sheets (1), Posters & Oddities (4), Posters & Infographics (2), Research & Explanatory Figures (3), Commercial & Product Visuals (2)
-
-### Realism & Photography
-
-#### Community No. C1 · Everyday candid realism
-
-![Everyday candid realism](docs/example-community-reddit-01-candid-realism.png)
-
-*Source: [ChatGPT 1.5 prompt to add realism in images](https://www.reddit.com/r/ChatGPT/comments/1ppvoj5/chatgpt_15_prompt_to_add_realism_in_images/) — u/LogicalChart3205*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a raw realistic candid natural amateur photo of an unremarkable everyday street corner moment. Keep the entire background in focus. Captured on a Samsung Galaxy S21 Ultra, 24mm lens look, f/8, flat natural lighting, natural soft shadows, low contrast, disposable-camera vibe, slight JPEG artifacts, tiny imperfections, unpolished unedited feel, boring reality, casual snapshot, non-fictional everyday realism.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/LogicalChart3205`
-- Author ID: `LogicalChart3205`
-- Original post: [ChatGPT 1.5 prompt to add realism in images](https://www.reddit.com/r/ChatGPT/comments/1ppvoj5/chatgpt_15_prompt_to_add_realism_in_images/)
-- Original prompt / excerpt used for adaptation: `1:1 aspect ratio. Raw realistic candid natural amateur photo, background in focus, captured on Samsung Galaxy S21 Ultra, 24mm lens, f/8, low contrast, disposable camera vibe.`
-
-</details>
-
-#### Community No. C2 · City rooftop paparazzi snapshot
-
-![City rooftop paparazzi snapshot](docs/example-community-reddit-02-city-rooftop.png)
-
-*Source: [I used a Custom Gem (Gemini) to generate prompts for consistent realistic images](https://www.reddit.com/r/GeminiAI/comments/1rr9nn1/i_used_a_custom_gem_gemini_to_generate_prompts/) — u/LazySatisfaction6862*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a nighttime rooftop paparazzi-style snapshot. A stylish woman in a black silk slip dress, sheer black tights, and a thin gold chain necklace stands relaxed on a city rooftop terrace holding a crystal wine glass, weight shifted to one leg, slight smirk, confident direct eye contact. Background: blurred distant city lights, dark skyline, minimal lounge furniture. Lighting: hard direct camera flash with sharp shadows, high contrast, warm color grading, candid celebrity-photography energy. Shot at eye level with a 35mm lens look, authentic nightlife snapshot, subtle film grain, natural skin texture, crisp details, non-AI aesthetic.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/LazySatisfaction6862`
-- Author ID: `LazySatisfaction6862`
-- Original post: [I used a Custom Gem (Gemini) to generate prompts for consistent realistic images](https://www.reddit.com/r/GeminiAI/comments/1rr9nn1/i_used_a_custom_gem_gemini_to_generate_prompts/)
-- Original prompt / excerpt used for adaptation: `Prompt 4 — City Rooftop: black silk slip dress, wine glass, rooftop terrace at night, blurred city lights, hard direct camera flash, paparazzi style snapshot.`
-
-</details>
-
-### Maps & Game Worlds
-
-#### Community No. C3 · Isometric fantasy village map
-
-![Isometric fantasy village map](docs/example-community-reddit-03-isometric-fantasy-village.png)
-
-*Source: [Isometric Maps (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1hkqr4x/isometric_maps_prompts_included/) — u/Vegetable_Writer_443*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a vibrant isometric fantasy village map with a clean grid-based layout using 3x3 meter tiles. Include wooden houses with thatched roofs, cobblestone paths, and a central stone fountain. One corner of the map rises into a small grassy hill about 2 meters high with stairs connecting to the lower ground. Keep the isometric angle precise and game-ready. Warm sunlight sends clear rays and long shadows across the rooftops. Make the scene readable like a handcrafted strategy-game map, with crisp tile logic, charming environmental detail, and rich but controlled color.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/Vegetable_Writer_443`
-- Author ID: `Vegetable_Writer_443`
-- Original post: [Isometric Maps (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1hkqr4x/isometric_maps_prompts_included/)
-- Original prompt / excerpt used for adaptation: `A vibrant isometric fantasy village featuring a grid-based layout with 3x3 meter tiles, wooden houses, cobblestone paths, a central fountain, a small hill, and warm lighting.`
-
-</details>
-
-#### Community No. C4 · Pixel art breakfast still life
-
-![Pixel art breakfast still life](docs/example-community-reddit-05-pixel-breakfast.png)
-
-*Source: [Animated Pixel Art Food (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1jmodcx/animated_pixel_art_food_prompts_included/) — u/Vegetable_Writer_443*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a nostalgic pixel-art breakfast still life. Show a tall stack of fluffy golden pancakes drizzled with glossy maple syrup, topped with strawberries and blueberries, with pixelated steam rising into the air. The plate sits on a pastel tablecloth and a hot cup of coffee rests in the background. Use rich breakfast colors, careful lighting, and delicious texture detail while staying true to clean, readable pixel art.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/Vegetable_Writer_443`
-- Author ID: `Vegetable_Writer_443`
-- Original post: [Animated Pixel Art Food (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1jmodcx/animated_pixel_art_food_prompts_included/)
-- Original prompt / excerpt used for adaptation: `A pixel art still life featuring fluffy pancakes with maple syrup, strawberries, blueberries, pixelated steam, a pastel tablecloth, and coffee in the background.`
-
-</details>
-
-#### Community No. C5 · Low-poly samurai strategy village
-
-![Low-poly samurai strategy village](docs/example-community-reddit-11-lowpoly-samurai-strategy.png)
-
-*Source: [Low-Poly Strategy Video Games In Japan (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1l2d5dr/lowpoly_strategy_video_games_in_japan_prompts/) — u/Vegetable_Writer_443*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create an isometric low-poly strategy game screenshot of a mountainous Japanese village with rice terraces, torii gates, samurai and archer units in formation, and a tactical RTS interface. Include unit selection boxes, resource counters for rice and wood, fog-of-war minimap, command overlays, and warm daylight with soft shadows. Stylized but readable, modern indie strategy game key art, 16:9.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/Vegetable_Writer_443`
-- Author ID: `Vegetable_Writer_443`
-- Original post: [Low-Poly Strategy Video Games In Japan (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1l2d5dr/lowpoly_strategy_video_games_in_japan_prompts/)
-- Original prompt / excerpt used for adaptation: `Isometric low poly view of a mountainous Japanese village with rice terraces and torii gates, RTS interface, unit selection boxes, resource counters, minimap with fog of war, archers and samurai in formation.`
-
-</details>
-
-### Game Screenshots
-
-#### Community No. C6 · Anime open-world adventure HUD
-
-![Anime open-world adventure HUD](docs/example-community-reddit-06-anime-open-world.png)
-
-*Source: [Anime Style Video Games (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1lh2l98/anime_style_video_games_prompts_included/) — u/Vegetable_Writer_443*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a third-person over-the-shoulder screenshot from a nostalgic anime-style open-world adventure game. The protagonist stands in a lush forest with detailed foliage and vibrant shading, drawing a bow toward distant enemies. Add a clean on-screen HUD: quest log, compass at the top, character portrait and status effects at bottom left, subtle rain droplets on screen, and sun rays filtering through trees. Keep the composition dynamic, the forest immersive, and the UI believable like a premium action-RPG screenshot.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/Vegetable_Writer_443`
-- Author ID: `Vegetable_Writer_443`
-- Original post: [Anime Style Video Games (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1lh2l98/anime_style_video_games_prompts_included/)
-- Original prompt / excerpt used for adaptation: `Third-person over-the-shoulder anime-style open-world adventure in a lush forest, with quest log, compass, status effects, rain droplets on screen, and the protagonist aiming a bow.`
-
-</details>
-
-#### Community No. C7 · Retro Japanese town pixel RPG
-
-![Retro Japanese town pixel RPG](docs/example-community-reddit-10-retro-japan-rpg.png)
-
-*Source: [Retro Video Games In Japan (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1kozn4u/retro_video_games_in_japan_prompts_included/) — u/Vegetable_Writer_443*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create an isometric pixel-art RPG screenshot of a traditional Japanese village during cherry blossom season. Sakura petals drift through the air, a samurai player character practices sword moves in the square, villagers watch nearby, and the interface includes an inventory panel, stamina gauge, skill cooldown timers, and subtle quest UI. Cozy retro console feeling, soft ambient pastel lighting, crisp pixel details, 16:9 gameplay composition.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/Vegetable_Writer_443`
-- Author ID: `Vegetable_Writer_443`
-- Original post: [Retro Video Games In Japan (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1kozn4u/retro_video_games_in_japan_prompts_included/)
-- Original prompt / excerpt used for adaptation: `Isometric pixel art depiction of a traditional Japanese village during cherry blossom season, sakura petals gently falling, with RPG HUD, inventory, stamina, cooldown timers, and soft ambient pastel lighting.`
-
-</details>
-
-#### Community No. C8 · Cyberpunk Europe action HUD
-
-![Cyberpunk Europe action HUD](docs/example-community-reddit-12-cyberpunk-europe-action.png)
-
-*Source: [Cyberpunk Video Games In European Cities (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1kzzy77/cyberpunk_video_games_in_european_cities_prompts/) — u/Vegetable_Writer_443*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a third-person cyberpunk action game screenshot set in a neon-soaked European capital at night. The protagonist has glowing cybernetic implants and stands on rain-slick streets near a famous landmark while holograms, drones, and flying traffic crowd the skyline. Add a polished game HUD with health bar, ammo count, radar, stealth/energy meters, and mission overlays. Vivid cyan-magenta palette, wet reflections, cinematic intensity, 16:9.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/Vegetable_Writer_443`
-- Author ID: `Vegetable_Writer_443`
-- Original post: [Cyberpunk Video Games In European Cities (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1kzzy77/cyberpunk_video_games_in_european_cities_prompts/)
-- Original prompt / excerpt used for adaptation: `Third-person cyberpunk game scene in a neon-lit European capital with holograms, rain reflections, drones, glowing implants, and a dynamic HUD with health, ammo, radar, and mission overlays.`
-
-</details>
-
-### Concept Sheets
-
-#### Community No. C9 · Elven archer sketchbook concept sheet
-
-![Elven archer sketchbook concept sheet](docs/example-community-reddit-08-elven-archer-sheet.png)
-
-*Source: [Fantasy Concept Arts with V7 (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1jrcpan/fantasy_concept_arts_with_v7_prompts_included/) — u/Vegetable_Writer_443*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a fantasy concept art sketchbook page centered on a mystical elven archer with flowing robes. Render the main figure in loose graphite strokes with precise ink detailing. Surround the hero sketch with side views exploring cloak variations, a half-finished bow study with measurements, thumbnail action poses, handwritten annotations about enchanted embroidery patterns, and faint watercolor tests bleeding into the margins in forest-green and silver. The page should feel like a real art director's development sheet: exploratory, beautiful, readable, and richly tactile.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/Vegetable_Writer_443`
-- Author ID: `Vegetable_Writer_443`
-- Original post: [Fantasy Concept Arts with V7 (Prompts Included)](https://www.reddit.com/r/midjourney/comments/1jrcpan/fantasy_concept_arts_with_v7_prompts_included/)
-- Original prompt / excerpt used for adaptation: `A mystical elven archer with flowing robes, drawn in loose graphite strokes with ink detailing, side views, cloak variations, annotations, bow study, and faint watercolor tests in the margins.`
-
-</details>
-
-### Posters & Oddities
-
-#### Community No. C10 · VHS grocery-store chaos still
-
-![VHS grocery-store chaos still](docs/example-community-reddit-09-vhs-grocery-chaos.png)
-
-*Source: [tried to push the new image model with an insanely complicated prompt and it... just did it](https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/) — u/gavinpurcell*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a chaotic security-camera still from a 1990s grocery store. A man in full medieval armor is frozen mid-sprint stealing several rotisserie chickens past the dairy section. Overhead fluorescent lights reflect off the armor. The floor is baby-blue tile. Add a timestamp reading "08/13/96 04:44 AM" and a wall poster saying "NEW! TOASTER STRUDELS!". Make it low-fidelity, absurd, slightly intense, with motion blur, VHS color bleed, surveillance noise, and authentic analog-store lighting.
-
-**Source record**
-
-- Platform: `reddit`
-- Original author: `u/gavinpurcell`
-- Author ID: `gavinpurcell`
-- Original post: [tried to push the new image model with an insanely complicated prompt and it... just did it](https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/)
-- Original prompt / excerpt used for adaptation: `A security cam still from a 1990s grocery store showing a man in full medieval armor stealing rotisserie chickens, timestamp 08/13/96 04:44 AM, VHS color bleed.`
-
-</details>
-
-#### Community No. C11 · Epic silhouette worldbuilding poster
-
-![Epic silhouette worldbuilding poster](docs/example-community-xhs-01-epic-silhouette-poster.png)
-
-*Source: [被image-2震住了，直接封神](https://www.xiaohongshu.com/explore/69e324cd0000000021039ca9) — 不扛摄影机的AI导演-WHY · 64fde79600000000060316da*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Design a collector's-edition epic poster for an original fantasy theme called "The Celestial Archive". The outer silhouette is a graceful side profile of a lone archivist, and inside that silhouette a complete world naturally grows: observatories, floating stairways, bridges, ancient libraries, moons, towers, relics, and distant pilgrims. Make it feel like a narrative silhouette composition rather than a collage. Style: cinematic poster fused with dreamy watercolor illustration, quiet and majestic, sacred and nostalgic, with paper grain, soft mist, brush-edge texture, elegant negative space, and a discreet signature "WHY" integrated naturally as part of the layout.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `不扛摄影机的AI导演-WHY · 64fde79600000000060316da`
-- Author ID: `64fde79600000000060316da`
-- Original post: [被image-2震住了，直接封神](https://www.xiaohongshu.com/explore/69e324cd0000000021039ca9)
-- Original prompt / excerpt used for adaptation: `收藏版史诗海报，人物侧脸剪影中生长出完整世界观与经典场景。整体偏电影海报+梦幻水彩插画风，安静、宏大、神圣、怀旧。`
-
-</details>
-
-#### Community No. C12 · Dual-exposure narrative poster
-
-![Dual-exposure narrative poster](docs/example-community-xhs-06-dual-exposure-poster.png)
-
-*Source: [GPT Image 2 双重曝光风格](https://www.xiaohongshu.com/explore/69e7a01700000000230153f3) — 卡片猫 · 68dc98f4000000003100c908*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a high-aesthetic collector poster in a "silhouette universe / dual-exposure narrative" style for an original theme called "Moonlit Dragon Court". Choose the most symbolic outer contour yourself — not a bottle or hourglass, but a more resonant form like a mask, archway, wing, throne, face profile, or luminous gate. Inside and around that contour, let a complete theme world naturally unfold: palaces, bridges, moonlit water, dragon motifs, relics, banners, distant figures, and layered atmospheric depth. The image must feel like a premium novel/anime poster: elegant, mythic, poetic, not cluttered, not collage-like, with strong visual memory and restrained luxurious design.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `卡片猫 · 68dc98f4000000003100c908`
-- Author ID: `68dc98f4000000003100c908`
-- Original post: [GPT Image 2 双重曝光风格](https://www.xiaohongshu.com/explore/69e7a01700000000230153f3)
-- Original prompt / excerpt used for adaptation: `高审美的“轮廓宇宙 / 收藏版叙事海报”风格作品……让完整主题世界自然生长在象征性轮廓之中。`
-
-</details>
-
-#### Community No. C13 · Journey to the West silhouette epic poster
-
-![Journey to the West silhouette epic poster](docs/example-community-xhs-10-journey-west-silhouette.png)
-
-*Source: [image-2提示词-四大名著，只能说太牛X](https://www.xiaohongshu.com/explore/69e78cd4000000002103bdd3) — 不扛摄影机的AI导演-WHY · 64fde79600000000060316da*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a collector-edition epic narrative poster for 《西游记》. Use a giant elegant side-profile silhouette as the outer contour, and let the interior grow into a complete Journey to the West world: Monkey King, monk, pig and sand monk, flaming mountain, heavenly palace, demons, magic staff, clouds, temples, mountains, relics, and symbolic motifs. Not a collage but a refined silhouette-filled narrative composition, blending cinematic poster design with dreamy watercolor illustration, soft atmospheric perspective, paper grain, restrained layout, large breathing space, poetic and legendary mood. Add a subtle refined signature mark “WHY” integrated into the poster design.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `不扛摄影机的AI导演-WHY · 64fde79600000000060316da`
-- Author ID: `64fde79600000000060316da`
-- Original post: [image-2提示词-四大名著，只能说太牛X](https://www.xiaohongshu.com/explore/69e78cd4000000002103bdd3)
-- Original prompt / excerpt used for adaptation: `根据【XXX主题】自动生成一张收藏版史诗叙事海报：巨大优雅的人物侧脸剪影作为外轮廓，剪影内部自动生长出最契合该主题的完整世界观、标志性场景、角色关系、象征符号、关键建筑、生物、道具与氛围。`
-
-</details>
-
-### Posters & Infographics
-
-#### Community No. C14 · Modular encyclopedia infographic card
-
-![Modular encyclopedia infographic card](docs/example-community-xhs-02-snow-leopard-encyclopedia-card.png)
-
-*Source: [GPT image 2牛逼！！！！附指令](https://www.xiaohongshu.com/explore/69e832170000000023012116) — 别动我tokens · 69ae2d1b000000003301d440*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Generate a high-quality vertical science encyclopedia card about "雪豹 Snow Leopard". It should feel like a collectible modular knowledge infographic rather than a normal poster. Include one beautiful hero illustration, several zoomed-in detail callouts, rounded information modules, clear title hierarchy, compact encyclopedia content, rating cards, and a Top 5 facts module. Suggested sections: basic profile, habitat, appearance, hunting behavior, conservation risks, climate adaptation, suitable environment, and quick scorecard. Visual style: clean light background, soft palette, subtle shadows, refined icons, rounded info boxes, dense but readable information, polished editorial layout, high collection value.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `别动我tokens · 69ae2d1b000000003301d440`
-- Author ID: `69ae2d1b000000003301d440`
-- Original post: [GPT image 2牛逼！！！！附指令](https://www.xiaohongshu.com/explore/69e832170000000023012116)
-- Original prompt / excerpt used for adaptation: `请根据【主题】生成一张高质量竖版「科普百科图」……图鉴感、百科感、信息结构感、收藏感的模块化科普信息图。`
-
-</details>
-
-#### Community No. C15 · Weekend Seoul travel guide poster
-
-![Weekend Seoul travel guide poster](docs/example-community-xhs-09-seoul-travel-guide.png)
-
-*Source: [GPT image 2生成旅游攻略图让人惊叹](https://www.xiaohongshu.com/explore/69e8cd0d0000000023007215) — Mena · 5a4721a6e8ac2b17598e94de*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Generate a polished one-page Chinese travel guide poster for a fast weekend trip from Nanjing to Seoul in May. Use LARGE highly legible Chinese text, short phrases only, and no paragraph blocks. Focus on shopping, skincare, and a stylish Seongsu-dong route. Layout: big title, 4 modules only (行程 / 区域推荐 / 购物清单 / 美妆护肤), each with 2 to 4 short bullet points, plus a small cute route map with icons. Clean editorial infographic style, soft pastel colors, neat spacing, high readability, modern Xiaohongshu travel card aesthetic. Avoid tiny text, avoid dense explanations, avoid garbled characters.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `Mena · 5a4721a6e8ac2b17598e94de`
-- Author ID: `5a4721a6e8ac2b17598e94de`
-- Original post: [GPT image 2生成旅游攻略图让人惊叹](https://www.xiaohongshu.com/explore/69e8cd0d0000000023007215)
-- Original prompt / excerpt used for adaptation: `帮我生成一张5月份周末从南京到首尔的特种兵旅游攻略，重点是逛街，皮肤管理。`
-
-</details>
-
-### Research & Explanatory Figures
-
-#### Community No. C16 · ICLR-style method figure
-
-![ICLR-style method figure](docs/example-community-xhs-03-hmr-iclr-figure.png)
-
-*Source: [参考计算机顶会ICLR风格的AI绘图初步尝试](https://www.xiaohongshu.com/explore/69d396140000000023012282) — AI垂钓者 · 6104aff6000000000101c5e8*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a polished ICLR-style Figure 1 for an imaginary method called "Hierarchical Memory Routing for Long-Context Multimodal Reasoning (HMR)". The top band shows the failure mode of naive long-context multimodal processing: one overcrowded horizontal token stream mixing text, image patches, retrieved documents, tool traces, and audio snippets, with red-orange warning accents for interference, attention dilution, memory collision, and quadratic compute cost. A clean horizontal divider separates the main lower panel, which presents the HMR framework as a spacious modular loop. Center: a Reasoning Controller with stages Observe_t to Update_t. Left: a three-level Memory Hierarchy with working cache, episodic memory, and semantic knowledge base. Right: Multimodal Streams entering selectively through routing paths. Bottom right: sparse experts activated only when needed. White background, vector-clean styling, neutral gray plus cool accents, minimal but legible labels, conference-paper clarity, no poster aesthetics.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `AI垂钓者 · 6104aff6000000000101c5e8`
-- Author ID: `6104aff6000000000101c5e8`
-- Original post: [参考计算机顶会ICLR风格的AI绘图初步尝试](https://www.xiaohongshu.com/explore/69d396140000000023012282)
-- Original prompt / excerpt used for adaptation: `为ICLR论文生成一幅高质量的Figure 1，聚焦于“Hierarchical Memory Routing for Long-Context Multimodal Reasoning”。`
-
-</details>
-
-#### Community No. C17 · Minimal research illustration prompt
-
-![Minimal research illustration prompt](docs/example-community-xhs-05-llm-agent-research-illustration.png)
-
-*Source: [GPT4o 还真能画科研配图啊！！！提示词见正文](https://www.xiaohongshu.com/explore/67e414010000000007037315) — 路导 · 5e4017090000000001003824*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Draw a research-paper illustration showing a closed-loop LLM agent system. The left side begins with a user prompt, then flows into a planner, tool-use engine, retrieval module, memory buffer, and a final verifier that feeds corrections back into the system. Use a restrained academic palette of blue, slate, and orange accents. Style it like a clean paper illustration: vector-like blocks, precise arrows, sparse labels, balanced whitespace, and a clear Figure 1 narrative from problem input to verified output.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `路导 · 5e4017090000000001003824`
-- Author ID: `5e4017090000000001003824`
-- Original post: [GPT4o 还真能画科研配图啊！！！提示词见正文](https://www.xiaohongshu.com/explore/67e414010000000007037315)
-- Original prompt / excerpt used for adaptation: `给我画一张论文的科研配图。「配图的文字描述」。`
-
-</details>
-
-#### Community No. C18 · Robotics knowledge graph poster
-
-![Robotics knowledge graph poster](docs/example-community-xhs-11-robotics-knowledge-graph.png)
-
-*Source: [使用 gpt-image-2 生成机器人领域知识图谱](https://www.xiaohongshu.com/explore/69e861e9000000001a026b8c) — 爱学习的皮卡菟 · 6507f013000000001603a52d*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Use Chinese to generate a clean robotics knowledge overview poster with VERY readable large text. Do not make it too dense. Layout: one title plus 6 modules only — 机器人类型, 感知, 控制, 操作, 应用, 代表数据集. Each module should have a simple icon and 2 to 4 short bullet phrases. White background, blue technical accent color, clear hierarchy, generous spacing, crisp Chinese typography, educational infographic style. Avoid duplicated sections, avoid tiny text, avoid乱码, avoid overfilled content.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `爱学习的皮卡菟 · 6507f013000000001603a52d`
-- Author ID: `6507f013000000001603a52d`
-- Original post: [使用 gpt-image-2 生成机器人领域知识图谱](https://www.xiaohongshu.com/explore/69e861e9000000001a026b8c)
-- Original prompt / excerpt used for adaptation: `用中文生成一张高信息量的图片，全面介绍机器人领域知识，但这里适配为更高可读性的精简版海报。`
-
-</details>
-
-### Commercial & Product Visuals
-
-#### Community No. C19 · Universal commercial poster template
-
-![Universal commercial poster template](docs/example-community-xhs-07-aurora-oolong-poster.png)
-
-*Source: [GPT Image-2 全面开放！收好这些通用提示词](https://www.xiaohongshu.com/explore/69e7878300000000230050bb) — 木石成方 · 67c2649d000000000e011cbf*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Design a high-end commercial poster for a product called "Aurora Oolong Cold Brew". Minimalist style, clean frame, centered hero bottle and tea glass, soft studio lighting, realistic material textures, elegant condensation details, generous negative space, premium brand visual language, cinematic light and shadow, refined packaging typography, and ultra-detailed finish. Make it feel like a luxury beverage campaign that could run in a subway lightbox or fashion magazine.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `木石成方 · 67c2649d000000000e011cbf`
-- Author ID: `67c2649d000000000e011cbf`
-- Original post: [GPT Image-2 全面开放！收好这些通用提示词](https://www.xiaohongshu.com/explore/69e7878300000000230050bb)
-- Original prompt / excerpt used for adaptation: `商业海报：一张高端质感的[产品名称]广告海报，极简风格，主体居中构图，柔和工作室灯光，真实材质质感，背景留白。`
-
-</details>
-
-#### Community No. C20 · Xiaohongshu cooking tutorial card
-
-![Xiaohongshu cooking tutorial card](docs/example-community-xhs-08-cooking-tutorial-card.png)
-
-*Source: [GPT-Image-2 提示词：家常菜料理图](https://www.xiaohongshu.com/explore/69e8eeed0000000021004a54) — 算法人生 · 66dd79d4000000001d0312e2*
-
-<details>
-<summary>Prompt + source record</summary>
-
-**Adapted prompt**
-
-Create a Xiaohongshu-style viral cooking tutorial image in a 3:4 vertical layout for homemade scallion oil noodles. Cozy home-cooking vibe, warm inviting lifestyle aesthetic, 4 to 6 step grid layout, clean spacing, realistic food photography, soft natural lighting, slight film tone, warm color grading, visible oil sheen, steam, sauce texture, and hands interacting with the food. Add small Chinese annotations such as 切葱, 熬油, 拌面, 出锅. Avoid overcrowding or excessive text.
-
-**Source record**
-
-- Platform: `xiaohongshu`
-- Original author: `算法人生 · 66dd79d4000000001d0312e2`
-- Author ID: `66dd79d4000000001d0312e2`
-- Original post: [GPT-Image-2 提示词：家常菜料理图](https://www.xiaohongshu.com/explore/69e8eeed0000000021004a54)
-- Original prompt / excerpt used for adaptation: `Create a Xiaohongshu-style viral cooking tutorial image (3:4 vertical), cozy home cooking vibe, 4–6 step grid layout, soft natural lighting, warm color grading, realistic food photography, small Chinese annotations like 切块 / 搅拌 / 下锅 / 翻炒.`
-
-</details>
-
 ## 🙏 Acknowledgements
 
-Per-entry credit (author @handle, tweet/article URL, paper citation) is **inline with every gallery entry** above. This section lists only the large archives and official sources we built on top of:
+Per-entry source links are **inline with every community entry** above. This section lists only the large archives and official sources we built on top of:
 
-- **OpenAI** — the `gpt-image-2` model + the [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb) (gallery entries #47–#50 are verbatim from §4).
+- **OpenAI** — the `gpt-image-2` model + the [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb) (the cookbook examples are included inline in the gallery).
 - [`ZeroLu/awesome-gpt-image`](https://github.com/ZeroLu/awesome-gpt-image) — original community prompt archive, CC BY 4.0. Foundational entries in `skills/gpt-image/references/gallery.md` trace back here.
 - [`YouMind-OpenLab/awesome-gpt-image-2`](https://github.com/YouMind-OpenLab/awesome-gpt-image-2) — the numbered-gallery layout is modeled after their README.
 - [`EvoLinkAI/awesome-gpt-image-2-prompts`](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts) — gap-filling prompts for Watercolor / Ink / Isometric / Cyberpunk.

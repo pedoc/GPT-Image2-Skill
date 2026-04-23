@@ -175,50 +175,51 @@ Distilled from OpenAI's [official GPT Image prompting guide](https://github.com/
 
 <table>
   <tr>
-    <td>🎌 <a href="#-anime--manga">Anime &amp; Manga</a></td>
-    <td>🎮 <a href="#-gaming">Gaming</a></td>
-    <td>🤖 <a href="#-retro--cyberpunk">Retro &amp; Cyberpunk</a></td>
-    <td>🎬 <a href="#-cinematic--animation">Cinematic &amp; Animation</a></td>
+    <td>🎌 <a href="#gallery-anime-manga">Anime &amp; Manga</a></td>
+    <td>🎮 <a href="#gallery-gaming">Gaming</a></td>
+    <td>🤖 <a href="#gallery-retro-cyberpunk">Retro &amp; Cyberpunk</a></td>
+    <td>🎬 <a href="#gallery-cinematic-animation">Cinematic &amp; Animation</a></td>
   </tr>
   <tr>
-    <td>👤 <a href="#-character-design">Character Design</a></td>
-    <td>📝 <a href="#-typography--posters">Typography &amp; Posters</a></td>
-    <td>🎨 <a href="#-illustration">Illustration</a></td>
-    <td>💧 <a href="#-watercolor">Watercolor</a></td>
+    <td>👤 <a href="#gallery-character-design">Character Design</a></td>
+    <td>📝 <a href="#gallery-typography-posters">Typography &amp; Posters</a></td>
+    <td>🎨 <a href="#gallery-illustration">Illustration</a></td>
+    <td>💧 <a href="#gallery-watercolor">Watercolor</a></td>
   </tr>
   <tr>
-    <td>🖌️ <a href="#-ink--chinese">Ink &amp; Chinese</a></td>
-    <td>🕹️ <a href="#-pixel-art">Pixel Art</a></td>
-    <td>📐 <a href="#-isometric">Isometric</a></td>
-    <td>📦 <a href="#-product--food">Product &amp; Food</a></td>
+    <td>🖌️ <a href="#gallery-ink-chinese">Ink &amp; Chinese</a></td>
+    <td>🕹️ <a href="#gallery-pixel-art">Pixel Art</a></td>
+    <td>📐 <a href="#gallery-isometric">Isometric</a></td>
+    <td>📦 <a href="#gallery-product-food">Product &amp; Food</a></td>
   </tr>
   <tr>
-    <td>📷 <a href="#-photography">Photography</a></td>
-    <td>📊 <a href="#-infographics--field-guides">Infographics &amp; Field Guides</a></td>
-    <td>📚 <a href="#-research-paper-figures">Research Paper Figures</a></td>
-    <td>🏢 <a href="#-official-openai-cookbook-examples">Official OpenAI Cookbook</a></td>
+    <td>📷 <a href="#gallery-photography">Photography</a></td>
+    <td>📊 <a href="#gallery-infographics-field-guides">Infographics &amp; Field Guides</a></td>
+    <td>📚 <a href="#gallery-research-paper-figures">Research Paper Figures</a></td>
+    <td>🏢 <a href="#gallery-official-openai-cookbook">Official OpenAI Cookbook</a></td>
   </tr>
   <tr>
-    <td>✨ <a href="#-edit-endpoint-showcase">Edit Endpoint Showcase</a></td>
-    <td>📱 <a href="#-uiux-mockups">UI/UX Mockups</a></td>
-    <td>📊 <a href="#-data-visualization">Data Visualization</a></td>
-    <td>⚙️ <a href="#-technical-illustration">Technical Illustration</a></td>
+    <td>✨ <a href="#gallery-edit-endpoint-showcase">Edit Endpoint Showcase</a></td>
+    <td>📱 <a href="#gallery-uiux-mockups">UI/UX Mockups</a></td>
+    <td>📊 <a href="#gallery-data-visualization">Data Visualization</a></td>
+    <td>⚙️ <a href="#gallery-technical-illustration">Technical Illustration</a></td>
   </tr>
   <tr>
-    <td>🏛️ <a href="#-architecture--interior">Architecture &amp; Interior</a></td>
-    <td>🔬 <a href="#-scientific--educational">Scientific &amp; Educational</a></td>
-    <td>👗 <a href="#-fashion--editorial-photography">Fashion &amp; Editorial</a></td>
-    <td>🎨 <a href="#-fine-art-painting-styles">Fine Art Painting</a></td>
+    <td>🏛️ <a href="#gallery-architecture-interior">Architecture &amp; Interior</a></td>
+    <td>🔬 <a href="#gallery-scientific-educational">Scientific &amp; Educational</a></td>
+    <td>👗 <a href="#gallery-fashion-editorial">Fashion &amp; Editorial</a></td>
+    <td>🎨 <a href="#gallery-fine-art-painting">Fine Art Painting</a></td>
   </tr>
   <tr>
-    <td>✏️ <a href="#-illustration-styles-we-dont-have">More Illustration Styles</a></td>
-    <td>🎥 <a href="#-cinematic-film-references">Cinematic Film References</a></td>
-    <td colspan="2">🌌 <a href="#-niche--emerging-styles">Niche &amp; Emerging Styles</a></td>
+    <td>✏️ <a href="#gallery-more-illustration-styles">More Illustration Styles</a></td>
+    <td>🎥 <a href="#gallery-cinematic-film-references">Cinematic Film References</a></td>
+    <td colspan="2">🌌 <a href="#gallery-niche-emerging">Niche &amp; Emerging Styles</a></td>
   </tr>
 </table>
 
 ---
 
+<a id="gallery-anime-manga"></a>
 ### 🎌 Anime & Manga
 
 #### No. 1 · MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)
@@ -545,6 +546,7 @@ open("docs/example-anime-expression-grid.png", "wb").write(base64.b64decode(resu
 
 ---
 
+<a id="gallery-gaming"></a>
 ### 🎮 Gaming
 
 #### No. 6 · Hitman gameplay — OpenAI HQ
@@ -870,6 +872,7 @@ open("docs/example-community-reddit-11-lowpoly-samurai-strategy.png", "wb").writ
 ```
 
 </details>
+<a id="gallery-retro-cyberpunk"></a>
 ### 🤖 Retro & Cyberpunk
 
 #### No. 14 · Cyberpunk mecha girl over sea fortress
@@ -914,6 +917,7 @@ open("docs/example-cyberpunk-mecha.png", "wb").write(base64.b64decode(result.dat
 
 ---
 
+<a id="gallery-cinematic-animation"></a>
 ### 🎬 Cinematic & Animation
 
 #### No. 15 · Pixar-style 3D animation still (kitten)
@@ -1192,6 +1196,7 @@ open("docs/example-community-reddit-09-vhs-grocery-chaos.png", "wb").write(base6
 ```
 
 </details>
+<a id="gallery-character-design"></a>
 ### 👤 Character Design
 
 #### No. 20 · Official character reference sheet
@@ -1293,6 +1298,7 @@ open("docs/example-community-reddit-08-elven-archer-sheet.png", "wb").write(base
 ```
 
 </details>
+<a id="gallery-typography-posters"></a>
 ### 📝 Typography & Posters
 
 #### No. 22 · Chinese tea launch poster
@@ -1816,6 +1822,7 @@ open("docs/example-community-xhs-10-journey-west-silhouette.png", "wb").write(ba
 ```
 
 </details>
+<a id="gallery-illustration"></a>
 ### 🎨 Illustration
 
 #### No. 31 · Vintage Amalfi Coast travel poster
@@ -1860,6 +1867,7 @@ open("docs/example-amalfi-poster.png", "wb").write(base64.b64decode(result.data[
 
 ---
 
+<a id="gallery-watercolor"></a>
 ### 💧 Watercolor
 
 #### No. 32 · Dreamy watercolor — young woman at lily pond
@@ -1904,6 +1912,7 @@ open("docs/example-watercolor-lily-pond.png", "wb").write(base64.b64decode(resul
 
 ---
 
+<a id="gallery-ink-chinese"></a>
 ### 🖌️ Ink & Chinese
 
 #### No. 33 · Chinese ink-wash mountain landscape
@@ -1948,6 +1957,7 @@ open("docs/example-ink-landscape.png", "wb").write(base64.b64decode(result.data[
 
 ---
 
+<a id="gallery-pixel-art"></a>
 ### 🕹️ Pixel Art
 
 #### No. 34 · Pixel art car sprite sheet
@@ -2031,6 +2041,7 @@ open("docs/example-community-reddit-05-pixel-breakfast.png", "wb").write(base64.
 ```
 
 </details>
+<a id="gallery-isometric"></a>
 ### 📐 Isometric
 
 #### No. 36 · Isometric miniature cafe district
@@ -2114,6 +2125,7 @@ open("docs/example-community-reddit-03-isometric-fantasy-village.png", "wb").wri
 ```
 
 </details>
+<a id="gallery-product-food"></a>
 ### 📦 Product & Food
 
 #### No. 38 · 3D product box from dieline
@@ -2422,6 +2434,7 @@ open("docs/example-community-xhs-07-aurora-oolong-poster.png", "wb").write(base6
 ```
 
 </details>
+<a id="gallery-photography"></a>
 ### 📷 Photography
 
 #### No. 42 · RAW iPhone — 42nd Street subway
@@ -2610,6 +2623,7 @@ open("docs/example-panorama-jungle.png", "wb").write(base64.b64decode(result.dat
 
 ---
 
+<a id="gallery-infographics-field-guides"></a>
 ### 📊 Infographics & Field Guides
 
 #### No. 46 · Song Dynasty social-media feed
@@ -2950,6 +2964,7 @@ open("docs/example-community-xhs-08-cooking-tutorial-card.png", "wb").write(base
 ```
 
 </details>
+<a id="gallery-research-paper-figures"></a>
 ### 📚 Research Paper Figures
 
 A dedicated sub-library for ML/AI papers. Twelve templates covering architecture diagrams, plots, heatmaps, sankeys, timelines, traces, and security flows. Use these when you need NeurIPS-quality figures in one shot.
@@ -3921,6 +3936,7 @@ open("docs/example-community-xhs-05-llm-agent-research-illustration.png", "wb").
 ```
 
 </details>
+<a id="gallery-official-openai-cookbook"></a>
 ### 🏢 Official OpenAI Cookbook Examples
 
 Verbatim prompts from OpenAI's [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb). We regenerated each with our CLI at `--quality high` so you can compare your results against an independent run of the same prompt. Prompts are **exactly** as published by OpenAI.
@@ -4132,6 +4148,7 @@ open("docs/example-openai-comic-pet.png", "wb").write(base64.b64decode(result.da
 
 ---
 
+<a id="gallery-edit-endpoint-showcase"></a>
 ### ✨ Edit Endpoint Showcase
 
 #### No. 71 · Chess board → winter evening (edit via `/v1/images/edits`) 🆕
@@ -4249,6 +4266,7 @@ open("docs/example-prompt-injection-flow.png", "wb").write(base64.b64decode(resu
 
 ---
 
+<a id="gallery-uiux-mockups"></a>
 ### 📱 UI/UX Mockups
 
 #### No. 73 · Mobile Budgeting App Mockup
@@ -4461,6 +4479,7 @@ open("docs/example-health-tracker-wellness-app.png", "wb").write(base64.b64decod
 
 ---
 
+<a id="gallery-data-visualization"></a>
 ### 📊 Data Visualization
 
 #### No. 78 · Small Multiples Climate Grid
@@ -4673,6 +4692,7 @@ open("docs/example-geographic-choropleth-harvest-yield.png", "wb").write(base64.
 
 ---
 
+<a id="gallery-technical-illustration"></a>
 ### ⚙️ Technical Illustration
 
 #### No. 83 · Mechanical Watch Exploded View
@@ -4885,6 +4905,7 @@ open("docs/example-smartphone-internals-layered-view.png", "wb").write(base64.b6
 
 ---
 
+<a id="gallery-architecture-interior"></a>
 ### 🏛️ Architecture & Interior
 
 #### No. 88 · Japanese Minimalist Living Room
@@ -5097,6 +5118,7 @@ open("docs/example-gothic-cathedral-interior-render.png", "wb").write(base64.b64
 
 ---
 
+<a id="gallery-scientific-educational"></a>
 ### 🔬 Scientific & Educational
 
 #### No. 93 · Anatomy Poster
@@ -5309,6 +5331,7 @@ open("docs/example-geological-strata-cross-section.png", "wb").write(base64.b64d
 
 ---
 
+<a id="gallery-fashion-editorial"></a>
 ### 👗 Fashion Editorial
 
 #### No. 98 · Urban Streetwear Lookbook: Shibuya Night
@@ -5521,6 +5544,7 @@ open("docs/example-avant-garde-organic-high-fashion.png", "wb").write(base64.b64
 
 ---
 
+<a id="gallery-fine-art-painting"></a>
 ### 🎨 Fine Art Painting
 
 #### No. 103 · Vibrant Impasto: Floral Rhythms
@@ -5733,6 +5757,7 @@ open("docs/example-rivera-social-industrial-mural.png", "wb").write(base64.b64de
 
 ---
 
+<a id="gallery-more-illustration-styles"></a>
 ### ✏️ More Illustration Styles
 
 #### No. 108 · Flat Design: Modern Wellness
@@ -5945,6 +5970,7 @@ open("docs/example-risograph-urban-landscape.png", "wb").write(base64.b64decode(
 
 ---
 
+<a id="gallery-cinematic-film-references"></a>
 ### 🎥 Cinematic Film References
 
 #### No. 113 · Symmetric Pastel: The Grand Conservatory
@@ -6157,6 +6183,7 @@ open("docs/example-blade-runner-neo-noir-orange.png", "wb").write(base64.b64deco
 
 ---
 
+<a id="gallery-niche-emerging"></a>
 ### 🌌 Niche & Emerging
 
 #### No. 118 · Generative Art: Flow Field #42

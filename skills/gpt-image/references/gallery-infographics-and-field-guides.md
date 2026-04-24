@@ -2,7 +2,7 @@
 
 Range: No. 66–73 · Count: 8
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 66 · Song Dynasty social-media feed
 

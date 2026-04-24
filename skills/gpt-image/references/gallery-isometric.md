@@ -2,7 +2,7 @@
 
 Range: No. 53–54 · Count: 2
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 53 · Isometric miniature cafe district
 

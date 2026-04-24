@@ -204,7 +204,7 @@ Distilled from OpenAI's [official GPT Image prompting guide](https://github.com/
 7. **Use `quality="high"` for in-image text, dense diagrams, small labels, and multi-panel layouts.** Those cases degrade visibly at `medium`.
 
 **Three local references are loaded by the skill as needed:**
-- [`skills/gpt-image/references/gallery.md`](skills/gpt-image/references/gallery.md) — routing index for the split 151-prompt Gallery Atlas. Choose a category there, then load only the matching `references/gallery/<category>.md` file to avoid context bloat.
+- [`skills/gpt-image/references/gallery.md`](skills/gpt-image/references/gallery.md) — routing index for the split 151-prompt Gallery Atlas. Choose a category there, then load only the matching `references/gallery-<category>.md` file to avoid context bloat.
 - [`skills/gpt-image/references/craft.md`](skills/gpt-image/references/craft.md) — expanded 19-section prompt-craft checklist covering Scale-first usage, JSON/config-style prompts, multi-panel boards, UI specs, data/diagram grammar, edit invariants, reference workflows, dense text, and category mini-schemas.
 - [`skills/gpt-image/references/openai-cookbook.md`](skills/gpt-image/references/openai-cookbook.md) — verbatim Markdown capture of OpenAI's cookbook (1004 lines), including the authoritative parameter-coverage table and every §4 / §5 use-case example.
 

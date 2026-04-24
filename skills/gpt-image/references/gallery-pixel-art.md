@@ -2,7 +2,7 @@
 
 Range: No. 51–52 · Count: 2
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 51 · Pixel art car sprite sheet
 

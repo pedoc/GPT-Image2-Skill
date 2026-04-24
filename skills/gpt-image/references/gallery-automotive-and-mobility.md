@@ -2,7 +2,7 @@
 
 Range: No. 147–147 · Count: 1
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 147 · Electric city scooter sunrise ad
 

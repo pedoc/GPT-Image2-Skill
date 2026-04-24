@@ -2,7 +2,7 @@
 
 Range: No. 1–12 · Count: 12
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 1 · MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)
 

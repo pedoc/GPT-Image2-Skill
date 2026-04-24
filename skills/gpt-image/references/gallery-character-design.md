@@ -2,7 +2,7 @@
 
 Range: No. 30–31 · Count: 2
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 30 · Official character reference sheet
 

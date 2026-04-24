@@ -2,7 +2,7 @@
 
 Range: No. 122–128 · Count: 7
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 122 · Urban Streetwear Lookbook: Shibuya Night
 

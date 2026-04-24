@@ -2,7 +2,7 @@
 
 Range: No. 148–151 · Count: 4
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 148 · Realistic black-and-grey sleeve study
 

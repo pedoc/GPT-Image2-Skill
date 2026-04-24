@@ -2,7 +2,7 @@
 
 Range: No. 117–121 · Count: 5
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 117 · Anatomy Poster
 

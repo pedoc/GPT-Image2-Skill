@@ -2,7 +2,7 @@
 
 Range: No. 32–44 · Count: 13
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 32 · Chinese tea launch poster
 

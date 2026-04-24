@@ -2,7 +2,7 @@
 
 Range: No. 25–29 · Count: 5
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 25 · Pixar-style 3D animation still (kitten)
 

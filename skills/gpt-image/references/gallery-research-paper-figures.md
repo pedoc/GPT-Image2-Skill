@@ -2,7 +2,7 @@
 
 Range: No. 74–90 · Count: 17
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 74 · Transformer encoder–decoder architecture
 

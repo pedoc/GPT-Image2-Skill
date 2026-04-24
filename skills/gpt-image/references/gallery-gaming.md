@@ -2,7 +2,7 @@
 
 Range: No. 13–21 · Count: 9
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 13 · Hitman gameplay — OpenAI HQ
 

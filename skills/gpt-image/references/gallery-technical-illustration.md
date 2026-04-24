@@ -2,7 +2,7 @@
 
 Range: No. 107–111 · Count: 5
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 107 · Mechanical Watch Exploded View
 

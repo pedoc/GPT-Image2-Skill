@@ -2,7 +2,7 @@
 
 Range: No. 91–94 · Count: 4
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 91 · Automatic coffee machine infographic
 

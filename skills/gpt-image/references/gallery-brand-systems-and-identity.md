@@ -2,7 +2,7 @@
 
 Range: No. 59–61 · Count: 3
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 59 · Moss Radio brand identity showcase board
 

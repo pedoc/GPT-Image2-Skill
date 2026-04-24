@@ -2,7 +2,7 @@
 
 Range: No. 140–144 · Count: 5
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 140 · Symmetric Pastel: The Grand Conservatory
 

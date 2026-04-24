@@ -2,7 +2,7 @@
 
 Range: No. 134–139 · Count: 6
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 134 · Flat Design: Modern Wellness
 

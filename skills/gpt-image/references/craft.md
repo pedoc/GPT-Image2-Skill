@@ -1,6 +1,6 @@
 # GPT Image 2 Prompt Craft
 
-Cross-cutting principles distilled from the full 151-prompt Gallery Atlas. Use this file as the prompt-design checklist; use `gallery.md` as the routing index for the split concrete Scale/case atlas under `gallery/`.
+Cross-cutting principles distilled from the full 151-prompt Gallery Atlas. Use this file as the prompt-design checklist; use `gallery.md` as the routing index for the split concrete Scale/case atlas as `gallery-*.md` files.
 
 ## Table of contents
 
@@ -26,7 +26,7 @@ Cross-cutting principles distilled from the full 151-prompt Gallery Atlas. Use t
 
 ## 0. Use the Scale before writing from scratch
 
-Before drafting a prompt, open `gallery.md` as the category index, then read 3–8 nearby cases from the matching `gallery/<category>.md` file. The skill should not behave like a bare CLI wrapper: it should remix the repo's collected patterns.
+Before drafting a prompt, open `gallery.md` as the category index, then read 3–8 nearby cases from the matching `gallery-<category>.md` file. The skill should not behave like a bare CLI wrapper: it should remix the repo's collected patterns.
 
 Fast routing examples:
 - Anime/manga or multi-character boards → No. 1–12.
@@ -343,7 +343,7 @@ Chinese calligraphy or brush-signage prompts should specify style (`brush style`
 
 ## 17. Attribution and gallery metadata
 
-Every split `gallery/*.md` entry preserves either `Original` metadata or visible `Author + Source` attribution when it came from an outside source. When adapting an outside-source pattern into README/gallery entries, keep attribution in the metadata/footer.
+Every split `gallery-*.md` entry preserves either `Original` metadata or visible `Author + Source` attribution when it came from an outside source. When adapting an outside-source pattern into README/gallery entries, keep attribution in the metadata/footer.
 
 Use `Original` only for repo-created prompts/images.
 

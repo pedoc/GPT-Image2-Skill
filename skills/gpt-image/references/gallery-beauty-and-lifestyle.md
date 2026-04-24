@@ -2,7 +2,7 @@
 
 Range: No. 145–145 · Count: 1
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 145 · Quiet-luxury skincare morning tray
 

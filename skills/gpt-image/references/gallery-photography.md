@@ -2,7 +2,7 @@
 
 Range: No. 62–65 · Count: 4
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 62 · RAW iPhone — 42nd Street subway
 

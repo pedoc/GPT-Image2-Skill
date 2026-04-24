@@ -2,7 +2,7 @@
 
 Range: No. 22–24 · Count: 3
 
-Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `../craft.md`.
+Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
 ### No. 22 · Cyberpunk mecha girl over sea fortress
 

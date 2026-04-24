@@ -1311,6 +1311,7 @@ Make it a winter evening with heavy snowfall, snow dusted on the board and piece
 ### No. 96 · Tea poster → metro lightbox mockup
 
 - Image: `docs/edit-endpoint-showcase/tea-poster-metro-lightbox.png`
+- Input image: `docs/typography-posters/tea-poster.png`
 - Metadata: Edit Endpoint Showcase · `portrait` · `1024x1536` · Original
 
 ```text

@@ -58,12 +58,14 @@ Recommended schema:
 
 ```text
 /* PRODUCT_RENDER_CONFIG: Short Name
+   VERSION: 1.0.0
    AESTHETIC: Premium Commercial Photography */
 {
   "GLOBAL_SETTINGS": {
     "aspect_ratio": "2:3 vertical",
     "style": "hyper-realistic commercial photography",
-    "clarity": "sharp foreground, micro-texture visibility"
+    "clarity": "sharp foreground, micro-texture visibility",
+    "render_flags": ["8K_UHD", "sharp_foreground", "editorial_finish"]
   },
   "ENVIRONMENT": {
     "background": "warm gradient studio backdrop",
@@ -88,8 +90,10 @@ Recommended schema:
 
 Craft rules:
 - Keys should describe visual subsystems, not implementation internals.
+- A short header comment can carry `VERSION:` and `AESTHETIC:`. The version is not for code execution; it makes the prompt feel like a deliberate spec and helps future agents compare variants.
 - Values should be concrete visual constraints, not vague praise.
 - Arrays are good for visible elements; nested objects are good for materials, physics, lighting, and output goals.
+- Use `render_flags` / `quality_flags` for output-level constraints such as `8K_UHD`, `sharp_foreground`, `micro_texture`, `editorial_finish`, or `no_CGI_tell`.
 - JSON does not have to be machine-valid if comments help the model, but keep it clean and readable.
 - Still include aspect ratio and output mood inside the schema.
 
@@ -105,6 +109,12 @@ Pattern:
 5. Add exact label text where correctness matters.
 
 This is stronger than saying “make an infographic about X”.
+
+Educational anatomy / science poster pattern:
+- Name the subject exactly (`human muscular system`, `periodic table spectral variant`, `geological strata cross-section`).
+- Include view constraints where relevant, e.g. `anterior and posterior views` for anatomy.
+- Add scale/context notes such as `Adult height reference 175 cm` when the prompt needs scientific believability.
+- Require classroom-wall-chart clarity: clean hierarchy, thin labels, legend, muted academic palette, and no gore/excessive realism.
 
 ## 5. Research/data figures need diagram grammar
 
@@ -124,6 +134,20 @@ Examples:
 - No. 81 uses Sankey source blocks, processing blocks, final splits, and proportional ribbons.
 - No. 90 uses four columns plus benign/injection arrow semantics.
 
+Security / agent-safety figure pattern:
+- Show the attack surface as an explicit visual object, e.g. `Attacker-controlled document`, `Public Slack message`, or `Web page`.
+- If illustrating prompt injection, quote the payload visibly as a harmless example string such as `<!-- IGNORE previous instructions... -->`, then label it `injected instructions` / `payload`.
+- Separate benign flow and attack flow with line semantics: solid slate-gray for benign, dashed terracotta/red for injection path.
+- Keep the figure explanatory/defensive; do not turn the payload into operational instructions.
+
+Data visualization mini-schema (No. 102–106):
+- Name the chart family first: `small-multiples grid`, `network graph`, `chord diagram`, `treemap`, `geographic choropleth`.
+- Specify canvas and structure: `4×3`, node groups, ribbon groups, nested rectangles, map regions.
+- Provide exact labels, panel names, legend values, units, and axis labels.
+- Explain visual encoding: line = temperature, bars = precipitation, ribbon thickness ∝ flow, color = category/region/value.
+- Require consistent scales/alignment across repeated panels.
+- Keep styling editorial and readable: white background, generous margins, restrained palette, publication-grade labels.
+
 ## 6. UI prompts should read like product specs
 
 The UI/UX examples (No. 97–101) succeed because they specify product context, device frame, information architecture, real copy, and data.
@@ -132,7 +156,8 @@ Pattern:
 - Fictional product name to avoid real-brand leakage.
 - Device/canvas: `1290x2796 smartphone screen`, `16:10 monitor canvas`.
 - Palette and component system.
-- Header, cards, charts, nav, transaction/activity rows.
+- Top header phrasing: explicitly name the header area and its copy, e.g. `Include a top header with the in-image text "AURAE", "Good morning, Lina", and "Total balance $12,480.36"`.
+- Cards, charts, nav, transaction/activity rows.
 - Exact values and labels: balances, percentages, axis labels, button names.
 - Quality constraints: `crisp typography`, `clean spacing`, `precise icon alignment`, `production-quality mockup`.
 
@@ -149,9 +174,11 @@ Examples:
 - No. 21: 3×3 dark-fantasy worldbuilding set.
 - No. 27: 6-panel storyboard with shot/camera metadata.
 - No. 30: official character reference sheet.
+- No. 102: 4×3 small-multiples data grid with consistent axes.
 
 Rules:
-- State the grid/page count exactly.
+- State the grid/page count exactly: `3×3`, `4×3`, `3×2`, `16-panel`, `19 numbered miniature pages`.
+- For data grids, use the exact phrase `small-multiples grid`, specify rows/columns, and require consistent axes/labels across mini-panels.
 - Give each panel a role or beat.
 - Specify shared art direction, palette, costume motifs, symbols, lighting, and character identity.
 - For storyboards, add camera language: WIDE, OTS, CU, low angle, aerial, match cut, pan/tilt/static, duration.
@@ -200,14 +227,23 @@ Posters, ads, menus, and campaign visuals should specify hierarchy.
 
 Include:
 - Product/event name largest.
+- Prefer the wording `Exact readable text:` when every displayed string matters, especially event posters and wayfinding.
 - Claim/tagline.
 - SKU / variants / modules.
 - Prices or dates if relevant.
 - CTA or ordering/info module.
 - Fine print.
 - Distance readability: `legible from a distance`, `clear promotional hierarchy`.
+- Add a targeted avoid-line for text failures: `avoid unreadable microtext`, `avoid fake sponsor logos`, `avoid garbled characters`.
 
 This prevents flat banner layouts where every text block has the same weight.
+
+Three-glances test for hero posters:
+- First glance: the silhouette/theme is immediately recognizable.
+- Second glance: the viewer can read the narrative world, product/event promise, or campaign message.
+- Third glance: close inspection reveals texture, small labels, background details, and aftertaste.
+
+Use this for cinematic posters, city posters, fashion/editorial covers, and premium narrative ads where detail must work at multiple viewing distances.
 
 ## 12. Material, lighting, and palette are separate controls
 
@@ -217,6 +253,11 @@ Do not compress them into “premium”. Split them:
 - Palette: muted teal/rust/bone, cream/warm stone/pale green, slate/amber/teal, indigo/red-orange/cream.
 
 This is especially important for product renders, interiors, architecture, tattoo flash, beauty lifestyle, and technical exploded views.
+
+Brand/label control:
+- For original commercial images, say `No visible brand logos` when you do not want fake trademarks.
+- If tiny labels are acceptable but should not hallucinate brands, use `no readable fake labels except a tiny generic mark "AM ROUTINE"`.
+- For event posters, avoid fake sponsor strips unless the prompt supplies exact sponsor names.
 
 ## 13. Edit endpoint prompts must preserve invariants
 
@@ -230,6 +271,17 @@ Rules:
 - Preserve identity/layout/position/readability explicitly.
 - If editing a poster/mockup, preserve original text unless translation/replacement is requested.
 - Use `-i` reference images; use masks for localized changes.
+
+Reference-based unlocks:
+- `maintain composition and image details consistently`
+- `same subject, absolutely consistent in appearance and coloring`
+- `in the original positions`
+- `change only X; keep everything else the same`
+
+Multi-reference rule:
+- Identify each input by index and role: `Image 1: product photo`, `Image 2: style reference`, `Image 3: logo/packaging`.
+- Say exactly how references interact: apply style from Image 2 to subject from Image 1; place logo from Image 3 on the package; preserve layout from Image 1.
+- Repeat invariants on each iteration if identity, text, geometry, or brand elements must not drift.
 
 ## 14. Negation is for strong priors
 
@@ -254,7 +306,7 @@ Reusable category formulas from the atlas:
 - **Photography:** capture device + time/place + ordinary imperfections + real-world props.
 - **Architecture/Interior:** room type + camera/lens + materials + light direction + negative space + realistic shadows.
 - **Technical illustration:** exploded/cutaway structure + ordered components + numbered callouts + materials + blueprint/plate style.
-- **Tattoo:** tattooable placement + linework/shading/color tradition + negative-space gaps + flash-sheet presentation + no real skin photo.
+- **Tattoo:** tattooable placement + linework/shading/color tradition + negative-space gaps + flash-sheet presentation + no real skin photo. Use exact style tokens where helpful, e.g. `BLACK & GREY`, `FOREARM SLEEVE`, `NEGATIVE SPACE`, `traditional Japanese irezumi`, `dark surrealism`.
 
 ## 16. Dense Chinese and multilingual layouts need extra constraints
 

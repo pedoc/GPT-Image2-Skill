@@ -31,13 +31,13 @@ Reads `OPENAI_API_KEY` from env. Writes to `OUT` (or auto-named `YYYY-MM-DD-HH-M
 | `-f, --file` | path | auto | both | Output path. Auto-gen if omitted. Extension follows `--format`. |
 | `-i, --image` | path (repeatable) | — | edits | Reference image(s). Presence routes through `/v1/images/edits` (the official endpoint per the OpenAI cookbook). |
 | `-m, --mask` | path | — | edits | Alpha-channel PNG mask. Opaque pixels are preserved, transparent pixels are regenerated. Edits endpoint only — requires `-i`. |
-| `--input-fidelity` | `low` \| `high` | — | edits | Controls how closely the output tracks the reference. Supported on `gpt-image-1` and `gpt-image-1.5`; silently ignored by `gpt-image-2` (already high fidelity by default). |
+| `--input-fidelity` | `low` \| `high` | — | edits | Controls how closely the output tracks the reference. Supported on `gpt-image-1` and `gpt-image-1.5`. `gpt-image-2` rejects this parameter, so the CLI strips it locally before calling the API. |
 | `--model` | str | `gpt-image-2` | both | Model ID. Fallbacks: `gpt-image-1.5`, `gpt-image-1`, `gpt-image-1-mini`. |
 | `--size` | literal / shortcut | `1024x1024` | both | Literals: `1024x1024`, `1536x1024`, `1024x1536`, `2048x2048`, `2048x1152`, `3840x2160`, `2160x3840`, or any 16-px multiple up to 3840 max edge (3:1 ratio cap, 655k–8.3M total pixels). Shortcuts: `1k` `2k` `4k` `portrait` `landscape` `square` `wide` `tall`. |
 | `--quality` | `auto` \| `low` \| `medium` \| `high` | `high` | both | Cost roughly 10× per step. `low` ≈ $0.005/img, `medium` ≈ $0.04, `high` ≈ $0.17. CLI default stays `high`, but agents should choose deliberately: `low` for cheap drafts / large sweeps, `medium` for normal exploration, `high` for final assets, typography, Chinese text, diagrams, or anything shipping-facing. |
 | `-n, --n` | int | `1` | both | Number of images to return. `>1` suffixes filenames `_0`, `_1`, … |
 | `--background` | `auto` \| `opaque` | API default | generations only | `opaque` disables transparent background. |
-| `--moderation` | `auto` \| `low` | API default | generations only | `low` relaxes content filter where policy allows. |
+| `--moderation` | `auto` \| `low` | `low` | generations only | Defaults to `low` here for broader prompt exploration. Switch to `auto` if you want the stricter API-side default. |
 | `--format` | `png` \| `jpeg` \| `webp` | `png` | both | Response encoding. |
 | `--compression` | int 0–100 | — | both | JPEG/WebP compression. Ignored for PNG. |
 | `--user` | str | — | both | Optional end-user identifier for OpenAI abuse tracking. |
@@ -72,31 +72,31 @@ Both endpoints accept `gpt-image-2` as of April 2026 — verified against OpenAI
 
 ```bash
 # 1. Vanilla generate, 1K square, auto quality
-uv run generate.py -p "a photorealistic convenience store at 10pm"
+gpt-image -p "a photorealistic convenience store at 10pm"
 
 # 2. 2K portrait poster with exact Chinese text, high quality
-uv run generate.py \
+gpt-image \
   -p 'Design a 3:4 tea poster. Exact copy: "山川茶事" / "冷泡系列" / "中杯 16 元"' \
   --size portrait --quality high -f poster.png
 
 # 3. 4-image grid, transparent background disabled, webp
-uv run generate.py -p "isometric furniture, minimalist" \
+gpt-image -p "isometric furniture, minimalist" \
   -n 4 --background opaque --format webp --compression 85
 
 # 4. Edit / colorize existing image
-uv run generate.py -p "colorize this manga page and translate to Chinese" \
+gpt-image -p "colorize this manga page and translate to Chinese" \
   -i page.jpg -f colored.png
 
 # 5. Multi-reference brand collab
-uv run generate.py -p "77 (the cat) × KFC employee poster" \
+gpt-image -p "77 (the cat) × KFC employee poster" \
   -i cat.png -i kfc_logo.png -f collab.png --size portrait
 
 # 6. Masked inpaint — replace sky only
-uv run generate.py -p "replace sky with aurora, keep foreground intact" \
+gpt-image -p "replace sky with aurora, keep foreground intact" \
   -i photo.jpg -m sky_mask.png -f aurora.png --quality high
 
 # 7. 4K widescreen render
-uv run generate.py -p "cinematic Shanghai skyline at dusk" \
+gpt-image -p "cinematic Shanghai skyline at dusk" \
   --size 4k --quality high -f skyline.png
 ```
 

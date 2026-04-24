@@ -22,22 +22,25 @@ Exit codes: 0 success, 1 API error, 2 bad args.
 
 Examples:
     # Basic generate, auto filename, 1K square
-    uv run generate.py -p "a cat astronaut on the moon"
+    gpt-image -p "a cat astronaut on the moon"
 
     # Named output, portrait 2K, high quality
-    uv run generate.py -p "Chinese tea poster" -f poster.png --size 2k --quality high
+    gpt-image -p "Chinese tea poster" -f poster.png --size 2k --quality high
 
     # Edit existing image (colorize, restyle, translate text, etc.)
-    uv run generate.py -p "colorize this manga page" -i page.jpg -f colored.png
+    gpt-image -p "colorize this manga page" -i page.jpg -f colored.png
 
     # Multi-reference edit (outfit transfer, pet + brand, etc.)
-    uv run generate.py -p "77 × KFC collab poster" -i cat.png -i kfc_logo.png -f collab.png
+    gpt-image -p "77 × KFC collab poster" -i cat.png -i kfc_logo.png -f collab.png
 
     # Alpha-channel inpaint (mask opaque = keep, transparent = regenerate)
-    uv run generate.py -p "replace sky with aurora" -i photo.jpg -m sky_mask.png -f aurora.png
+    gpt-image -p "replace sky with aurora" -i photo.jpg -m sky_mask.png -f aurora.png
 
     # Grid of 4, transparent background, webp
-    uv run generate.py -p "isometric chair, minimalist" -n 4 --background opaque --format webp
+    gpt-image -p "isometric chair, minimalist" -n 4 --background opaque --format webp
+
+    # Skill shim (same implementation, plugin-local path)
+    uv run "$CLAUDE_PLUGIN_ROOT/skills/gpt-image/scripts/generate.py" -p "a cat astronaut on the moon"
 """
 from __future__ import annotations
 
@@ -78,6 +81,7 @@ SIZE_SHORTCUTS: dict[str, str] = {
 
 DEFAULT_MODEL = "gpt-image-2"
 DEFAULT_SIZE = "1024x1024"
+DEFAULT_MODERATION = "low"
 
 
 def slugify(text: str, max_len: int = 30) -> str:
@@ -97,10 +101,14 @@ def resolve_size(value: str) -> str:
     return SIZE_SHORTCUTS.get(value.lower(), value)
 
 
+def model_rejects_input_fidelity(model: str) -> bool:
+    return model.strip().lower().startswith("gpt-image-2")
+
+
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        prog="generate.py",
-        description="Call OpenAI GPT Image 2 (generations or edits) via the openai Python SDK.",
+        prog="gpt-image",
+        description="Call OpenAI GPT Image 2 (generations or edits) via the official openai Python SDK.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     p.add_argument("-p", "--prompt", required=True, help="Text prompt / edit instruction.")
@@ -137,12 +145,12 @@ def parse_args() -> argparse.Namespace:
         help="`opaque` disables transparency. Default API-side auto.",
     )
     p.add_argument(
-        "--moderation", default=None, choices=["auto", "low"],
-        help="Generations only. `low` relaxes content filter. Default API-side auto.",
+        "--moderation", default=DEFAULT_MODERATION, choices=["auto", "low"],
+        help="Generations only. Default low. Use `auto` if you want the stricter API-side default.",
     )
     p.add_argument(
         "--input-fidelity", dest="input_fidelity", default=None, choices=["low", "high"],
-        help="Edits only. Supported on gpt-image-1/1.5; silently ignored by gpt-image-2.",
+        help="Edits only. gpt-image-2 rejects this parameter, so the CLI drops it locally before calling the API.",
     )
     p.add_argument(
         "--format", dest="output_format", default=None,
@@ -189,6 +197,14 @@ def call_edit(client: OpenAI, args: argparse.Namespace) -> Any:
         print(f"error: --mask not found: {args.mask}", file=sys.stderr)
         sys.exit(2)
 
+    input_fidelity = args.input_fidelity
+    if input_fidelity and model_rejects_input_fidelity(args.model):
+        print(
+            "note: dropping --input-fidelity because gpt-image-2 rejects that parameter.",
+            file=sys.stderr,
+        )
+        input_fidelity = None
+
     image_handles = [p.open("rb") for p in args.image]
     mask_handle = args.mask.open("rb") if args.mask else None
     try:
@@ -201,7 +217,7 @@ def call_edit(client: OpenAI, args: argparse.Namespace) -> Any:
             "quality": args.quality,
             "n": args.n,
             "background": args.background,
-            "input_fidelity": args.input_fidelity,
+            "input_fidelity": input_fidelity,
             "output_format": args.output_format,
             "output_compression": args.output_compression,
             "user": args.user,

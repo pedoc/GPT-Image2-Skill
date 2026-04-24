@@ -1,5 +1,5 @@
-<h1 align="center">GPT Image 2 Skill</h1>
-<p align="center"><em>OpenAI GPT Image 2 skill + CLI — curated, copy-paste prompts and a thin wrapper around the official <code>client.images.generate()</code> and <code>client.images.edit()</code> SDK calls.</em></p>
+<h1 align="center">GPT Image 2 Agentic Skill</h1>
+<p align="center"><em>OpenAI GPT Image 2 agentic skill + CLI — curated, copy-paste prompts and runnable examples for skill-capable agents.</em></p>
 
 <p align="center">
   <a href="https://github.com/wuyoscar/gpt_image_2_skill/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg" alt="CC BY 4.0"/></a>
@@ -9,10 +9,39 @@
 </p>
 
 <p align="center">
-  <img src="docs/gptimage2skill-banner.png" alt="GPTImage2Skill banner" width="100%"/>
+  <img src="docs/assets/gptimage2skill-banner.png" alt="GPTImage2Skill banner" width="100%"/>
 </p>
 
 ---
+
+## ✨ At a glance
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th align="left">Item</th>
+    <th align="left">Value</th>
+  </tr>
+  <tr>
+    <td>Gallery size</td>
+    <td><strong>151 prompts / examples</strong></td>
+  </tr>
+  <tr>
+    <td>Surfaces</td>
+    <td><strong>Agentic Skill + CLI</strong> — Claude Code / Codex, OpenClaw, Hermes Agent and other skill-capable agent runtimes</td>
+  </tr>
+  <tr>
+    <td>Last update</td>
+    <td><strong>2026-04-24</strong></td>
+  </tr>
+  <tr>
+    <td>Docs</td>
+    <td><strong>English + 中文</strong></td>
+  </tr>
+</table>
+
+---
+
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [SECURITY.md](SECURITY.md).
 
 ## 📥 Install
 
@@ -36,13 +65,22 @@ $skill-installer https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/
 </details>
 
 <details>
-<summary>Manual skill install</summary>
+<summary>Manual agent-skill install</summary>
+
+Set `AGENT_SKILLS_DIR` to the skills directory used by your agent runtime, then symlink this repo's skill folder into it.
 
 ```bash
 git clone https://github.com/wuyoscar/gpt_image_2_skill.git
 cd gpt_image_2_skill
-mkdir -p ~/.codex/skills
-ln -s "$PWD/skills/gpt-image" ~/.codex/skills/gpt-image
+
+# Choose the skill directory for your runtime.
+# Examples:
+#   Codex:      ~/.codex/skills
+#   Claude Code / OpenClaw / Hermes Agent / other runtimes: use that runtime's documented skills directory.
+export AGENT_SKILLS_DIR="/path/to/your/agent/skills"
+
+mkdir -p "$AGENT_SKILLS_DIR"
+ln -s "$PWD/skills/gpt-image" "$AGENT_SKILLS_DIR/gpt-image"
 ```
 
 </details>
@@ -97,9 +135,13 @@ Under the hood: `POST /v1/images/generations` with `model=gpt-image-2`.
 ### Text + reference image → image (edit)
 
 ```bash
-# Restyle a scene
+# Single-reference edit / restyle
 gpt-image -p "Make it a winter evening with heavy snowfall" \
   -i chess.png --quality high -f chess-winter.png
+
+# Multi-reference edit: the edits endpoint accepts multiple input images
+gpt-image -p "Place the dog from image 2 next to the woman in image 1. Match the same lighting, composition, and background. Do not change anything else." \
+  -i woman.png -i dog.png --size portrait --quality medium -f woman-with-dog.png
 
 # Mask-based inpaint: opaque = keep, transparent = regenerate
 gpt-image -p "replace sky with aurora" \
@@ -119,12 +161,12 @@ Under the hood: `POST /v1/images/edits` (multipart form), the official endpoint 
 | `-f, --file` | path | `./fig/YYYY-MM-DD-HH-MM-SS-<slug>.png` | both | Explicit output path. |
 | `-i, --image` | path (repeatable) | — | edits | Presence routes through `/v1/images/edits`. |
 | `-m, --mask` | path (PNG, alpha) | — | edits | Opaque = preserved, transparent = regenerated. Requires `-i`. |
-| `--input-fidelity` | `low` · `high` | — | edits | Supported on `gpt-image-1`/`1.5`; silently ignored by `gpt-image-2`. |
+| `--input-fidelity` | `low` · `high` | — | edits | Supported on `gpt-image-1`/`1.5`. `gpt-image-2` rejects this parameter, so the CLI drops it locally. |
 | `--size` | `1k` · `2k` · `4k` · `portrait` · `landscape` · `square` · `wide` · `tall` · literal `1024x1024` etc. | `1024x1024` | both | Literals must be 16-px multiples, max edge 3840, 3:1 cap, 655k–8.3M total pixels. |
 | `--quality` | `auto` · `low` · `medium` · `high` | `high` | both | This is the practical budget dial: `low` for cheap drafts / large sweeps, `medium` for normal exploration, `high` for final text-heavy or shipping-facing assets. |
 | `-n, --n` | int | 1 | both | Batch generation. `n>1` suffixes filenames `_0`, `_1`, … |
 | `--background` | `auto` · `opaque` | API default | generations | `opaque` disables transparency. |
-| `--moderation` | `auto` · `low` | API default | generations | `low` relaxes the content filter where policy allows. |
+| `--moderation` | `auto` · `low` | `low` | generations | `low` is the default here for broader prompt exploration; switch to `auto` if you want the stricter API-side default. |
 | `--format` | `png` · `jpeg` · `webp` | `png` | both | Response encoding. |
 | `--compression` | 0–100 | — | both | JPEG/WebP only. |
 
@@ -169,64 +211,73 @@ Distilled from OpenAI's [official GPT Image prompting guide](https://github.com/
 
 ---
 
-## 🎨 Prompt Gallery
+<a id="gallery-index"></a>
 
-**120 prompts / examples**, numbered in the order shown below and grouped directly by category. Outside-source items keep a visible **Source Link**.
+## 🎨 Prompt Gallery
 
 <table>
   <tr>
-    <td>🎌 <a href="#gallery-anime-manga">Anime &amp; Manga</a></td>
-    <td>🎮 <a href="#gallery-gaming">Gaming</a></td>
-    <td>🤖 <a href="#gallery-retro-cyberpunk">Retro &amp; Cyberpunk</a></td>
-    <td>🎬 <a href="#gallery-cinematic-animation">Cinematic &amp; Animation</a></td>
+    <td>🎌 <a href="#gallery-anime-manga">Anime & Manga</a><br><sub>No. 1–12 · 12 prompts</sub></td>
+    <td>🎮 <a href="#gallery-gaming">Gaming</a><br><sub>No. 13–21 · 9 prompts</sub></td>
+    <td>🤖 <a href="#gallery-retro-cyberpunk">Retro & Cyberpunk</a><br><sub>No. 22–24 · 3 prompts</sub></td>
+    <td>🎬 <a href="#gallery-cinematic-animation">Cinematic & Animation</a><br><sub>No. 25–29 · 5 prompts</sub></td>
   </tr>
   <tr>
-    <td>👤 <a href="#gallery-character-design">Character Design</a></td>
-    <td>📝 <a href="#gallery-typography-posters">Typography &amp; Posters</a></td>
-    <td>🎨 <a href="#gallery-illustration">Illustration</a></td>
-    <td>💧 <a href="#gallery-watercolor">Watercolor</a></td>
+    <td>👤 <a href="#gallery-character-design">Character Design</a><br><sub>No. 30–31 · 2 prompts</sub></td>
+    <td>📝 <a href="#gallery-typography-posters">Typography & Posters</a><br><sub>No. 32–44 · 13 prompts</sub></td>
+    <td>🎨 <a href="#gallery-illustration">Illustration</a><br><sub>No. 45–46 · 2 prompts</sub></td>
+    <td>💧 <a href="#gallery-watercolor">Watercolor</a><br><sub>No. 47–48 · 2 prompts</sub></td>
   </tr>
   <tr>
-    <td>🖌️ <a href="#gallery-ink-chinese">Ink &amp; Chinese</a></td>
-    <td>🕹️ <a href="#gallery-pixel-art">Pixel Art</a></td>
-    <td>📐 <a href="#gallery-isometric">Isometric</a></td>
-    <td>📦 <a href="#gallery-product-food">Product &amp; Food</a></td>
+    <td>🖌️ <a href="#gallery-ink-chinese">Ink & Chinese</a><br><sub>No. 49–50 · 2 prompts</sub></td>
+    <td>🕹️ <a href="#gallery-pixel-art">Pixel Art</a><br><sub>No. 51–52 · 2 prompts</sub></td>
+    <td>📐 <a href="#gallery-isometric">Isometric</a><br><sub>No. 53–54 · 2 prompts</sub></td>
+    <td>📦 <a href="#gallery-product-food">Product & Food</a><br><sub>No. 55–58 · 4 prompts</sub></td>
   </tr>
   <tr>
-    <td>📷 <a href="#gallery-photography">Photography</a></td>
-    <td>📊 <a href="#gallery-infographics-field-guides">Infographics &amp; Field Guides</a></td>
-    <td>📚 <a href="#gallery-research-paper-figures">Research Paper Figures</a></td>
-    <td>🏢 <a href="#gallery-official-openai-cookbook">Official OpenAI Cookbook</a></td>
+    <td>🧩 <a href="#gallery-brand-systems-identity">Brand Systems & Identity</a><br><sub>No. 59–61 · 3 prompts</sub></td>
+    <td>📷 <a href="#gallery-photography">Photography</a><br><sub>No. 62–65 · 4 prompts</sub></td>
+    <td>📊 <a href="#gallery-infographics-field-guides">Infographics & Field Guides</a><br><sub>No. 66–73 · 8 prompts</sub></td>
+    <td>📚 <a href="#gallery-research-paper-figures">Research Paper Figures</a><br><sub>No. 74–90 · 17 prompts</sub></td>
   </tr>
   <tr>
-    <td>✨ <a href="#gallery-edit-endpoint-showcase">Edit Endpoint Showcase</a></td>
-    <td>📱 <a href="#gallery-uiux-mockups">UI/UX Mockups</a></td>
-    <td>📊 <a href="#gallery-data-visualization">Data Visualization</a></td>
-    <td>⚙️ <a href="#gallery-technical-illustration">Technical Illustration</a></td>
+    <td>🏢 <a href="#gallery-official-openai-cookbook">Official OpenAI Cookbook Examples</a><br><sub>No. 91–94 · 4 prompts</sub></td>
+    <td>✨ <a href="#gallery-edit-endpoint-showcase">Edit Endpoint Showcase</a><br><sub>No. 95–96 · 2 prompts</sub></td>
+    <td>📱 <a href="#gallery-uiux-mockups">UI/UX Mockups</a><br><sub>No. 97–101 · 5 prompts</sub></td>
+    <td>📊 <a href="#gallery-data-visualization">Data Visualization</a><br><sub>No. 102–106 · 5 prompts</sub></td>
   </tr>
   <tr>
-    <td>🏛️ <a href="#gallery-architecture-interior">Architecture &amp; Interior</a></td>
-    <td>🔬 <a href="#gallery-scientific-educational">Scientific &amp; Educational</a></td>
-    <td>👗 <a href="#gallery-fashion-editorial">Fashion &amp; Editorial</a></td>
-    <td>🎨 <a href="#gallery-fine-art-painting">Fine Art Painting</a></td>
+    <td>⚙️ <a href="#gallery-technical-illustration">Technical Illustration</a><br><sub>No. 107–111 · 5 prompts</sub></td>
+    <td>🏛️ <a href="#gallery-architecture-interior">Architecture & Interior</a><br><sub>No. 112–116 · 5 prompts</sub></td>
+    <td>🔬 <a href="#gallery-scientific-educational">Scientific & Educational</a><br><sub>No. 117–121 · 5 prompts</sub></td>
+    <td>👗 <a href="#gallery-fashion-editorial">Fashion Editorial</a><br><sub>No. 122–128 · 7 prompts</sub></td>
   </tr>
   <tr>
-    <td>✏️ <a href="#gallery-more-illustration-styles">More Illustration Styles</a></td>
-    <td>🎥 <a href="#gallery-cinematic-film-references">Cinematic Film References</a></td>
-    <td colspan="2">🌌 <a href="#gallery-niche-emerging">Niche &amp; Emerging Styles</a></td>
+    <td>🎨 <a href="#gallery-fine-art-painting">Fine Art Painting</a><br><sub>No. 129–133 · 5 prompts</sub></td>
+    <td>✏️ <a href="#gallery-more-illustration-styles">More Illustration Styles</a><br><sub>No. 134–139 · 6 prompts</sub></td>
+    <td>🎥 <a href="#gallery-cinematic-film-references">Cinematic Film References</a><br><sub>No. 140–144 · 5 prompts</sub></td>
+    <td>💄 <a href="#gallery-beauty-lifestyle">Beauty & Lifestyle</a><br><sub>No. 145 · 1 prompt</sub></td>
+  </tr>
+  <tr>
+    <td>🎟️ <a href="#gallery-events-experience">Events & Experience</a><br><sub>No. 146 · 1 prompt</sub></td>
+    <td>🛵 <a href="#gallery-automotive-mobility">Automotive & Mobility</a><br><sub>No. 147 · 1 prompt</sub></td>
+    <td>🖋️ <a href="#gallery-tattoo-design">Tattoo Design</a><br><sub>No. 148–151 · 4 prompts</sub></td>
   </tr>
 </table>
 
 ---
 
 <a id="gallery-anime-manga"></a>
+
 ### 🎌 Anime & Manga
+
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
 #### No. 1 · MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)
 
-<img src="docs/example-anime-jjk-action.png" width="620" alt="MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)"/>
+<img src="docs/anime-manga/anime-jjk-action.png" width="620" alt="MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)"/>
 
-<sub>Anime & Manga · `landscape` · `1536x1024`</sub>
+<sub>Anime & Manga · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -253,7 +304,7 @@ Backdrop: ruined urban street at dusk, shattered asphalt, cracked neon kanji sig
 
 Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp line-art, rim-light on both figures, motion-blur streaks around the energy sphere. Palette of deep navy, electric cyan, crimson splashes. Kinetic-impact composition in the tradition of JJK'\''s Shibuya arc.' \
   --size landscape --quality high \
-  -f docs/example-anime-jjk-action.png
+  -f docs/anime-manga/anime-jjk-action.png
 ```
 
 **OpenAI SDK**
@@ -275,7 +326,7 @@ Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp lin
 )
 
 import base64
-open("docs/example-anime-jjk-action.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/anime-manga/anime-jjk-action.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -284,9 +335,9 @@ open("docs/example-anime-jjk-action.png", "wb").write(base64.b64decode(result.da
 
 #### No. 2 · Shōnen battle key-visual (Naruto-Shippuden aesthetic)
 
-<img src="docs/example-anime-naruto-clash.png" width="620" alt="Shōnen battle key-visual (Naruto-Shippuden aesthetic)"/>
+<img src="docs/anime-manga/anime-naruto-clash.png" width="620" alt="Shōnen battle key-visual (Naruto-Shippuden aesthetic)"/>
 
-<sub>Anime & Manga · `landscape` · `1536x1024`</sub>
+<sub>Anime & Manga · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -317,7 +368,7 @@ Backdrop: nighttime valley, cracked earth, giant uprooted trees mid-crash, moonl
 
 Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective, strong speed lines radiating from the collision, anime-action key-frame quality, digital 2D cel shading, saturated but not neon, visible genga-quality line-art, dramatic backlight." \
   --size landscape --quality high \
-  -f docs/example-anime-naruto-clash.png
+  -f docs/anime-manga/anime-naruto-clash.png
 ```
 
 **OpenAI SDK**
@@ -341,7 +392,7 @@ Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective
 )
 
 import base64
-open("docs/example-anime-naruto-clash.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/anime-manga/anime-naruto-clash.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -350,9 +401,9 @@ open("docs/example-anime-naruto-clash.png", "wb").write(base64.b64decode(result.
 
 #### No. 3 · Shōnen manga two-page spread (basketball slam dunk)
 
-<img src="docs/example-manga-spread.png" width="620" alt="Shōnen manga two-page spread (basketball slam dunk)"/>
+<img src="docs/anime-manga/manga-spread.png" width="620" alt="Shōnen manga two-page spread (basketball slam dunk)"/>
 
-<sub>Anime & Manga · `landscape` · `1536x1024`</sub>
+<sub>Anime & Manga · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -393,7 +444,7 @@ Art direction: professional mangaka quality — confident inking, dramatic scree
 
 Dialogue balloons intentionally blank; only the two sound effects are visible.' \
   --size landscape --quality high \
-  -f docs/example-manga-spread.png
+  -f docs/anime-manga/manga-spread.png
 ```
 
 **OpenAI SDK**
@@ -422,7 +473,7 @@ Dialogue balloons intentionally blank; only the two sound effects are visible.""
 )
 
 import base64
-open("docs/example-manga-spread.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/anime-manga/manga-spread.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -431,9 +482,9 @@ open("docs/example-manga-spread.png", "wb").write(base64.b64decode(result.data[0
 
 #### No. 4 · Manga relationship map — *A Tale of Two Cities*
 
-<img src="docs/example-manga-relationship.png" width="460" alt="Manga relationship map — *A Tale of Two Cities*"/>
+<img src="docs/anime-manga/manga-relationship.png" width="460" alt="Manga relationship map — *A Tale of Two Cities*"/>
 
-<sub>Anime & Manga · `portrait` · `1024x1536` · Author: [@cht0001](https://x.com/cht0001)</sub>
+<sub>Anime & Manga · `portrait` · `1024x1536` · Author: @cht0001 · Source: [X](https://x.com/cht0001)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -470,7 +521,7 @@ Characters as small portrait panels connected by labeled relationship lines:
 
 Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 18th-century Paris (guillotine silhouette) / London (Tower of London). Monochrome black-ink linework with grey screentone shading.' \
   --size portrait --quality high \
-  -f docs/example-manga-relationship.png
+  -f docs/anime-manga/manga-relationship.png
 ```
 
 **OpenAI SDK**
@@ -497,7 +548,7 @@ Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 1
 )
 
 import base64
-open("docs/example-manga-relationship.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/anime-manga/manga-relationship.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -506,9 +557,9 @@ open("docs/example-manga-relationship.png", "wb").write(base64.b64decode(result.
 
 #### No. 5 · 16-panel anime expression grid
 
-<img src="docs/example-anime-expression-grid.png" width="460" alt="16-panel anime expression grid"/>
+<img src="docs/anime-manga/anime-expression-grid.png" width="460" alt="16-panel anime expression grid"/>
 
-<sub>Anime & Manga (character consistency) · `square` · `1024x1024` · Author: [source article →](https://mp.weixin.qq.com/s/ASxig6mFVYxrIE8-8Fthew)</sub>
+<sub>Anime & Manga · `square` · `1024x1024` · Author: Unknown · Source: [source article](https://mp.weixin.qq.com/s/ASxig6mFVYxrIE8-8Fthew)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -523,7 +574,7 @@ Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her 
 gpt-image \
   -p "Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her face shape, hairstyle, and clothing must remain highly consistent across all panels. The 16 expressions should include: happy, sad, angry, surprised, shy, speechless, evil grin, contemplative, curious, proud, wronged, disdainful, confused, scared, crying, and a heart expression." \
   --size square --quality high \
-  -f docs/example-anime-expression-grid.png
+  -f docs/anime-manga/anime-expression-grid.png
 ```
 
 **OpenAI SDK**
@@ -539,21 +590,323 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-anime-expression-grid.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/anime-manga/anime-expression-grid.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
+#### No. 6 · Elegant cafe anime fashion portrait
+
+<img src="docs/anime-manga/anime-cafe-stockings-fashion.png" width="460" alt="Elegant cafe anime fashion portrait"/>
+
+<sub>Anime & Manga · `portrait` · `1024x1536` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a tasteful portrait-oriented anime fashion illustration of an adult woman, age 24, with a cute playful expression, looking at the camera in a cozy European cafe at golden hour. She wears a cream blouse, charcoal pleated skirt, tailored cropped jacket, sheer black stockings, loafers, and a small ribbon hair clip; she is seated sideways at a small marble table with latte art, a sketchbook, and warm window light. Composition: three-quarter fashion portrait, elegant legs visible but relaxed and non-explicit, wholesome editorial mood, no nudity, no lingerie, no school uniform, no explicit pose, adult character only. Use polished modern anime rendering, crisp line art, luminous eyes, soft cel shading, subtle fabric texture, gentle blush, background bokeh, and a refined magazine-cover color palette.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a tasteful portrait-oriented anime fashion illustration of an adult woman, age 24, with a cute playful expression, looking at the camera in a cozy European cafe at golden hour. She wears a cream blouse, charcoal pleated skirt, tailored cropped jacket, sheer black stockings, loafers, and a small ribbon hair clip; she is seated sideways at a small marble table with latte art, a sketchbook, and warm window light. Composition: three-quarter fashion portrait, elegant legs visible but relaxed and non-explicit, wholesome editorial mood, no nudity, no lingerie, no school uniform, no explicit pose, adult character only. Use polished modern anime rendering, crisp line art, luminous eyes, soft cel shading, subtle fabric texture, gentle blush, background bokeh, and a refined magazine-cover color palette.' \
+  --size portrait --quality high --moderation low \
+  -f docs/anime-manga/anime-cafe-stockings-fashion.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a tasteful portrait-oriented anime fashion illustration of an adult woman, age 24, with a cute playful expression, looking at the camera in a cozy European cafe at golden hour. She wears a cream blouse, charcoal pleated skirt, tailored cropped jacket, sheer black stockings, loafers, and a small ribbon hair clip; she is seated sideways at a small marble table with latte art, a sketchbook, and warm window light. Composition: three-quarter fashion portrait, elegant legs visible but relaxed and non-explicit, wholesome editorial mood, no nudity, no lingerie, no school uniform, no explicit pose, adult character only. Use polished modern anime rendering, crisp line art, luminous eyes, soft cel shading, subtle fabric texture, gentle blush, background bokeh, and a refined magazine-cover color palette.""",
+    size="1024x1536",
+    quality="high",
+    moderation="low",
+)
+
+import base64
+open("docs/anime-manga/anime-cafe-stockings-fashion.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 7 · Neon arcade anime fashion portrait
+
+<img src="docs/anime-manga/anime-arcade-stockings-fashion.png" width="460" alt="Neon arcade anime fashion portrait"/>
+
+<sub>Anime & Manga · `portrait` · `1024x1536` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a portrait-oriented anime fashion illustration of an adult woman, age 25, in a neon arcade district at night. She has a cute confident smile and looks directly at the viewer while standing beside glowing claw machines and retro game cabinets. Outfit: black turtleneck, red satin bomber jacket, high-waisted skirt, patterned dark stockings, platform shoes, small crossbody bag, star earrings. Composition: full-body fashion portrait with strong silhouette, neon reflections on wet pavement, vending machines, sticker-covered walls, colorful signage, and cinematic rim light. Keep the pose playful but non-explicit, no nudity, no lingerie, no fetish framing, adult character only. Use high-end anime key visual rendering, crisp line art, saturated magenta-cyan lighting, clean readable background details, and glossy cyber-pop atmosphere.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a portrait-oriented anime fashion illustration of an adult woman, age 25, in a neon arcade district at night. She has a cute confident smile and looks directly at the viewer while standing beside glowing claw machines and retro game cabinets. Outfit: black turtleneck, red satin bomber jacket, high-waisted skirt, patterned dark stockings, platform shoes, small crossbody bag, star earrings. Composition: full-body fashion portrait with strong silhouette, neon reflections on wet pavement, vending machines, sticker-covered walls, colorful signage, and cinematic rim light. Keep the pose playful but non-explicit, no nudity, no lingerie, no fetish framing, adult character only. Use high-end anime key visual rendering, crisp line art, saturated magenta-cyan lighting, clean readable background details, and glossy cyber-pop atmosphere.' \
+  --size portrait --quality high --moderation low \
+  -f docs/anime-manga/anime-arcade-stockings-fashion.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a portrait-oriented anime fashion illustration of an adult woman, age 25, in a neon arcade district at night. She has a cute confident smile and looks directly at the viewer while standing beside glowing claw machines and retro game cabinets. Outfit: black turtleneck, red satin bomber jacket, high-waisted skirt, patterned dark stockings, platform shoes, small crossbody bag, star earrings. Composition: full-body fashion portrait with strong silhouette, neon reflections on wet pavement, vending machines, sticker-covered walls, colorful signage, and cinematic rim light. Keep the pose playful but non-explicit, no nudity, no lingerie, no fetish framing, adult character only. Use high-end anime key visual rendering, crisp line art, saturated magenta-cyan lighting, clean readable background details, and glossy cyber-pop atmosphere.""",
+    size="1024x1536",
+    quality="high",
+    moderation="low",
+)
+
+import base64
+open("docs/anime-manga/anime-arcade-stockings-fashion.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 8 · Spring cafe anime ensemble
+
+<img src="docs/anime-manga/anime-girls-sweet-group.png" width="620" alt="Spring cafe anime ensemble with six gentle characters"/>
+
+<sub>Anime & Manga · `landscape` · `1536x1024` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a landscape anime ensemble key visual featuring six distinct adult young women, ages 22 to 27, with cute gentle personalities, gathered together in a cozy spring campus-cafe courtyard. The composition should feel like a polished slice-of-life anime promotional poster rather than a single portrait: one central seated character holding a sketchbook, two friends leaning in with warm smiles, one shy character holding a small bouquet, one cheerful character waving, and one calm bookish character pouring tea. Give each character a clearly different hairstyle, outfit palette, accessory, and expression while keeping the whole group harmonious and wholesome. Fashion: soft cardigans, pleated skirts, berets, ribbons, loafers, light stockings, pastel jackets, modest stylish outfits. Mood: sweet, well-behaved, playful, friendly, no fanservice, no nudity, no explicit pose, adult characters only. Use modern high-end anime rendering with crisp line art, luminous eyes, soft cel shading, warm afternoon light, cherry blossoms, cafe signage, small pastries, balanced depth, clean background details, and a strong readable group silhouette.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a landscape anime ensemble key visual featuring six distinct adult young women, ages 22 to 27, with cute gentle personalities, gathered together in a cozy spring campus-cafe courtyard. The composition should feel like a polished slice-of-life anime promotional poster rather than a single portrait: one central seated character holding a sketchbook, two friends leaning in with warm smiles, one shy character holding a small bouquet, one cheerful character waving, and one calm bookish character pouring tea. Give each character a clearly different hairstyle, outfit palette, accessory, and expression while keeping the whole group harmonious and wholesome. Fashion: soft cardigans, pleated skirts, berets, ribbons, loafers, light stockings, pastel jackets, modest stylish outfits. Mood: sweet, well-behaved, playful, friendly, no fanservice, no nudity, no explicit pose, adult characters only. Use modern high-end anime rendering with crisp line art, luminous eyes, soft cel shading, warm afternoon light, cherry blossoms, cafe signage, small pastries, balanced depth, clean background details, and a strong readable group silhouette.' \
+  --size landscape --quality high --moderation low \
+  -f docs/anime-manga/anime-girls-sweet-group.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a landscape anime ensemble key visual featuring six distinct adult young women, ages 22 to 27, with cute gentle personalities, gathered together in a cozy spring campus-cafe courtyard. The composition should feel like a polished slice-of-life anime promotional poster rather than a single portrait: one central seated character holding a sketchbook, two friends leaning in with warm smiles, one shy character holding a small bouquet, one cheerful character waving, and one calm bookish character pouring tea. Give each character a clearly different hairstyle, outfit palette, accessory, and expression while keeping the whole group harmonious and wholesome. Fashion: soft cardigans, pleated skirts, berets, ribbons, loafers, light stockings, pastel jackets, modest stylish outfits. Mood: sweet, well-behaved, playful, friendly, no fanservice, no nudity, no explicit pose, adult characters only. Use modern high-end anime rendering with crisp line art, luminous eyes, soft cel shading, warm afternoon light, cherry blossoms, cafe signage, small pastries, balanced depth, clean background details, and a strong readable group silhouette.""",
+    size="1536x1024",
+    quality="high",
+    moderation="low",
+)
+
+import base64
+open("docs/anime-manga/anime-girls-sweet-group.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 9 · Ten-panel anime character grid
+
+<img src="docs/anime-manga/anime-ten-panel-character-grid.png" width="620" alt="Ten-panel anime character grid"/>
+
+<sub>Anime & Manga · `landscape` · `1536x1024` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a single landscape image containing a clean 2×5 ten-panel anime character grid. Each panel shows a different adult young woman, age 22 to 26, designed as a cute gentle heroine archetype: bookish librarian, cheerful cafe barista, shy violinist, sporty tennis player, elegant student-council president, sleepy illustrator, flower-shop assistant, soft-spoken witch apprentice, city-pop singer, and cozy winter commuter. Keep all panels consistent in art direction: modern polished anime, crisp line art, soft cel shading, luminous eyes, pastel accent colors, tidy white gutters, small readable name tag at the bottom of each panel, and a balanced character-design-sheet feel. Every character should have a distinct hairstyle, outfit, prop, and expression. The overall board should feel like a collectible anime cast sheet / ten-grid poster, cute and wholesome, no nudity, no lingerie, no explicit pose, adult characters only.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a single landscape image containing a clean 2×5 ten-panel anime character grid. Each panel shows a different adult young woman, age 22 to 26, designed as a cute gentle heroine archetype: bookish librarian, cheerful cafe barista, shy violinist, sporty tennis player, elegant student-council president, sleepy illustrator, flower-shop assistant, soft-spoken witch apprentice, city-pop singer, and cozy winter commuter. Keep all panels consistent in art direction: modern polished anime, crisp line art, soft cel shading, luminous eyes, pastel accent colors, tidy white gutters, small readable name tag at the bottom of each panel, and a balanced character-design-sheet feel. Every character should have a distinct hairstyle, outfit, prop, and expression. The overall board should feel like a collectible anime cast sheet / ten-grid poster, cute and wholesome, no nudity, no lingerie, no explicit pose, adult characters only.' \
+  --size landscape --quality high --moderation low \
+  -f docs/anime-manga/anime-ten-panel-character-grid.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a single landscape image containing a clean 2×5 ten-panel anime character grid. Each panel shows a different adult young woman, age 22 to 26, designed as a cute gentle heroine archetype: bookish librarian, cheerful cafe barista, shy violinist, sporty tennis player, elegant student-council president, sleepy illustrator, flower-shop assistant, soft-spoken witch apprentice, city-pop singer, and cozy winter commuter. Keep all panels consistent in art direction: modern polished anime, crisp line art, soft cel shading, luminous eyes, pastel accent colors, tidy white gutters, small readable name tag at the bottom of each panel, and a balanced character-design-sheet feel. Every character should have a distinct hairstyle, outfit, prop, and expression. The overall board should feel like a collectible anime cast sheet / ten-grid poster, cute and wholesome, no nudity, no lingerie, no explicit pose, adult characters only.""",
+    size="1536x1024",
+    quality="high",
+    moderation="low",
+)
+
+import base64
+open("docs/anime-manga/anime-ten-panel-character-grid.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 10 · Tide Brothers 19-page manga proof sheet
+
+<img src="docs/anime-manga/tide-brothers-19-page-manga.png" width="460" alt="Tide Brothers 19-page original manga proof sheet"/>
+
+<sub>Anime & Manga · `tall` · `2160x3840` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create one tall manga chapter proof sheet containing 19 numbered miniature pages for an original shonen pirate manga, not based on any existing series. Title: "TIDE BROTHERS: THE STARFALL MAP". Main characters: Rune, a cheerful rubbery-armed young pirate captain with a straw-colored scarf but original costume; and Ash, his older flame-wielding brother with a red coat, freckles, and a calm smile. They are original characters, not existing IP. Show 19 small pages arranged as a readable contact sheet, each page with 1 to 3 manga panels, black-and-white ink, screentone, dynamic speed lines, expressive faces, and clear speech bubbles. Complete plot beats: 1 cover page with the brothers on a stormy deck; 2 reunion at a floating harbor; 3 discovery of a star-shaped map; 4 alien sea-beast emerges; 5 Rune jokes "Adventure found us first!"; 6 Ash replies "Then we answer together."; 7 rival sky pirates attack; 8 slapstick cooking scene; 9 quiet flashback promise; 10 double-page-style action pose compressed into one page; 11 map glows with alien constellations; 12 crew cheers; 13 villain captain steals the compass; 14 chase across rooftop sails; 15 Ash shields Rune with fire; 16 Rune launches a spring-like punch; 17 brothers laugh after victory; 18 cliffhanger: moon door opens; 19 final page text "NEXT: THE ISLAND ABOVE THE CLOUDS". Keep dialogue short, legible, and complete. Style: classic weekly shonen manga energy, original pirate adventure, wholesome brotherhood, no gore, no existing copyrighted characters.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create one tall manga chapter proof sheet containing 19 numbered miniature pages for an original shonen pirate manga, not based on any existing series. Title: "TIDE BROTHERS: THE STARFALL MAP". Main characters: Rune, a cheerful rubbery-armed young pirate captain with a straw-colored scarf but original costume; and Ash, his older flame-wielding brother with a red coat, freckles, and a calm smile. They are original characters, not existing IP. Show 19 small pages arranged as a readable contact sheet, each page with 1 to 3 manga panels, black-and-white ink, screentone, dynamic speed lines, expressive faces, and clear speech bubbles. Complete plot beats: 1 cover page with the brothers on a stormy deck; 2 reunion at a floating harbor; 3 discovery of a star-shaped map; 4 alien sea-beast emerges; 5 Rune jokes "Adventure found us first!"; 6 Ash replies "Then we answer together."; 7 rival sky pirates attack; 8 slapstick cooking scene; 9 quiet flashback promise; 10 double-page-style action pose compressed into one page; 11 map glows with alien constellations; 12 crew cheers; 13 villain captain steals the compass; 14 chase across rooftop sails; 15 Ash shields Rune with fire; 16 Rune launches a spring-like punch; 17 brothers laugh after victory; 18 cliffhanger: moon door opens; 19 final page text "NEXT: THE ISLAND ABOVE THE CLOUDS". Keep dialogue short, legible, and complete. Style: classic weekly shonen manga energy, original pirate adventure, wholesome brotherhood, no gore, no existing copyrighted characters.' \
+  --size tall --quality high --moderation low \
+  -f docs/anime-manga/tide-brothers-19-page-manga.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create one tall manga chapter proof sheet containing 19 numbered miniature pages for an original shonen pirate manga, not based on any existing series. Title: "TIDE BROTHERS: THE STARFALL MAP". Main characters: Rune, a cheerful rubbery-armed young pirate captain with a straw-colored scarf but original costume; and Ash, his older flame-wielding brother with a red coat, freckles, and a calm smile. They are original characters, not existing IP. Show 19 small pages arranged as a readable contact sheet, each page with 1 to 3 manga panels, black-and-white ink, screentone, dynamic speed lines, expressive faces, and clear speech bubbles. Complete plot beats: 1 cover page with the brothers on a stormy deck; 2 reunion at a floating harbor; 3 discovery of a star-shaped map; 4 alien sea-beast emerges; 5 Rune jokes "Adventure found us first!"; 6 Ash replies "Then we answer together."; 7 rival sky pirates attack; 8 slapstick cooking scene; 9 quiet flashback promise; 10 double-page-style action pose compressed into one page; 11 map glows with alien constellations; 12 crew cheers; 13 villain captain steals the compass; 14 chase across rooftop sails; 15 Ash shields Rune with fire; 16 Rune launches a spring-like punch; 17 brothers laugh after victory; 18 cliffhanger: moon door opens; 19 final page text "NEXT: THE ISLAND ABOVE THE CLOUDS". Keep dialogue short, legible, and complete. Style: classic weekly shonen manga energy, original pirate adventure, wholesome brotherhood, no gore, no existing copyrighted characters.""",
+    size="2160x3840",
+    quality="high",
+    moderation="low",
+)
+
+import base64
+open("docs/anime-manga/tide-brothers-19-page-manga.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 11 · Roadside mirror anime fashion selfie
+
+<img src="docs/anime-manga/anime-roadside-mirror-fashion.png" width="460" alt="Roadside mirror anime fashion selfie"/>
+
+<sub>Anime & Manga · `portrait` · `1024x1536` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a portrait-oriented anime fashion illustration of an adult woman, age 24, taking a playful roadside mirror selfie in the reflection of a parked scooter mirror on a quiet Tokyo side street. She looks into the mirror with a bright mischievous smile, one hand making a small peace sign near her cheek, the other holding a phone with a cute sticker case. Outfit: soft ivory knit cardigan, navy pleated skirt, sheer black stockings, loafers, small shoulder bag, ribbon hair clip, tasteful everyday street fashion. Composition: the mirror reflection is the main frame, with blurred street signs, vending machine glow, crosswalk stripes, and spring evening light around the mirror edge. Keep the pose cute, stylish, and non-explicit; no nudity, no lingerie, no fetish framing, adult character only. Use polished modern anime rendering, crisp line art, luminous eyes, soft cel shading, warm reflections, natural street-photo energy, and a charming slice-of-life mood.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a portrait-oriented anime fashion illustration of an adult woman, age 24, taking a playful roadside mirror selfie in the reflection of a parked scooter mirror on a quiet Tokyo side street. She looks into the mirror with a bright mischievous smile, one hand making a small peace sign near her cheek, the other holding a phone with a cute sticker case. Outfit: soft ivory knit cardigan, navy pleated skirt, sheer black stockings, loafers, small shoulder bag, ribbon hair clip, tasteful everyday street fashion. Composition: the mirror reflection is the main frame, with blurred street signs, vending machine glow, crosswalk stripes, and spring evening light around the mirror edge. Keep the pose cute, stylish, and non-explicit; no nudity, no lingerie, no fetish framing, adult character only. Use polished modern anime rendering, crisp line art, luminous eyes, soft cel shading, warm reflections, natural street-photo energy, and a charming slice-of-life mood.' \
+  --size portrait --quality high --moderation low \
+  -f docs/anime-manga/anime-roadside-mirror-fashion.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a portrait-oriented anime fashion illustration of an adult woman, age 24, taking a playful roadside mirror selfie in the reflection of a parked scooter mirror on a quiet Tokyo side street. She looks into the mirror with a bright mischievous smile, one hand making a small peace sign near her cheek, the other holding a phone with a cute sticker case. Outfit: soft ivory knit cardigan, navy pleated skirt, sheer black stockings, loafers, small shoulder bag, ribbon hair clip, tasteful everyday street fashion. Composition: the mirror reflection is the main frame, with blurred street signs, vending machine glow, crosswalk stripes, and spring evening light around the mirror edge. Keep the pose cute, stylish, and non-explicit; no nudity, no lingerie, no fetish framing, adult character only. Use polished modern anime rendering, crisp line art, luminous eyes, soft cel shading, warm reflections, natural street-photo energy, and a charming slice-of-life mood.""",
+    size="1024x1536",
+    quality="high",
+    moderation="low",
+)
+
+import base64
+open("docs/anime-manga/anime-roadside-mirror-fashion.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 12 · Rainy bus-stop mirror anime portrait
+
+<img src="docs/anime-manga/anime-rainy-bus-stop-mirror.png" width="460" alt="Rainy bus-stop mirror anime portrait"/>
+
+<sub>Anime & Manga · `portrait` · `1024x1536` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a portrait anime key visual of an adult woman, age 25, posing cutely in a convex traffic safety mirror beside a rainy roadside bus stop at blue hour. The image should show both the round mirror reflection and a bit of the real street around it: wet asphalt, umbrellas, blurred bus headlights, a small timetable sign, and glowing convenience-store windows. She wears a camel duffle coat, short plaid skirt, sheer black stockings, ankle boots, knitted scarf, and a tiny charm bracelet; her expression is playful and bashful, looking at the viewer through the mirror reflection. Keep the styling tasteful and wholesome: no nudity, no lingerie, no explicit pose, no school-uniform framing, adult character only. Use high-end anime rendering, delicate rain highlights, crisp line art, luminous eyes, soft cel shading, realistic mirror distortion, and a cozy rainy-city atmosphere.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a portrait anime key visual of an adult woman, age 25, posing cutely in a convex traffic safety mirror beside a rainy roadside bus stop at blue hour. The image should show both the round mirror reflection and a bit of the real street around it: wet asphalt, umbrellas, blurred bus headlights, a small timetable sign, and glowing convenience-store windows. She wears a camel duffle coat, short plaid skirt, sheer black stockings, ankle boots, knitted scarf, and a tiny charm bracelet; her expression is playful and bashful, looking at the viewer through the mirror reflection. Keep the styling tasteful and wholesome: no nudity, no lingerie, no explicit pose, no school-uniform framing, adult character only. Use high-end anime rendering, delicate rain highlights, crisp line art, luminous eyes, soft cel shading, realistic mirror distortion, and a cozy rainy-city atmosphere.' \
+  --size portrait --quality high --moderation low \
+  -f docs/anime-manga/anime-rainy-bus-stop-mirror.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a portrait anime key visual of an adult woman, age 25, posing cutely in a convex traffic safety mirror beside a rainy roadside bus stop at blue hour. The image should show both the round mirror reflection and a bit of the real street around it: wet asphalt, umbrellas, blurred bus headlights, a small timetable sign, and glowing convenience-store windows. She wears a camel duffle coat, short plaid skirt, sheer black stockings, ankle boots, knitted scarf, and a tiny charm bracelet; her expression is playful and bashful, looking at the viewer through the mirror reflection. Keep the styling tasteful and wholesome: no nudity, no lingerie, no explicit pose, no school-uniform framing, adult character only. Use high-end anime rendering, delicate rain highlights, crisp line art, luminous eyes, soft cel shading, realistic mirror distortion, and a cozy rainy-city atmosphere.""",
+    size="1024x1536",
+    quality="high",
+    moderation="low",
+)
+
+import base64
+open("docs/anime-manga/anime-rainy-bus-stop-mirror.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
 <a id="gallery-gaming"></a>
+
 ### 🎮 Gaming
 
-#### No. 6 · Hitman gameplay — OpenAI HQ
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-hitman-openai.png" width="620" alt="Hitman gameplay — OpenAI HQ"/>
+#### No. 13 · Hitman gameplay — OpenAI HQ
 
-<sub>Gaming · `landscape` · `1536x1024` · Author: [@flowersslop](https://x.com/flowersslop)</sub>
+<img src="docs/gaming/hitman-openai.png" width="620" alt="Hitman gameplay — OpenAI HQ"/>
+
+<sub>Gaming · `landscape` · `1536x1024` · Author: @flowersslop · Source: [X](https://x.com/flowersslop)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -568,7 +921,7 @@ A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6
 gpt-image \
   -p "A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6 without getting caught" \
   --size landscape --quality high \
-  -f docs/example-hitman-openai.png
+  -f docs/gaming/hitman-openai.png
 ```
 
 **OpenAI SDK**
@@ -584,18 +937,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-hitman-openai.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/gaming/hitman-openai.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 7 · GTA 6 gameplay — Vice City beach
+#### No. 14 · GTA 6 gameplay — Vice City beach
 
-<img src="docs/example-gta6-beach.png" width="620" alt="GTA 6 gameplay — Vice City beach"/>
+<img src="docs/gaming/gta6-beach.png" width="620" alt="GTA 6 gameplay — Vice City beach"/>
 
-<sub>Gaming · `landscape` · `1536x1024` · Author: [@WolfRiccardo](https://x.com/WolfRiccardo)</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Author: @WolfRiccardo · Source: [X](https://x.com/WolfRiccardo)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -610,7 +963,7 @@ GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a
 gpt-image \
   -p "GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a stationary 4k monitor. (There's a slight blurriness in the image, as it feels like it was taken handheld). A wide, bright environment. Realistic details. The character is walking on the beach with /:dog." \
   --size landscape --quality high \
-  -f docs/example-gta6-beach.png
+  -f docs/gaming/gta6-beach.png
 ```
 
 **OpenAI SDK**
@@ -626,18 +979,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-gta6-beach.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/gaming/gta6-beach.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 8 · Dark-fantasy swamp boss hunt
+#### No. 15 · Dark-fantasy swamp boss hunt
 
-<img src="docs/example-original-dark-fantasy-hunt.png" width="720" alt="Dark-fantasy swamp boss hunt"/>
+<img src="docs/gaming/dark-fantasy-hunt.png" width="720" alt="Dark-fantasy swamp boss hunt"/>
 
-<sub>Gaming · `landscape` · `1536x1024`</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -652,7 +1005,7 @@ Create an original AAA dark-fantasy action RPG screenshot. A silver-haired monst
 gpt-image \
   -p 'Create an original AAA dark-fantasy action RPG screenshot. A silver-haired monster hunter in layered leather armor stands in a ruined marsh at blue hour, sword drawn toward a huge winged swamp beast rising from mist. Cinematic over-the-shoulder framing, believable HUD with health, stamina, potion icons, quest text, and minimap. Wet stones, dead trees, torchlight, moonlit fog, subtle alchemy glyphs, highly detailed materials, dramatic but readable composition, premium next-gen game look, 16:9 landscape.' \
   --size landscape --quality high \
-  -f docs/example-original-dark-fantasy-hunt.png
+  -f docs/gaming/dark-fantasy-hunt.png
 ```
 
 **OpenAI SDK**
@@ -668,16 +1021,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-original-dark-fantasy-hunt.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/gaming/dark-fantasy-hunt.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 9 · Epic fellowship bridge approach
+#### No. 16 · Epic fellowship bridge approach
 
-<img src="docs/example-original-epic-fellowship-bridge.png" width="720" alt="Epic fellowship bridge approach"/>
+<img src="docs/gaming/epic-fellowship-bridge.png" width="720" alt="Epic fellowship bridge approach"/>
 
-<sub>Gaming · `landscape` · `1536x1024`</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -692,7 +1045,7 @@ Create an original epic fantasy RPG key-art screenshot. A small fellowship of tr
 gpt-image \
   -p 'Create an original epic fantasy RPG key-art screenshot. A small fellowship of travelers crosses a colossal ancient stone bridge toward a luminous mountain city at sunrise. One ranger leads, a mage carries a lantern, a dwarf-like smith bears a hammer, and banners whip in the wind. Vast valley below, waterfalls, golden clouds, weathered masonry, cinematic scale, subtle HUD quest marker and compass, richly detailed armor and environment, AAA fantasy adventure tone, 16:9 landscape, highly detailed and uplifting.' \
   --size landscape --quality high \
-  -f docs/example-original-epic-fellowship-bridge.png
+  -f docs/gaming/epic-fellowship-bridge.png
 ```
 
 **OpenAI SDK**
@@ -708,16 +1061,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-original-epic-fellowship-bridge.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/gaming/epic-fellowship-bridge.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 10 · Retro Japanese town pixel RPG
+#### No. 17 · Retro Japanese town pixel RPG
 
-<img src="docs/example-community-reddit-10-retro-japan-rpg.png" width="560" alt="Retro Japanese town pixel RPG"/>
+<img src="docs/gaming/retro-japan-rpg.png" width="560" alt="Retro Japanese town pixel RPG"/>
 
-<sub>Gaming · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1kozn4u/retro_video_games_in_japan_prompts_included/)</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1kozn4u/retro_video_games_in_japan_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -732,7 +1085,7 @@ Create an isometric pixel-art RPG screenshot of a traditional Japanese village d
 gpt-image \
   -p 'Create an isometric pixel-art RPG screenshot of a traditional Japanese village during cherry blossom season. Sakura petals drift through the air, a samurai player character practices sword moves in the square, villagers watch nearby, and the interface includes an inventory panel, stamina gauge, skill cooldown timers, and subtle quest UI. Cozy retro console feeling, soft ambient pastel lighting, crisp pixel details, 16:9 gameplay composition.' \
   --size landscape --quality high \
-  -f docs/example-community-reddit-10-retro-japan-rpg.png
+  -f docs/gaming/retro-japan-rpg.png
 ```
 
 **OpenAI SDK**
@@ -748,16 +1101,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-reddit-10-retro-japan-rpg.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/gaming/retro-japan-rpg.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 11 · Cyberpunk Europe action HUD
+#### No. 18 · Cyberpunk Europe action HUD
 
-<img src="docs/example-community-reddit-12-cyberpunk-europe-action.png" width="560" alt="Cyberpunk Europe action HUD"/>
+<img src="docs/gaming/cyberpunk-europe-action.png" width="560" alt="Cyberpunk Europe action HUD"/>
 
-<sub>Gaming · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1kzzy77/cyberpunk_video_games_in_european_cities_prompts/)</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1kzzy77/cyberpunk_video_games_in_european_cities_prompts/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -772,7 +1125,7 @@ Create a third-person cyberpunk action game screenshot set in a neon-soaked Euro
 gpt-image \
   -p 'Create a third-person cyberpunk action game screenshot set in a neon-soaked European capital at night. The protagonist has glowing cybernetic implants and stands on rain-slick streets near a famous landmark while holograms, drones, and flying traffic crowd the skyline. Add a polished game HUD with health bar, ammo count, radar, stealth/energy meters, and mission overlays. Vivid cyan-magenta palette, wet reflections, cinematic intensity, 16:9.' \
   --size landscape --quality high \
-  -f docs/example-community-reddit-12-cyberpunk-europe-action.png
+  -f docs/gaming/cyberpunk-europe-action.png
 ```
 
 **OpenAI SDK**
@@ -788,16 +1141,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-reddit-12-cyberpunk-europe-action.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/gaming/cyberpunk-europe-action.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 12 · Anime open-world adventure HUD
+#### No. 19 · Anime open-world adventure HUD
 
-<img src="docs/example-community-reddit-06-anime-open-world.png" width="560" alt="Anime open-world adventure HUD"/>
+<img src="docs/gaming/anime-open-world.png" width="560" alt="Anime open-world adventure HUD"/>
 
-<sub>Gaming · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1lh2l98/anime_style_video_games_prompts_included/)</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1lh2l98/anime_style_video_games_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -812,7 +1165,7 @@ Create a third-person over-the-shoulder screenshot from a nostalgic anime-style 
 gpt-image \
   -p 'Create a third-person over-the-shoulder screenshot from a nostalgic anime-style open-world adventure game. The protagonist stands in a lush forest with detailed foliage and vibrant shading, drawing a bow toward distant enemies. Add a clean on-screen HUD: quest log, compass at the top, character portrait and status effects at bottom left, subtle rain droplets on screen, and sun rays filtering through trees. Keep the composition dynamic, the forest immersive, and the UI believable like a premium action-RPG screenshot.' \
   --size landscape --quality high \
-  -f docs/example-community-reddit-06-anime-open-world.png
+  -f docs/gaming/anime-open-world.png
 ```
 
 **OpenAI SDK**
@@ -828,16 +1181,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-reddit-06-anime-open-world.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/gaming/anime-open-world.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 13 · Low-poly samurai strategy village
+#### No. 20 · Low-poly samurai strategy village
 
-<img src="docs/example-community-reddit-11-lowpoly-samurai-strategy.png" width="560" alt="Low-poly samurai strategy village"/>
+<img src="docs/gaming/lowpoly-samurai-strategy.png" width="560" alt="Low-poly samurai strategy village"/>
 
-<sub>Gaming · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1l2d5dr/lowpoly_strategy_video_games_in_japan_prompts/)</sub>
+<sub>Gaming · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1l2d5dr/lowpoly_strategy_video_games_in_japan_prompts/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -852,7 +1205,7 @@ Create an isometric low-poly strategy game screenshot of a mountainous Japanese 
 gpt-image \
   -p 'Create an isometric low-poly strategy game screenshot of a mountainous Japanese village with rice terraces, torii gates, samurai and archer units in formation, and a tactical RTS interface. Include unit selection boxes, resource counters for rice and wood, fog-of-war minimap, command overlays, and warm daylight with soft shadows. Stylized but readable, modern indie strategy game key art, 16:9.' \
   --size landscape --quality high \
-  -f docs/example-community-reddit-11-lowpoly-samurai-strategy.png
+  -f docs/gaming/lowpoly-samurai-strategy.png
 ```
 
 **OpenAI SDK**
@@ -868,18 +1221,64 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-reddit-11-lowpoly-samurai-strategy.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/gaming/lowpoly-samurai-strategy.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
+---
+
+#### No. 21 · Nine-panel dark-fantasy worldbuilding set
+
+<img src="docs/gaming/worldbuilding-nine-panel-set.png" width="620" alt="Nine-panel dark-fantasy worldbuilding set"/>
+
+<sub>Gaming · `square` · `1024x1024` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2046866168208916503)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a square 3x3 worldbuilding set for an original dark-fantasy universe called "Saltwind Reach". Each panel is a distinct but consistent scene: a storm-battered coastal fortress at dawn, a foggy market street, a knight relic close-up, a handwritten map fragment, a monster silhouette study, a candlelit tavern interior, an alchemist kit flat lay, a moonlit harbor, and a faction banner concept. Keep one cohesive art direction across all nine panels: painterly realism, muted teal / rust / bone palette, cinematic weather, premium concept-art presentation, small caption labels, and strong consistency across costume motifs, architecture, symbols, and lighting. The full board should feel like a polished pre-production worldbuilding sheet rather than a collage of unrelated images.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a square 3x3 worldbuilding set for an original dark-fantasy universe called "Saltwind Reach". Each panel is a distinct but consistent scene: a storm-battered coastal fortress at dawn, a foggy market street, a knight relic close-up, a handwritten map fragment, a monster silhouette study, a candlelit tavern interior, an alchemist kit flat lay, a moonlit harbor, and a faction banner concept. Keep one cohesive art direction across all nine panels: painterly realism, muted teal / rust / bone palette, cinematic weather, premium concept-art presentation, small caption labels, and strong consistency across costume motifs, architecture, symbols, and lighting. The full board should feel like a polished pre-production worldbuilding sheet rather than a collage of unrelated images.' \
+  --size square --quality high \
+  -f docs/gaming/worldbuilding-nine-panel-set.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a square 3x3 worldbuilding set for an original dark-fantasy universe called "Saltwind Reach". Each panel is a distinct but consistent scene: a storm-battered coastal fortress at dawn, a foggy market street, a knight relic close-up, a handwritten map fragment, a monster silhouette study, a candlelit tavern interior, an alchemist kit flat lay, a moonlit harbor, and a faction banner concept. Keep one cohesive art direction across all nine panels: painterly realism, muted teal / rust / bone palette, cinematic weather, premium concept-art presentation, small caption labels, and strong consistency across costume motifs, architecture, symbols, and lighting. The full board should feel like a polished pre-production worldbuilding sheet rather than a collage of unrelated images.""",
+    size="1024x1024",
+    quality="high",
+)
+
+import base64
+open("docs/gaming/worldbuilding-nine-panel-set.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+
 <a id="gallery-retro-cyberpunk"></a>
+
 ### 🤖 Retro & Cyberpunk
 
-#### No. 14 · Cyberpunk mecha girl over sea fortress
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-cyberpunk-mecha.png" width="620" alt="Cyberpunk mecha girl over sea fortress"/>
+#### No. 22 · Cyberpunk mecha girl over sea fortress
 
-<sub>Retro & Cyberpunk · `landscape` · `1536x1024` · Author: [archive →](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
+<img src="docs/retro-cyberpunk/cyberpunk-mecha.png" width="620" alt="Cyberpunk mecha girl over sea fortress"/>
+
+<sub>Retro & Cyberpunk · `landscape` · `1536x1024` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -894,7 +1293,7 @@ A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber 
 gpt-image \
   -p "A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar, standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind, a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes, moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor, 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes, cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic. Format 16:9." \
   --size landscape --quality high \
-  -f docs/example-cyberpunk-mecha.png
+  -f docs/retro-cyberpunk/cyberpunk-mecha.png
 ```
 
 **OpenAI SDK**
@@ -910,21 +1309,110 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-cyberpunk-mecha.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/retro-cyberpunk/cyberpunk-mecha.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+---
+
+#### No. 23 · Neon Orchid District design board
+
+<img src="docs/retro-cyberpunk/neon-orchid-district-board.png" width="620" alt="Neon Orchid District cyberpunk design board"/>
+
+<sub>Retro & Cyberpunk · `landscape` · `1536x1024` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a cyberpunk character-and-city design board in a premium magazine-layout format, landscape 16:9. Title text: "NEON ORCHID DISTRICT". The board is divided into five asymmetric panels: one large cinematic street scene of a rain-soaked elevated night market, two close-up portrait panels of original adult cyberpunk couriers with glowing orchid tattoos, one small isometric map panel showing alleys and drone routes, and one artifact panel showing encrypted transit passes, cybernetic gloves, and vending-machine stickers. Use layered neon magenta, cyan, acid green, wet asphalt reflections, holographic signage, dense but readable composition, editorial margins, small labels, and a cohesive retro-future anime/cyberpunk style. Original characters only, no existing IP, no explicit content.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a cyberpunk character-and-city design board in a premium magazine-layout format, landscape 16:9. Title text: "NEON ORCHID DISTRICT". The board is divided into five asymmetric panels: one large cinematic street scene of a rain-soaked elevated night market, two close-up portrait panels of original adult cyberpunk couriers with glowing orchid tattoos, one small isometric map panel showing alleys and drone routes, and one artifact panel showing encrypted transit passes, cybernetic gloves, and vending-machine stickers. Use layered neon magenta, cyan, acid green, wet asphalt reflections, holographic signage, dense but readable composition, editorial margins, small labels, and a cohesive retro-future anime/cyberpunk style. Original characters only, no existing IP, no explicit content.' \
+  --size landscape --quality high --moderation low \
+  -f docs/retro-cyberpunk/neon-orchid-district-board.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a cyberpunk character-and-city design board in a premium magazine-layout format, landscape 16:9. Title text: "NEON ORCHID DISTRICT". The board is divided into five asymmetric panels: one large cinematic street scene of a rain-soaked elevated night market, two close-up portrait panels of original adult cyberpunk couriers with glowing orchid tattoos, one small isometric map panel showing alleys and drone routes, and one artifact panel showing encrypted transit passes, cybernetic gloves, and vending-machine stickers. Use layered neon magenta, cyan, acid green, wet asphalt reflections, holographic signage, dense but readable composition, editorial margins, small labels, and a cohesive retro-future anime/cyberpunk style. Original characters only, no existing IP, no explicit content.""",
+    size="1536x1024",
+    quality="high",
+    moderation="low",
+)
+
+import base64
+open("docs/retro-cyberpunk/neon-orchid-district-board.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
+#### No. 24 · Synth Moon Crew alien nightlife grid
+
+<img src="docs/retro-cyberpunk/synth-moon-crew-grid.png" width="620" alt="Synth Moon Crew cyberpunk alien nightlife grid"/>
+
+<sub>Retro & Cyberpunk · `square` · `1024x1024` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a square cyberpunk alien nightclub catalog sheet called "SYNTH MOON CREW". Layout: a clean 3×3 grid of nine cards with thin chrome borders. Each card shows a different original alien or android nightlife character: glass-horn DJ, koi-scale bartender, moth-wing hacker, chrome geisha bassist, jellyfish courier, neon priestess, reptile fashion model, vending-machine oracle, and masked dancer. Each card has a tiny readable name tag and a unique color accent, but the whole grid shares a polished late-90s anime cyberpunk aesthetic, black background, fluorescent rim lights, glossy materials, sticker-like UI glyphs, playful stylish energy, no gore, no explicit content, original designs only.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a square cyberpunk alien nightclub catalog sheet called "SYNTH MOON CREW". Layout: a clean 3×3 grid of nine cards with thin chrome borders. Each card shows a different original alien or android nightlife character: glass-horn DJ, koi-scale bartender, moth-wing hacker, chrome geisha bassist, jellyfish courier, neon priestess, reptile fashion model, vending-machine oracle, and masked dancer. Each card has a tiny readable name tag and a unique color accent, but the whole grid shares a polished late-90s anime cyberpunk aesthetic, black background, fluorescent rim lights, glossy materials, sticker-like UI glyphs, playful stylish energy, no gore, no explicit content, original designs only.' \
+  --size square --quality high --moderation low \
+  -f docs/retro-cyberpunk/synth-moon-crew-grid.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a square cyberpunk alien nightclub catalog sheet called "SYNTH MOON CREW". Layout: a clean 3×3 grid of nine cards with thin chrome borders. Each card shows a different original alien or android nightlife character: glass-horn DJ, koi-scale bartender, moth-wing hacker, chrome geisha bassist, jellyfish courier, neon priestess, reptile fashion model, vending-machine oracle, and masked dancer. Each card has a tiny readable name tag and a unique color accent, but the whole grid shares a polished late-90s anime cyberpunk aesthetic, black background, fluorescent rim lights, glossy materials, sticker-like UI glyphs, playful stylish energy, no gore, no explicit content, original designs only.""",
+    size="1024x1024",
+    quality="high",
+    moderation="low",
+)
+
+import base64
+open("docs/retro-cyberpunk/synth-moon-crew-grid.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+
 <a id="gallery-cinematic-animation"></a>
+
 ### 🎬 Cinematic & Animation
 
-#### No. 15 · Pixar-style 3D animation still (kitten)
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-pixar-kitchen.png" width="620" alt="Pixar-style 3D animation still (kitten)"/>
+#### No. 25 · Pixar-style 3D animation still (kitten)
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+<img src="docs/cinematic-animation/pixar-kitchen.png" width="620" alt="Pixar-style 3D animation still (kitten)"/>
+
+<sub>Cinematic & Animation · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -951,7 +1439,7 @@ Character: kitten with expressive, slightly oversized eyes (classic Pixar propor
 
 Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.' \
   --size landscape --quality high \
-  -f docs/example-pixar-kitchen.png
+  -f docs/cinematic-animation/pixar-kitchen.png
 ```
 
 **OpenAI SDK**
@@ -973,18 +1461,18 @@ Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whi
 )
 
 import base64
-open("docs/example-pixar-kitchen.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-animation/pixar-kitchen.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 16 · 1940s film-noir still
+#### No. 26 · 1940s film-noir still
 
-<img src="docs/example-noir-detective.png" width="620" alt="1940s film-noir still"/>
+<img src="docs/cinematic-animation/noir-detective.png" width="620" alt="1940s film-noir still"/>
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+<sub>Cinematic & Animation · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1007,7 +1495,7 @@ Scene: a detective in trench coat and fedora stands alone at a rain-soaked stree
 
 Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".' \
   --size landscape --quality high \
-  -f docs/example-noir-detective.png
+  -f docs/cinematic-animation/noir-detective.png
 ```
 
 **OpenAI SDK**
@@ -1027,18 +1515,18 @@ Lighting: classic chiaroscuro — single hard key light above right, venetian-bl
 )
 
 import base64
-open("docs/example-noir-detective.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-animation/noir-detective.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 17 · Professional 6-panel film storyboard
+#### No. 27 · Professional 6-panel film storyboard
 
-<img src="docs/example-storyboard.png" width="620" alt="Professional 6-panel film storyboard"/>
+<img src="docs/cinematic-animation/storyboard.png" width="620" alt="Professional 6-panel film storyboard"/>
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+<sub>Cinematic & Animation · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1075,7 +1563,7 @@ Panel 6 — Match cut: runner'\''s boots landing on wet rooftop; splash. Info: "
 
 Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.' \
   --size landscape --quality high \
-  -f docs/example-storyboard.png
+  -f docs/cinematic-animation/storyboard.png
 ```
 
 **OpenAI SDK**
@@ -1102,18 +1590,18 @@ Art direction: classic animation-school storyboard — pencil line-work, grey ma
 )
 
 import base64
-open("docs/example-storyboard.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-animation/storyboard.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 18 · Studio-Ghibli-style animation still
+#### No. 28 · Studio-Ghibli-style animation still
 
-<img src="docs/example-ghibli-cottage.png" width="620" alt="Studio-Ghibli-style animation still"/>
+<img src="docs/cinematic-animation/ghibli-cottage.png" width="620" alt="Studio-Ghibli-style animation still"/>
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+<sub>Cinematic & Animation · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1132,7 +1620,7 @@ gpt-image \
 
 Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki'\''s Delivery Service", not a 3D render.' \
   --size landscape --quality high \
-  -f docs/example-ghibli-cottage.png
+  -f docs/cinematic-animation/ghibli-cottage.png
 ```
 
 **OpenAI SDK**
@@ -1150,18 +1638,18 @@ Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft p
 )
 
 import base64
-open("docs/example-ghibli-cottage.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-animation/ghibli-cottage.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 19 · VHS grocery-store chaos still
+#### No. 29 · VHS grocery-store chaos still
 
-<img src="docs/example-community-reddit-09-vhs-grocery-chaos.png" width="560" alt="VHS grocery-store chaos still"/>
+<img src="docs/cinematic-animation/vhs-grocery-chaos.png" width="560" alt="VHS grocery-store chaos still"/>
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024` · Author: [Reddit source](https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/)</sub>
+<sub>Cinematic & Animation · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1176,7 +1664,7 @@ Create a chaotic security-camera still from a 1990s grocery store. A man in full
 gpt-image \
   -p 'Create a chaotic security-camera still from a 1990s grocery store. A man in full medieval armor is frozen mid-sprint stealing several rotisserie chickens past the dairy section. Overhead fluorescent lights reflect off the armor. The floor is baby-blue tile. Add a timestamp reading "08/13/96 04:44 AM" and a wall poster saying "NEW! TOASTER STRUDELS!". Make it low-fidelity, absurd, slightly intense, with motion blur, VHS color bleed, surveillance noise, and authentic analog-store lighting.' \
   --size landscape --quality high \
-  -f docs/example-community-reddit-09-vhs-grocery-chaos.png
+  -f docs/cinematic-animation/vhs-grocery-chaos.png
 ```
 
 **OpenAI SDK**
@@ -1192,18 +1680,21 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-reddit-09-vhs-grocery-chaos.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-animation/vhs-grocery-chaos.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 <a id="gallery-character-design"></a>
+
 ### 👤 Character Design
 
-#### No. 20 · Official character reference sheet
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-character-sheet.png" width="620" alt="Official character reference sheet"/>
+#### No. 30 · Official character reference sheet
 
-<sub>Character Design · `landscape` · `1536x1024` · Author: [@MANISH1027512](https://x.com/MANISH1027512)</sub>
+<img src="docs/character-design/character-sheet.png" width="620" alt="Official character reference sheet"/>
+
+<sub>Character Design · `landscape` · `1536x1024` · Author: @MANISH1027512 · Source: [X](https://x.com/MANISH1027512)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1230,7 +1721,7 @@ gpt-image \
 - Include a brief explanation of the worldview setting
 - Overall, use an organized layout (white background, illustration style)" \
   --size landscape --quality high \
-  -f docs/example-character-sheet.png
+  -f docs/character-design/character-sheet.png
 ```
 
 **OpenAI SDK**
@@ -1252,18 +1743,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-character-sheet.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/character-design/character-sheet.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 21 · Elven archer sketchbook concept sheet
+#### No. 31 · Elven archer sketchbook concept sheet
 
-<img src="docs/example-community-reddit-08-elven-archer-sheet.png" width="560" alt="Elven archer sketchbook concept sheet"/>
+<img src="docs/character-design/elven-archer-sheet.png" width="560" alt="Elven archer sketchbook concept sheet"/>
 
-<sub>Character Design · `portrait` · `1024x1536` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1jrcpan/fantasy_concept_arts_with_v7_prompts_included/)</sub>
+<sub>Character Design · `portrait` · `1024x1536` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1jrcpan/fantasy_concept_arts_with_v7_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1278,7 +1769,7 @@ Create a fantasy concept art sketchbook page centered on a mystical elven archer
 gpt-image \
   -p "Create a fantasy concept art sketchbook page centered on a mystical elven archer with flowing robes. Render the main figure in loose graphite strokes with precise ink detailing. Surround the hero sketch with side views exploring cloak variations, a half-finished bow study with measurements, thumbnail action poses, handwritten annotations about enchanted embroidery patterns, and faint watercolor tests bleeding into the margins in forest-green and silver. The page should feel like a real art director's development sheet: exploratory, beautiful, readable, and richly tactile." \
   --size portrait --quality high \
-  -f docs/example-community-reddit-08-elven-archer-sheet.png
+  -f docs/character-design/elven-archer-sheet.png
 ```
 
 **OpenAI SDK**
@@ -1294,18 +1785,21 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-reddit-08-elven-archer-sheet.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/character-design/elven-archer-sheet.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 <a id="gallery-typography-posters"></a>
+
 ### 📝 Typography & Posters
 
-#### No. 22 · Chinese tea launch poster
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-tea-poster.png" width="460" alt="Chinese tea launch poster"/>
+#### No. 32 · Chinese tea launch poster
 
-<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
+<img src="docs/typography-posters/tea-poster.png" width="460" alt="Chinese tea launch poster"/>
+
+<sub>Typography & Posters · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1350,7 +1844,7 @@ Fine print: "图片仅供参考，请以门店实际售卖为准"
 
 Maintain a clear promotional hierarchy while keeping the overall feeling sophisticated rather than cheap or overly e-commerce-like. Pay special attention to small text, numbers, prices, info modules, and Chinese typography aesthetics.' \
   --size portrait --quality high \
-  -f docs/example-tea-poster.png
+  -f docs/typography-posters/tea-poster.png
 ```
 
 **OpenAI SDK**
@@ -1381,18 +1875,18 @@ Maintain a clear promotional hierarchy while keeping the overall feeling sophist
 )
 
 import base64
-open("docs/example-tea-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/typography-posters/tea-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 23 · 1980s propaganda poster
+#### No. 33 · 1980s propaganda poster
 
-<img src="docs/example-propaganda-poster.png" width="460" alt="1980s propaganda poster"/>
+<img src="docs/typography-posters/propaganda-poster.png" width="460" alt="1980s propaganda poster"/>
 
-<sub>Typography & Posters · `1k` · `1024x1024` · Author: [@akokoi1](https://x.com/akokoi1)</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: @akokoi1 · Source: [X](https://x.com/akokoi1)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1406,8 +1900,8 @@ Generate a 1980s propaganda poster. Use the exact slogan "热烈庆祝GPT-Image-
 ```bash
 gpt-image \
   -p 'Generate a 1980s propaganda poster. Use the exact slogan "热烈庆祝GPT-Image-2全量开放". Include Sam Altman, Dario Amodei, and Elon Musk, and give Dario Amodei a red scarf.' \
-  --size 1k --quality high \
-  -f docs/example-propaganda-poster.png
+  --size portrait --quality high \
+  -f docs/typography-posters/propaganda-poster.png
 ```
 
 **OpenAI SDK**
@@ -1418,23 +1912,23 @@ client = OpenAI()
 result = client.images.generate(
     model="gpt-image-2",
     prompt="""Generate a 1980s propaganda poster. Use the exact slogan "热烈庆祝GPT-Image-2全量开放". Include Sam Altman, Dario Amodei, and Elon Musk, and give Dario Amodei a red scarf.""",
-    size="1024x1024",
+    size="1024x1536",
     quality="high",
 )
 
 import base64
-open("docs/example-propaganda-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/typography-posters/propaganda-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 24 · Saul-Bass-style thriller movie poster
+#### No. 34 · Saul-Bass-style thriller movie poster
 
-<img src="docs/example-saul-bass-poster.png" width="460" alt="Saul-Bass-style thriller movie poster"/>
+<img src="docs/typography-posters/saul-bass-poster.png" width="460" alt="Saul-Bass-style thriller movie poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1467,7 +1961,7 @@ Exact typography:
 
 Palette: cream, charcoal black, crimson red, mustard-yellow accent. Pure flat graphic design, no photo elements, no gradients, no 3D — in the lineage of Bass'\''s "Anatomy of a Murder", "Vertigo", and "The Man with the Golden Arm".' \
   --size portrait --quality high \
-  -f docs/example-saul-bass-poster.png
+  -f docs/typography-posters/saul-bass-poster.png
 ```
 
 **OpenAI SDK**
@@ -1492,18 +1986,18 @@ Palette: cream, charcoal black, crimson red, mustard-yellow accent. Pure flat gr
 )
 
 import base64
-open("docs/example-saul-bass-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/typography-posters/saul-bass-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 25 · Vogue-style fashion magazine cover
+#### No. 35 · Vogue-style fashion magazine cover
 
-<img src="docs/example-vogue-cover.png" width="460" alt="Vogue-style fashion magazine cover"/>
+<img src="docs/typography-posters/vogue-cover.png" width="460" alt="Vogue-style fashion magazine cover"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1552,7 +2046,7 @@ Exact cover typography (all English, crisp, correctly spelled):
 
 Lighting: classic fashion editorial — soft single-source key, subtle fill, deep shadow on one cheek, fine film grain.' \
   --size portrait --quality high \
-  -f docs/example-vogue-cover.png
+  -f docs/typography-posters/vogue-cover.png
 ```
 
 **OpenAI SDK**
@@ -1585,18 +2079,18 @@ Lighting: classic fashion editorial — soft single-source key, subtle fill, dee
 )
 
 import base64
-open("docs/example-vogue-cover.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/typography-posters/vogue-cover.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 26 · 1950s Astounding Stories pulp cover
+#### No. 36 · 1950s Astounding Stories pulp cover
 
-<img src="docs/example-pulp-scifi-cover.png" width="460" alt="1950s Astounding Stories pulp cover"/>
+<img src="docs/typography-posters/pulp-scifi-cover.png" width="460" alt="1950s Astounding Stories pulp cover"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536`</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1629,7 +2123,7 @@ Exact typography:
 
 Art direction: painted gouache with visible brush strokes, saturated pulp palette (canary yellow, orange, red, electric violet, chrome silver), hand-lettered headlines, slightly rough paper texture, faint foxing on corners.' \
   --size portrait --quality high \
-  -f docs/example-pulp-scifi-cover.png
+  -f docs/typography-posters/pulp-scifi-cover.png
 ```
 
 **OpenAI SDK**
@@ -1654,18 +2148,18 @@ Art direction: painted gouache with visible brush strokes, saturated pulp palett
 )
 
 import base64
-open("docs/example-pulp-scifi-cover.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/typography-posters/pulp-scifi-cover.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 27 · Boston Spring 2026 city poster
+#### No. 37 · Boston Spring 2026 city poster
 
-<img src="docs/example-boston-poster.png" width="460" alt="Boston Spring 2026 city poster"/>
+<img src="docs/typography-posters/boston-poster.png" width="460" alt="Boston Spring 2026 city poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536` · Author: [@BubbleBrain](https://x.com/BubbleBrain)</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: @BubbleBrain · Source: [X](https://x.com/BubbleBrain)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1680,7 +2174,7 @@ A striking Spring 2026 city poster for Boston with an elegant celebratory mood a
 gpt-image \
   -p 'A striking Spring 2026 city poster for Boston with an elegant celebratory mood and a bold contemporary design. On a clean off-white textured background with large areas of negative space, a miniature single sculler rows across the lower right corner of the image on a narrow ribbon of reflective water. The wake from the oar sweeps upward in a dynamic calligraphic curve, gradually transforming into the Charles River and then into a dreamlike hand-painted panorama of Boston. Inside this flowing river-shaped composition are iconic Boston elements: the Back Bay skyline, Beacon Hill brownstones, Acorn Street, Boston Public Garden, Swan Boats, Zakim Bridge, Fenway-inspired details, historic brick architecture, harbor ferries, and the city'\''s waterfront atmosphere. Soft morning fog, golden spring light, subtle festive accents in crimson and gold, rich detail, layered depth, sophisticated city-poster aesthetics, fresh and refined, visually powerful but not overcrowded. Elegant typography in the lower left reads "SPRING 2026" with a vertical slogan "BOSTON, A CITY OF RIVER, MEMORY, AND INVENTION", text clear and beautifully composed, premium graphic design, 9:16' \
   --size portrait --quality high \
-  -f docs/example-boston-poster.png
+  -f docs/typography-posters/boston-poster.png
 ```
 
 **OpenAI SDK**
@@ -1696,18 +2190,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-boston-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/typography-posters/boston-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 28 · Epic silhouette worldbuilding poster
+#### No. 38 · Epic silhouette worldbuilding poster
 
-<img src="docs/example-community-xhs-01-epic-silhouette-poster.png" width="560" alt="Epic silhouette worldbuilding poster"/>
+<img src="docs/typography-posters/epic-silhouette-poster.png" width="560" alt="Epic silhouette worldbuilding poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e324cd0000000021039ca9)</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e324cd0000000021039ca9)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1722,7 +2216,7 @@ Design a collector's-edition epic poster for an original fantasy theme called "T
 gpt-image \
   -p 'Design a collector\'s-edition epic poster for an original fantasy theme called "The Celestial Archive". The outer silhouette is a graceful side profile of a lone archivist, and inside that silhouette a complete world naturally grows: observatories, floating stairways, bridges, ancient libraries, moons, towers, relics, and distant pilgrims. Make it feel like a narrative silhouette composition rather than a collage. Style: cinematic poster fused with dreamy watercolor illustration, quiet and majestic, sacred and nostalgic, with paper grain, soft mist, brush-edge texture, elegant negative space, and a discreet signature "WHY" integrated naturally as part of the layout.' \
   --size portrait --quality high \
-  -f docs/example-community-xhs-01-epic-silhouette-poster.png
+  -f docs/typography-posters/epic-silhouette-poster.png
 ```
 
 **OpenAI SDK**
@@ -1738,16 +2232,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-xhs-01-epic-silhouette-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/typography-posters/epic-silhouette-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 29 · Dual-exposure narrative poster
+#### No. 39 · Dual-exposure narrative poster
 
-<img src="docs/example-community-xhs-06-dual-exposure-poster.png" width="560" alt="Dual-exposure narrative poster"/>
+<img src="docs/typography-posters/dual-exposure-poster.png" width="560" alt="Dual-exposure narrative poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e7a01700000000230153f3)</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e7a01700000000230153f3)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1762,7 +2256,7 @@ Create a high-aesthetic collector poster in a "silhouette universe / dual-exposu
 gpt-image \
   -p 'Create a high-aesthetic collector poster in a "silhouette universe / dual-exposure narrative" style for an original theme called "Moonlit Dragon Court". Choose the most symbolic outer contour yourself — not a bottle or hourglass, but a more resonant form like a mask, archway, wing, throne, face profile, or luminous gate. Inside and around that contour, let a complete theme world naturally unfold: palaces, bridges, moonlit water, dragon motifs, relics, banners, distant figures, and layered atmospheric depth. The image must feel like a premium novel/anime poster: elegant, mythic, poetic, not cluttered, not collage-like, with strong visual memory and restrained luxurious design.' \
   --size portrait --quality high \
-  -f docs/example-community-xhs-06-dual-exposure-poster.png
+  -f docs/typography-posters/dual-exposure-poster.png
 ```
 
 **OpenAI SDK**
@@ -1778,16 +2272,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-xhs-06-dual-exposure-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/typography-posters/dual-exposure-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 30 · Journey to the West silhouette epic poster
+#### No. 40 · Journey to the West silhouette epic poster
 
-<img src="docs/example-community-xhs-10-journey-west-silhouette.png" width="560" alt="Journey to the West silhouette epic poster"/>
+<img src="docs/typography-posters/journey-west-silhouette.png" width="560" alt="Journey to the West silhouette epic poster"/>
 
-<sub>Typography & Posters · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e78cd4000000002103bdd3)</sub>
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e78cd4000000002103bdd3)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1802,7 +2296,7 @@ Create a collector-edition epic narrative poster for 《西游记》. Use a gian
 gpt-image \
   -p 'Create a collector-edition epic narrative poster for 《西游记》. Use a giant elegant side-profile silhouette as the outer contour, and let the interior grow into a complete Journey to the West world: Monkey King, monk, pig and sand monk, flaming mountain, heavenly palace, demons, magic staff, clouds, temples, mountains, relics, and symbolic motifs. Not a collage but a refined silhouette-filled narrative composition, blending cinematic poster design with dreamy watercolor illustration, soft atmospheric perspective, paper grain, restrained layout, large breathing space, poetic and legendary mood. Add a subtle refined signature mark “WHY” integrated into the poster design.' \
   --size portrait --quality high \
-  -f docs/example-community-xhs-10-journey-west-silhouette.png
+  -f docs/typography-posters/journey-west-silhouette.png
 ```
 
 **OpenAI SDK**
@@ -1818,18 +2312,190 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-xhs-10-journey-west-silhouette.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/typography-posters/journey-west-silhouette.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
+---
+
+#### No. 41 · Japanese pachinko rainbow flyer
+
+<img src="docs/typography-posters/japanese-pachinko-flyer.png" width="460" alt="Japanese pachinko rainbow flyer"/>
+
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: @midori_tatsuta · Source: [X](https://x.com/midori_tatsuta/status/2045441358530498797)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+パチンコ屋のギラギラチラシを3:4で作って。リアルで精密な今どきの可愛い日本人女性を1人配置。ギラギラで立体感のあるリッチな装飾のレインボーフォントなどを駆使し、とにかく豪華に。実在しない架空の新台の紹介をいくつか並べて。価格・特典・煽り文句・小さな注意書きまで入れて、日本の量販広告らしい情報量と熱量で仕上げて。
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'パチンコ屋のギラギラチラシを3:4で作って。リアルで精密な今どきの可愛い日本人女性を1人配置。ギラギラで立体感のあるリッチな装飾のレインボーフォントなどを駆使し、とにかく豪華に。実在しない架空の新台の紹介をいくつか並べて。価格・特典・煽り文句・小さな注意書きまで入れて、日本の量販広告らしい情報量と熱量で仕上げて。' \
+  --size portrait --quality high \
+  -f docs/typography-posters/japanese-pachinko-flyer.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""パチンコ屋のギラギラチラシを3:4で作って。リアルで精密な今どきの可愛い日本人女性を1人配置。ギラギラで立体感のあるリッチな装飾のレインボーフォントなどを駆使し、とにかく豪華に。実在しない架空の新台の紹介をいくつか並べて。価格・特典・煽り文句・小さな注意書きまで入れて、日本の量販広告らしい情報量と熱量で仕上げて。""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/typography-posters/japanese-pachinko-flyer.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 42 · Spanish fantasy film mobile poster
+
+<img src="docs/typography-posters/spanish-fantasy-mobile-poster.png" width="460" alt="Spanish fantasy film mobile poster"/>
+
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: @palabraseca · Source: [X](https://x.com/palabraseca/status/2047079358326849911)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Haz un póster vertical 4:5 para una película fantástica inexistente llamada "La Última Ciudad Sumergida". Debe sentirse como un gran estreno cinematográfico: detallado, elegante, épico y pensado como wallpaper de móvil. Muestra a una heroína sola sobre un puente inundado mirando una ciudad luminosa bajo el mar. Usa tipografía dramática en español, créditos falsos creíbles, niebla dorada, luz azul verdosa, composición premium y acabado de cartel internacional de cine.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Haz un póster vertical 4:5 para una película fantástica inexistente llamada "La Última Ciudad Sumergida". Debe sentirse como un gran estreno cinematográfico: detallado, elegante, épico y pensado como wallpaper de móvil. Muestra a una heroína sola sobre un puente inundado mirando una ciudad luminosa bajo el mar. Usa tipografía dramática en español, créditos falsos creíbles, niebla dorada, luz azul verdosa, composición premium y acabado de cartel internacional de cine.' \
+  --size portrait --quality high \
+  -f docs/typography-posters/spanish-fantasy-mobile-poster.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Haz un póster vertical 4:5 para una película fantástica inexistente llamada "La Última Ciudad Sumergida". Debe sentirse como un gran estreno cinematográfico: detallado, elegante, épico y pensado como wallpaper de móvil. Muestra a una heroína sola sobre un puente inundado mirando una ciudad luminosa bajo el mar. Usa tipografía dramática en español, créditos falsos creíbles, niebla dorada, luz azul verdosa, composición premium y acabado de cartel internacional de cine.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/typography-posters/spanish-fantasy-mobile-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 43 · Chongqing rainy-night city promo poster
+
+<img src="docs/typography-posters/city-tourism-promo-poster.png" width="460" alt="Chongqing rainy-night city promo poster"/>
+
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e5cb85000000001a027aa8)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+做一张 3:4 城市宣传海报，主题是“山城雨夜·重庆”。整体像高端城市文旅 campaign poster，不要廉价旅行社风格。画面中心是层叠山城建筑、轻轨穿楼、湿润街道、霓虹倒影、江边雾气和夜色中的坡道。用现代中文排版，加入少量准确标题与副标题："山城雨夜" / "CHONGQING" / "8D 城市 / 江雾 / 火锅 / 轻轨 / 夜景"。信息密度适中，留白克制，色彩以深蓝、暖橙、湿润霓虹红为主，像一本设计年鉴里的城市品牌海报。
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p '做一张 3:4 城市宣传海报，主题是“山城雨夜·重庆”。整体像高端城市文旅 campaign poster，不要廉价旅行社风格。画面中心是层叠山城建筑、轻轨穿楼、湿润街道、霓虹倒影、江边雾气和夜色中的坡道。用现代中文排版，加入少量准确标题与副标题："山城雨夜" / "CHONGQING" / "8D 城市 / 江雾 / 火锅 / 轻轨 / 夜景"。信息密度适中，留白克制，色彩以深蓝、暖橙、湿润霓虹红为主，像一本设计年鉴里的城市品牌海报。' \
+  --size portrait --quality high \
+  -f docs/typography-posters/city-tourism-promo-poster.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""做一张 3:4 城市宣传海报，主题是“山城雨夜·重庆”。整体像高端城市文旅 campaign poster，不要廉价旅行社风格。画面中心是层叠山城建筑、轻轨穿楼、湿润街道、霓虹倒影、江边雾气和夜色中的坡道。用现代中文排版，加入少量准确标题与副标题："山城雨夜" / "CHONGQING" / "8D 城市 / 江雾 / 火锅 / 轻轨 / 夜景"。信息密度适中，留白克制，色彩以深蓝、暖橙、湿润霓虹红为主，像一本设计年鉴里的城市品牌海报。""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/typography-posters/city-tourism-promo-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+
+#### No. 44 · Athlete journey poster: Aya Navarro
+
+<img src="docs/typography-posters/athlete-journey-poster-aya-navarro.png" width="460" alt="Athlete journey poster: Aya Navarro"/>
+
+<sub>Typography & Posters · `portrait` · `1024x1536` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2047325329052823996)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Cinematic portrait poster of fictional athlete Aya Navarro showing her full journey from local school courts to world-stage champion, bold editorial typography listing milestone years, medals, best performances, dramatic split-era composition, premium sports documentary design, mobile-poster format, high text clarity.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Cinematic portrait poster of fictional athlete Aya Navarro showing her full journey from local school courts to world-stage champion, bold editorial typography listing milestone years, medals, best performances, dramatic split-era composition, premium sports documentary design, mobile-poster format, high text clarity.' \
+  --size portrait --quality high \
+  -f docs/typography-posters/athlete-journey-poster-aya-navarro.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Cinematic portrait poster of fictional athlete Aya Navarro showing her full journey from local school courts to world-stage champion, bold editorial typography listing milestone years, medals, best performances, dramatic split-era composition, premium sports documentary design, mobile-poster format, high text clarity.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/typography-posters/athlete-journey-poster-aya-navarro.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
 <a id="gallery-illustration"></a>
+
 ### 🎨 Illustration
 
-#### No. 31 · Vintage Amalfi Coast travel poster
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-amalfi-poster.png" width="460" alt="Vintage Amalfi Coast travel poster"/>
+#### No. 45 · Vintage Amalfi Coast travel poster
 
-<sub>Illustration · `portrait` · `1024x1536` · Author: [@WolfRiccardo](https://x.com/WolfRiccardo)</sub>
+<img src="docs/illustration/amalfi-poster.png" width="460" alt="Vintage Amalfi Coast travel poster"/>
+
+<sub>Illustration · `portrait` · `1024x1536` · Author: @WolfRiccardo · Source: [X](https://x.com/WolfRiccardo)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1844,7 +2510,7 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 gpt-image \
   -p "Modern pencil illustration of Vintage travel poster illustration of the Amalfi Coast, Italy, panoramic coastal cliff road scene, classic 1960s white car driving along a curved seaside road, deep blue Mediterranean sea with small sailboats, colorful pastel hillside village, bright blue sky with soft clouds, lemon tree branches with vibrant yellow lemons framing the foreground, warm summer sunlight, bold vibrant colors, retro 1950s travel poster style, cinematic composition, high detail, screen print texture, graphic illustration. Hand-drawn style, illustration with loose strokes and defined contours. High-contrast color palette, maintaining chromatic harmony between background and elements. Contemporary and decorative aesthetic." \
   --size portrait --quality high \
-  -f docs/example-amalfi-poster.png
+  -f docs/illustration/amalfi-poster.png
 ```
 
 **OpenAI SDK**
@@ -1860,21 +2526,64 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-amalfi-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/illustration/amalfi-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
+#### No. 46 · Paper-cut forest night market
+
+<img src="docs/illustration/papercut-forest-market.png" width="620" alt="Paper-cut forest night market"/>
+
+<sub>Illustration · `landscape` · `1536x1024` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a landscape editorial illustration in layered paper-cut style: a tiny forest night market hidden beneath giant mushrooms and fern leaves. Include warm lantern stalls selling acorn cakes, beetle taxis, a fox calligrapher, a badger tea vendor, children holding leaf umbrellas, and fireflies forming soft dotted paths. Style anchor: mid-century children’s book illustration meets contemporary layered paper diorama, visible cut-paper edges, soft shadows between layers, muted moss green, pumpkin orange, cream, and ink-blue palette. First glance: a cozy glowing market silhouette. Second glance: many small vendor stories. Third glance: handmade paper texture, tiny signage, and playful animal gestures. No photorealism, no 3D plastic look, no cluttered unreadable faces.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a landscape editorial illustration in layered paper-cut style: a tiny forest night market hidden beneath giant mushrooms and fern leaves. Include warm lantern stalls selling acorn cakes, beetle taxis, a fox calligrapher, a badger tea vendor, children holding leaf umbrellas, and fireflies forming soft dotted paths. Style anchor: mid-century children’s book illustration meets contemporary layered paper diorama, visible cut-paper edges, soft shadows between layers, muted moss green, pumpkin orange, cream, and ink-blue palette. First glance: a cozy glowing market silhouette. Second glance: many small vendor stories. Third glance: handmade paper texture, tiny signage, and playful animal gestures. No photorealism, no 3D plastic look, no cluttered unreadable faces.' \
+  --size landscape --quality high \
+  -f docs/illustration/papercut-forest-market.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a landscape editorial illustration in layered paper-cut style: a tiny forest night market hidden beneath giant mushrooms and fern leaves. Include warm lantern stalls selling acorn cakes, beetle taxis, a fox calligrapher, a badger tea vendor, children holding leaf umbrellas, and fireflies forming soft dotted paths. Style anchor: mid-century children’s book illustration meets contemporary layered paper diorama, visible cut-paper edges, soft shadows between layers, muted moss green, pumpkin orange, cream, and ink-blue palette. First glance: a cozy glowing market silhouette. Second glance: many small vendor stories. Third glance: handmade paper texture, tiny signage, and playful animal gestures. No photorealism, no 3D plastic look, no cluttered unreadable faces.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/illustration/papercut-forest-market.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
 <a id="gallery-watercolor"></a>
+
 ### 💧 Watercolor
 
-#### No. 32 · Dreamy watercolor — young woman at lily pond
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-watercolor-lily-pond.png" width="460" alt="Dreamy watercolor — young woman at lily pond"/>
+#### No. 47 · Dreamy watercolor — young woman at lily pond
 
-<sub>Watercolor · `portrait` · `1024x1536` · Author: [archive →](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
+<img src="docs/watercolor/watercolor-lily-pond.png" width="460" alt="Dreamy watercolor — young woman at lily pond"/>
+
+<sub>Watercolor · `portrait` · `1024x1536` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1889,7 +2598,7 @@ Dreamy watercolor illustration of a young woman in a cream linen dress sitting o
 gpt-image \
   -p "Dreamy watercolor illustration of a young woman in a cream linen dress sitting on a weathered stone bench, contemplating a lily pond at late golden hour. Impressionist-light aesthetic, loose confident brush strokes, translucent washes in muted teal and warm ochre tones with soft lavender shadows. Soft blur of water lilies and reflected clouds in the pond surface. Gentle sunlight filters through overhanging willow branches. Cold-pressed paper texture visible throughout, edges of wet-on-wet bleeds, delicate lighting, clean composition with generous negative space, minimalist focus on mood, sense of calm, lightness, and ephemeral beauty. Editorial high-quality illustration, in the tradition of Turner's watercolor studies and modern editorial magazine illustration." \
   --size portrait --quality high \
-  -f docs/example-watercolor-lily-pond.png
+  -f docs/watercolor/watercolor-lily-pond.png
 ```
 
 **OpenAI SDK**
@@ -1905,21 +2614,64 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-watercolor-lily-pond.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/watercolor/watercolor-lily-pond.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
+#### No. 48 · Rainy botanical greenhouse watercolor
+
+<img src="docs/watercolor/rainy-botanical-greenhouse.png" width="620" alt="Rainy botanical greenhouse watercolor"/>
+
+<sub>Watercolor · `landscape` · `1536x1024` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a delicate watercolor illustration of a rainy botanical greenhouse in early morning. Landscape composition, transparent washes, granulating pigments, soft wet-on-wet blooms, visible cold-pressed paper texture. Scene: arched glass greenhouse ribs, raindrops streaming down panes, hanging ferns, orchids, clay pots, a narrow stone path, a wooden bench with an open gardening notebook, and diffused silver daylight. Palette: sage green, eucalyptus gray, pale lavender, warm terracotta, and tiny yellow flower accents. Keep the image airy and poetic, with preserved white paper highlights, no hard digital gradients, no photorealistic lens effects, and no heavy outlines.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a delicate watercolor illustration of a rainy botanical greenhouse in early morning. Landscape composition, transparent washes, granulating pigments, soft wet-on-wet blooms, visible cold-pressed paper texture. Scene: arched glass greenhouse ribs, raindrops streaming down panes, hanging ferns, orchids, clay pots, a narrow stone path, a wooden bench with an open gardening notebook, and diffused silver daylight. Palette: sage green, eucalyptus gray, pale lavender, warm terracotta, and tiny yellow flower accents. Keep the image airy and poetic, with preserved white paper highlights, no hard digital gradients, no photorealistic lens effects, and no heavy outlines.' \
+  --size landscape --quality high \
+  -f docs/watercolor/rainy-botanical-greenhouse.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a delicate watercolor illustration of a rainy botanical greenhouse in early morning. Landscape composition, transparent washes, granulating pigments, soft wet-on-wet blooms, visible cold-pressed paper texture. Scene: arched glass greenhouse ribs, raindrops streaming down panes, hanging ferns, orchids, clay pots, a narrow stone path, a wooden bench with an open gardening notebook, and diffused silver daylight. Palette: sage green, eucalyptus gray, pale lavender, warm terracotta, and tiny yellow flower accents. Keep the image airy and poetic, with preserved white paper highlights, no hard digital gradients, no photorealistic lens effects, and no heavy outlines.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/watercolor/rainy-botanical-greenhouse.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
 <a id="gallery-ink-chinese"></a>
+
 ### 🖌️ Ink & Chinese
 
-#### No. 33 · Chinese ink-wash mountain landscape
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-ink-landscape.png" width="460" alt="Chinese ink-wash mountain landscape"/>
+#### No. 49 · Chinese ink-wash mountain landscape
 
-<sub>Ink & Chinese · `portrait` · `1024x1536` · Author: [archive →](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
+<img src="docs/ink-chinese/ink-landscape.png" width="460" alt="Chinese ink-wash mountain landscape"/>
+
+<sub>Ink & Chinese · `portrait` · `1024x1536` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1934,7 +2686,7 @@ A traditional Chinese ink-wash (水墨) landscape painting of mist-shrouded moun
 gpt-image \
   -p 'A traditional Chinese ink-wash (水墨) landscape painting of mist-shrouded mountains, rendered on aged xuan rice paper. Layered mountain ranges receding into distance through gradations of black ink — bold dark foreground peaks with sharp brushwork, mid-ground ranges in medium wash, far peaks almost dissolved into pale grey mist. A single traditional pavilion perched on a cliff midway up, a small solitary figure crossing a wooden bridge over a waterfall. Pine trees with calligraphic branches, curling cloud-mist flowing between peaks (留白 negative-space clouds). A vertical seal stamp in red (篆刻 zhu-wen style) bottom-left, a vertical column of calligraphic characters reading "山高水長" top-right in elegant caoshu (草書) brushwork. Paper has faint warm beige tone with visible fiber texture. Aesthetic in the tradition of 范寬 Fan Kuan / 馬遠 Ma Yuan Song-dynasty landscape painting — contemplative, restrained, deep negative space, brush-energy (气韵) visible in every stroke.' \
   --size portrait --quality high \
-  -f docs/example-ink-landscape.png
+  -f docs/ink-chinese/ink-landscape.png
 ```
 
 **OpenAI SDK**
@@ -1950,21 +2702,64 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-ink-landscape.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/ink-chinese/ink-landscape.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
+#### No. 50 · Song dynasty night-market handscroll
+
+<img src="docs/ink-chinese/song-night-market-scroll.png" width="620" alt="Song dynasty night-market handscroll"/>
+
+<sub>Ink & Chinese · `landscape` · `1536x1024` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a horizontal Chinese ink-and-wash handscroll scene of a Song dynasty riverside night market. Use gongbi-level architectural detail combined with loose ink atmosphere: arched stone bridge, lantern boats, teahouse balconies, book stalls, noodle steam, scholars reading under lamps, children chasing paper rabbits, and distant city walls fading into mist. Add small readable Chinese shop signs in brush style: "茶", "书", "面", "灯市". Palette: black ink, warm lantern ochre, muted cinnabar seals, and pale blue-gray moonlight. Composition should read as a continuous scroll with rhythmic clusters of people and negative-space water. Avoid modern objects, anime faces, fake calligraphy clutter, and overly saturated poster lighting.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a horizontal Chinese ink-and-wash handscroll scene of a Song dynasty riverside night market. Use gongbi-level architectural detail combined with loose ink atmosphere: arched stone bridge, lantern boats, teahouse balconies, book stalls, noodle steam, scholars reading under lamps, children chasing paper rabbits, and distant city walls fading into mist. Add small readable Chinese shop signs in brush style: "茶", "书", "面", "灯市". Palette: black ink, warm lantern ochre, muted cinnabar seals, and pale blue-gray moonlight. Composition should read as a continuous scroll with rhythmic clusters of people and negative-space water. Avoid modern objects, anime faces, fake calligraphy clutter, and overly saturated poster lighting.' \
+  --size landscape --quality high \
+  -f docs/ink-chinese/song-night-market-scroll.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a horizontal Chinese ink-and-wash handscroll scene of a Song dynasty riverside night market. Use gongbi-level architectural detail combined with loose ink atmosphere: arched stone bridge, lantern boats, teahouse balconies, book stalls, noodle steam, scholars reading under lamps, children chasing paper rabbits, and distant city walls fading into mist. Add small readable Chinese shop signs in brush style: "茶", "书", "面", "灯市". Palette: black ink, warm lantern ochre, muted cinnabar seals, and pale blue-gray moonlight. Composition should read as a continuous scroll with rhythmic clusters of people and negative-space water. Avoid modern objects, anime faces, fake calligraphy clutter, and overly saturated poster lighting.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/ink-chinese/song-night-market-scroll.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
 <a id="gallery-pixel-art"></a>
+
 ### 🕹️ Pixel Art
 
-#### No. 34 · Pixel art car sprite sheet
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-pixel-sprite-cars.png" width="460" alt="Pixel art car sprite sheet"/>
+#### No. 51 · Pixel art car sprite sheet
 
-<sub>Pixel Art · `square` · `1024x1024` · Author: [@RoundtableSpace](https://x.com/RoundtableSpace)</sub>
+<img src="docs/pixel-art/pixel-sprite-cars.png" width="460" alt="Pixel art car sprite sheet"/>
+
+<sub>Pixel Art · `square` · `1024x1024` · Author: @RoundtableSpace · Source: [X](https://x.com/RoundtableSpace)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -1979,7 +2774,7 @@ A 10x10 pixel art sprite sheet of retro video game cars, 16-bit era aesthetic. T
 gpt-image \
   -p "A 10x10 pixel art sprite sheet of retro video game cars, 16-bit era aesthetic. Ten rows by ten columns of small vehicle sprites on a clean light-grey grid background, each cell 64x64 pixels. Variety across sprites: sedans, sports cars, muscle cars, SUVs, pickup trucks, vans, taxi cabs, police cruisers, convertibles, and hot rods, in a full rainbow of colors. All sprites rendered in a consistent 3/4 top-down perspective with matching shading, crisp pixel edges, no anti-aliasing, palette limited to ~16 tones per sprite, SNES / Super Nintendo cart-racing game tradition." \
   --size square --quality high \
-  -f docs/example-pixel-sprite-cars.png
+  -f docs/pixel-art/pixel-sprite-cars.png
 ```
 
 **OpenAI SDK**
@@ -1995,18 +2790,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-pixel-sprite-cars.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/pixel-art/pixel-sprite-cars.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 35 · Pixel art breakfast still life
+#### No. 52 · Pixel art breakfast still life
 
-<img src="docs/example-community-reddit-05-pixel-breakfast.png" width="560" alt="Pixel art breakfast still life"/>
+<img src="docs/pixel-art/pixel-breakfast.png" width="560" alt="Pixel art breakfast still life"/>
 
-<sub>Pixel Art · `1k` · `1k` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1jmodcx/animated_pixel_art_food_prompts_included/)</sub>
+<sub>Pixel Art · `square` · `1024x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1jmodcx/animated_pixel_art_food_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2021,7 +2816,7 @@ Create a nostalgic pixel-art breakfast still life. Show a tall stack of fluffy g
 gpt-image \
   -p 'Create a nostalgic pixel-art breakfast still life. Show a tall stack of fluffy golden pancakes drizzled with glossy maple syrup, topped with strawberries and blueberries, with pixelated steam rising into the air. The plate sits on a pastel tablecloth and a hot cup of coffee rests in the background. Use rich breakfast colors, careful lighting, and delicious texture detail while staying true to clean, readable pixel art.' \
   --size 1k --quality high \
-  -f docs/example-community-reddit-05-pixel-breakfast.png
+  -f docs/pixel-art/pixel-breakfast.png
 ```
 
 **OpenAI SDK**
@@ -2037,18 +2832,21 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-reddit-05-pixel-breakfast.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/pixel-art/pixel-breakfast.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 <a id="gallery-isometric"></a>
+
 ### 📐 Isometric
 
-#### No. 36 · Isometric miniature cafe district
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-isometric-cafe.png" width="460" alt="Isometric miniature cafe district"/>
+#### No. 53 · Isometric miniature cafe district
 
-<sub>Isometric · `square` · `1024x1024` · Author: [archive →](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
+<img src="docs/isometric/isometric-cafe.png" width="460" alt="Isometric miniature cafe district"/>
+
+<sub>Isometric · `square` · `1024x1024` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2063,7 +2861,7 @@ A detailed isometric 3D miniature scene of a two-block cafe district, clean geom
 gpt-image \
   -p "A detailed isometric 3D miniature scene of a two-block cafe district, clean geometric forms, precise 30° isometric perspective alignment. A corner cafe with outdoor umbrella seating, a bookstore next door with stacks of books visible through the window, a bakery with a window display of pastries, a bicycle parked at the curb, a small fountain in a mini-plaza, planter boxes with tiny trees, a food cart on the corner selling coffee, stylised miniature pedestrians in various poses, tiled roof tops with ventilation details. Soft ambient lighting from upper-left, no harsh shadows, pastel-plus-muted palette (terracotta rooftops, cream walls, sage greens, dusty blue accents), slight atmospheric haze, subtle ambient occlusion in corners, high-detail miniature texturing. Professional rendering quality, suitable for editorial or marketing materials. Flat colored background in a single soft cream tone, no ground plane shadow, scene floating like a diorama." \
   --size square --quality high \
-  -f docs/example-isometric-cafe.png
+  -f docs/isometric/isometric-cafe.png
 ```
 
 **OpenAI SDK**
@@ -2079,18 +2877,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-isometric-cafe.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/isometric/isometric-cafe.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 37 · Isometric fantasy village map
+#### No. 54 · Isometric fantasy village map
 
-<img src="docs/example-community-reddit-03-isometric-fantasy-village.png" width="560" alt="Isometric fantasy village map"/>
+<img src="docs/isometric/isometric-fantasy-village.png" width="560" alt="Isometric fantasy village map"/>
 
-<sub>Isometric · `1k` · `1k` · Author: [Reddit source](https://www.reddit.com/r/midjourney/comments/1hkqr4x/isometric_maps_prompts_included/)</sub>
+<sub>Isometric · `square` · `1024x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1hkqr4x/isometric_maps_prompts_included/)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2105,7 +2903,7 @@ Create a vibrant isometric fantasy village map with a clean grid-based layout us
 gpt-image \
   -p 'Create a vibrant isometric fantasy village map with a clean grid-based layout using 3x3 meter tiles. Include wooden houses with thatched roofs, cobblestone paths, and a central stone fountain. One corner of the map rises into a small grassy hill about 2 meters high with stairs connecting to the lower ground. Keep the isometric angle precise and game-ready. Warm sunlight sends clear rays and long shadows across the rooftops. Make the scene readable like a handcrafted strategy-game map, with crisp tile logic, charming environmental detail, and rich but controlled color.' \
   --size 1k --quality high \
-  -f docs/example-community-reddit-03-isometric-fantasy-village.png
+  -f docs/isometric/isometric-fantasy-village.png
 ```
 
 **OpenAI SDK**
@@ -2121,18 +2919,21 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-reddit-03-isometric-fantasy-village.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/isometric/isometric-fantasy-village.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 <a id="gallery-product-food"></a>
+
 ### 📦 Product & Food
 
-#### No. 38 · 3D product box from dieline
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-product-dieline-box.png" width="460" alt="3D product box from dieline"/>
+#### No. 55 · 3D product box from dieline
 
-<sub>Product & Food · `portrait` · `1024x1536` · Author: [@Salmaaboukarr](https://x.com/Salmaaboukarr)</sub>
+<img src="docs/product-food/product-dieline-box.png" width="460" alt="3D product box from dieline"/>
+
+<sub>Product & Food · `portrait` · `1024x1536` · Author: @Salmaaboukarr · Source: [X](https://x.com/Salmaaboukarr)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2147,7 +2948,7 @@ Assemble the dieline into a flawless 3D box with accurate panels, clean folds, u
 gpt-image \
   -p 'Assemble the dieline into a flawless 3D box with accurate panels, clean folds, undistorted type, and artwork preserved exactly. Shoot it upright at a refined three-quarter angle in a minimal premium studio setting with a soft neutral background, diffused light, subtle shadows, no props, true colours, matte paperboard texture, and realistic editorial detail. The box front reads "AURAE / COLD-BREW MATCHA / 12 fl oz" in clean sans-serif. Side panel shows small ingredient list in 8pt type, nutrition-facts-style block. Clean, editorial, award-winning packshot aesthetic.' \
   --size portrait --quality high \
-  -f docs/example-product-dieline-box.png
+  -f docs/product-food/product-dieline-box.png
 ```
 
 **OpenAI SDK**
@@ -2163,18 +2964,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-product-dieline-box.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/product-food/product-dieline-box.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 39 · Chocolate wafer product render (JSON-style)
+#### No. 56 · Chocolate wafer product render (JSON-style)
 
-<img src="docs/example-product-chocolate-wafer.png" width="460" alt="Chocolate wafer product render (JSON-style)"/>
+<img src="docs/product-food/product-chocolate-wafer.png" width="460" alt="Chocolate wafer product render (JSON-style)"/>
 
-<sub>Product & Food (JSON-style prompt) · `portrait` · `1024x1536` · Author: [@mehvishs25](https://x.com/mehvishs25)</sub>
+<sub>Product & Food · `portrait` · `1024x1536` · Author: @mehvishs25 · Source: [X](https://x.com/mehvishs25)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2239,7 +3040,7 @@ gpt-image \
   "RENDER_OUTPUT": { "Resolution": "8K_UHD", "Aspect_Ratio": "3:4", "Quality_Flags": ["Hyper_Realistic", "Sharp_Foreground", "Indulgent_Mood"] }
 }' \
   --size portrait --quality high \
-  -f docs/example-product-chocolate-wafer.png
+  -f docs/product-food/product-chocolate-wafer.png
 ```
 
 **OpenAI SDK**
@@ -2280,18 +3081,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-product-chocolate-wafer.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/product-food/product-chocolate-wafer.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 40 · Salad-explosion food photography (JSON-style)
+#### No. 57 · Salad-explosion food photography (JSON-style)
 
-<img src="docs/example-food-salad-explosion.png" width="460" alt="Salad-explosion food photography (JSON-style)"/>
+<img src="docs/product-food/food-salad-explosion.png" width="460" alt="Salad-explosion food photography (JSON-style)"/>
 
-<sub>Product & Food (JSON-style prompt) · `portrait` · `1024x1536` · Author: [@ChillaiKalan__](https://x.com/ChillaiKalan__)</sub>
+<sub>Product & Food · `portrait` · `1024x1536` · Author: @ChillaiKalan__ · Source: [X](https://x.com/ChillaiKalan__)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2350,7 +3151,7 @@ gpt-image \
   "render_flags": ["food photography award-winning", "no CGI tell", "editorial cookbook cover feel"]
 }' \
   --size portrait --quality high \
-  -f docs/example-food-salad-explosion.png
+  -f docs/product-food/food-salad-explosion.png
 ```
 
 **OpenAI SDK**
@@ -2388,18 +3189,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-food-salad-explosion.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/product-food/food-salad-explosion.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 41 · Universal commercial poster template
+#### No. 58 · Universal commercial poster template
 
-<img src="docs/example-community-xhs-07-aurora-oolong-poster.png" width="560" alt="Universal commercial poster template"/>
+<img src="docs/product-food/aurora-oolong-poster.png" width="560" alt="Universal commercial poster template"/>
 
-<sub>Product & Food · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e7878300000000230050bb)</sub>
+<sub>Product & Food · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e7878300000000230050bb)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2414,7 +3215,7 @@ Design a high-end commercial poster for a product called "Aurora Oolong Cold Bre
 gpt-image \
   -p 'Design a high-end commercial poster for a product called "Aurora Oolong Cold Brew". Minimalist style, clean frame, centered hero bottle and tea glass, soft studio lighting, realistic material textures, elegant condensation details, generous negative space, premium brand visual language, cinematic light and shadow, refined packaging typography, and ultra-detailed finish. Make it feel like a luxury beverage campaign that could run in a subway lightbox or fashion magazine.' \
   --size portrait --quality high \
-  -f docs/example-community-xhs-07-aurora-oolong-poster.png
+  -f docs/product-food/aurora-oolong-poster.png
 ```
 
 **OpenAI SDK**
@@ -2430,18 +3231,154 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-xhs-07-aurora-oolong-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/product-food/aurora-oolong-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
+---
+
+<a id="gallery-brand-systems-identity"></a>
+
+### 🧩 Brand Systems & Identity
+
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
+
+#### No. 59 · Moss Radio brand identity showcase board
+
+<img src="docs/brand-systems-identity/brand-identity-moss-radio.png" width="560" alt="Moss Radio brand identity showcase board"/>
+
+<sub>Brand Systems & Identity · `square` · `1024x1024` · Author: @LexnLin · Source: [X](https://x.com/LexnLin/status/2046952493213429886)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a square high-end brand identity showcase board for a fictional brand called "Moss Radio". The brand should feel analog, cultured, warm, tactile, and design-forward. It operates in independent audio hardware and café-retail and should appeal to creative professionals and music obsessives. The overall mood should be nostalgic but modern. Design a polished modular grid of multiple tiles, each showing a different application of one cohesive visual identity system. Include logo explorations, wordmarks, app icon variations, editorial posters, product cards, landing page fragments, packaging concepts, typography specimens, interface snippets, color palette presentations, sticker systems, patterns, branded mockups, and small motion-inspired compositions. Use Swiss-inspired typography, rounded industrial shapes, and a moss green / parchment / charcoal / copper palette. Dense but elegant layout, sharp alignment, strong hierarchy, premium case-study presentation.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a square high-end brand identity showcase board for a fictional brand called "Moss Radio". The brand should feel analog, cultured, warm, tactile, and design-forward. It operates in independent audio hardware and café-retail and should appeal to creative professionals and music obsessives. The overall mood should be nostalgic but modern. Design a polished modular grid of multiple tiles, each showing a different application of one cohesive visual identity system. Include logo explorations, wordmarks, app icon variations, editorial posters, product cards, landing page fragments, packaging concepts, typography specimens, interface snippets, color palette presentations, sticker systems, patterns, branded mockups, and small motion-inspired compositions. Use Swiss-inspired typography, rounded industrial shapes, and a moss green / parchment / charcoal / copper palette. Dense but elegant layout, sharp alignment, strong hierarchy, premium case-study presentation.' \
+  --size square --quality high \
+  -f docs/brand-systems-identity/brand-identity-moss-radio.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a square high-end brand identity showcase board for a fictional brand called "Moss Radio". The brand should feel analog, cultured, warm, tactile, and design-forward. It operates in independent audio hardware and café-retail and should appeal to creative professionals and music obsessives. The overall mood should be nostalgic but modern. Design a polished modular grid of multiple tiles, each showing a different application of one cohesive visual identity system. Include logo explorations, wordmarks, app icon variations, editorial posters, product cards, landing page fragments, packaging concepts, typography specimens, interface snippets, color palette presentations, sticker systems, patterns, branded mockups, and small motion-inspired compositions. Use Swiss-inspired typography, rounded industrial shapes, and a moss green / parchment / charcoal / copper palette. Dense but elegant layout, sharp alignment, strong hierarchy, premium case-study presentation.""",
+    size="1024x1024",
+    quality="high",
+)
+
+import base64
+open("docs/brand-systems-identity/brand-identity-moss-radio.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 60 · PS1 nostalgia reboot brand kit
+
+<img src="docs/brand-systems-identity/ps1-reboot-brand-kit.png" width="560" alt="PS1 nostalgia reboot brand kit"/>
+
+<sub>Brand Systems & Identity · `square` · `1024x1024` · Author: @den_turbin · Source: [X](https://x.com/den_turbin/status/2046863385791467773)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a clean brand kit presented as one square modular board for a fictional revival of the PlayStation One era called "PS1 1998 Reboot". The identity should merge Japanese editorial design, Y2K nostalgia, acid green accents, VHS texture, silver plastics, disc-menu UI motifs, retail stickers, controller packaging, startup-screen typography, and memory-card iconography. Show multiple coordinated tiles including posters, packaging, interface snippets, collectible cards, typography studies, icons, and branded mockups. Keep it polished, cohesive, art-directed, and emotionally nostalgic, like a real top-tier design studio case study rather than generic merch.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a clean brand kit presented as one square modular board for a fictional revival of the PlayStation One era called "PS1 1998 Reboot". The identity should merge Japanese editorial design, Y2K nostalgia, acid green accents, VHS texture, silver plastics, disc-menu UI motifs, retail stickers, controller packaging, startup-screen typography, and memory-card iconography. Show multiple coordinated tiles including posters, packaging, interface snippets, collectible cards, typography studies, icons, and branded mockups. Keep it polished, cohesive, art-directed, and emotionally nostalgic, like a real top-tier design studio case study rather than generic merch.' \
+  --size square --quality high \
+  -f docs/brand-systems-identity/ps1-reboot-brand-kit.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a clean brand kit presented as one square modular board for a fictional revival of the PlayStation One era called "PS1 1998 Reboot". The identity should merge Japanese editorial design, Y2K nostalgia, acid green accents, VHS texture, silver plastics, disc-menu UI motifs, retail stickers, controller packaging, startup-screen typography, and memory-card iconography. Show multiple coordinated tiles including posters, packaging, interface snippets, collectible cards, typography studies, icons, and branded mockups. Keep it polished, cohesive, art-directed, and emotionally nostalgic, like a real top-tier design studio case study rather than generic merch.""",
+    size="1024x1024",
+    quality="high",
+)
+
+import base64
+open("docs/brand-systems-identity/ps1-reboot-brand-kit.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+
+#### No. 61 · Playful brand kit: Mochi Metro
+
+<img src="docs/brand-systems-identity/playful-brand-kit-mochi-metro.png" width="560" alt="Playful brand kit: Mochi Metro"/>
+
+<sub>Brand Systems & Identity · `square` · `1024x1024` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2047207315976368584)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Playful brand kit for "Mochi Metro", bold colors, fun typography, modern layout, modular square board with logo studies, packaging snippets, posters, app icons, stickers, UI fragments, and a cheerful Tokyo-snack visual system. Crisp alignment, dense but clean, highly polished design presentation.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Playful brand kit for "Mochi Metro", bold colors, fun typography, modern layout, modular square board with logo studies, packaging snippets, posters, app icons, stickers, UI fragments, and a cheerful Tokyo-snack visual system. Crisp alignment, dense but clean, highly polished design presentation.' \
+  --size square --quality high \
+  -f docs/brand-systems-identity/playful-brand-kit-mochi-metro.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Playful brand kit for "Mochi Metro", bold colors, fun typography, modern layout, modular square board with logo studies, packaging snippets, posters, app icons, stickers, UI fragments, and a cheerful Tokyo-snack visual system. Crisp alignment, dense but clean, highly polished design presentation.""",
+    size="1024x1024",
+    quality="high",
+)
+
+import base64
+open("docs/brand-systems-identity/playful-brand-kit-mochi-metro.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
 <a id="gallery-photography"></a>
+
 ### 📷 Photography
 
-#### No. 42 · RAW iPhone — 42nd Street subway
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-photoreal-subway.png" width="620" alt="RAW iPhone — 42nd Street subway"/>
+#### No. 62 · RAW iPhone — 42nd Street subway
 
-<sub>Photography · `landscape` · `1536x1024` · Author: [@WolfRiccardo](https://x.com/WolfRiccardo)</sub>
+<img src="docs/photography/photoreal-subway.png" width="620" alt="RAW iPhone — 42nd Street subway"/>
+
+<sub>Photography · `landscape` · `1536x1024` · Author: @WolfRiccardo · Source: [X](https://x.com/WolfRiccardo)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2456,7 +3393,7 @@ Create a completely RAW quality, unprocessed, unedited image with full iPhone ca
 gpt-image \
   -p "Create a completely RAW quality, unprocessed, unedited image with full iPhone camera quality. A subway station in USA, a momentary blur. The subway is in motion. In front of the subway, there is an elderly woman and man." \
   --size landscape --quality high \
-  -f docs/example-photoreal-subway.png
+  -f docs/photography/photoreal-subway.png
 ```
 
 **OpenAI SDK**
@@ -2472,18 +3409,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-photoreal-subway.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/photography/photoreal-subway.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 43 · Handwritten notebook flatlay
+#### No. 63 · Handwritten notebook flatlay
 
-<img src="docs/example-handwritten-notebook.png" width="620" alt="Handwritten notebook flatlay"/>
+<img src="docs/photography/handwritten-notebook.png" width="620" alt="Handwritten notebook flatlay"/>
 
-<sub>Photography · `landscape` · `1536x1024` · Author: [@patrickassale](https://x.com/patrickassale)</sub>
+<sub>Photography · `landscape` · `1536x1024` · Author: @patrickassale · Source: [X](https://x.com/patrickassale)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2498,7 +3435,7 @@ Amateur photo of an open notebook lying flat, filled with handwritten notes in b
 gpt-image \
   -p "Amateur photo of an open notebook lying flat, filled with handwritten notes in black ballpoint pen. The handwriting is casual and slightly messy, like personal notes, natural imperfections, crossed out words, underlined headings. Shot from slightly above, natural daylight from a window, no flash. Casual desk setting, shot on iPhone" \
   --size landscape --quality high \
-  -f docs/example-handwritten-notebook.png
+  -f docs/photography/handwritten-notebook.png
 ```
 
 **OpenAI SDK**
@@ -2514,18 +3451,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-handwritten-notebook.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/photography/handwritten-notebook.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 44 · Chess board mid-tournament game
+#### No. 64 · Chess board mid-tournament game
 
-<img src="docs/example-chess-midgame.png" width="620" alt="Chess board mid-tournament game"/>
+<img src="docs/photography/chess-midgame.png" width="620" alt="Chess board mid-tournament game"/>
 
-<sub>Photography · `landscape` · `1536x1024` · Author: [@EddGorenstein](https://x.com/EddGorenstein)</sub>
+<sub>Photography · `landscape` · `1536x1024` · Author: @EddGorenstein · Source: [X](https://x.com/EddGorenstein)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2544,7 +3481,7 @@ gpt-image \
 
 Materials: polished wooden staunton-style pieces — dark side in rosewood, light side in maple. Board made of inlaid maple and walnut squares. A digital chess clock sits to the left showing "00:14:28 / 00:08:47". Soft overhead tournament lighting, blurred tournament-hall background. All pieces accurate, no mutants, no extra sets.' \
   --size landscape --quality high \
-  -f docs/example-chess-midgame.png
+  -f docs/photography/chess-midgame.png
 ```
 
 **OpenAI SDK**
@@ -2562,18 +3499,18 @@ Materials: polished wooden staunton-style pieces — dark side in rosewood, ligh
 )
 
 import base64
-open("docs/example-chess-midgame.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/photography/chess-midgame.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 45 · 360° equirectangular jungle panorama
+#### No. 65 · 360° equirectangular jungle panorama
 
-<img src="docs/example-panorama-jungle.png" width="620" alt="360° equirectangular jungle panorama"/>
+<img src="docs/photography/panorama-jungle.png" width="620" alt="360° equirectangular jungle panorama"/>
 
-<sub>Photography (equirectangular) · `wide` · `2048x1152` · Author: [@AIimagined](https://x.com/AIimagined)</sub>
+<sub>Photography · `wide` · `2048x1152` · Author: @AIimagined · Source: [X](https://x.com/AIimagined)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2596,7 +3533,7 @@ Scene: towering fern-covered trees, shafts of golden sunlight piercing the canop
 
 Lighting: late-afternoon golden hour, warm directional backlight through the canopy. High dynamic range, slight atmospheric haze. Equirectangular projection suitable for spherical / 360 viewers." \
   --size wide --quality high \
-  -f docs/example-panorama-jungle.png
+  -f docs/photography/panorama-jungle.png
 ```
 
 **OpenAI SDK**
@@ -2616,7 +3553,7 @@ Lighting: late-afternoon golden hour, warm directional backlight through the can
 )
 
 import base64
-open("docs/example-panorama-jungle.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/photography/panorama-jungle.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -2624,13 +3561,16 @@ open("docs/example-panorama-jungle.png", "wb").write(base64.b64decode(result.dat
 ---
 
 <a id="gallery-infographics-field-guides"></a>
+
 ### 📊 Infographics & Field Guides
 
-#### No. 46 · Song Dynasty social-media feed
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-song-dynasty-feed.png" width="460" alt="Song Dynasty social-media feed"/>
+#### No. 66 · Song Dynasty social-media feed
 
-<sub>Infographics · `portrait` · `1024x1536` · Author: [@Panda20230902](https://x.com/Panda20230902)</sub>
+<img src="docs/infographics-field-guides/song-dynasty-feed.png" width="460" alt="Song Dynasty social-media feed"/>
+
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: @Panda20230902 · Source: [X](https://x.com/Panda20230902)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2645,7 +3585,7 @@ open("docs/example-panorama-jungle.png", "wb").write(base64.b64decode(result.dat
 gpt-image \
   -p '"Song Dynasty People'\''s Moments"/"SONG DYNASTY SOCIAL MEDIA FEED", Ancient and modern time-travel humor fusion interface design style, The image simulates a mobile phone social media interface, but the content is entirely Song Dynasty scenes, The avatar is a portrait of a Song Dynasty literati, Username "Su Dongpo SuShi_Official", Post content "Just arrived in Huangzhou, demoted but feeling okay. Made Dongpo pork myself today, tastes amazing, recipe attached:", The attached image is a close-up of Dongpo pork in Gongbi painting style, Likes list "Huang Tingjian, Qin Guan, Fo Yin etc. 126 people", Comments section "Wang Anshi: Hehe" "Sima Guang: Still the same taste", Interface elements such as the like icon are replaced with Song Dynasty patterns, The status bar shows "Great Song Mobile 5G" and "Third Year of Yuanfeng", The color scheme is mobile phone dark mode paired with elegant Song Dynasty tones, A masterpiece of fun collision between history and social media' \
   --size portrait --quality high \
-  -f docs/example-song-dynasty-feed.png
+  -f docs/infographics-field-guides/song-dynasty-feed.png
 ```
 
 **OpenAI SDK**
@@ -2661,18 +3601,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-song-dynasty-feed.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/infographics-field-guides/song-dynasty-feed.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 47 · Museum catalog disassembly infographic (唐代襦裙)
+#### No. 67 · Museum catalog disassembly infographic (唐代襦裙)
 
-<img src="docs/example-museum-infographic.png" width="460" alt="Museum catalog disassembly infographic (唐代襦裙)"/>
+<img src="docs/infographics-field-guides/museum-infographic.png" width="460" alt="Museum catalog disassembly infographic (唐代襦裙)"/>
 
-<sub>Infographics · `portrait` · `1024x1536` · Author: [@MrLarus](https://x.com/MrLarus)</sub>
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: @MrLarus · Source: [X](https://x.com/MrLarus)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2717,7 +3657,7 @@ If the subject is suitable for character display, use a full-body standing postu
 
 Avoid: poster feel, studio portrait feel, e-commerce feel, anime feel, cosplay feel, random annotations, incorrect structures, blurry text, fake materials, excessive decoration.' \
   --size portrait --quality high \
-  -f docs/example-museum-infographic.png
+  -f docs/infographics-field-guides/museum-infographic.png
 ```
 
 **OpenAI SDK**
@@ -2748,18 +3688,18 @@ Avoid: poster feel, studio portrait feel, e-commerce feel, anime feel, cosplay f
 )
 
 import base64
-open("docs/example-museum-infographic.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/infographics-field-guides/museum-infographic.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 48 · Encyclopedia field guide (Giant Panda)
+#### No. 68 · Encyclopedia field guide (Giant Panda)
 
-<img src="docs/example-encyclopedia-panda.png" width="460" alt="Encyclopedia field guide (Giant Panda)"/>
+<img src="docs/infographics-field-guides/encyclopedia-panda.png" width="460" alt="Encyclopedia field guide (Giant Panda)"/>
 
-<sub>Infographics · `portrait` · `1024x1536` · Author: [@MrLarus](https://x.com/MrLarus)</sub>
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: @MrLarus · Source: [X](https://x.com/MrLarus)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2806,7 +3746,7 @@ Visual requirements: use a clean light background, soft colors, subtle shadows, 
 
 Do not make it look like a commercial promo poster. Emphasize knowledge organization, modular information, and a field-guide presentation." \
   --size portrait --quality high \
-  -f docs/example-encyclopedia-panda.png
+  -f docs/infographics-field-guides/encyclopedia-panda.png
 ```
 
 **OpenAI SDK**
@@ -2838,18 +3778,18 @@ Do not make it look like a commercial promo poster. Emphasize knowledge organiza
 )
 
 import base64
-open("docs/example-encyclopedia-panda.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/infographics-field-guides/encyclopedia-panda.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 49 · Weekend Seoul travel guide poster
+#### No. 69 · Weekend Seoul travel guide poster
 
-<img src="docs/example-community-xhs-09-seoul-travel-guide.png" width="560" alt="Weekend Seoul travel guide poster"/>
+<img src="docs/infographics-field-guides/seoul-travel-guide.png" width="560" alt="Weekend Seoul travel guide poster"/>
 
-<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e8cd0d0000000023007215)</sub>
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e8cd0d0000000023007215)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2864,7 +3804,7 @@ Generate a polished one-page Chinese travel guide poster for a fast weekend trip
 gpt-image \
   -p 'Generate a polished one-page Chinese travel guide poster for a fast weekend trip from Nanjing to Seoul in May. Use LARGE highly legible Chinese text, short phrases only, and no paragraph blocks. Focus on shopping, skincare, and a stylish Seongsu-dong route. Layout: big title, 4 modules only (行程 / 区域推荐 / 购物清单 / 美妆护肤), each with 2 to 4 short bullet points, plus a small cute route map with icons. Clean editorial infographic style, soft pastel colors, neat spacing, high readability, modern Xiaohongshu travel card aesthetic. Avoid tiny text, avoid dense explanations, avoid garbled characters.' \
   --size portrait --quality high \
-  -f docs/example-community-xhs-09-seoul-travel-guide.png
+  -f docs/infographics-field-guides/seoul-travel-guide.png
 ```
 
 **OpenAI SDK**
@@ -2880,16 +3820,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-xhs-09-seoul-travel-guide.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/infographics-field-guides/seoul-travel-guide.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 50 · Modular encyclopedia infographic card
+#### No. 70 · Modular encyclopedia infographic card
 
-<img src="docs/example-community-xhs-02-snow-leopard-encyclopedia-card.png" width="560" alt="Modular encyclopedia infographic card"/>
+<img src="docs/infographics-field-guides/snow-leopard-encyclopedia-card.png" width="560" alt="Modular encyclopedia infographic card"/>
 
-<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e832170000000023012116)</sub>
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e832170000000023012116)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2904,7 +3844,7 @@ Generate a high-quality vertical science encyclopedia card about "雪豹 Snow Le
 gpt-image \
   -p 'Generate a high-quality vertical science encyclopedia card about "雪豹 Snow Leopard". It should feel like a collectible modular knowledge infographic rather than a normal poster. Include one beautiful hero illustration, several zoomed-in detail callouts, rounded information modules, clear title hierarchy, compact encyclopedia content, rating cards, and a Top 5 facts module. Suggested sections: basic profile, habitat, appearance, hunting behavior, conservation risks, climate adaptation, suitable environment, and quick scorecard. Visual style: clean light background, soft palette, subtle shadows, refined icons, rounded info boxes, dense but readable information, polished editorial layout, high collection value.' \
   --size portrait --quality high \
-  -f docs/example-community-xhs-02-snow-leopard-encyclopedia-card.png
+  -f docs/infographics-field-guides/snow-leopard-encyclopedia-card.png
 ```
 
 **OpenAI SDK**
@@ -2920,16 +3860,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-xhs-02-snow-leopard-encyclopedia-card.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/infographics-field-guides/snow-leopard-encyclopedia-card.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 51 · Xiaohongshu cooking tutorial card
+#### No. 71 · Xiaohongshu cooking tutorial card
 
-<img src="docs/example-community-xhs-08-cooking-tutorial-card.png" width="560" alt="Xiaohongshu cooking tutorial card"/>
+<img src="docs/infographics-field-guides/cooking-tutorial-card.png" width="560" alt="Xiaohongshu cooking tutorial card"/>
 
-<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69e8eeed0000000021004a54)</sub>
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e8eeed0000000021004a54)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -2944,7 +3884,7 @@ Create a Xiaohongshu-style viral cooking tutorial image in a 3:4 vertical layout
 gpt-image \
   -p 'Create a Xiaohongshu-style viral cooking tutorial image in a 3:4 vertical layout for homemade scallion oil noodles. Cozy home-cooking vibe, warm inviting lifestyle aesthetic, 4 to 6 step grid layout, clean spacing, realistic food photography, soft natural lighting, slight film tone, warm color grading, visible oil sheen, steam, sauce texture, and hands interacting with the food. Add small Chinese annotations such as 切葱, 熬油, 拌面, 出锅. Avoid overcrowding or excessive text.' \
   --size portrait --quality high \
-  -f docs/example-community-xhs-08-cooking-tutorial-card.png
+  -f docs/infographics-field-guides/cooking-tutorial-card.png
 ```
 
 **OpenAI SDK**
@@ -2960,20 +3900,108 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-xhs-08-cooking-tutorial-card.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/infographics-field-guides/cooking-tutorial-card.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
+---
+
+#### No. 72 · Camera styles reference board for iPhone photographers
+
+<img src="docs/infographics-field-guides/camera-styles-infographic.png" width="620" alt="Camera styles reference board for iPhone photographers"/>
+
+<sub>Infographics & Field Guides · `landscape` · `1536x1024` · Author: @Vtrivedy10 · Source: [X](https://x.com/Vtrivedy10/status/2046771959157887014)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Make me an image in 35 mm film style of a diagram showing the knowledge of camera styles, presets, and what to know about them as an aspiring iPhone photographer that wants to pursue their passion. Build it as a rich multi-panel reference board with labeled sections for film looks, digital presets, portrait approaches, street photography styles, color temperature, grain, contrast, flash, framing, and common mistakes. Each camera and preset style should appear in its actual style instead of being rendered uniformly in one style. Make it visually dense, highly educational, beautifully designed, and easy to scan.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Make me an image in 35 mm film style of a diagram showing the knowledge of camera styles, presets, and what to know about them as an aspiring iPhone photographer that wants to pursue their passion. Build it as a rich multi-panel reference board with labeled sections for film looks, digital presets, portrait approaches, street photography styles, color temperature, grain, contrast, flash, framing, and common mistakes. Each camera and preset style should appear in its actual style instead of being rendered uniformly in one style. Make it visually dense, highly educational, beautifully designed, and easy to scan.' \
+  --size landscape --quality high \
+  -f docs/infographics-field-guides/camera-styles-infographic.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Make me an image in 35 mm film style of a diagram showing the knowledge of camera styles, presets, and what to know about them as an aspiring iPhone photographer that wants to pursue their passion. Build it as a rich multi-panel reference board with labeled sections for film looks, digital presets, portrait approaches, street photography styles, color temperature, grain, contrast, flash, framing, and common mistakes. Each camera and preset style should appear in its actual style instead of being rendered uniformly in one style. Make it visually dense, highly educational, beautifully designed, and easy to scan.""",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/infographics-field-guides/camera-styles-infographic.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 73 · Chinese endangered-animal infographic
+
+<img src="docs/infographics-field-guides/endangered-animal-chinese-infographic.png" width="460" alt="Chinese endangered-animal infographic"/>
+
+<sub>Infographics & Field Guides · `portrait` · `1024x1536` · Author: @billtheinvestor · Source: [X](https://x.com/billtheinvestor/status/2047153211560399009)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a visually rich infographic in Chinese about an endangered animal. Start by finding one online, research its habitat, diet, and unique traits. Present information through annotated visuals and structured callouts, not generic sections. Style it like a bold graphic illustration: a detailed, photorealistic central animal as the focal point, supported by diagrams, callouts, and concise text elements. Use clean backgrounds and a mix of photorealism with strong graphic elements (shapes, icons, color blocking) in a layered composition. Make it dense, tactile, and professionally authored.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a visually rich infographic in Chinese about an endangered animal. Start by finding one online, research its habitat, diet, and unique traits. Present information through annotated visuals and structured callouts, not generic sections. Style it like a bold graphic illustration: a detailed, photorealistic central animal as the focal point, supported by diagrams, callouts, and concise text elements. Use clean backgrounds and a mix of photorealism with strong graphic elements (shapes, icons, color blocking) in a layered composition. Make it dense, tactile, and professionally authored.' \
+  --size portrait --quality high \
+  -f docs/infographics-field-guides/endangered-animal-chinese-infographic.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a visually rich infographic in Chinese about an endangered animal. Start by finding one online, research its habitat, diet, and unique traits. Present information through annotated visuals and structured callouts, not generic sections. Style it like a bold graphic illustration: a detailed, photorealistic central animal as the focal point, supported by diagrams, callouts, and concise text elements. Use clean backgrounds and a mix of photorealism with strong graphic elements (shapes, icons, color blocking) in a layered composition. Make it dense, tactile, and professionally authored.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/infographics-field-guides/endangered-animal-chinese-infographic.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+
 <a id="gallery-research-paper-figures"></a>
+
 ### 📚 Research Paper Figures
+
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
 A dedicated sub-library for ML/AI papers. Twelve templates covering architecture diagrams, plots, heatmaps, sankeys, timelines, traces, and security flows. Use these when you need NeurIPS-quality figures in one shot.
 
-#### No. 52 · Transformer encoder–decoder architecture
+#### No. 74 · Transformer encoder–decoder architecture
 
-<img src="docs/example-transformer-arch.png" width="620" alt="Transformer encoder–decoder architecture"/>
+<img src="docs/research-paper-figures/transformer-arch.png" width="620" alt="Transformer encoder–decoder architecture"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Vaswani et al., 2017</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Vaswani et al., 2017</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3000,7 +4028,7 @@ RIGHT column header: "DECODER (×N)". Blocks bottom-to-top: "Output tokens (shif
 
 Title: "Transformer: encoder–decoder with multi-head attention". Subtitle: "Vaswani et al., 2017".' \
   --size landscape --quality high \
-  -f docs/example-transformer-arch.png
+  -f docs/research-paper-figures/transformer-arch.png
 ```
 
 **OpenAI SDK**
@@ -3022,18 +4050,18 @@ Title: "Transformer: encoder–decoder with multi-head attention". Subtitle: "Va
 )
 
 import base64
-open("docs/example-transformer-arch.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/transformer-arch.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 53 · Retrieval-Augmented Generation pipeline
+#### No. 75 · Retrieval-Augmented Generation pipeline
 
-<img src="docs/example-rag-pipeline.png" width="620" alt="Retrieval-Augmented Generation pipeline"/>
+<img src="docs/research-paper-figures/rag-pipeline.png" width="620" alt="Retrieval-Augmented Generation pipeline"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Lewis et al., 2020</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Lewis et al., 2020</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3070,7 +4098,7 @@ Dashed outline around (2)-(3) labeled "OFFLINE — built once". Dashed outline a
 
 Title: "Retrieval-Augmented Generation pipeline". Subtitle: "Lewis et al., 2020".' \
   --size landscape --quality high \
-  -f docs/example-rag-pipeline.png
+  -f docs/research-paper-figures/rag-pipeline.png
 ```
 
 **OpenAI SDK**
@@ -3097,18 +4125,18 @@ Title: "Retrieval-Augmented Generation pipeline". Subtitle: "Lewis et al., 2020"
 )
 
 import base64
-open("docs/example-rag-pipeline.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/rag-pipeline.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 54 · Multi-agent LLM system architecture
+#### No. 76 · Multi-agent LLM system architecture
 
-<img src="docs/example-agent-architecture.png" width="620" alt="Multi-agent LLM system architecture"/>
+<img src="docs/research-paper-figures/agent-architecture.png" width="620" alt="Multi-agent LLM system architecture"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** AutoGen (Wu 2023), LangGraph, Anthropic Managed Agents</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** AutoGen (Wu 2023), LangGraph, Anthropic Managed Agents</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3147,7 +4175,7 @@ Bottom inset "Example trace": 8-step horizontal timeline chips from "User asks" 
 
 Title: "Agentic LLM system: planner orchestrates specialised workers over a shared tool and memory layer". Subtitle: "adapted from AutoGen (Wu et al., 2023), LangGraph, and Anthropic Managed Agents patterns".' \
   --size landscape --quality high \
-  -f docs/example-agent-architecture.png
+  -f docs/research-paper-figures/agent-architecture.png
 ```
 
 **OpenAI SDK**
@@ -3175,18 +4203,18 @@ Title: "Agentic LLM system: planner orchestrates specialised workers over a shar
 )
 
 import base64
-open("docs/example-agent-architecture.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/agent-architecture.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 55 · Denoising diffusion forward/reverse chain
+#### No. 77 · Denoising diffusion forward/reverse chain
 
-<img src="docs/example-diffusion-chain.png" width="620" alt="Denoising diffusion forward/reverse chain"/>
+<img src="docs/research-paper-figures/diffusion-chain.png" width="620" alt="Denoising diffusion forward/reverse chain"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Ho et al., 2020</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Ho et al., 2020</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3217,7 +4245,7 @@ Far-right curved arrow "T diffusion steps" connecting top-right to bottom-right;
 
 Title: "Denoising Diffusion: forward corruption and learned reverse". Subtitle: "Ho et al., 2020".' \
   --size landscape --quality high \
-  -f docs/example-diffusion-chain.png
+  -f docs/research-paper-figures/diffusion-chain.png
 ```
 
 **OpenAI SDK**
@@ -3241,18 +4269,18 @@ Title: "Denoising Diffusion: forward corruption and learned reverse". Subtitle: 
 )
 
 import base64
-open("docs/example-diffusion-chain.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/diffusion-chain.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 56 · Empirical scaling laws plot
+#### No. 78 · Empirical scaling laws plot
 
-<img src="docs/example-scaling-curves.png" width="620" alt="Empirical scaling laws plot"/>
+<img src="docs/research-paper-figures/scaling-curves.png" width="620" alt="Empirical scaling laws plot"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Kaplan 2020 / Chinchilla (Hoffmann 2022)</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Kaplan 2020 / Chinchilla (Hoffmann 2022)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3285,7 +4313,7 @@ Warm-copper dashed diagonal line labeled "compute-optimal frontier"; open circle
 
 Title: "Empirical scaling laws: loss vs training compute". Subtitle: "four model sizes on a fixed data mixture; shaded bands = ±1 std over 3 seeds."' \
   --size landscape --quality high \
-  -f docs/example-scaling-curves.png
+  -f docs/research-paper-figures/scaling-curves.png
 ```
 
 **OpenAI SDK**
@@ -3310,18 +4338,18 @@ Title: "Empirical scaling laws: loss vs training compute". Subtitle: "four model
 )
 
 import base64
-open("docs/example-scaling-curves.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/scaling-curves.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 57 · Benchmark comparison heatmap
+#### No. 79 · Benchmark comparison heatmap
 
-<img src="docs/example-benchmark-heatmap.png" width="620" alt="Benchmark comparison heatmap"/>
+<img src="docs/research-paper-figures/benchmark-heatmap.png" width="620" alt="Benchmark comparison heatmap"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** HELM (Liang 2023)</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** HELM (Liang 2023)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3354,7 +4382,7 @@ Vertical color bar on the right with ticks "0", "25", "50", "75", "100" and labe
 
 Title: "Benchmark comparison across 10 frontier LLMs". Subtitle: "zero-shot accuracy; best per benchmark outlined in bold. Evaluated March 2026."' \
   --size landscape --quality high \
-  -f docs/example-benchmark-heatmap.png
+  -f docs/research-paper-figures/benchmark-heatmap.png
 ```
 
 **OpenAI SDK**
@@ -3379,18 +4407,18 @@ Title: "Benchmark comparison across 10 frontier LLMs". Subtitle: "zero-shot accu
 )
 
 import base64
-open("docs/example-benchmark-heatmap.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/benchmark-heatmap.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 58 · Ablation bar chart with error bars
+#### No. 80 · Ablation bar chart with error bars
 
-<img src="docs/example-ablation-bars.png" width="620" alt="Ablation bar chart with error bars"/>
+<img src="docs/research-paper-figures/ablation-bars.png" width="620" alt="Ablation bar chart with error bars"/>
 
-<sub>Research Figures · `landscape` · `1536x1024`</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3429,7 +4457,7 @@ Thin black ±1σ error bars on each; numeric label above each bar in monospace. 
 
 Title: "Ablation of core reasoning components across 5 benchmarks". Subtitle: "error bars = ±1 std over 3 runs; numeric drops relative to full model shown above each bar."' \
   --size landscape --quality high \
-  -f docs/example-ablation-bars.png
+  -f docs/research-paper-figures/ablation-bars.png
 ```
 
 **OpenAI SDK**
@@ -3457,18 +4485,18 @@ Title: "Ablation of core reasoning components across 5 benchmarks". Subtitle: "e
 )
 
 import base64
-open("docs/example-ablation-bars.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/ablation-bars.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 59 · LLM pretraining data-mixture sankey
+#### No. 81 · LLM pretraining data-mixture sankey
 
-<img src="docs/example-data-sankey.png" width="620" alt="LLM pretraining data-mixture sankey"/>
+<img src="docs/research-paper-figures/data-sankey.png" width="620" alt="LLM pretraining data-mixture sankey"/>
 
-<sub>Research Figures · `landscape` · `1536x1024`</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3503,7 +4531,7 @@ Flow ribbons inherit source color with mid-labels showing token counts ("85B", "
 
 Title: "LLM pretraining data mixture and downstream splits". Subtitle: "token counts after deduplication and quality filtering; ribbon thickness ∝ token flow."' \
   --size landscape --quality high \
-  -f docs/example-data-sankey.png
+  -f docs/research-paper-figures/data-sankey.png
 ```
 
 **OpenAI SDK**
@@ -3529,18 +4557,18 @@ Title: "LLM pretraining data mixture and downstream splits". Subtitle: "token co
 )
 
 import base64
-open("docs/example-data-sankey.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/data-sankey.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 60 · Multi-head attention heatmaps
+#### No. 82 · Multi-head attention heatmaps
 
-<img src="docs/example-attention-heatmap.png" width="620" alt="Multi-head attention heatmaps"/>
+<img src="docs/research-paper-figures/attention-heatmap.png" width="620" alt="Multi-head attention heatmaps"/>
 
-<sub>Research Figures · `landscape` · `1536x1024` · **Cites:** Clark et al., 2019</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Clark et al., 2019</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3579,7 +4607,7 @@ Cells: dusty-teal gradient, darker = higher weight. Peak cells outlined in 1px s
 
 Title: "Representative multi-head attention patterns in a 16-layer Transformer". Subtitle: "four of 256 heads, hand-picked for illustrative head-role diversity; inspired by Clark et al., 2019."' \
   --size landscape --quality high \
-  -f docs/example-attention-heatmap.png
+  -f docs/research-paper-figures/attention-heatmap.png
 ```
 
 **OpenAI SDK**
@@ -3607,18 +4635,18 @@ Title: "Representative multi-head attention patterns in a 16-layer Transformer".
 )
 
 import base64
-open("docs/example-attention-heatmap.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/attention-heatmap.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 61 · Frontier LLM family tree (2018–2026)
+#### No. 83 · Frontier LLM family tree (2018–2026)
 
-<img src="docs/example-model-timeline.png" width="620" alt="Frontier LLM family tree (2018–2026)"/>
+<img src="docs/research-paper-figures/model-timeline.png" width="620" alt="Frontier LLM family tree (2018–2026)"/>
 
-<sub>Research Figures · `landscape` · `1536x1024`</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3653,7 +4681,7 @@ Solid slate-gray arcs = intra-family successors; warm-copper dashed arcs = cross
 
 Title: "Frontier LLM lineage, 2018 – 2026". Subtitle: "chips = model releases; solid arcs = intra-family successors; dashed arcs = cross-family distillation."' \
   --size landscape --quality high \
-  -f docs/example-model-timeline.png
+  -f docs/research-paper-figures/model-timeline.png
 ```
 
 **OpenAI SDK**
@@ -3679,18 +4707,18 @@ Title: "Frontier LLM lineage, 2018 – 2026". Subtitle: "chips = model releases;
 )
 
 import base64
-open("docs/example-model-timeline.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/model-timeline.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 62 · ReAct reasoning trace
+#### No. 84 · ReAct reasoning trace
 
-<img src="docs/example-react-trace.png" width="460" alt="ReAct reasoning trace"/>
+<img src="docs/research-paper-figures/react-trace.png" width="460" alt="ReAct reasoning trace"/>
 
-<sub>Research Figures · `portrait` · `1024x1536` · **Cites:** Yao et al., 2022</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Yao et al., 2022</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3738,8 +4766,8 @@ Thought blocks: dusty-teal left border, italic, brain glyph. Action blocks: mute
 Bottom: pill-shaped "Final answer: 2013" with a check glyph.
 
 Title: "ReAct trace: interleaved reasoning and tool-use on a factual-QA task". Subtitle: "Yao et al., 2022."' \
-  --size portrait --quality high \
-  -f docs/example-react-trace.png
+  --size landscape --quality high \
+  -f docs/research-paper-figures/react-trace.png
 ```
 
 **OpenAI SDK**
@@ -3767,21 +4795,21 @@ Thought blocks: dusty-teal left border, italic, brain glyph. Action blocks: mute
 Bottom: pill-shaped "Final answer: 2013" with a check glyph.
 
 Title: "ReAct trace: interleaved reasoning and tool-use on a factual-QA task". Subtitle: "Yao et al., 2022."""",
-    size="1024x1536",
+    size="1536x1024",
     quality="high",
 )
 
 import base64
-open("docs/example-react-trace.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/react-trace.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 63 · Memory Router for Multimodal Agents
+#### No. 85 · Memory Router for Multimodal Agents
 
-<img src="docs/example-original-memory-router-figure.png" width="720" alt="Memory Router for Multimodal Agents"/>
+<img src="docs/research-paper-figures/memory-router-figure.png" width="720" alt="Memory Router for Multimodal Agents"/>
 
-<sub>Research Figures · `landscape` · `1536x1024`</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3796,7 +4824,7 @@ Design a premium conference-paper figure for an imaginary method called Memory R
 gpt-image \
   -p 'Design a premium conference-paper figure for an imaginary method called Memory Router for Multimodal Agents. Landscape layout, pure white background, large readable labels, elegant vector-clean boxes and curved arrows, tasteful teal slate and amber palette. Top strip shows the failure mode of a crowded baseline pipeline with red warning accents. Main panel shows User Query, Planner, Retriever, Tool Executor, Memory Router, Working Memory, Long-term Memory, Verifier, and a feedback loop. Beautiful spacing, crisp legend, subtle depth, polished academic styling, highly detailed but uncluttered.' \
   --size landscape --quality high \
-  -f docs/example-original-memory-router-figure.png
+  -f docs/research-paper-figures/memory-router-figure.png
 ```
 
 **OpenAI SDK**
@@ -3812,16 +4840,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-original-memory-router-figure.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/memory-router-figure.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 64 · Frontier Safety Eval Loop
+#### No. 86 · Frontier Safety Eval Loop
 
-<img src="docs/example-original-frontier-safety-eval-loop.png" width="720" alt="Frontier Safety Eval Loop"/>
+<img src="docs/research-paper-figures/frontier-safety-eval-loop.png" width="720" alt="Frontier Safety Eval Loop"/>
 
-<sub>Research Figures · `landscape` · `1536x1024`</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3836,7 +4864,7 @@ Create a beautiful research flowchart for an AI safety benchmark pipeline called
 gpt-image \
   -p 'Create a beautiful research flowchart for an AI safety benchmark pipeline called Frontier Safety Eval Loop. Landscape figure, white background, large typography, vector-like shapes, soft indigo, coral, sage, and graphite palette. Show stages Prompt Suite, Model Runs, Judge Models, Human Audit, Failure Taxonomy, Patch Queue, and Re-run. Use clean swimlanes, numbered callouts, compact legends, and premium paper-ready styling. High detail, excellent color harmony, generous whitespace, no clutter, conference-quality diagram.' \
   --size landscape --quality high \
-  -f docs/example-original-frontier-safety-eval-loop.png
+  -f docs/research-paper-figures/frontier-safety-eval-loop.png
 ```
 
 **OpenAI SDK**
@@ -3852,16 +4880,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-original-frontier-safety-eval-loop.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/frontier-safety-eval-loop.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 65 · ICLR-style method figure
+#### No. 87 · ICLR-style method figure
 
-<img src="docs/example-community-xhs-03-hmr-iclr-figure.png" width="560" alt="ICLR-style method figure"/>
+<img src="docs/research-paper-figures/hmr-iclr-figure.png" width="560" alt="ICLR-style method figure"/>
 
-<sub>Research Paper Figures · `landscape` · `1536x1024` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/69d396140000000023012282)</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69d396140000000023012282)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3876,7 +4904,7 @@ Create a polished ICLR-style Figure 1 for an imaginary method called "Hierarchic
 gpt-image \
   -p 'Create a polished ICLR-style Figure 1 for an imaginary method called "Hierarchical Memory Routing for Long-Context Multimodal Reasoning (HMR)". The top band shows the failure mode of naive long-context multimodal processing: one overcrowded horizontal token stream mixing text, image patches, retrieved documents, tool traces, and audio snippets, with red-orange warning accents for interference, attention dilution, memory collision, and quadratic compute cost. A clean horizontal divider separates the main lower panel, which presents the HMR framework as a spacious modular loop. Center: a Reasoning Controller with stages Observe_t to Update_t. Left: a three-level Memory Hierarchy with working cache, episodic memory, and semantic knowledge base. Right: Multimodal Streams entering selectively through routing paths. Bottom right: sparse experts activated only when needed. White background, vector-clean styling, neutral gray plus cool accents, minimal but legible labels, conference-paper clarity, no poster aesthetics.' \
   --size landscape --quality high \
-  -f docs/example-community-xhs-03-hmr-iclr-figure.png
+  -f docs/research-paper-figures/hmr-iclr-figure.png
 ```
 
 **OpenAI SDK**
@@ -3892,16 +4920,16 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-xhs-03-hmr-iclr-figure.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/hmr-iclr-figure.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
-#### No. 66 · Minimal research illustration prompt
+#### No. 88 · Minimal research illustration prompt
 
-<img src="docs/example-community-xhs-05-llm-agent-research-illustration.png" width="560" alt="Minimal research illustration prompt"/>
+<img src="docs/research-paper-figures/llm-agent-research-illustration.png" width="560" alt="Minimal research illustration prompt"/>
 
-<sub>Research Paper Figures · `landscape` · `1536x1024` · Author: [Xiaohongshu source](https://www.xiaohongshu.com/explore/67e414010000000007037315)</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/67e414010000000007037315)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -3916,7 +4944,7 @@ Draw a research-paper illustration showing a closed-loop LLM agent system. The l
 gpt-image \
   -p 'Draw a research-paper illustration showing a closed-loop LLM agent system. The left side begins with a user prompt, then flows into a planner, tool-use engine, retrieval module, memory buffer, and a final verifier that feeds corrections back into the system. Use a restrained academic palette of blue, slate, and orange accents. Style it like a clean paper illustration: vector-like blocks, precise arrows, sparse labels, balanced whitespace, and a clear Figure 1 narrative from problem input to verified output.' \
   --size landscape --quality high \
-  -f docs/example-community-xhs-05-llm-agent-research-illustration.png
+  -f docs/research-paper-figures/llm-agent-research-illustration.png
 ```
 
 **OpenAI SDK**
@@ -3932,39 +4960,32 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-community-xhs-05-llm-agent-research-illustration.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/llm-agent-research-illustration.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
-<a id="gallery-official-openai-cookbook"></a>
-### 🏢 Official OpenAI Cookbook Examples
+---
 
-Verbatim prompts from OpenAI's [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb). We regenerated each with our CLI at `--quality high` so you can compare your results against an independent run of the same prompt. Prompts are **exactly** as published by OpenAI.
+#### No. 89 · Multimodal agent experiment workflow figure
 
-#### No. 67 · Automatic coffee machine infographic
+<img src="docs/research-paper-figures/multimodal-agent-experiment-workflow.png" width="560" alt="Multimodal agent experiment workflow figure"/>
 
-<img src="docs/example-openai-coffee-infographic.png" width="460" alt="Automatic coffee machine infographic"/>
-
-<sub>Infographics · `portrait` · `1024x1536` · Author: [OpenAI cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e997a90000000022027c30)</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
 
 **Prompt**
 ```text
-Create a detailed Infographic of the functioning and flow of an automatic coffee machine like a Jura.
-From bean basket, to grinding, to scale, water tank, boiler, etc.
-I'd like to understand technically and visually the flow.
+Create a polished research workflow figure for a multimodal agent evaluation experiment. Landscape academic diagram on white background. Show stages Dataset Curation, Prompt Design, Tool Sandbox, Model Runs, Judge Ensemble, Error Taxonomy, Human Audit, and Final Report. Use a restrained blue, slate, and orange palette, vector-clean boxes, thin arrows, numbered callouts, tiny legends, and paper-ready typography. It should look like Figure 1 from a strong systems paper rather than a marketing poster.
 ```
 
 **CLI**
 ```bash
 gpt-image \
-  -p "Create a detailed Infographic of the functioning and flow of an automatic coffee machine like a Jura.
-From bean basket, to grinding, to scale, water tank, boiler, etc.
-I'd like to understand technically and visually the flow." \
-  --size portrait --quality high \
-  -f docs/example-openai-coffee-infographic.png
+  -p 'Create a polished research workflow figure for a multimodal agent evaluation experiment. Landscape academic diagram on white background. Show stages Dataset Curation, Prompt Design, Tool Sandbox, Model Runs, Judge Ensemble, Error Taxonomy, Human Audit, and Final Report. Use a restrained blue, slate, and orange palette, vector-clean boxes, thin arrows, numbered callouts, tiny legends, and paper-ready typography. It should look like Figure 1 from a strong systems paper rather than a marketing poster.' \
+  --size landscape --quality high \
+  -f docs/research-paper-figures/multimodal-agent-experiment-workflow.png
 ```
 
 **OpenAI SDK**
@@ -3974,234 +4995,24 @@ client = OpenAI()
 
 result = client.images.generate(
     model="gpt-image-2",
-    prompt="""Create a detailed Infographic of the functioning and flow of an automatic coffee machine like a Jura.
-From bean basket, to grinding, to scale, water tank, boiler, etc.
-I'd like to understand technically and visually the flow.""",
-    size="1024x1536",
+    prompt="""Create a polished research workflow figure for a multimodal agent evaluation experiment. Landscape academic diagram on white background. Show stages Dataset Curation, Prompt Design, Tool Sandbox, Model Runs, Judge Ensemble, Error Taxonomy, Human Audit, and Final Report. Use a restrained blue, slate, and orange palette, vector-clean boxes, thin arrows, numbered callouts, tiny legends, and paper-ready typography. It should look like Figure 1 from a strong systems paper rather than a marketing poster.""",
+    size="1536x1024",
     quality="high",
 )
 
 import base64
-open("docs/example-openai-coffee-infographic.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/multimodal-agent-experiment-workflow.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 68 · Photorealistic elderly sailor
+#### No. 90 · Indirect prompt-injection attack flow
 
-<img src="docs/example-openai-sailor.png" width="460" alt="Photorealistic elderly sailor"/>
+<img src="docs/research-paper-figures/prompt-injection-flow.png" width="620" alt="Indirect prompt-injection attack flow"/>
 
-<sub>Photography / Photorealism · `portrait` · `1024x1536` · Author: [OpenAI cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat.
-He has weathered skin with visible wrinkles, pores, and sun texture, and a few faded traditional sailor tattoos on his arms.
-He is calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.
-Soft coastal daylight, shallow depth of field, subtle film grain, natural color balance.
-The image should feel honest and unposed, with real skin texture, worn materials, and everyday detail. No glamorization, no heavy retouching.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p "Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat.
-He has weathered skin with visible wrinkles, pores, and sun texture, and a few faded traditional sailor tattoos on his arms.
-He is calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.
-Soft coastal daylight, shallow depth of field, subtle film grain, natural color balance.
-The image should feel honest and unposed, with real skin texture, worn materials, and everyday detail. No glamorization, no heavy retouching." \
-  --size portrait --quality high \
-  -f docs/example-openai-sailor.png
-```
-
-**OpenAI SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat.
-He has weathered skin with visible wrinkles, pores, and sun texture, and a few faded traditional sailor tattoos on his arms.
-He is calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.
-Soft coastal daylight, shallow depth of field, subtle film grain, natural color balance.
-The image should feel honest and unposed, with real skin texture, worn materials, and everyday detail. No glamorization, no heavy retouching.""",
-    size="1024x1536",
-    quality="high",
-)
-
-import base64
-open("docs/example-openai-sailor.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
-#### No. 69 · Minimalist bakery logo — Field & Flour
-
-<img src="docs/example-openai-logo-bakery.png" width="460" alt="Minimalist bakery logo — Field & Flour"/>
-
-<sub>Typography & Posters (logo) · `square` · `1024x1024` · Author: [OpenAI cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-Create an original, non-infringing logo for a company called Field & Flour, a local bakery.
-The logo should feel warm, simple, and timeless. Use clean, vector-like shapes, a strong silhouette, and balanced negative space.
-Favor simplicity over detail so it reads clearly at small and large sizes. Flat design, minimal strokes, no gradients unless essential.
-Plain background. Deliver a single centered logo with generous padding. No watermark.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p "Create an original, non-infringing logo for a company called Field & Flour, a local bakery.
-The logo should feel warm, simple, and timeless. Use clean, vector-like shapes, a strong silhouette, and balanced negative space.
-Favor simplicity over detail so it reads clearly at small and large sizes. Flat design, minimal strokes, no gradients unless essential.
-Plain background. Deliver a single centered logo with generous padding. No watermark." \
-  --size square --quality high \
-  -f docs/example-openai-logo-bakery.png
-```
-
-**OpenAI SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""Create an original, non-infringing logo for a company called Field & Flour, a local bakery.
-The logo should feel warm, simple, and timeless. Use clean, vector-like shapes, a strong silhouette, and balanced negative space.
-Favor simplicity over detail so it reads clearly at small and large sizes. Flat design, minimal strokes, no gradients unless essential.
-Plain background. Deliver a single centered logo with generous padding. No watermark.""",
-    size="1024x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-openai-logo-bakery.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
-#### No. 70 · 4-panel pet comic strip
-
-<img src="docs/example-openai-comic-pet.png" width="460" alt="4-panel pet comic strip"/>
-
-<sub>Anime & Manga / Storyboard · `portrait` · `1024x1536` · Author: [OpenAI cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-Create a short vertical comic-style reel with 4 equal-sized panels.
-Panel 1: The owner leaves through the front door. The pet is framed in the window behind them, small against the glass, eyes wide, paws pressed high, the house suddenly quiet.
-Panel 2: The door clicks shut. Silence breaks. The pet slowly turns toward the empty house, posture shifting, eyes sharp with possibility.
-Panel 3: The house transformed. The pet sprawls across the couch like it owns the place, crumbs nearby, sunlight cutting across the room like a spotlight.
-Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and composed, as if nothing happened.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p "Create a short vertical comic-style reel with 4 equal-sized panels.
-Panel 1: The owner leaves through the front door. The pet is framed in the window behind them, small against the glass, eyes wide, paws pressed high, the house suddenly quiet.
-Panel 2: The door clicks shut. Silence breaks. The pet slowly turns toward the empty house, posture shifting, eyes sharp with possibility.
-Panel 3: The house transformed. The pet sprawls across the couch like it owns the place, crumbs nearby, sunlight cutting across the room like a spotlight.
-Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and composed, as if nothing happened." \
-  --size portrait --quality high \
-  -f docs/example-openai-comic-pet.png
-```
-
-**OpenAI SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.generate(
-    model="gpt-image-2",
-    prompt="""Create a short vertical comic-style reel with 4 equal-sized panels.
-Panel 1: The owner leaves through the front door. The pet is framed in the window behind them, small against the glass, eyes wide, paws pressed high, the house suddenly quiet.
-Panel 2: The door clicks shut. Silence breaks. The pet slowly turns toward the empty house, posture shifting, eyes sharp with possibility.
-Panel 3: The house transformed. The pet sprawls across the couch like it owns the place, crumbs nearby, sunlight cutting across the room like a spotlight.
-Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and composed, as if nothing happened.""",
-    size="1024x1536",
-    quality="high",
-)
-
-import base64
-open("docs/example-openai-comic-pet.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
-<a id="gallery-edit-endpoint-showcase"></a>
-### ✨ Edit Endpoint Showcase
-
-#### No. 71 · Chess board → winter evening (edit via `/v1/images/edits`) 🆕
-
-| Before (from No. 44) | After — edited with a single text prompt |
-|---|---|
-| <img src="docs/example-chess-midgame.png" width="420" alt="Chess mid-game original"/> | <img src="docs/example-edit-chess-winter.png" width="420" alt="Chess mid-game restyled as winter scene"/> |
-
-<sub>Edit Endpoint Showcase · `square` · `1024x1024` · Author: [OpenAI cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
-
-<details>
-<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
-
-**Prompt**
-```text
-Make it a winter evening with heavy snowfall, snow dusted on the board and pieces, breath vapor in the air, cold blue-grey lighting, chess position still clearly readable.
-```
-
-**CLI**
-```bash
-gpt-image \
-  -p 'Make it a winter evening with heavy snowfall, snow dusted on the board and pieces, breath vapor in the air, cold blue-grey lighting, chess position still clearly readable.' \
-  -i docs/example-chess-midgame.png \
-  --size square --quality high \
-  -f docs/example-edit-chess-winter.png
-```
-
-**OpenAI SDK**
-```python
-from openai import OpenAI
-client = OpenAI()
-
-result = client.images.edit(
-    model="gpt-image-2",
-    image=[open("docs/example-chess-midgame.png", "rb")],
-    prompt="Make it a winter evening with heavy snowfall, snow dusted on the board and pieces, breath vapor in the air, cold blue-grey lighting, chess position still clearly readable.",
-    size="1024x1024",
-    quality="high",
-)
-
-import base64
-open("docs/example-edit-chess-winter.png", "wb").write(base64.b64decode(result.data[0].b64_json))
-```
-
-</details>
-
----
-
-#### No. 72 · Indirect prompt-injection attack flow
-
-<img src="docs/example-prompt-injection-flow.png" width="620" alt="Indirect prompt-injection attack flow"/>
-
-<sub>Research Figures (security) · `landscape` · `1536x1024` · **Cites:** Greshake et al., 2023</sub>
+<sub>Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Greshake et al., 2023</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4234,7 +5045,7 @@ ARROWS: solid slate-gray = benign flow; dashed soft-terracotta = injection path.
 
 Title: "Indirect prompt injection: attacker hides payloads in third-party content consumed by the agent". Subtitle: "Greshake et al., 2023; applies whenever an LLM agent consumes untrusted text."' \
   --size landscape --quality high \
-  -f docs/example-prompt-injection-flow.png
+  -f docs/research-paper-figures/prompt-injection-flow.png
 ```
 
 **OpenAI SDK**
@@ -4259,21 +5070,333 @@ Title: "Indirect prompt injection: attacker hides payloads in third-party conten
 )
 
 import base64
-open("docs/example-prompt-injection-flow.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/research-paper-figures/prompt-injection-flow.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
+<a id="gallery-official-openai-cookbook"></a>
+
+### 🏢 Official OpenAI Cookbook Examples
+
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
+
+Verbatim prompts from OpenAI's [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb). We regenerated each with our CLI at `--quality high` so you can compare your results against an independent run of the same prompt. Prompts are **exactly** as published by OpenAI.
+
+#### No. 91 · Automatic coffee machine infographic
+
+<img src="docs/official-openai-cookbook/coffee-infographic.png" width="460" alt="Automatic coffee machine infographic"/>
+
+<sub>Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a detailed Infographic of the functioning and flow of an automatic coffee machine like a Jura.
+From bean basket, to grinding, to scale, water tank, boiler, etc.
+I'd like to understand technically and visually the flow.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "Create a detailed Infographic of the functioning and flow of an automatic coffee machine like a Jura.
+From bean basket, to grinding, to scale, water tank, boiler, etc.
+I'd like to understand technically and visually the flow." \
+  --size portrait --quality high \
+  -f docs/official-openai-cookbook/coffee-infographic.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a detailed Infographic of the functioning and flow of an automatic coffee machine like a Jura.
+From bean basket, to grinding, to scale, water tank, boiler, etc.
+I'd like to understand technically and visually the flow.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/official-openai-cookbook/coffee-infographic.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 92 · Photorealistic elderly sailor
+
+<img src="docs/official-openai-cookbook/sailor.png" width="460" alt="Photorealistic elderly sailor"/>
+
+<sub>Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat.
+He has weathered skin with visible wrinkles, pores, and sun texture, and a few faded traditional sailor tattoos on his arms.
+He is calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.
+Soft coastal daylight, shallow depth of field, subtle film grain, natural color balance.
+The image should feel honest and unposed, with real skin texture, worn materials, and everyday detail. No glamorization, no heavy retouching.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat.
+He has weathered skin with visible wrinkles, pores, and sun texture, and a few faded traditional sailor tattoos on his arms.
+He is calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.
+Soft coastal daylight, shallow depth of field, subtle film grain, natural color balance.
+The image should feel honest and unposed, with real skin texture, worn materials, and everyday detail. No glamorization, no heavy retouching." \
+  --size portrait --quality high \
+  -f docs/official-openai-cookbook/sailor.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat.
+He has weathered skin with visible wrinkles, pores, and sun texture, and a few faded traditional sailor tattoos on his arms.
+He is calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.
+Soft coastal daylight, shallow depth of field, subtle film grain, natural color balance.
+The image should feel honest and unposed, with real skin texture, worn materials, and everyday detail. No glamorization, no heavy retouching.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/official-openai-cookbook/sailor.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 93 · Minimalist bakery logo — Field & Flour
+
+<img src="docs/official-openai-cookbook/logo-bakery.png" width="460" alt="Minimalist bakery logo — Field & Flour"/>
+
+<sub>Official OpenAI Cookbook Examples · `square` · `1024x1024` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create an original, non-infringing logo for a company called Field & Flour, a local bakery.
+The logo should feel warm, simple, and timeless. Use clean, vector-like shapes, a strong silhouette, and balanced negative space.
+Favor simplicity over detail so it reads clearly at small and large sizes. Flat design, minimal strokes, no gradients unless essential.
+Plain background. Deliver a single centered logo with generous padding. No watermark.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "Create an original, non-infringing logo for a company called Field & Flour, a local bakery.
+The logo should feel warm, simple, and timeless. Use clean, vector-like shapes, a strong silhouette, and balanced negative space.
+Favor simplicity over detail so it reads clearly at small and large sizes. Flat design, minimal strokes, no gradients unless essential.
+Plain background. Deliver a single centered logo with generous padding. No watermark." \
+  --size square --quality high \
+  -f docs/official-openai-cookbook/logo-bakery.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create an original, non-infringing logo for a company called Field & Flour, a local bakery.
+The logo should feel warm, simple, and timeless. Use clean, vector-like shapes, a strong silhouette, and balanced negative space.
+Favor simplicity over detail so it reads clearly at small and large sizes. Flat design, minimal strokes, no gradients unless essential.
+Plain background. Deliver a single centered logo with generous padding. No watermark.""",
+    size="1024x1024",
+    quality="high",
+)
+
+import base64
+open("docs/official-openai-cookbook/logo-bakery.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 94 · 4-panel pet comic strip
+
+<img src="docs/official-openai-cookbook/comic-pet.png" width="460" alt="4-panel pet comic strip"/>
+
+<sub>Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a short vertical comic-style reel with 4 equal-sized panels.
+Panel 1: The owner leaves through the front door. The pet is framed in the window behind them, small against the glass, eyes wide, paws pressed high, the house suddenly quiet.
+Panel 2: The door clicks shut. Silence breaks. The pet slowly turns toward the empty house, posture shifting, eyes sharp with possibility.
+Panel 3: The house transformed. The pet sprawls across the couch like it owns the place, crumbs nearby, sunlight cutting across the room like a spotlight.
+Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and composed, as if nothing happened.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p "Create a short vertical comic-style reel with 4 equal-sized panels.
+Panel 1: The owner leaves through the front door. The pet is framed in the window behind them, small against the glass, eyes wide, paws pressed high, the house suddenly quiet.
+Panel 2: The door clicks shut. Silence breaks. The pet slowly turns toward the empty house, posture shifting, eyes sharp with possibility.
+Panel 3: The house transformed. The pet sprawls across the couch like it owns the place, crumbs nearby, sunlight cutting across the room like a spotlight.
+Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and composed, as if nothing happened." \
+  --size portrait --quality high \
+  -f docs/official-openai-cookbook/comic-pet.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a short vertical comic-style reel with 4 equal-sized panels.
+Panel 1: The owner leaves through the front door. The pet is framed in the window behind them, small against the glass, eyes wide, paws pressed high, the house suddenly quiet.
+Panel 2: The door clicks shut. Silence breaks. The pet slowly turns toward the empty house, posture shifting, eyes sharp with possibility.
+Panel 3: The house transformed. The pet sprawls across the couch like it owns the place, crumbs nearby, sunlight cutting across the room like a spotlight.
+Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and composed, as if nothing happened.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/official-openai-cookbook/comic-pet.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+<a id="gallery-edit-endpoint-showcase"></a>
+
+### ✨ Edit Endpoint Showcase
+
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
+
+#### No. 95 · Chess board → winter evening (edit via `/v1/images/edits`) 🆕
+
+| Before (from No. 55) | After — edited with a single text prompt |
+|---|---|
+| <img src="docs/photography/chess-midgame.png" width="420" alt="Chess mid-game original"/> | <img src="docs/edit-endpoint-showcase/edit-chess-winter.png" width="420" alt="Chess mid-game restyled as winter scene"/> |
+
+<sub>Edit Endpoint Showcase · `landscape` · `1536x1024` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Make it a winter evening with heavy snowfall, snow dusted on the board and pieces, breath vapor in the air, cold blue-grey lighting, chess position still clearly readable.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Make it a winter evening with heavy snowfall, snow dusted on the board and pieces, breath vapor in the air, cold blue-grey lighting, chess position still clearly readable.' \
+  -i docs/photography/chess-midgame.png \
+  --size landscape --quality high \
+  -f docs/edit-endpoint-showcase/edit-chess-winter.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.edit(
+    model="gpt-image-2",
+    image=[open("docs/photography/chess-midgame.png", "rb")],
+    prompt="Make it a winter evening with heavy snowfall, snow dusted on the board and pieces, breath vapor in the air, cold blue-grey lighting, chess position still clearly readable.",
+    size="1536x1024",
+    quality="high",
+)
+
+import base64
+open("docs/edit-endpoint-showcase/edit-chess-winter.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 96 · Tea poster → metro lightbox mockup
+
+<img src="docs/edit-endpoint-showcase/tea-poster-metro-lightbox.png" width="460" alt="Tea poster transformed into a metro-station lightbox mockup"/>
+
+<sub>Edit Endpoint Showcase · `portrait` · `1024x1536` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Transform the provided tea poster into a realistic metro-station lightbox mockup while preserving the poster artwork and Chinese typography as much as possible. Show the poster behind glossy glass in a vertical illuminated advertising frame on a clean subway platform wall. Add subtle reflections, brushed metal frame, floor tiles, soft overhead transit lighting, and a few blurred commuters in the distance. Keep the poster straight, legible, and dominant; do not redesign the poster, do not change its main text, and do not add fake brand logos.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Transform the provided tea poster into a realistic metro-station lightbox mockup while preserving the poster artwork and Chinese typography as much as possible. Show the poster behind glossy glass in a vertical illuminated advertising frame on a clean subway platform wall. Add subtle reflections, brushed metal frame, floor tiles, soft overhead transit lighting, and a few blurred commuters in the distance. Keep the poster straight, legible, and dominant; do not redesign the poster, do not change its main text, and do not add fake brand logos.' \
+  -i docs/typography-posters/tea-poster.png \
+  --size portrait --quality high \
+  -f docs/edit-endpoint-showcase/tea-poster-metro-lightbox.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.edit(
+    model="gpt-image-2",
+    image=[open("docs/typography-posters/tea-poster.png", "rb")],
+    prompt="""Transform the provided tea poster into a realistic metro-station lightbox mockup while preserving the poster artwork and Chinese typography as much as possible. Show the poster behind glossy glass in a vertical illuminated advertising frame on a clean subway platform wall. Add subtle reflections, brushed metal frame, floor tiles, soft overhead transit lighting, and a few blurred commuters in the distance. Keep the poster straight, legible, and dominant; do not redesign the poster, do not change its main text, and do not add fake brand logos.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/edit-endpoint-showcase/tea-poster-metro-lightbox.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
 <a id="gallery-uiux-mockups"></a>
+
 ### 📱 UI/UX Mockups
 
-#### No. 73 · Mobile Budgeting App Mockup
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-mobile-budgeting-app-neobank.png" width="460" alt="Mobile Budgeting App Mockup"/>
+#### No. 97 · Mobile Budgeting App Mockup
 
-<sub>UI/UX Mockups · `portrait` · `1024x1536`</sub>
+<img src="docs/uiux-mockups/mobile-budgeting-app-neobank.png" width="460" alt="Mobile Budgeting App Mockup"/>
+
+<sub>UI/UX Mockups · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4288,7 +5411,7 @@ Design a polished mobile finance app UI mockup for a fictional neobank called AU
 gpt-image \
   -p 'Design a polished mobile finance app UI mockup for a fictional neobank called AURAE, shown on a 1290x2796 smartphone screen, front-facing, with a soft off-white background and subtle shadow. Use a calm palette of deep navy, mint green, warm gray, and white. Create a complete home screen with crisp typography, clean spacing, rounded cards, and precise icon alignment. Include a top header with the in-image text "AURAE", "Good morning, Lina", and "Total balance $12,480.36". Add three summary chips labeled "Income +$4,200", "Spent -$1,830", and "Saved 32%". Show a weekly spending bar chart labeled "Mon Tue Wed Thu Fri Sat Sun" and a recent transactions list with "Metro Pass $18.50", "Green Bowl $14.20", and "Rent $1,240.00". Include a bottom nav with "Home", "Cards", "Budget", and "Profile". Prioritize crisp UI hierarchy, realistic mobile app styling, sharp labels, and production-quality mockup presentation.' \
   --size portrait --quality high \
-  -f docs/example-mobile-budgeting-app-neobank.png
+  -f docs/uiux-mockups/mobile-budgeting-app-neobank.png
 ```
 
 **OpenAI SDK**
@@ -4304,18 +5427,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-mobile-budgeting-app-neobank.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/uiux-mockups/mobile-budgeting-app-neobank.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 74 · Desktop Operations Dashboard
+#### No. 98 · Desktop Operations Dashboard
 
-<img src="docs/example-desktop-analytics-dashboard-operations.png" width="620" alt="Desktop Operations Dashboard"/>
+<img src="docs/uiux-mockups/desktop-analytics-dashboard-operations.png" width="620" alt="Desktop Operations Dashboard"/>
 
-<sub>UI/UX Mockups · `landscape` · `1536x1024`</sub>
+<sub>UI/UX Mockups · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4330,7 +5453,7 @@ Create a high-end desktop SaaS analytics dashboard mockup for a fictional platfo
 gpt-image \
   -p 'Create a high-end desktop SaaS analytics dashboard mockup for a fictional platform named HELIX OPS, displayed on a 16:10 monitor canvas at 1600x1000. Use a cool palette of slate, cobalt blue, teal, pale gray, and white, with subtle glass panels and tight grid alignment. The layout should include a left sidebar, top filter bar, KPI cards, line charts, data table, and alert panel. Use crisp typography and correct labels. Include in-image text: "HELIX OPS", "Operations Overview", "Last 30 Days", "Uptime 99.982%", "Tickets 184", "Latency 42 ms", and "Conversion 6.4%". Show a line chart labeled "Apr 1" through "Apr 30", a donut chart titled "Traffic Sources", and a table with columns "Site", "Status", "Region", and "Load". Add alert pills reading "3 Critical" and "12 Warning". Composition should feel realistic and presentation-ready, with clean hierarchy, precise spacing, balanced negative space, and ultra-sharp dashboard UI rendering.' \
   --size landscape --quality high \
-  -f docs/example-desktop-analytics-dashboard-operations.png
+  -f docs/uiux-mockups/desktop-analytics-dashboard-operations.png
 ```
 
 **OpenAI SDK**
@@ -4346,18 +5469,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-desktop-analytics-dashboard-operations.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/uiux-mockups/desktop-analytics-dashboard-operations.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 75 · Design System Card Set
+#### No. 99 · Design System Card Set
 
-<img src="docs/example-design-system-component-card-set.png" width="460" alt="Design System Card Set"/>
+<img src="docs/uiux-mockups/design-system-component-card-set.png" width="460" alt="Design System Card Set"/>
 
-<sub>UI/UX Mockups · `square` · `1024x1024`</sub>
+<sub>UI/UX Mockups · `square` · `1024x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4372,7 +5495,7 @@ Generate a clean design system overview board for a fictional product language c
 gpt-image \
   -p 'Generate a clean design system overview board for a fictional product language called LUMEN UI, arranged as a square component gallery on a 2048x2048 canvas. Use a neutral palette of ivory, charcoal, muted blue, sage, and coral accents. The composition should be an orderly grid of cards showing buttons, input fields, badges, toggles, tabs, avatars, alerts, and pricing cards. Include crisp typography, even spacing, subtle shadows, and exact alignment as if exported from a professional design tool. Add labeled sections with the in-image text "LUMEN UI", "Buttons", "Inputs", "Status", "Cards", and "Type Scale". Include sample button labels "Primary", "Secondary", and "Danger"; badge labels "Success", "Pending", and "Error"; and typography specimens "Display 48", "Heading 24", and "Body 16". Ensure the board feels systematic, editorial, and highly legible, with clean hierarchy, correct labels, and polished component consistency suitable for a design systems gallery.' \
   --size square --quality high \
-  -f docs/example-design-system-component-card-set.png
+  -f docs/uiux-mockups/design-system-component-card-set.png
 ```
 
 **OpenAI SDK**
@@ -4388,18 +5511,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-design-system-component-card-set.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/uiux-mockups/design-system-component-card-set.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 76 · Web3 Wallet Interface Concept
+#### No. 100 · Web3 Wallet Interface Concept
 
-<img src="docs/example-web3-wallet-app-concept.png" width="460" alt="Web3 Wallet Interface Concept"/>
+<img src="docs/uiux-mockups/web3-wallet-app-concept.png" width="460" alt="Web3 Wallet Interface Concept"/>
 
-<sub>UI/UX Mockups · `portrait` · `1024x1536`</sub>
+<sub>UI/UX Mockups · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4414,7 +5537,7 @@ Design a premium mobile web3 wallet app mockup for a fictional wallet called NOV
 gpt-image \
   -p 'Design a premium mobile web3 wallet app mockup for a fictional wallet called NOVA VAULT on a 1179x2556 phone screen, centered on a dark graphite background with faint aurora gradients. Use a refined palette of black, electric cyan, emerald, violet-blue, and soft white. The app should feel modern but credible, with crisp typography, glassmorphism only where useful, and strong financial UI clarity. Include in-image text: "NOVA VAULT", "Portfolio $48,920.14", "24h +3.82%", "Send", "Receive", "Swap", and "History". Show token cards labeled "SOLAR 18.42", "LATTICE 244.7", and "USDX 12,840.00" with small sparkline charts. Add a security section reading "Shield Level 96" and a network selector labeled "Mainnet". Include a recent activity list with "Swap SOLAR to USDX", "Received 240 LATTICE", and "Gas 0.0021". Prioritize crisp labels, exact numbers, clean hierarchy, believable wallet UX, and polished gpt-image-2-friendly UI detail.' \
   --size portrait --quality high \
-  -f docs/example-web3-wallet-app-concept.png
+  -f docs/uiux-mockups/web3-wallet-app-concept.png
 ```
 
 **OpenAI SDK**
@@ -4430,18 +5553,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-web3-wallet-app-concept.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/uiux-mockups/web3-wallet-app-concept.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 77 · Health Tracker App Mockup
+#### No. 101 · Health Tracker App Mockup
 
-<img src="docs/example-health-tracker-wellness-app.png" width="460" alt="Health Tracker App Mockup"/>
+<img src="docs/uiux-mockups/health-tracker-wellness-app.png" width="460" alt="Health Tracker App Mockup"/>
 
-<sub>UI/UX Mockups · `portrait` · `1024x1536`</sub>
+<sub>UI/UX Mockups · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4456,7 +5579,7 @@ Create a refined mobile health tracking app screen for a fictional wellness prod
 gpt-image \
   -p 'Create a refined mobile health tracking app screen for a fictional wellness product named VITA LOOP, displayed on a tall smartphone with a bright editorial UI aesthetic. Use a palette of soft mint, deep forest green, cream, coral, and cool gray. Compose a daily overview screen with clean cards, circular progress rings, miniature charts, and a tidy bottom navigation. Include crisp in-image text: "VITA LOOP", "Daily Summary", "Steps 8,420", "Sleep 7.6 h", "Heart Rate 64 bpm", and "Hydration 2.1 L". Add three progress rings labeled "Move 78%", "Recovery 84%", and "Focus 66%". Show a weekly chart labeled "Mon Tue Wed Thu Fri Sat Sun" and two buttons reading "Log Meal" and "Start Session". Add a health insight card with the text "Recovery improved 12% this week". The result should feel production-ready, medically clean, carefully spaced, sharply rendered, and optimized for crisp typography and accurate labels.' \
   --size portrait --quality high \
-  -f docs/example-health-tracker-wellness-app.png
+  -f docs/uiux-mockups/health-tracker-wellness-app.png
 ```
 
 **OpenAI SDK**
@@ -4472,7 +5595,7 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-health-tracker-wellness-app.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/uiux-mockups/health-tracker-wellness-app.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -4480,13 +5603,16 @@ open("docs/example-health-tracker-wellness-app.png", "wb").write(base64.b64decod
 ---
 
 <a id="gallery-data-visualization"></a>
+
 ### 📊 Data Visualization
 
-#### No. 78 · Small Multiples Climate Grid
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-small-multiples-climate-grid.png" width="620" alt="Small Multiples Climate Grid"/>
+#### No. 102 · Small Multiples Climate Grid
 
-<sub>Data Visualization · `wide` · `2048x1152`</sub>
+<img src="docs/data-visualization/small-multiples-climate-grid.png" width="620" alt="Small Multiples Climate Grid"/>
+
+<sub>Data Visualization · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4501,7 +5627,7 @@ Produce a clean editorial data visualization poster showing a 4x3 small-multiple
 gpt-image \
   -p 'Produce a clean editorial data visualization poster showing a 4x3 small-multiples grid of monthly climate charts for 12 fictional cities. Use a white background, generous margins, and a restrained palette of navy, rust, sky blue, olive, and charcoal. Each mini-panel should contain a temperature line and precipitation bars with consistent axes and ultra-legible labels. Include a title block with the in-image text "Annual Climate Profiles" and subtitle "12 Cities, 2025". Label panels "Northport", "Solmere", "Aster Bay", "Ridgefall", "Halcyon", "Verdin", "Glass Harbor", "Red Mesa", "Moonfield", "Lake Arden", "Cinder Point", and "Juniper". Use month labels "J F M A M J J A S O N D" and axis labels "Temp °C" and "Rain mm". Add numeric legend values "0", "10", "20", "30", and "100". Keep the composition highly structured, scientifically clear, and visually elegant, with crisp typography, aligned scales, and publication-grade chart rendering.' \
   --size wide --quality high \
-  -f docs/example-small-multiples-climate-grid.png
+  -f docs/data-visualization/small-multiples-climate-grid.png
 ```
 
 **OpenAI SDK**
@@ -4517,18 +5643,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-small-multiples-climate-grid.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/data-visualization/small-multiples-climate-grid.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 79 · Network Graph Collaboration Map
+#### No. 103 · Network Graph Collaboration Map
 
-<img src="docs/example-network-graph-collaboration-map.png" width="620" alt="Network Graph Collaboration Map"/>
+<img src="docs/data-visualization/network-graph-collaboration-map.png" width="620" alt="Network Graph Collaboration Map"/>
 
-<sub>Data Visualization · `landscape` · `1536x1024`</sub>
+<sub>Data Visualization · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4543,7 +5669,7 @@ Generate a sophisticated network graph visualization on a dark charcoal canvas s
 gpt-image \
   -p 'Generate a sophisticated network graph visualization on a dark charcoal canvas showing collaborations across a fictional research consortium called ORBIT GRID. Use glowing node colors in teal, amber, coral, pale blue, and white, with fine connecting lines and clean labels. The composition should be balanced, readable, and intentionally designed rather than random. Include a title in crisp text reading "ORBIT GRID Collaboration Network" and a legend with "Institute", "Lab", "Project", and "Advisory". Show approximately 36 nodes, with larger hubs labeled "Helix Center", "Nova Lab", "Aster Institute", "Cinder Bio", and "Polar Systems". Add edge labels sparingly, such as "shared data", "joint grant", and "coauthor". Include a right-side stats card reading "Nodes 36", "Edges 92", and "Density 0.146". Emphasize clean hierarchy, accurate node-label placement, anti-overlap spacing, subtle depth, and crisp typography suited for a polished technical visualization generated by gpt-image-2.' \
   --size landscape --quality high \
-  -f docs/example-network-graph-collaboration-map.png
+  -f docs/data-visualization/network-graph-collaboration-map.png
 ```
 
 **OpenAI SDK**
@@ -4559,18 +5685,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-network-graph-collaboration-map.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/data-visualization/network-graph-collaboration-map.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 80 · Chord Diagram of Energy Flows
+#### No. 104 · Chord Diagram of Energy Flows
 
-<img src="docs/example-chord-diagram-energy-flows.png" width="460" alt="Chord Diagram of Energy Flows"/>
+<img src="docs/data-visualization/chord-diagram-energy-flows.png" width="460" alt="Chord Diagram of Energy Flows"/>
 
-<sub>Data Visualization · `square` · `1024x1024`</sub>
+<sub>Data Visualization · `square` · `1024x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4585,7 +5711,7 @@ Create a publication-quality chord diagram visualizing fictional regional energy
 gpt-image \
   -p 'Create a publication-quality chord diagram visualizing fictional regional energy flows in 2025. Use a bright ivory background with a centered circular composition and a harmonious palette of cobalt, teal, ochre, coral, plum, and graphite. The diagram should feel mathematically precise, with clean arcs, semi-transparent ribbons, and highly legible labels. Add a title block with the in-image text "Regional Energy Exchange" and subtitle "TWh, 2025". Label outer segments "North", "South", "East", "West", "Coastal", and "Grid Reserve". Include a small legend reading "Hydro", "Solar", "Wind", and "Storage". Place tiny numeric ticks around the ring at "0", "50", "100", and "150". Use ribbon thickness to imply volume, but keep the composition readable and elegant. Prioritize crisp labels, clear hierarchy, accurate geometry, balanced white space, and a refined data-journalism aesthetic rather than generic infographic styling.' \
   --size square --quality high \
-  -f docs/example-chord-diagram-energy-flows.png
+  -f docs/data-visualization/chord-diagram-energy-flows.png
 ```
 
 **OpenAI SDK**
@@ -4601,18 +5727,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-chord-diagram-energy-flows.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/data-visualization/chord-diagram-energy-flows.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 81 · Treemap Budget Allocation
+#### No. 105 · Treemap Budget Allocation
 
-<img src="docs/example-treemap-startup-budget-allocation.png" width="620" alt="Treemap Budget Allocation"/>
+<img src="docs/data-visualization/treemap-startup-budget-allocation.png" width="620" alt="Treemap Budget Allocation"/>
 
-<sub>Data Visualization · `landscape` · `1536x1024`</sub>
+<sub>Data Visualization · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4627,7 +5753,7 @@ Design a modern treemap infographic showing a fictional company budget allocatio
 gpt-image \
   -p 'Design a modern treemap infographic showing a fictional company budget allocation for LUMEN BIO in fiscal year 2026. Use a light neutral background and a controlled palette of forest green, desaturated blue, amber, terracotta, lavender-gray, and charcoal outlines. The composition should be a clean rectangular treemap with strong visual grouping and crisp typography. Include a header with the in-image text "LUMEN BIO Budget Allocation" and "FY 2026". Major blocks should be labeled "R&D 38%", "Manufacturing 22%", "Clinical 14%", "Operations 10%", "Marketing 7%", "IT 5%", and "Legal 4%". Within some blocks, add smaller labels like "Prototypes", "Reagents", "QA", "Cloud", and "Field Trials". Include a compact side legend reading "Total Budget $84.0M". Ensure the chart has precise edges, balanced annotation density, clean hierarchy, and sharp text rendering suitable for a technical gallery prompt.' \
   --size landscape --quality high \
-  -f docs/example-treemap-startup-budget-allocation.png
+  -f docs/data-visualization/treemap-startup-budget-allocation.png
 ```
 
 **OpenAI SDK**
@@ -4643,18 +5769,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-treemap-startup-budget-allocation.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/data-visualization/treemap-startup-budget-allocation.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 82 · Geographic Choropleth Yield Map
+#### No. 106 · Geographic Choropleth Yield Map
 
-<img src="docs/example-geographic-choropleth-harvest-yield.png" width="620" alt="Geographic Choropleth Yield Map"/>
+<img src="docs/data-visualization/geographic-choropleth-harvest-yield.png" width="620" alt="Geographic Choropleth Yield Map"/>
 
-<sub>Data Visualization · `wide` · `2048x1152`</sub>
+<sub>Data Visualization · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4669,7 +5795,7 @@ Produce a polished geographic choropleth map infographic of a fictional agricult
 gpt-image \
   -p 'Produce a polished geographic choropleth map infographic of a fictional agricultural region called the Solterra Basin, showing harvest yield by district. Use a minimalist cartographic style on an off-white background with muted terrain hints and a sequential palette from pale sand to deep green. The map should include 14 clearly separated districts with clean borders, crisp labels, and a right-side legend. Include in-image text: "Solterra Basin Harvest Yield", "2025", and legend title "tons / hectare". Label districts with names such as "North Vale", "Riverbend", "Copper Plain", "East Orchard", and "Cinder Ridge". Include legend values "1.2", "2.4", "3.6", "4.8", and "6.0". Add a compact annotation box reading "Highest yield: East Orchard 5.8" and "Lowest yield: Dry Steppe 1.4". Prioritize clean typography, accurate map-like geometry, balanced composition, subtle cartographic detail, and publication-grade infographic clarity.' \
   --size wide --quality high \
-  -f docs/example-geographic-choropleth-harvest-yield.png
+  -f docs/data-visualization/geographic-choropleth-harvest-yield.png
 ```
 
 **OpenAI SDK**
@@ -4685,7 +5811,7 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-geographic-choropleth-harvest-yield.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/data-visualization/geographic-choropleth-harvest-yield.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -4693,13 +5819,16 @@ open("docs/example-geographic-choropleth-harvest-yield.png", "wb").write(base64.
 ---
 
 <a id="gallery-technical-illustration"></a>
+
 ### ⚙️ Technical Illustration
 
-#### No. 83 · Mechanical Watch Exploded View
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-mechanical-watch-exploded-view.png" width="460" alt="Mechanical Watch Exploded View"/>
+#### No. 107 · Mechanical Watch Exploded View
 
-<sub>Technical Illustration · `square` · `1024x1024`</sub>
+<img src="docs/technical-illustration/mechanical-watch-exploded-view.png" width="460" alt="Mechanical Watch Exploded View"/>
+
+<sub>Technical Illustration · `square` · `1024x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4714,7 +5843,7 @@ Create a premium technical exploded-view illustration of a fictional mechanical 
 gpt-image \
   -p 'Create a premium technical exploded-view illustration of a fictional mechanical wristwatch called the Meridian 8, centered on a dark slate background with fine blueprint grid accents. Show the watch components separated vertically with precise spacing: sapphire crystal, dial, hands, chapter ring, movement plates, escapement, balance wheel, mainspring barrel, case, crown, and leather strap sections. Use realistic brushed steel, brass, ruby jewel accents, and deep navy dial details. Add crisp callouts and labels with the in-image text "Meridian 8", "Exploded Assembly", "42 mm Case", "25 Jewels", and "Power Reserve 72 h". Include numbered callouts "01" through "10" with short labels like "Balance Wheel", "Mainspring Barrel", and "Sapphire Crystal". The result should be highly detailed, technically believable, sharply rendered, and suitable for an industrial design plate with clean hierarchy, exact labeling, and refined material realism.' \
   --size square --quality high \
-  -f docs/example-mechanical-watch-exploded-view.png
+  -f docs/technical-illustration/mechanical-watch-exploded-view.png
 ```
 
 **OpenAI SDK**
@@ -4730,18 +5859,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-mechanical-watch-exploded-view.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/technical-illustration/mechanical-watch-exploded-view.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 84 · Rocket Cutaway Diagram
+#### No. 108 · Rocket Cutaway Diagram
 
-<img src="docs/example-rocket-cutaway-launch-vehicle.png" width="320" alt="Rocket Cutaway Diagram"/>
+<img src="docs/technical-illustration/rocket-cutaway-launch-vehicle.png" width="320" alt="Rocket Cutaway Diagram"/>
 
-<sub>Technical Illustration · `tall` · `2160x3840`</sub>
+<sub>Technical Illustration · `tall` · `2160x3840` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4756,7 +5885,7 @@ Generate a highly detailed vertical cutaway illustration of a fictional two-stag
 gpt-image \
   -p 'Generate a highly detailed vertical cutaway illustration of a fictional two-stage launch vehicle named Aster-9 on a clean white technical background. Show the full rocket from nose cone to engines, sliced to reveal internal tanks, avionics, payload fairing, interstage, turbopumps, and thrust structure. Use a restrained palette of white, gunmetal, orange, pale blue, and safety red accents. Add precise leader lines and crisp labels. Include in-image text: "ASTER-9", "Payload 8,400 kg", "Height 62.4 m", "Stage 1 RP-1 / LOX", and "Stage 2 Methalox". Label internal parts such as "Payload Bay", "Guidance Computer", "LOX Tank", "Fuel Tank", "Helium COPV", and "Engine Cluster x9". Add a small scale marker with "0 m", "20 m", "40 m", and "60 m". Prioritize accurate engineering-diagram composition, clean typography, believable hardware detail, and razor-sharp annotations optimized for gpt-image-2.' \
   --size tall --quality high \
-  -f docs/example-rocket-cutaway-launch-vehicle.png
+  -f docs/technical-illustration/rocket-cutaway-launch-vehicle.png
 ```
 
 **OpenAI SDK**
@@ -4772,18 +5901,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-rocket-cutaway-launch-vehicle.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/technical-illustration/rocket-cutaway-launch-vehicle.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 85 · Mechanical Keyboard Exploded Assembly
+#### No. 109 · Mechanical Keyboard Exploded Assembly
 
-<img src="docs/example-mechanical-keyboard-exploded-assembly.png" width="620" alt="Mechanical Keyboard Exploded Assembly"/>
+<img src="docs/technical-illustration/mechanical-keyboard-exploded-assembly.png" width="620" alt="Mechanical Keyboard Exploded Assembly"/>
 
-<sub>Technical Illustration · `wide` · `2048x1152`</sub>
+<sub>Technical Illustration · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4798,7 +5927,7 @@ Design a crisp exploded-view product illustration of a custom mechanical keyboar
 gpt-image \
   -p 'Design a crisp exploded-view product illustration of a custom mechanical keyboard named LUMEN K65, shown in three-quarter perspective on a pale gray background with subtle shadow. Separate the layers clearly: keycaps, switches, plate, PCB, foam, gasket mounts, case top, battery module, rotary knob, and case bottom. Use anodized silver, matte black, translucent smoke keycaps, and small teal accent parts. Add clean technical callouts and in-image text reading "LUMEN K65", "Exploded Assembly", "65% Layout", "Hot-Swap PCB", and "3,200 mAh". Include labels for "PBT Keycaps", "Linear Switch", "Aluminum Plate", "Poron Foam", "USB-C", and "Encoder Knob". Show a compact dimension note "317 mm x 112 mm x 31 mm". The composition should feel like an industrial design presentation board: precise spacing, realistic materials, sharp typography, correct labels, and highly legible component hierarchy.' \
   --size wide --quality high \
-  -f docs/example-mechanical-keyboard-exploded-assembly.png
+  -f docs/technical-illustration/mechanical-keyboard-exploded-assembly.png
 ```
 
 **OpenAI SDK**
@@ -4814,18 +5943,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-mechanical-keyboard-exploded-assembly.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/technical-illustration/mechanical-keyboard-exploded-assembly.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 86 · Car Powertrain Transparent Cutaway
+#### No. 110 · Car Powertrain Transparent Cutaway
 
-<img src="docs/example-car-powertrain-transparent-cutaway.png" width="620" alt="Car Powertrain Transparent Cutaway"/>
+<img src="docs/technical-illustration/car-powertrain-transparent-cutaway.png" width="620" alt="Car Powertrain Transparent Cutaway"/>
 
-<sub>Technical Illustration · `landscape` · `1536x1024`</sub>
+<sub>Technical Illustration · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4840,7 +5969,7 @@ Create a high-detail transparent cutaway illustration of a fictional hybrid spor
 gpt-image \
   -p 'Create a high-detail transparent cutaway illustration of a fictional hybrid sports coupe powertrain on a dark neutral studio background. Show the vehicle in side profile with semi-transparent bodywork revealing the front electric motor, battery pack, rear combustion engine, transmission tunnel, cooling loops, and rear differential. Use realistic metallic surfaces, matte graphite body panels, orange high-voltage cables, and blue coolant lines. Add clean engineering callouts with crisp in-image text: "Project VELA GT", "Hybrid Powertrain", "System Output 412 kW", "Battery 18.6 kWh", and "0-100 km/h 3.8 s". Label key parts "Inverter", "Motor", "Battery Pack", "Turbo Inline-4", "Radiator", and "Rear Differential". Include a simple legend showing cable colors for "HV", "Coolant", and "Fuel". The rendering should be technically believable, photorealistic where appropriate, sharply annotated, and composed like a premium automotive engineering poster.' \
   --size landscape --quality high \
-  -f docs/example-car-powertrain-transparent-cutaway.png
+  -f docs/technical-illustration/car-powertrain-transparent-cutaway.png
 ```
 
 **OpenAI SDK**
@@ -4856,18 +5985,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-car-powertrain-transparent-cutaway.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/technical-illustration/car-powertrain-transparent-cutaway.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 87 · Smartphone Internals Layered View
+#### No. 111 · Smartphone Internals Layered View
 
-<img src="docs/example-smartphone-internals-layered-view.png" width="460" alt="Smartphone Internals Layered View"/>
+<img src="docs/technical-illustration/smartphone-internals-layered-view.png" width="460" alt="Smartphone Internals Layered View"/>
 
-<sub>Technical Illustration · `portrait` · `1024x1536`</sub>
+<sub>Technical Illustration · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4882,7 +6011,7 @@ Produce a sleek exploded-view illustration of a fictional flagship smartphone ca
 gpt-image \
   -p 'Produce a sleek exploded-view illustration of a fictional flagship smartphone called the HELIX ONE, shown front and back in a vertically layered assembly on a soft charcoal gradient background. Separate the glass, OLED panel, midframe, battery, camera island, wireless charging coil, logic board, cooling vapor chamber, speakers, and rear shell. Use realistic materials including brushed titanium edges, ceramic back, black glass, copper thermal elements, and blue PCB traces. Add crisp labels and in-image text: "HELIX ONE", "Layered Internal Architecture", "6.7 in OLED", "5,100 mAh", and "Vapor Chamber 3,200 mm2". Label components "Main Camera 50 MP", "Ultrawide 13 MP", "Coil", "Battery", "Logic Board", and "Speaker Module". Keep the composition elegant, technical, and believable, with exact spacing, sharp typography, clean callout leaders, and premium product-visualization quality.' \
   --size portrait --quality high \
-  -f docs/example-smartphone-internals-layered-view.png
+  -f docs/technical-illustration/smartphone-internals-layered-view.png
 ```
 
 **OpenAI SDK**
@@ -4898,7 +6027,7 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-smartphone-internals-layered-view.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/technical-illustration/smartphone-internals-layered-view.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -4906,13 +6035,16 @@ open("docs/example-smartphone-internals-layered-view.png", "wb").write(base64.b6
 ---
 
 <a id="gallery-architecture-interior"></a>
+
 ### 🏛️ Architecture & Interior
 
-#### No. 88 · Japanese Minimalist Living Room
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-japanese-minimalist-living-room-render.png" width="620" alt="Japanese Minimalist Living Room"/>
+#### No. 112 · Japanese Minimalist Living Room
 
-<sub>Architecture & Interior · `landscape` · `1536x1024`</sub>
+<img src="docs/architecture-interior/japanese-minimalist-living-room-render.png" width="620" alt="Japanese Minimalist Living Room"/>
+
+<sub>Architecture & Interior · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4927,7 +6059,7 @@ Render a serene Japanese minimalist living room interior in photorealistic archi
 gpt-image \
   -p 'Render a serene Japanese minimalist living room interior in photorealistic architectural visualization style, viewed from eye level with a 28 mm lens feel. The space should feature light oak flooring, shoji-inspired sliding panels, low modular seating, a recessed tokonoma niche, linen textures, and soft morning light entering from the left. Use a restrained palette of warm beige, pale oak, charcoal, muted moss green, and rice-paper white. Include subtle in-image text on a small framed floor plan board that reads "Room 6.4 m x 4.8 m" and "AURAE House". Add a low tea table, one ceramic vase, a bonsai-like plant, and indirect cove lighting at 3000 K. Composition should be calm and balanced with strong negative space, realistic shadows, accurate material behavior, and magazine-quality interior rendering. Prioritize photorealism, architectural detail, crisp edges, and tasteful minimalism rather than stylized fantasy.' \
   --size landscape --quality high \
-  -f docs/example-japanese-minimalist-living-room-render.png
+  -f docs/architecture-interior/japanese-minimalist-living-room-render.png
 ```
 
 **OpenAI SDK**
@@ -4943,18 +6075,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-japanese-minimalist-living-room-render.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/architecture-interior/japanese-minimalist-living-room-render.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 89 · Brutalist Concrete Museum Atrium
+#### No. 113 · Brutalist Concrete Museum Atrium
 
-<img src="docs/example-brutalist-concrete-museum-atrium.png" width="620" alt="Brutalist Concrete Museum Atrium"/>
+<img src="docs/architecture-interior/brutalist-concrete-museum-atrium.png" width="620" alt="Brutalist Concrete Museum Atrium"/>
 
-<sub>Architecture & Interior · `wide` · `2048x1152`</sub>
+<sub>Architecture & Interior · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -4969,7 +6101,7 @@ Create a photorealistic interior render of a monumental brutalist museum atrium 
 gpt-image \
   -p 'Create a photorealistic interior render of a monumental brutalist museum atrium with exposed board-formed concrete, dramatic skylights, long ramps, and massive geometric voids. Viewpoint is slightly low and wide, emphasizing vertical scale and shadow. Use a palette of cool gray concrete, black steel, muted sandstone, pale daylight, and a few rust-colored wayfinding accents. Include sparse signage with crisp in-image text: "Gallery A", "Level 02", and "Atrium 18.0 m". Add a few small human figures for scale, but keep the architecture dominant. The space should include suspended walkways, a central sculpture plinth, and reflected light from polished concrete floors. Composition must feel cinematic yet architecturally precise, with realistic material textures, accurate lighting, controlled contrast, and gallery-quality rendering. Prioritize believable spatial depth, clean geometry, subtle atmospheric perspective, and sharp signage.' \
   --size wide --quality high \
-  -f docs/example-brutalist-concrete-museum-atrium.png
+  -f docs/architecture-interior/brutalist-concrete-museum-atrium.png
 ```
 
 **OpenAI SDK**
@@ -4985,18 +6117,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-brutalist-concrete-museum-atrium.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/architecture-interior/brutalist-concrete-museum-atrium.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 90 · Mid-Century Modern Office
+#### No. 114 · Mid-Century Modern Office
 
-<img src="docs/example-mid-century-modern-office-studio.png" width="620" alt="Mid-Century Modern Office"/>
+<img src="docs/architecture-interior/mid-century-modern-office-studio.png" width="620" alt="Mid-Century Modern Office"/>
 
-<sub>Architecture & Interior · `landscape` · `1536x1024`</sub>
+<sub>Architecture & Interior · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5011,7 +6143,7 @@ Render a sophisticated mid-century modern creative office in photorealistic inte
 gpt-image \
   -p 'Render a sophisticated mid-century modern creative office in photorealistic interior style, with walnut millwork, brass accents, olive upholstery, terrazzo flooring, smoked glass partitions, and large windows casting late-afternoon light. Use a rich palette of walnut brown, olive green, cream, brass gold, and muted terracotta. The composition should show a central executive desk, built-in shelving, a lounge corner, and a wall-mounted planning board. On the board, include subtle in-image text "Studio North", "Q3 Review", and "14:30". Add realistic accessories like drafting tools, books, ceramic lamps, and a record player, but keep the scene curated and uncluttered. Camera angle should feel editorial, around 32 mm, with balanced perspective lines and realistic depth of field. Prioritize tactile materials, believable lighting, clean geometry, and polished architectural-visualization quality with crisp details and intentional composition.' \
   --size landscape --quality high \
-  -f docs/example-mid-century-modern-office-studio.png
+  -f docs/architecture-interior/mid-century-modern-office-studio.png
 ```
 
 **OpenAI SDK**
@@ -5027,18 +6159,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-mid-century-modern-office-studio.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/architecture-interior/mid-century-modern-office-studio.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 91 · Biophilic Biotech Lab
+#### No. 115 · Biophilic Biotech Lab
 
-<img src="docs/example-biophilic-biotech-lab-render.png" width="620" alt="Biophilic Biotech Lab"/>
+<img src="docs/architecture-interior/biophilic-biotech-lab-render.png" width="620" alt="Biophilic Biotech Lab"/>
 
-<sub>Architecture & Interior · `wide` · `2048x1152`</sub>
+<sub>Architecture & Interior · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5053,7 +6185,7 @@ Generate a high-end photorealistic render of a future-facing biotech laboratory 
 gpt-image \
   -p 'Generate a high-end photorealistic render of a future-facing biotech laboratory that integrates biophilic design. Show a bright open lab with glass partitions, living moss walls, hanging plants, pale wood details, white composite worktops, and advanced research equipment. Use a fresh palette of white, sage green, pale oak, stainless steel, and clear cyan monitor accents. Include precise architectural lighting at 4200 K, skylight diffusion, and clean reflections. Add subtle wall graphics with crisp in-image text "HELIX BIO LAB 03", "Clean Zone", and "22 C". The scene should include lab benches, microscopes, sample storage towers, and collaborative seating, arranged with strong spatial clarity. Composition must feel aspirational but credible, with realistic equipment proportions, hygienic surfaces, controlled clutter, and premium visualization quality. Emphasize photorealism, accurate material rendering, clean hierarchy, and an elegant fusion of nature and scientific workspace design.' \
   --size wide --quality high \
-  -f docs/example-biophilic-biotech-lab-render.png
+  -f docs/architecture-interior/biophilic-biotech-lab-render.png
 ```
 
 **OpenAI SDK**
@@ -5069,18 +6201,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-biophilic-biotech-lab-render.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/architecture-interior/biophilic-biotech-lab-render.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 92 · Gothic Cathedral Interior
+#### No. 116 · Gothic Cathedral Interior
 
-<img src="docs/example-gothic-cathedral-interior-render.png" width="320" alt="Gothic Cathedral Interior"/>
+<img src="docs/architecture-interior/gothic-cathedral-interior-render.png" width="320" alt="Gothic Cathedral Interior"/>
 
-<sub>Architecture & Interior · `tall` · `2160x3840`</sub>
+<sub>Architecture & Interior · `tall` · `2160x3840` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5095,7 +6227,7 @@ Render a majestic Gothic cathedral interior in photorealistic architectural styl
 gpt-image \
   -p 'Render a majestic Gothic cathedral interior in photorealistic architectural style, viewed down the central nave with towering ribbed vaults, pointed arches, intricate tracery, and colored light from stained glass windows. Use a palette of cool stone gray, deep burgundy, sapphire blue, candle gold, and dusty ambient light. Include realistic worn limestone textures, carved choir stalls, a patterned stone floor, and a distant altar. Add a discreet informational plaque near the foreground with the in-image text "Nave Height 28.5 m" and "Westminster Hall of Light". The composition should emphasize verticality, symmetry, and sacred atmosphere while remaining architecturally believable. Lighting should mix soft daylight shafts and warm candlelight, with subtle volumetric dust. Prioritize accurate Gothic detailing, strong perspective, material realism, and crisp small text, producing a museum-grade architectural render rather than a fantasy scene.' \
   --size tall --quality high \
-  -f docs/example-gothic-cathedral-interior-render.png
+  -f docs/architecture-interior/gothic-cathedral-interior-render.png
 ```
 
 **OpenAI SDK**
@@ -5111,7 +6243,7 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-gothic-cathedral-interior-render.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/architecture-interior/gothic-cathedral-interior-render.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -5119,13 +6251,16 @@ open("docs/example-gothic-cathedral-interior-render.png", "wb").write(base64.b64
 ---
 
 <a id="gallery-scientific-educational"></a>
+
 ### 🔬 Scientific & Educational
 
-#### No. 93 · Anatomy Poster
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-human-anatomy-muscular-poster.png" width="320" alt="Anatomy Poster"/>
+#### No. 117 · Anatomy Poster
 
-<sub>Scientific & Educational · `tall` · `2160x3840`</sub>
+<img src="docs/scientific-educational/human-anatomy-muscular-poster.png" width="320" alt="Anatomy Poster"/>
+
+<sub>Scientific & Educational · `tall` · `2160x3840` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5140,7 +6275,7 @@ Create a clean educational anatomy poster showing the human muscular system in a
 gpt-image \
   -p 'Create a clean educational anatomy poster showing the human muscular system in anterior and posterior views on a pale cream background. Use an academic but visually refined style with precise linework, muted reds and umbers for muscle groups, cool gray bones, and thin charcoal labels. Include a centered title with crisp in-image text "Human Muscular System" and a subtitle "Anterior and Posterior Views". Label key structures such as "Deltoid", "Pectoralis Major", "Rectus Abdominis", "Biceps Femoris", "Gastrocnemius", and "Trapezius". Add a compact scale note reading "Adult height reference 175 cm" and a small legend with "Superficial" and "Deep". Keep the composition symmetrical, scientifically accurate in appearance, and suitable for a classroom wall chart. Prioritize correct labels, crisp typography, clean hierarchy, subtle shading, and publication-quality educational clarity without gore or excessive realism.' \
   --size tall --quality high \
-  -f docs/example-human-anatomy-muscular-poster.png
+  -f docs/scientific-educational/human-anatomy-muscular-poster.png
 ```
 
 **OpenAI SDK**
@@ -5156,18 +6291,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-human-anatomy-muscular-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/scientific-educational/human-anatomy-muscular-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 94 · Periodic Table Spectral Variant
+#### No. 118 · Periodic Table Spectral Variant
 
-<img src="docs/example-periodic-table-spectral-variant.png" width="620" alt="Periodic Table Spectral Variant"/>
+<img src="docs/scientific-educational/periodic-table-spectral-variant.png" width="620" alt="Periodic Table Spectral Variant"/>
 
-<sub>Scientific & Educational · `wide` · `2048x1152`</sub>
+<sub>Scientific & Educational · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5182,7 +6317,7 @@ Design a distinctive periodic table poster variant where each element tile is co
 gpt-image \
   -p 'Design a distinctive periodic table poster variant where each element tile is colored by fictional emission-spectrum families while preserving clean scientific layout. Use a dark navy background with luminous but disciplined colors: cyan, magenta, amber, lime, and silver-white. Arrange the periodic table accurately with clear periods and groups, including separate lanthanide and actinide rows. Add a crisp title reading "Periodic Table of the Elements" and subtitle "Spectral Classification Variant". Ensure visible labels for representative tiles such as "H 1", "He 2", "C 6", "Fe 26", "Ag 47", and "U 92". Include side legends titled "Alkali", "Transition", "Metalloid", "Noble Gas", and "Actinide". Add small group numbers "1" through "18" and period numbers "1" through "7". The result should feel educational, modern, and highly legible, with precise typography, clean cell alignment, balanced glow effects, and accurate table structure.' \
   --size wide --quality high \
-  -f docs/example-periodic-table-spectral-variant.png
+  -f docs/scientific-educational/periodic-table-spectral-variant.png
 ```
 
 **OpenAI SDK**
@@ -5198,18 +6333,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-periodic-table-spectral-variant.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/scientific-educational/periodic-table-spectral-variant.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 95 · Tree of Life Poster
+#### No. 119 · Tree of Life Poster
 
-<img src="docs/example-tree-of-life-phylogeny-poster.png" width="460" alt="Tree of Life Poster"/>
+<img src="docs/scientific-educational/tree-of-life-phylogeny-poster.png" width="460" alt="Tree of Life Poster"/>
 
-<sub>Scientific & Educational · `square` · `1024x1024`</sub>
+<sub>Scientific & Educational · `square` · `1024x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5224,7 +6359,7 @@ Generate an elegant scientific poster visualizing a stylized tree of life as a r
 gpt-image \
   -p 'Generate an elegant scientific poster visualizing a stylized tree of life as a radial phylogeny diagram on an ivory background. Use fine botanical-meets-scientific linework with a restrained palette of moss green, deep teal, amber, plum, and charcoal. The diagram should branch outward from a central root labeled with crisp in-image text "Last Universal Common Ancestor". Main clades should be labeled "Bacteria", "Archaea", and "Eukaryota", with outer branches including "Plants", "Fungi", "Animals", "Protists", and "Cyanobacteria". Add a title at the top reading "Tree of Life" and a subtitle "Simplified Radial Phylogeny". Include a small scale note "Approximate branching only". Keep labels readable and branch geometry balanced, with clean hierarchy and educational clarity. The overall design should feel like a museum-science graphic: structured, accurate in spirit, visually rich, and rendered with crisp text and refined detail.' \
   --size square --quality high \
-  -f docs/example-tree-of-life-phylogeny-poster.png
+  -f docs/scientific-educational/tree-of-life-phylogeny-poster.png
 ```
 
 **OpenAI SDK**
@@ -5240,18 +6375,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-tree-of-life-phylogeny-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/scientific-educational/tree-of-life-phylogeny-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 96 · Weather Systems Diagram
+#### No. 120 · Weather Systems Diagram
 
-<img src="docs/example-weather-systems-fronts-diagram.png" width="620" alt="Weather Systems Diagram"/>
+<img src="docs/scientific-educational/weather-systems-fronts-diagram.png" width="620" alt="Weather Systems Diagram"/>
 
-<sub>Scientific & Educational · `landscape` · `1536x1024`</sub>
+<sub>Scientific & Educational · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5266,7 +6401,7 @@ Create a polished meteorology infographic showing a mid-latitude cyclone system 
 gpt-image \
   -p 'Create a polished meteorology infographic showing a mid-latitude cyclone system from a top-down synoptic view. Use a cool palette of ocean blue, cloud white, storm gray, crimson, and cobalt, with smooth contour lines and crisp symbols. Include pressure isobars, cloud bands, warm and cold fronts, arrows for wind direction, and rainfall zones. Add clear in-image text: "Mid-Latitude Cyclone", "Low Pressure 984 hPa", "Warm Front", "Cold Front", and "Occluded Front". Include city labels "Northport", "Elmside", and "Cedar Bay" for context, plus a legend reading "Rain", "Snow", and "Thunderstorm". Show temperature markers "8 C", "14 C", and "21 C" in different air masses. The composition should be educational and publication-ready, with sharp labels, clean hierarchy, accurate diagram conventions, and strong visual readability suitable for a textbook or science exhibit panel.' \
   --size landscape --quality high \
-  -f docs/example-weather-systems-fronts-diagram.png
+  -f docs/scientific-educational/weather-systems-fronts-diagram.png
 ```
 
 **OpenAI SDK**
@@ -5282,18 +6417,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-weather-systems-fronts-diagram.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/scientific-educational/weather-systems-fronts-diagram.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 97 · Geological Strata Cross-Section
+#### No. 121 · Geological Strata Cross-Section
 
-<img src="docs/example-geological-strata-cross-section.png" width="620" alt="Geological Strata Cross-Section"/>
+<img src="docs/scientific-educational/geological-strata-cross-section.png" width="620" alt="Geological Strata Cross-Section"/>
 
-<sub>Scientific & Educational · `wide` · `2048x1152`</sub>
+<sub>Scientific & Educational · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5308,7 +6443,7 @@ Produce a detailed geological cross-section poster of layered earth strata cutti
 gpt-image \
   -p 'Produce a detailed geological cross-section poster of layered earth strata cutting through a fictional canyon basin. Use a natural scientific palette of sandstone beige, iron oxide red, shale gray, limestone cream, basalt charcoal, and muted green vegetation above ground. Show clearly differentiated layers, a fault line, an aquifer, fossil-bearing beds, and a volcanic intrusion. Add crisp in-image text: "Geological Cross-Section", "Solterra Basin", "Scale 0-500 m", and labels "Sandstone", "Shale", "Limestone", "Coal Seam", "Aquifer", and "Basalt Dike". Include a vertical scale with "0 m", "100 m", "250 m", and "500 m". Add small annotations "Marine fossils" and "Groundwater flow" with arrows. The composition should be highly legible, educational, and neatly diagrammed, with clean linework, correct label placement, balanced annotation density, and publication-quality scientific illustration clarity.' \
   --size wide --quality high \
-  -f docs/example-geological-strata-cross-section.png
+  -f docs/scientific-educational/geological-strata-cross-section.png
 ```
 
 **OpenAI SDK**
@@ -5324,7 +6459,7 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-geological-strata-cross-section.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/scientific-educational/geological-strata-cross-section.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -5332,13 +6467,16 @@ open("docs/example-geological-strata-cross-section.png", "wb").write(base64.b64d
 ---
 
 <a id="gallery-fashion-editorial"></a>
+
 ### 👗 Fashion Editorial
 
-#### No. 98 · Urban Streetwear Lookbook: Shibuya Night
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-streetwear-tokyo-lookbook.png" width="460" alt="Urban Streetwear Lookbook: Shibuya Night"/>
+#### No. 122 · Urban Streetwear Lookbook: Shibuya Night
 
-<sub>Fashion Editorial · `portrait` · `1024x1536`</sub>
+<img src="docs/fashion-editorial/streetwear-tokyo-lookbook.png" width="460" alt="Urban Streetwear Lookbook: Shibuya Night"/>
+
+<sub>Fashion Editorial · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5353,7 +6491,7 @@ Full-body lookbook photography of a model standing in the center of a rain-slick
 gpt-image \
   -p "Full-body lookbook photography of a model standing in the center of a rain-slicked Shibuya crossing at twilight. The model wears an oversized, multi-pocketed technical puffer jacket in 'Electric Cobalt' with reflective silver detailing, paired with wide-leg cargo trousers in matte black and chunky platform sneakers. The composition is a sharp medium-wide shot using a 35mm lens, capturing the vibrant neon signs of the background blurred into a soft bokeh of pinks and cyans. Lighting is dramatic and directional, sourced from the surrounding digital billboards, creating high-contrast highlights on the jacket's texture. The mood is urban and fast-paced, with a subtle film grain characteristic of Portra 400. The image features a clean vertical layout suitable for a fashion magazine, with the text 'NEO-URBAN' subtly embossed in the corner in a minimalist sans-serif font. No brand logos are visible." \
   --size portrait --quality high \
-  -f docs/example-streetwear-tokyo-lookbook.png
+  -f docs/fashion-editorial/streetwear-tokyo-lookbook.png
 ```
 
 **OpenAI SDK**
@@ -5369,18 +6507,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-streetwear-tokyo-lookbook.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fashion-editorial/streetwear-tokyo-lookbook.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 99 · Avant-Garde Haute Couture Runway
+#### No. 123 · Avant-Garde Haute Couture Runway
 
-<img src="docs/example-haute-couture-sculptural-runway.png" width="320" alt="Avant-Garde Haute Couture Runway"/>
+<img src="docs/fashion-editorial/haute-couture-sculptural-runway.png" width="320" alt="Avant-Garde Haute Couture Runway"/>
 
-<sub>Fashion Editorial · `tall` · `2160x3840`</sub>
+<sub>Fashion Editorial · `tall` · `2160x3840` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5395,7 +6533,7 @@ High-angle editorial photograph of a haute couture runway show set within a brut
 gpt-image \
   -p "High-angle editorial photograph of a haute couture runway show set within a brutalist concrete cathedral. The model is draped in a sculptural gown made of pleated iridescent organza that mimics the fluid movement of liquid mercury. The color palette is dominated by 'Champagne Gold' and 'Shadow Grey'. Lighting is a single, powerful overhead spotlight that creates sharp, dramatic shadows and emphasizes the architectural volume of the garment. The model has a minimalist, ethereal makeup look with silver leaf accents on the brow. The camera uses a 50mm prime lens with a deep depth of field to capture both the intricate texture of the fabric and the cold, vast scale of the concrete architecture in the background. The atmosphere is solemn, artistic, and high-fashion, focusing on the intersection of textile and space." \
   --size tall --quality high \
-  -f docs/example-haute-couture-sculptural-runway.png
+  -f docs/fashion-editorial/haute-couture-sculptural-runway.png
 ```
 
 **OpenAI SDK**
@@ -5411,18 +6549,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-haute-couture-sculptural-runway.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fashion-editorial/haute-couture-sculptural-runway.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 100 · Y2K Revival: Cyber-Pop Studio Session
+#### No. 124 · Y2K Revival: Cyber-Pop Studio Session
 
-<img src="docs/example-y2k-revival-cyber-pop.png" width="460" alt="Y2K Revival: Cyber-Pop Studio Session"/>
+<img src="docs/fashion-editorial/y2k-revival-cyber-pop.png" width="460" alt="Y2K Revival: Cyber-Pop Studio Session"/>
 
-<sub>Fashion Editorial · `square` · `1024x1024`</sub>
+<sub>Fashion Editorial · `square` · `1024x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5437,7 +6575,7 @@ A vibrant Y2K-inspired fashion editorial shot in a studio with a high-gloss whit
 gpt-image \
   -p "A vibrant Y2K-inspired fashion editorial shot in a studio with a high-gloss white floor and a curved lavender backdrop. The model is styled in a 'Cyber-Pink' velour tracksuit with butterfly motifs, tinted translucent sunglasses, and frosted blue eyeshadow. The lighting is bright and 'bubbly,' using ring lights to create circular catchlights in the eyes and a soft, glowy skin texture reminiscent of early 2000s music videos. The composition is a close-up fish-eye lens shot, distorting the proportions for a playful, energetic effect. Colors are saturated neon greens, hot pinks, and icy blues. Floating around the model are low-poly 3D heart shapes and plastic-textured stars. The text 'GLOSS' is written in a chunky, 3D chrome bubble font across the top. The overall aesthetic is nostalgic, plastic, and hyper-digital." \
   --size square --quality high \
-  -f docs/example-y2k-revival-cyber-pop.png
+  -f docs/fashion-editorial/y2k-revival-cyber-pop.png
 ```
 
 **OpenAI SDK**
@@ -5453,18 +6591,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-y2k-revival-cyber-pop.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fashion-editorial/y2k-revival-cyber-pop.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 101 · Old Money Aesthetic: Equestrian Estate
+#### No. 125 · Old Money Aesthetic: Equestrian Estate
 
-<img src="docs/example-old-money-equestrian-estate.png" width="620" alt="Old Money Aesthetic: Equestrian Estate"/>
+<img src="docs/fashion-editorial/old-money-equestrian-estate.png" width="620" alt="Old Money Aesthetic: Equestrian Estate"/>
 
-<sub>Fashion Editorial · `landscape` · `1536x1024`</sub>
+<sub>Fashion Editorial · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5479,7 +6617,7 @@ Quiet luxury editorial photography set on a sprawling English country estate dur
 gpt-image \
   -p "Quiet luxury editorial photography set on a sprawling English country estate during the golden hour. A model sits gracefully on a stone wall, dressed in a tailored 'Camel' cashmere coat, a silk neck scarf with a heritage print, and dark brown leather riding boots. In the background, a vintage dark green convertible is parked near a stable of limestone and ivy. The lighting is warm and diffused, casting long, soft shadows across the manicured lawn. The color palette is earthy and sophisticated: forest green, rich tan, cream, and mahogany. The camera is a medium-format Hasselblad, producing a rich, creamy texture and incredibly fine detail in the wool and leather. The mood is one of timeless elegance, inherited wealth, and serene countryside life. There are no modern logos or distracting elements; the focus is on quality and tradition." \
   --size landscape --quality high \
-  -f docs/example-old-money-equestrian-estate.png
+  -f docs/fashion-editorial/old-money-equestrian-estate.png
 ```
 
 **OpenAI SDK**
@@ -5495,18 +6633,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-old-money-equestrian-estate.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fashion-editorial/old-money-equestrian-estate.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 102 · Avant-Garde: Organic Surrealism
+#### No. 126 · Avant-Garde: Organic Surrealism
 
-<img src="docs/example-avant-garde-organic-high-fashion.png" width="460" alt="Avant-Garde: Organic Surrealism"/>
+<img src="docs/fashion-editorial/avant-garde-organic-high-fashion.png" width="460" alt="Avant-Garde: Organic Surrealism"/>
 
-<sub>Fashion Editorial · `portrait` · `1024x1536`</sub>
+<sub>Fashion Editorial · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5521,7 +6659,7 @@ A high-fashion editorial shot in a surreal desert landscape where the sand is wh
 gpt-image \
   -p "A high-fashion editorial shot in a surreal desert landscape where the sand is white and the sky is a deep, dark indigo. The model wears an avant-garde garment that appears to be grown from bioluminescent fungi and dried desert vines, featuring intricate organic textures and glowing veins of 'Acid Green'. The silhouette is exaggerated and asymmetrical, blending into the surrounding rock formations. The lighting is otherworldly, with the model illuminated by a soft internal glow from the dress and a faint lunar backlight. The composition is a low-angle shot to make the model appear monumental and god-like. The camera uses a wide-angle lens to capture the vast, empty horizon. The color palette is strictly limited to white, indigo, and bioluminescent green, creating a haunting and futuristic aesthetic that challenges the boundaries of clothing." \
   --size portrait --quality high \
-  -f docs/example-avant-garde-organic-high-fashion.png
+  -f docs/fashion-editorial/avant-garde-organic-high-fashion.png
 ```
 
 **OpenAI SDK**
@@ -5537,21 +6675,107 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-avant-garde-organic-high-fashion.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fashion-editorial/avant-garde-organic-high-fashion.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
+#### No. 127 · Muted streetwear studio editorial portrait
+
+<img src="docs/fashion-editorial/editorial-studio-portrait.png" width="460" alt="Muted streetwear studio editorial portrait"/>
+
+<sub>Fashion Editorial · `portrait` · `1024x1536` · Author: @john_my07 · Source: [X](https://x.com/john_my07/status/2047182640760140198)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+A high-end studio photoshoot featuring a half-body portrait of a person in their mid-30s to early 40s with a naturally fit build. The subject stands in a relaxed yet confident pose, with a calm, neutral, self-assured expression. They are dressed in modern, minimal casual streetwear, such as a well-fitted t-shirt or a light jacket, using neutral, muted tones. Shot at eye level using an 85mm portrait lens with an aperture of f/2.8, keeping the subject tack sharp while creating a soft, shallow depth of field that gently blurs the background. The lighting is professional studio quality: a softbox key light from the front, subtle fill lighting to balance shadows, and a gentle rim light to separate the subject from the background. Shadows are soft and natural, with accurate, realistic skin tones. The background is a clean studio backdrop with a smooth, minimal texture and a soft neutral gradient, completely distraction-free. The overall style is highly realistic with an editorial fashion portrait look. Color grading is natural and balanced, with no filters or overprocessing. Rendered in ultra-high detail.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'A high-end studio photoshoot featuring a half-body portrait of a person in their mid-30s to early 40s with a naturally fit build. The subject stands in a relaxed yet confident pose, with a calm, neutral, self-assured expression. They are dressed in modern, minimal casual streetwear, such as a well-fitted t-shirt or a light jacket, using neutral, muted tones. Shot at eye level using an 85mm portrait lens with an aperture of f/2.8, keeping the subject tack sharp while creating a soft, shallow depth of field that gently blurs the background. The lighting is professional studio quality: a softbox key light from the front, subtle fill lighting to balance shadows, and a gentle rim light to separate the subject from the background. Shadows are soft and natural, with accurate, realistic skin tones. The background is a clean studio backdrop with a smooth, minimal texture and a soft neutral gradient, completely distraction-free. The overall style is highly realistic with an editorial fashion portrait look. Color grading is natural and balanced, with no filters or overprocessing. Rendered in ultra-high detail.' \
+  --size portrait --quality high \
+  -f docs/fashion-editorial/editorial-studio-portrait.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""A high-end studio photoshoot featuring a half-body portrait of a person in their mid-30s to early 40s with a naturally fit build. The subject stands in a relaxed yet confident pose, with a calm, neutral, self-assured expression. They are dressed in modern, minimal casual streetwear, such as a well-fitted t-shirt or a light jacket, using neutral, muted tones. Shot at eye level using an 85mm portrait lens with an aperture of f/2.8, keeping the subject tack sharp while creating a soft, shallow depth of field that gently blurs the background. The lighting is professional studio quality: a softbox key light from the front, subtle fill lighting to balance shadows, and a gentle rim light to separate the subject from the background. Shadows are soft and natural, with accurate, realistic skin tones. The background is a clean studio backdrop with a smooth, minimal texture and a soft neutral gradient, completely distraction-free. The overall style is highly realistic with an editorial fashion portrait look. Color grading is natural and balanced, with no filters or overprocessing. Rendered in ultra-high detail.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/fashion-editorial/editorial-studio-portrait.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 128 · Eiffel Tower luxury night editorial
+
+<img src="docs/fashion-editorial/eiffel-tower-luxury-editorial.png" width="460" alt="Eiffel Tower luxury night editorial"/>
+
+<sub>Fashion Editorial · `portrait` · `1024x1536` · Author: @Sheldon056 · Source: [X](https://x.com/Sheldon056/status/2047157379020861782)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Dramatic, low-angle ground perspective full-body shot captured with a 50mm lens at f/1.4, featuring a stylish bearded man with slicked-back hair and aviator glasses, wearing tailored high-fashion modern clothing, standing on the platform of Trocadéro at night. He is dressed in a structured black velvet blazer over a black cashmere roll-neck sweater, tailored black trousers, and polished black boots, looking up intently at the fully illuminated Eiffel Tower, which dominates the background. Directly behind him is a deep sapphire blue Bugatti Chiron reflecting the surrounding city lights. One foot is planted on the rear tire, with his body leaning casually back. Use a shallow depth of field, rendering distant Parisian street lights and crowd into creamy bokeh. Spotlighting from city lamps creates dramatic, high-contrast shadows. Photorealistic, cinematic, luxury high-fashion editorial aesthetic.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Dramatic, low-angle ground perspective full-body shot captured with a 50mm lens at f/1.4, featuring a stylish bearded man with slicked-back hair and aviator glasses, wearing tailored high-fashion modern clothing, standing on the platform of Trocadéro at night. He is dressed in a structured black velvet blazer over a black cashmere roll-neck sweater, tailored black trousers, and polished black boots, looking up intently at the fully illuminated Eiffel Tower, which dominates the background. Directly behind him is a deep sapphire blue Bugatti Chiron reflecting the surrounding city lights. One foot is planted on the rear tire, with his body leaning casually back. Use a shallow depth of field, rendering distant Parisian street lights and crowd into creamy bokeh. Spotlighting from city lamps creates dramatic, high-contrast shadows. Photorealistic, cinematic, luxury high-fashion editorial aesthetic.' \
+  --size portrait --quality high \
+  -f docs/fashion-editorial/eiffel-tower-luxury-editorial.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Dramatic, low-angle ground perspective full-body shot captured with a 50mm lens at f/1.4, featuring a stylish bearded man with slicked-back hair and aviator glasses, wearing tailored high-fashion modern clothing, standing on the platform of Trocadéro at night. He is dressed in a structured black velvet blazer over a black cashmere roll-neck sweater, tailored black trousers, and polished black boots, looking up intently at the fully illuminated Eiffel Tower, which dominates the background. Directly behind him is a deep sapphire blue Bugatti Chiron reflecting the surrounding city lights. One foot is planted on the rear tire, with his body leaning casually back. Use a shallow depth of field, rendering distant Parisian street lights and crowd into creamy bokeh. Spotlighting from city lamps creates dramatic, high-contrast shadows. Photorealistic, cinematic, luxury high-fashion editorial aesthetic.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/fashion-editorial/eiffel-tower-luxury-editorial.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+
 <a id="gallery-fine-art-painting"></a>
+
 ### 🎨 Fine Art Painting
 
-#### No. 103 · Vibrant Impasto: Floral Rhythms
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-impasto-floral-swirls.png" width="460" alt="Vibrant Impasto: Floral Rhythms"/>
+#### No. 129 · Vibrant Impasto: Floral Rhythms
 
-<sub>Fine Art Painting · `square` · `1024x1024`</sub>
+<img src="docs/fine-art-painting/impasto-floral-swirls.png" width="460" alt="Vibrant Impasto: Floral Rhythms"/>
+
+<sub>Fine Art Painting · `square` · `1024x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5566,7 +6790,7 @@ A vivid oil painting in the lineage of post-impressionist impasto, featuring a d
 gpt-image \
   -p "A vivid oil painting in the lineage of post-impressionist impasto, featuring a dense garden of sunflowers and irises. The paint is applied in thick, rhythmic swirls and heavy dollops with a palette knife, creating a tangible 3D texture on the canvas. The color palette is an explosion of 'Chrome Yellow', 'Deep Ultramarine', and 'Vermilion Red', with visible strokes of white lead to indicate shimmering light. The composition is a tight, chaotic floral arrangement that seems to vibrate with energy. The lighting is harsh midday sun, which creates deep shadows within the ridges of the thick paint. There are no flat surfaces; every inch of the 'canvas' is covered in expressive, turbulent movement. The overall effect is one of raw emotion and the physical presence of the medium, focusing on the light-play over the peaks of the oil paint." \
   --size square --quality high \
-  -f docs/example-impasto-floral-swirls.png
+  -f docs/fine-art-painting/impasto-floral-swirls.png
 ```
 
 **OpenAI SDK**
@@ -5582,18 +6806,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-impasto-floral-swirls.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fine-art-painting/impasto-floral-swirls.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 104 · Impressionist Lineage: River at Dusk
+#### No. 130 · Impressionist Lineage: River at Dusk
 
-<img src="docs/example-impressionist-river-dusk.png" width="620" alt="Impressionist Lineage: River at Dusk"/>
+<img src="docs/fine-art-painting/impressionist-river-dusk.png" width="620" alt="Impressionist Lineage: River at Dusk"/>
 
-<sub>Fine Art Painting · `wide` · `2048x1152`</sub>
+<sub>Fine Art Painting · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5608,7 +6832,7 @@ A serene landscape painting in the lineage of late 19th-century Impressionism, d
 gpt-image \
   -p "A serene landscape painting in the lineage of late 19th-century Impressionism, depicting a wide river reflecting a hazy violet and gold sunset. The water is rendered with short, horizontal dabs of color—'Lavender', 'Pale Peach', and 'Sage Green'—that suggest the gentle ripple of the surface. On the banks, weeping willows are suggested by soft, blurred strokes of dark emerald and charcoal. The atmosphere is thick with moisture and light, where the sky and water seem to merge at the horizon. There are no sharp lines or defined edges; the entire scene is a study of light, color, and atmospheric perspective. The lighting is the fleeting 'blue hour,' where the last rays of sun catch the tips of the waves. The mood is tranquil and meditative, capturing a fleeting moment of natural beauty through a soft, atmospheric lens." \
   --size wide --quality high \
-  -f docs/example-impressionist-river-dusk.png
+  -f docs/fine-art-painting/impressionist-river-dusk.png
 ```
 
 **OpenAI SDK**
@@ -5624,18 +6848,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-impressionist-river-dusk.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fine-art-painting/impressionist-river-dusk.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 105 · Mid-Century Modern: The Blue Pool
+#### No. 131 · Mid-Century Modern: The Blue Pool
 
-<img src="docs/example-hockney-california-backyard.png" width="620" alt="Mid-Century Modern: The Blue Pool"/>
+<img src="docs/fine-art-painting/hockney-california-backyard.png" width="620" alt="Mid-Century Modern: The Blue Pool"/>
 
-<sub>Fine Art Painting · `landscape` · `1536x1024`</sub>
+<sub>Fine Art Painting · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5650,7 +6874,7 @@ A flat, vibrant acrylic painting in the lineage of 1960s California modernism. T
 gpt-image \
   -p "A flat, vibrant acrylic painting in the lineage of 1960s California modernism. The scene features a sparkling turquoise swimming pool in the foreground, with highly stylized white splash lines indicating a recent dive. In the background, a minimalist glass-and-steel house sits under a cloudless 'Cerulean' sky, flanked by two perfectly manicured palm trees. The color palette is dominated by saturated primaries: 'Turquoise Blue', 'Lemon Yellow', and 'Terracotta'. The lighting is the flat, shadowless glare of a Los Angeles afternoon, emphasizing the geometric shapes and clean lines of the architecture. The composition is strictly horizontal and balanced, with a sense of artificial stillness and leisure. The texture is smooth and matte, avoiding any visible brushstrokes to maintain a clean, graphic quality. It is a portrait of a sunny, suburban utopia." \
   --size landscape --quality high \
-  -f docs/example-hockney-california-backyard.png
+  -f docs/fine-art-painting/hockney-california-backyard.png
 ```
 
 **OpenAI SDK**
@@ -5666,18 +6890,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-hockney-california-backyard.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fine-art-painting/hockney-california-backyard.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 106 · Color Field Abstract: Crimson and Ochre
+#### No. 132 · Color Field Abstract: Crimson and Ochre
 
-<img src="docs/example-rothko-color-field-meditation.png" width="320" alt="Color Field Abstract: Crimson and Ochre"/>
+<img src="docs/fine-art-painting/rothko-color-field-meditation.png" width="320" alt="Color Field Abstract: Crimson and Ochre"/>
 
-<sub>Fine Art Painting · `tall` · `2160x3840`</sub>
+<sub>Fine Art Painting · `tall` · `2160x3840` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5692,7 +6916,7 @@ A large-scale abstract painting in the lineage of mid-century Color Field expres
 gpt-image \
   -p "A large-scale abstract painting in the lineage of mid-century Color Field expressionism. The composition consists of three stacked, soft-edged rectangular forms that appear to float against a darker background. The top rectangle is a deep 'Oxblood Red', the middle is a vibrating 'Burnt Orange', and the bottom is a dusty 'Ochre'. The edges of the shapes are hazy and feathered, allowing the colors to bleed into one another and create a sense of profound depth. The texture of the canvas is subtly visible through the thin, layered washes of pigment. There is no representational subject matter; the focus is entirely on the emotional resonance of the color and the monumental scale. The lighting is soft and ambient, making the colors seem to glow from within the canvas. The mood is spiritual, somber, and deeply immersive." \
   --size tall --quality high \
-  -f docs/example-rothko-color-field-meditation.png
+  -f docs/fine-art-painting/rothko-color-field-meditation.png
 ```
 
 **OpenAI SDK**
@@ -5708,18 +6932,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-rothko-color-field-meditation.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fine-art-painting/rothko-color-field-meditation.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 107 · Social Realism: The Great Foundry
+#### No. 133 · Social Realism: The Great Foundry
 
-<img src="docs/example-rivera-social-industrial-mural.png" width="620" alt="Social Realism: The Great Foundry"/>
+<img src="docs/fine-art-painting/rivera-social-industrial-mural.png" width="620" alt="Social Realism: The Great Foundry"/>
 
-<sub>Fine Art Painting · `wide` · `2048x1152`</sub>
+<sub>Fine Art Painting · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5734,7 +6958,7 @@ A grand-scale public mural in the lineage of early 20th-century social realism a
 gpt-image \
   -p "A grand-scale public mural in the lineage of early 20th-century social realism and Mexican muralism. The scene depicts an industrial foundry where diverse workers are engaged in the heroic labor of forging massive steel gears. The figures are rendered with heavy, rounded forms and powerful muscularity, colored in earthy tones of 'Sienna', 'Slate Grey', and 'Iron Rust'. The composition is dense and rhythmic, filled with the interlocking shapes of machinery, pipes, and human bodies. In the center, a golden glow emanates from a crucible of molten metal, illuminating the faces of the workers with a dramatic 'Fire Orange'. The style is bold and graphic, with strong black outlines and a flattened perspective that emphasizes the collective effort. The mural covers a vast curved wall, suggesting a narrative of progress, unity, and the dignity of the working class." \
   --size wide --quality high \
-  -f docs/example-rivera-social-industrial-mural.png
+  -f docs/fine-art-painting/rivera-social-industrial-mural.png
 ```
 
 **OpenAI SDK**
@@ -5750,7 +6974,7 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-rivera-social-industrial-mural.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/fine-art-painting/rivera-social-industrial-mural.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -5758,13 +6982,16 @@ open("docs/example-rivera-social-industrial-mural.png", "wb").write(base64.b64de
 ---
 
 <a id="gallery-more-illustration-styles"></a>
+
 ### ✏️ More Illustration Styles
 
-#### No. 108 · Flat Design: Modern Wellness
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-flat-design-editorial-wellness.png" width="460" alt="Flat Design: Modern Wellness"/>
+#### No. 134 · Flat Design: Modern Wellness
 
-<sub>Illustration · `square` · `1024x1024`</sub>
+<img src="docs/more-illustration-styles/flat-design-editorial-wellness.png" width="460" alt="Flat Design: Modern Wellness"/>
+
+<sub>More Illustration Styles · `square` · `1024x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5779,7 +7006,7 @@ A clean, vector-based flat design illustration for a modern health and wellness 
 gpt-image \
   -p "A clean, vector-based flat design illustration for a modern health and wellness editorial. The scene features a diverse group of stylized people practicing yoga and meditation in a minimalist park. The characters have simplified, elegant proportions with no facial features, wearing activewear in a palette of 'Muted Sage', 'Dusty Rose', and 'Sand'. The background consists of geometric semi-circles representing hills and simple leaf shapes in varying shades of green. There are no gradients or shadows; the entire image is composed of solid, overlapping color blocks with crisp edges. The composition is balanced and airy, with plenty of negative space. The lighting is represented by a single yellow circle for the sun, casting no shadows. The overall aesthetic is friendly, professional, and very 'Behance 2024,' emphasizing clarity and calm." \
   --size square --quality high \
-  -f docs/example-flat-design-editorial-wellness.png
+  -f docs/more-illustration-styles/flat-design-editorial-wellness.png
 ```
 
 **OpenAI SDK**
@@ -5795,18 +7022,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-flat-design-editorial-wellness.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/more-illustration-styles/flat-design-editorial-wellness.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 109 · Chibi Style: The Starry Bakery
+#### No. 135 · Chibi Style: The Starry Bakery
 
-<img src="docs/example-chibi-kawaii-bakery.png" width="460" alt="Chibi Style: The Starry Bakery"/>
+<img src="docs/more-illustration-styles/chibi-kawaii-bakery.png" width="460" alt="Chibi Style: The Starry Bakery"/>
 
-<sub>Illustration · `square` · `1024x1024`</sub>
+<sub>More Illustration Styles · `square` · `1024x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5821,7 +7048,7 @@ A hyper-cute 'Q-style' or chibi illustration of a tiny, magical bakery run by a 
 gpt-image \
   -p "A hyper-cute 'Q-style' or chibi illustration of a tiny, magical bakery run by a group of small forest animals. The characters have oversized heads, large twinkling eyes, and tiny limbs, dressed in miniature baker hats and aprons. They are decorating giant, glowing cupcakes that look like planets. The color palette is 'Pastel Rainbow': mint, strawberry pink, lavender, and lemon. The line art is soft and rounded, in a dark chocolate brown rather than black. The background is a cozy, rounded kitchen with jars of sparkling stardust and windows looking out onto a crescent moon. The lighting is warm and sparkly, with many small 'twinkle' effects and soft white glows around the pastries. The mood is sugary-sweet, whimsical, and extremely comforting, designed for a sticker set or a children's book." \
   --size square --quality high \
-  -f docs/example-chibi-kawaii-bakery.png
+  -f docs/more-illustration-styles/chibi-kawaii-bakery.png
 ```
 
 **OpenAI SDK**
@@ -5837,18 +7064,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-chibi-kawaii-bakery.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/more-illustration-styles/chibi-kawaii-bakery.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 110 · Low-Poly Geometric: Alpine Sunset
+#### No. 136 · Low-Poly Geometric: Alpine Sunset
 
-<img src="docs/example-low-poly-mountain-voyage.png" width="620" alt="Low-Poly Geometric: Alpine Sunset"/>
+<img src="docs/more-illustration-styles/low-poly-mountain-voyage.png" width="620" alt="Low-Poly Geometric: Alpine Sunset"/>
 
-<sub>Illustration · `landscape` · `1536x1024`</sub>
+<sub>More Illustration Styles · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5863,7 +7090,7 @@ A stylized landscape illustration composed entirely of sharp, flat-shaded geomet
 gpt-image \
   -p "A stylized landscape illustration composed entirely of sharp, flat-shaded geometric polygons. The subject is a range of snow-capped mountains at sunset. Every surface is a triangle or quadrilateral, with no curves or gradients. The lighting is calculated by the angle of the polygons, creating distinct facets of light and shadow. The color palette transitions from 'Deep Indigo' in the valleys to 'Fiery Crimson' and 'Gold' on the mountain peaks. In the foreground, a low-poly pine forest is represented by simple green tetrahedrons. The sky is a series of horizontal bands of color, with a low-poly sun made of concentric yellow circles. The overall look is reminiscent of early 3D video game aesthetics but with a modern, high-resolution finish. The mood is clean, digital, and strangely peaceful in its mathematical simplicity." \
   --size landscape --quality high \
-  -f docs/example-low-poly-mountain-voyage.png
+  -f docs/more-illustration-styles/low-poly-mountain-voyage.png
 ```
 
 **OpenAI SDK**
@@ -5879,18 +7106,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-low-poly-mountain-voyage.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/more-illustration-styles/low-poly-mountain-voyage.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 111 · Sticker Design: Cyber-Explorer Club
+#### No. 137 · Sticker Design: Cyber-Explorer Club
 
-<img src="docs/example-holographic-sticker-badge.png" width="460" alt="Sticker Design: Cyber-Explorer Club"/>
+<img src="docs/more-illustration-styles/holographic-sticker-badge.png" width="460" alt="Sticker Design: Cyber-Explorer Club"/>
 
-<sub>Illustration · `square` · `1024x1024`</sub>
+<sub>More Illustration Styles · `square` · `1024x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5905,7 +7132,7 @@ A collection of five high-quality die-cut sticker designs arranged on a dark car
 gpt-image \
   -p "A collection of five high-quality die-cut sticker designs arranged on a dark carbon-fiber background. The central sticker is a circular badge featuring a stylized astronaut helmet with the text 'EXPLORE' in a bold, futuristic font. The other stickers include a retro-style rocket, a planet with rings, and a lightning bolt. The art style is 'Neo-Traditional Sticker,' with thick white borders and vibrant, saturated colors. A 'holographic' texture overlay is applied to certain areas, creating a rainbow-sheen effect that shifts with the light. The lighting features bright specular highlights to give the stickers a 3D, plastic, and slightly glossy feel. The colors are 'Electric Purple', 'Cyan', and 'Neon Yellow'. Each sticker has a subtle drop shadow to make it appear as if it's peeling slightly off the surface." \
   --size square --quality high \
-  -f docs/example-holographic-sticker-badge.png
+  -f docs/more-illustration-styles/holographic-sticker-badge.png
 ```
 
 **OpenAI SDK**
@@ -5921,18 +7148,60 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-holographic-sticker-badge.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/more-illustration-styles/holographic-sticker-badge.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 112 · Risograph Print: City Shadows
+#### No. 138 · Kawaii sticker pack: Mexico icons
 
-<img src="docs/example-risograph-urban-landscape.png" width="460" alt="Risograph Print: City Shadows"/>
+<img src="docs/more-illustration-styles/kawaii-sticker-pack-mexico.png" width="460" alt="Kawaii sticker pack: Mexico icons"/>
 
-<sub>Illustration · `portrait` · `1024x1536`</sub>
+<sub>More Illustration Styles · `square` · `1024x1024` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2046875573574877663)</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Design a cute kawaii sticker pack featuring famous things from Mexico, including iconic food, landmarks, and traditional objects, all with adorable faces, soft pastel colors, rounded shapes, minimal shading, chibi style, glossy sticker finish, high resolution, arranged as a sticker sheet.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Design a cute kawaii sticker pack featuring famous things from Mexico, including iconic food, landmarks, and traditional objects, all with adorable faces, soft pastel colors, rounded shapes, minimal shading, chibi style, glossy sticker finish, high resolution, arranged as a sticker sheet.' \
+  --size square --quality high \
+  -f docs/more-illustration-styles/kawaii-sticker-pack-mexico.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Design a cute kawaii sticker pack featuring famous things from Mexico, including iconic food, landmarks, and traditional objects, all with adorable faces, soft pastel colors, rounded shapes, minimal shading, chibi style, glossy sticker finish, high resolution, arranged as a sticker sheet.""",
+    size="1024x1024",
+    quality="high",
+)
+
+import base64
+open("docs/more-illustration-styles/kawaii-sticker-pack-mexico.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+#### No. 139 · Risograph Print: City Shadows
+
+<img src="docs/more-illustration-styles/risograph-urban-landscape.png" width="460" alt="Risograph Print: City Shadows"/>
+
+<sub>More Illustration Styles · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5947,7 +7216,7 @@ An urban landscape illustration created in the style of a two-color Risograph pr
 gpt-image \
   -p "An urban landscape illustration created in the style of a two-color Risograph print. The palette is limited to 'Fluorescent Pink' and 'Teal Blue', with a dark navy created where the two inks overlap. The image has the characteristic grainy, tactile texture of Riso printing, with visible halftones and a slight, intentional 'misregistration' where the colors don't perfectly align. The subject is a high-contrast view of a city street with fire escapes and power lines. The lighting is represented through the density of the dot patterns, creating a gritty, lo-fi aesthetic. The composition uses flat shapes and bold silhouettes, with the pink ink used for the sky and the teal for the building shadows. The mood is indie, artistic, and nostalgic for DIY zine culture. The text 'SHIFT' is printed in the bottom corner in a distorted, ink-heavy typeface." \
   --size portrait --quality high \
-  -f docs/example-risograph-urban-landscape.png
+  -f docs/more-illustration-styles/risograph-urban-landscape.png
 ```
 
 **OpenAI SDK**
@@ -5963,7 +7232,7 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-risograph-urban-landscape.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/more-illustration-styles/risograph-urban-landscape.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
@@ -5971,13 +7240,16 @@ open("docs/example-risograph-urban-landscape.png", "wb").write(base64.b64decode(
 ---
 
 <a id="gallery-cinematic-film-references"></a>
+
 ### 🎥 Cinematic Film References
 
-#### No. 113 · Symmetric Pastel: The Grand Conservatory
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<img src="docs/example-anderson-symmetric-pastel-hotel.png" width="620" alt="Symmetric Pastel: The Grand Conservatory"/>
+#### No. 140 · Symmetric Pastel: The Grand Conservatory
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+<img src="docs/cinematic-film-references/anderson-symmetric-pastel-hotel.png" width="620" alt="Symmetric Pastel: The Grand Conservatory"/>
+
+<sub>Cinematic Film References · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -5992,7 +7264,7 @@ A perfectly symmetrical, wide-angle cinematic shot in the lineage of Wes Anderso
 gpt-image \
   -p "A perfectly symmetrical, wide-angle cinematic shot in the lineage of Wes Anderson's whimsical aesthetic. The scene is a grand glass conservatory filled with exotic plants and pink flamingos, centered on a perfectly placed yellow velvet sofa. The color palette is a strict pastel scheme of 'Millennial Pink', 'Pistachio Green', and 'Mustard Yellow'. Every element in the frame is meticulously arranged, with a flat, front-on perspective that feels like a dollhouse. The lighting is soft and even, with no harsh shadows, giving the scene a surreal, painterly quality. In the center of the frame, a man in a lavender bellhop uniform stands perfectly still, holding a single red rose. The camera is a vintage Panavision, capturing a crisp, detailed image with a slight, nostalgic warmth. The mood is quirky, charming, and highly controlled, emphasizing the beauty of obsessive organization." \
   --size landscape --quality high \
-  -f docs/example-anderson-symmetric-pastel-hotel.png
+  -f docs/cinematic-film-references/anderson-symmetric-pastel-hotel.png
 ```
 
 **OpenAI SDK**
@@ -6008,18 +7280,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-anderson-symmetric-pastel-hotel.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-film-references/anderson-symmetric-pastel-hotel.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 114 · Monolithic Scifi: The Obsidian Gate
+#### No. 141 · Monolithic Scifi: The Obsidian Gate
 
-<img src="docs/example-villeneuve-monolithic-desert.png" width="620" alt="Monolithic Scifi: The Obsidian Gate"/>
+<img src="docs/cinematic-film-references/villeneuve-monolithic-desert.png" width="620" alt="Monolithic Scifi: The Obsidian Gate"/>
 
-<sub>Cinematic & Animation · `wide` · `2048x1152`</sub>
+<sub>Cinematic Film References · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -6034,7 +7306,7 @@ A breathtaking cinematic wide shot in the lineage of Denis Villeneuve's monolith
 gpt-image \
   -p "A breathtaking cinematic wide shot in the lineage of Denis Villeneuve's monolithic sci-fi. A lone, tiny figure stands before a gargantuan, featureless obsidian slab that rises miles into a dusty orange sky. The scale is incomprehensible, making the person look like a grain of sand. The environment is a vast, flat salt plain under a hazy, dim sun. The lighting is low-contrast and atmospheric, with the monolith's surface reflecting a dull, oily sheen. The color palette is 'Industrial Monochrome': deep blacks, slate greys, and a muted, sandy ochre. There is a sense of immense weight and ancient silence. The camera uses a wide-angle lens with a deep focus to emphasize the terrifying scale of the structure. The mood is one of awe, dread, and the sublime mystery of an advanced, alien intelligence. Minimalist and brutalist in design." \
   --size wide --quality high \
-  -f docs/example-villeneuve-monolithic-desert.png
+  -f docs/cinematic-film-references/villeneuve-monolithic-desert.png
 ```
 
 **OpenAI SDK**
@@ -6050,18 +7322,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-villeneuve-monolithic-desert.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-film-references/villeneuve-monolithic-desert.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 115 · Dreamscape: The Floating Garden
+#### No. 142 · Dreamscape: The Floating Garden
 
-<img src="docs/example-miyazaki-floating-island-garden.png" width="620" alt="Dreamscape: The Floating Garden"/>
+<img src="docs/cinematic-film-references/miyazaki-floating-island-garden.png" width="620" alt="Dreamscape: The Floating Garden"/>
 
-<sub>Cinematic & Animation · `landscape` · `1536x1024`</sub>
+<sub>Cinematic Film References · `landscape` · `1536x1024` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -6076,7 +7348,7 @@ A lush, hand-painted cinematic frame in the lineage of Hayao Miyazaki's dreamlik
 gpt-image \
   -p "A lush, hand-painted cinematic frame in the lineage of Hayao Miyazaki's dreamlike animation. The scene features a series of small, grassy islands floating in a sea of puffy, white cumulus clouds under a brilliant turquoise sky. Ancient stone ruins covered in vibrant 'Emerald Green' moss sit among flowering fruit trees. A gentle wind is visible through the swaying of long grass and the flight of white birds. The lighting is the bright, optimistic clarity of a summer morning, with soft, painted shadows and a gentle glow on every surface. The color palette is rich and natural: cerulean, spring green, and blossom pink. The composition is open and airy, with a sense of infinite wonder and peace. The textures have a soft, gouache-like quality, with every leaf and blade of grass feeling alive and cared for. It is a world of pure imagination and environmental harmony." \
   --size landscape --quality high \
-  -f docs/example-miyazaki-floating-island-garden.png
+  -f docs/cinematic-film-references/miyazaki-floating-island-garden.png
 ```
 
 **OpenAI SDK**
@@ -6092,18 +7364,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-miyazaki-floating-island-garden.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-film-references/miyazaki-floating-island-garden.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 116 · Slow Cinema: The Misty Orchard
+#### No. 143 · Slow Cinema: The Misty Orchard
 
-<img src="docs/example-tarkovsky-misty-dacha-morning.png" width="620" alt="Slow Cinema: The Misty Orchard"/>
+<img src="docs/cinematic-film-references/tarkovsky-misty-dacha-morning.png" width="620" alt="Slow Cinema: The Misty Orchard"/>
 
-<sub>Cinematic & Animation · `wide` · `2048x1152`</sub>
+<sub>Cinematic Film References · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -6118,7 +7390,7 @@ A contemplative, long-take cinematic frame in the lineage of Tarkovsky's slow ci
 gpt-image \
   -p "A contemplative, long-take cinematic frame in the lineage of Tarkovsky's slow cinema. A dense, silver mist clings to a neglected apple orchard at dawn. In the center, a simple wooden table with a single glass of water sits among the tall, wet grass. The colors are nearly monochromatic, dominated by 'Mossy Green', 'Cold Grey', and 'Damp Brown', with a single spark of amber from a distant lantern. The lighting is natural and melancholy, filtered through the thick fog and the canopy of trees. There is a profound sense of time passing, silence, and spiritual weight. The camera is static, with a slow, almost imperceptible zoom. The textures are tangible: the rot on the wood, the droplets of dew on the glass, the dampness of the air. The mood is philosophical, lonely, and deeply grounded in the natural world and the memory of a home." \
   --size wide --quality high \
-  -f docs/example-tarkovsky-misty-dacha-morning.png
+  -f docs/cinematic-film-references/tarkovsky-misty-dacha-morning.png
 ```
 
 **OpenAI SDK**
@@ -6134,18 +7406,18 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-tarkovsky-misty-dacha-morning.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-film-references/tarkovsky-misty-dacha-morning.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 117 · Neo-Noir: The Orange Fog
+#### No. 144 · Neo-Noir: The Orange Fog
 
-<img src="docs/example-blade-runner-neo-noir-orange.png" width="620" alt="Neo-Noir: The Orange Fog"/>
+<img src="docs/cinematic-film-references/blade-runner-neo-noir-orange.png" width="620" alt="Neo-Noir: The Orange Fog"/>
 
-<sub>Cinematic & Animation · `wide` · `2048x1152`</sub>
+<sub>Cinematic Film References · `wide` · `2048x1152` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
@@ -6160,7 +7432,7 @@ A cinematic wide shot in the lineage of Blade Runner 2049, depicting a futuristi
 gpt-image \
   -p "A cinematic wide shot in the lineage of Blade Runner 2049, depicting a futuristic city buried in a thick, toxic orange radioactive fog. The silhouettes of crumbling, ancient statues and jagged skyscrapers are barely visible through the haze. A lone hover-vehicle with blue thruster lights cuts through the orange gloom, creating a sharp color contrast. The lighting is oppressive and diffused, with no visible sun, only a constant, eerie orange glow that flattens all features. The color palette is a striking 'Amber and Cobalt' duo-tone. The composition is low-angle, looking up at the oppressive structures of the city. The camera uses a 35mm anamorphic lens, creating a cinematic wide aspect ratio and subtle lens flares. The mood is apocalyptic, lonely, and visually stunning in its desolation, focusing on the atmospheric density and the scale of the ruins." \
   --size wide --quality high \
-  -f docs/example-blade-runner-neo-noir-orange.png
+  -f docs/cinematic-film-references/blade-runner-neo-noir-orange.png
 ```
 
 **OpenAI SDK**
@@ -6176,36 +7448,39 @@ result = client.images.generate(
 )
 
 import base64
-open("docs/example-blade-runner-neo-noir-orange.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/cinematic-film-references/blade-runner-neo-noir-orange.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-<a id="gallery-niche-emerging"></a>
-### 🌌 Niche & Emerging
+<a id="gallery-beauty-lifestyle"></a>
 
-#### No. 118 · Generative Art: Flow Field #42
+### 💄 Beauty & Lifestyle
 
-<img src="docs/example-generative-flow-field-particles.png" width="460" alt="Generative Art: Flow Field #42"/>
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
 
-<sub>Niche & Emerging · `square` · `1024x1024`</sub>
+#### No. 145 · Quiet-luxury skincare morning tray
+
+<img src="docs/beauty-lifestyle/skincare-morning-routine-tray.png" width="460" alt="Quiet-luxury skincare morning tray"/>
+
+<sub>Beauty & Lifestyle · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
 
 **Prompt**
 ```text
-An intricate generative art piece in the lineage of Processing and p5.js flow fields. Thousands of fine, glowing lines curve and weave across a pitch-black background, following an underlying Perlin noise algorithm. The lines transition in color from 'Electric Violet' at their origin to 'Cyan' and 'Ghost White' at their tails, creating a sense of fluid motion and organic complexity. The density of the lines varies, creating areas of intense light and dark voids. The overall composition resembles a cross-section of a nebula or a high-speed capture of liquid currents. The lighting is purely self-emissive, with the lines appearing to glow against the void. The image is hyper-detailed, with each individual strand visible, yet forming a cohesive, mathematical whole. The mood is futuristic, orderly, and mesmerizing, celebrating the beauty of code and complexity.
+Create a 3:4 vertical beauty lifestyle photograph for a premium skincare morning routine. Scene: a travertine bathroom counter beside a soft frosted window, with a minimal glass serum bottle, ceramic cleanser tube, cream jar, folded linen towel, jade roller, small dish of pearl hair clips, and a single dewy white camellia flower. Lighting: natural morning side light, gentle reflections, realistic glass thickness, soft shadows, clean negative space. Aesthetic: quiet luxury, Japanese minimalism meets modern spa editorial, cream / warm stone / translucent pale green palette. No visible brand logos, no readable fake labels except a tiny generic mark "AM ROUTINE", no human face, no clutter, no overdone CGI shine.
 ```
 
 **CLI**
 ```bash
 gpt-image \
-  -p "An intricate generative art piece in the lineage of Processing and p5.js flow fields. Thousands of fine, glowing lines curve and weave across a pitch-black background, following an underlying Perlin noise algorithm. The lines transition in color from 'Electric Violet' at their origin to 'Cyan' and 'Ghost White' at their tails, creating a sense of fluid motion and organic complexity. The density of the lines varies, creating areas of intense light and dark voids. The overall composition resembles a cross-section of a nebula or a high-speed capture of liquid currents. The lighting is purely self-emissive, with the lines appearing to glow against the void. The image is hyper-detailed, with each individual strand visible, yet forming a cohesive, mathematical whole. The mood is futuristic, orderly, and mesmerizing, celebrating the beauty of code and complexity." \
-  --size square --quality high \
-  -f docs/example-generative-flow-field-particles.png
+  -p 'Create a 3:4 vertical beauty lifestyle photograph for a premium skincare morning routine. Scene: a travertine bathroom counter beside a soft frosted window, with a minimal glass serum bottle, ceramic cleanser tube, cream jar, folded linen towel, jade roller, small dish of pearl hair clips, and a single dewy white camellia flower. Lighting: natural morning side light, gentle reflections, realistic glass thickness, soft shadows, clean negative space. Aesthetic: quiet luxury, Japanese minimalism meets modern spa editorial, cream / warm stone / translucent pale green palette. No visible brand logos, no readable fake labels except a tiny generic mark "AM ROUTINE", no human face, no clutter, no overdone CGI shine.' \
+  --size portrait --quality high \
+  -f docs/beauty-lifestyle/skincare-morning-routine-tray.png
 ```
 
 **OpenAI SDK**
@@ -6215,39 +7490,45 @@ client = OpenAI()
 
 result = client.images.generate(
     model="gpt-image-2",
-    prompt="""An intricate generative art piece in the lineage of Processing and p5.js flow fields. Thousands of fine, glowing lines curve and weave across a pitch-black background, following an underlying Perlin noise algorithm. The lines transition in color from 'Electric Violet' at their origin to 'Cyan' and 'Ghost White' at their tails, creating a sense of fluid motion and organic complexity. The density of the lines varies, creating areas of intense light and dark voids. The overall composition resembles a cross-section of a nebula or a high-speed capture of liquid currents. The lighting is purely self-emissive, with the lines appearing to glow against the void. The image is hyper-detailed, with each individual strand visible, yet forming a cohesive, mathematical whole. The mood is futuristic, orderly, and mesmerizing, celebrating the beauty of code and complexity.""",
-    size="1024x1024",
+    prompt="""Create a 3:4 vertical beauty lifestyle photograph for a premium skincare morning routine. Scene: a travertine bathroom counter beside a soft frosted window, with a minimal glass serum bottle, ceramic cleanser tube, cream jar, folded linen towel, jade roller, small dish of pearl hair clips, and a single dewy white camellia flower. Lighting: natural morning side light, gentle reflections, realistic glass thickness, soft shadows, clean negative space. Aesthetic: quiet luxury, Japanese minimalism meets modern spa editorial, cream / warm stone / translucent pale green palette. No visible brand logos, no readable fake labels except a tiny generic mark "AM ROUTINE", no human face, no clutter, no overdone CGI shine.""",
+    size="1024x1536",
     quality="high",
 )
 
 import base64
-open("docs/example-generative-flow-field-particles.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/beauty-lifestyle/skincare-morning-routine-tray.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 119 · 90s OVA: The Cyber-Terminal
+<a id="gallery-events-experience"></a>
 
-<img src="docs/example-90s-anime-cyber-terminal.png" width="620" alt="90s OVA: The Cyber-Terminal"/>
+### 🎟️ Events & Experience
 
-<sub>Niche & Emerging · `landscape` · `1536x1024`</sub>
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
+
+#### No. 146 · Riverside makers market wayfinding poster
+
+<img src="docs/events-experience/indie-market-wayfinding-poster.png" width="460" alt="Riverside makers market wayfinding poster"/>
+
+<sub>Events & Experience · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
 
 **Prompt**
 ```text
-A detailed background cel from a 1990s cyberpunk OVA, in the lineage of Ghost in the Shell. The scene is a cluttered hacker's den, filled with CRT monitors displaying green cascading code, tangled bundles of multi-colored wires, and translucent holographic interfaces. The art style features sharp, hand-inked line work and a grit-heavy color palette of 'Deep Teal', 'Crimson', and 'Oily Black'. The lighting is provided by the glow of the screens, casting sharp, high-contrast highlights on the metallic surfaces and the model's face. The atmosphere is dense with detail: dust motes dancing in the light, scratched metal, and worn plastic. The mood is moody, high-tech, and underground. In the corner, the text 'BOOT_SEQUENCE_COMPLETE' is visible in a retro pixel font. The overall look is analog-digital, reflecting the hardware-heavy sci-fi of the 90s.
+Design a vertical event-experience wayfinding poster for an imaginary weekend indie maker market. Exact readable text: "RIVERSIDE MAKERS MARKET" / "SAT 10–6" / "CERAMICS · PRINTS · COFFEE · MUSIC" / "ENTRY FREE". Layout: cheerful modular grid with a small illustrated map at the bottom, booth icons, arrow markers, stage, coffee cart, workshop tent, and riverside lawn. Style anchor: Swiss grid discipline meets friendly risograph community poster, two-color overprint texture, rounded icon system, off-white paper, coral red, river blue, moss green. Make the poster visually useful, charming, and legible from a distance. Avoid generic festival chaos, fake sponsor logos, and unreadable microtext.
 ```
 
 **CLI**
 ```bash
 gpt-image \
-  -p "A detailed background cel from a 1990s cyberpunk OVA, in the lineage of Ghost in the Shell. The scene is a cluttered hacker's den, filled with CRT monitors displaying green cascading code, tangled bundles of multi-colored wires, and translucent holographic interfaces. The art style features sharp, hand-inked line work and a grit-heavy color palette of 'Deep Teal', 'Crimson', and 'Oily Black'. The lighting is provided by the glow of the screens, casting sharp, high-contrast highlights on the metallic surfaces and the model's face. The atmosphere is dense with detail: dust motes dancing in the light, scratched metal, and worn plastic. The mood is moody, high-tech, and underground. In the corner, the text 'BOOT_SEQUENCE_COMPLETE' is visible in a retro pixel font. The overall look is analog-digital, reflecting the hardware-heavy sci-fi of the 90s." \
-  --size landscape --quality high \
-  -f docs/example-90s-anime-cyber-terminal.png
+  -p 'Design a vertical event-experience wayfinding poster for an imaginary weekend indie maker market. Exact readable text: "RIVERSIDE MAKERS MARKET" / "SAT 10–6" / "CERAMICS · PRINTS · COFFEE · MUSIC" / "ENTRY FREE". Layout: cheerful modular grid with a small illustrated map at the bottom, booth icons, arrow markers, stage, coffee cart, workshop tent, and riverside lawn. Style anchor: Swiss grid discipline meets friendly risograph community poster, two-color overprint texture, rounded icon system, off-white paper, coral red, river blue, moss green. Make the poster visually useful, charming, and legible from a distance. Avoid generic festival chaos, fake sponsor logos, and unreadable microtext.' \
+  --size portrait --quality high \
+  -f docs/events-experience/indie-market-wayfinding-poster.png
 ```
 
 **OpenAI SDK**
@@ -6257,39 +7538,93 @@ client = OpenAI()
 
 result = client.images.generate(
     model="gpt-image-2",
-    prompt="""A detailed background cel from a 1990s cyberpunk OVA, in the lineage of Ghost in the Shell. The scene is a cluttered hacker's den, filled with CRT monitors displaying green cascading code, tangled bundles of multi-colored wires, and translucent holographic interfaces. The art style features sharp, hand-inked line work and a grit-heavy color palette of 'Deep Teal', 'Crimson', and 'Oily Black'. The lighting is provided by the glow of the screens, casting sharp, high-contrast highlights on the metallic surfaces and the model's face. The atmosphere is dense with detail: dust motes dancing in the light, scratched metal, and worn plastic. The mood is moody, high-tech, and underground. In the corner, the text 'BOOT_SEQUENCE_COMPLETE' is visible in a retro pixel font. The overall look is analog-digital, reflecting the hardware-heavy sci-fi of the 90s.""",
+    prompt="""Design a vertical event-experience wayfinding poster for an imaginary weekend indie maker market. Exact readable text: "RIVERSIDE MAKERS MARKET" / "SAT 10–6" / "CERAMICS · PRINTS · COFFEE · MUSIC" / "ENTRY FREE". Layout: cheerful modular grid with a small illustrated map at the bottom, booth icons, arrow markers, stage, coffee cart, workshop tent, and riverside lawn. Style anchor: Swiss grid discipline meets friendly risograph community poster, two-color overprint texture, rounded icon system, off-white paper, coral red, river blue, moss green. Make the poster visually useful, charming, and legible from a distance. Avoid generic festival chaos, fake sponsor logos, and unreadable microtext.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/events-experience/indie-market-wayfinding-poster.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
+
+---
+
+<a id="gallery-automotive-mobility"></a>
+
+### 🛵 Automotive & Mobility
+
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
+
+#### No. 147 · Electric city scooter sunrise ad
+
+<img src="docs/automotive-mobility/electric-city-scooter-ad.png" width="620" alt="Electric city scooter sunrise ad"/>
+
+<sub>Automotive & Mobility · `landscape` · `1536x1024` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a landscape automotive-mobility advertising render for an elegant compact electric city scooter at sunrise. The scooter is parked on a quiet Copenhagen-style bike lane beside warm brick buildings and clean street furniture. Hero object: matte sage-green scooter with rounded minimal body, leather tan seat, integrated LED headlight, visible charging port, and small digital dashboard. Composition: low three-quarter angle, leading lane lines, soft morning haze, realistic metal and rubber materials, subtle motion blur from passing cyclists in the background. Exact small headline text on a nearby poster: "QUIET CITY, CLEAN RIDE". Aesthetic: Scandinavian product design, premium but practical. Avoid motorcycle aggression, sci-fi excess, fake brand logos, and toy-like proportions.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a landscape automotive-mobility advertising render for an elegant compact electric city scooter at sunrise. The scooter is parked on a quiet Copenhagen-style bike lane beside warm brick buildings and clean street furniture. Hero object: matte sage-green scooter with rounded minimal body, leather tan seat, integrated LED headlight, visible charging port, and small digital dashboard. Composition: low three-quarter angle, leading lane lines, soft morning haze, realistic metal and rubber materials, subtle motion blur from passing cyclists in the background. Exact small headline text on a nearby poster: "QUIET CITY, CLEAN RIDE". Aesthetic: Scandinavian product design, premium but practical. Avoid motorcycle aggression, sci-fi excess, fake brand logos, and toy-like proportions.' \
+  --size landscape --quality high \
+  -f docs/automotive-mobility/electric-city-scooter-ad.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a landscape automotive-mobility advertising render for an elegant compact electric city scooter at sunrise. The scooter is parked on a quiet Copenhagen-style bike lane beside warm brick buildings and clean street furniture. Hero object: matte sage-green scooter with rounded minimal body, leather tan seat, integrated LED headlight, visible charging port, and small digital dashboard. Composition: low three-quarter angle, leading lane lines, soft morning haze, realistic metal and rubber materials, subtle motion blur from passing cyclists in the background. Exact small headline text on a nearby poster: "QUIET CITY, CLEAN RIDE". Aesthetic: Scandinavian product design, premium but practical. Avoid motorcycle aggression, sci-fi excess, fake brand logos, and toy-like proportions.""",
     size="1536x1024",
     quality="high",
 )
 
 import base64
-open("docs/example-90s-anime-cyber-terminal.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/automotive-mobility/electric-city-scooter-ad.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-#### No. 120 · Vaporwave: The Abandoned Mall
+<a id="gallery-tattoo-design"></a>
 
-<img src="docs/example-vaporwave-mall-fountain.png" width="620" alt="Vaporwave: The Abandoned Mall"/>
+### 🖋️ Tattoo Design
 
-<sub>Niche & Emerging · `landscape` · `1536x1024`</sub>
+<p align="right"><sub><a href="#gallery-index">↑ Back to gallery index</a></sub></p>
+
+#### No. 148 · Realistic black-and-grey sleeve study
+
+<img src="docs/tattoo-design/realistic-black-grey-sleeve-study.png" width="460" alt="Realistic black-and-grey tattoo sleeve study"/>
+
+<sub>Tattoo Design · `portrait` · `1024x1536` · Original</sub>
 
 <details>
 <summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
 
 **Prompt**
 ```text
-A quintessential vaporwave aesthetic image featuring a classical marble bust of a Greek god wearing pink mirrored sunglasses, placed next to a splashing indoor fountain in an abandoned 1980s shopping mall. The color palette is a surreal 'Sunset Gradient' of hot pink, neon blue, and soft purple. Floating geometric 3D shapes, like checkered spheres and wireframe grids, drift in the air. A lone palm tree stands in a plastic pot, illuminated by a neon light. The lighting is dreamy and artificial, with a soft 'VHS' scanline overlay and a slight chromatic aberration at the edges. The composition is a nostalgic, low-fidelity dreamscape that feels both familiar and impossible. The text 'A E S T H E T I C' is written in a spaced-out, full-width serif font across the bottom. The mood is one of ironic nostalgia and digital melancholy.
+Create a portrait tattoo design sheet for a realistic black-and-grey forearm sleeve. Subject: a highly detailed raven skull nested with realistic peonies, smoke ribbons, tiny moths, and cracked marble fragments. Present it as premium tattoo flash on warm off-white paper with a faint arm-placement silhouette behind the main artwork. Style: ultra-realistic tattoo shading, smooth dotwork gradients, crisp stencil-ready outlines, high contrast but not muddy, strong negative-space gaps for skin breathing room. Include small layout notes in clean text: "BLACK & GREY" / "FOREARM SLEEVE" / "NEGATIVE SPACE". No gore, no body horror, no brand logos, no actual person, no photorealistic skin photo; make it a professional tattoo design presentation.
 ```
 
 **CLI**
 ```bash
 gpt-image \
-  -p "A quintessential vaporwave aesthetic image featuring a classical marble bust of a Greek god wearing pink mirrored sunglasses, placed next to a splashing indoor fountain in an abandoned 1980s shopping mall. The color palette is a surreal 'Sunset Gradient' of hot pink, neon blue, and soft purple. Floating geometric 3D shapes, like checkered spheres and wireframe grids, drift in the air. A lone palm tree stands in a plastic pot, illuminated by a neon light. The lighting is dreamy and artificial, with a soft 'VHS' scanline overlay and a slight chromatic aberration at the edges. The composition is a nostalgic, low-fidelity dreamscape that feels both familiar and impossible. The text 'A E S T H E T I C' is written in a spaced-out, full-width serif font across the bottom. The mood is one of ironic nostalgia and digital melancholy." \
-  --size landscape --quality high \
-  -f docs/example-vaporwave-mall-fountain.png
+  -p 'Create a portrait tattoo design sheet for a realistic black-and-grey forearm sleeve. Subject: a highly detailed raven skull nested with realistic peonies, smoke ribbons, tiny moths, and cracked marble fragments. Present it as premium tattoo flash on warm off-white paper with a faint arm-placement silhouette behind the main artwork. Style: ultra-realistic tattoo shading, smooth dotwork gradients, crisp stencil-ready outlines, high contrast but not muddy, strong negative-space gaps for skin breathing room. Include small layout notes in clean text: "BLACK & GREY" / "FOREARM SLEEVE" / "NEGATIVE SPACE". No gore, no body horror, no brand logos, no actual person, no photorealistic skin photo; make it a professional tattoo design presentation.' \
+  --size portrait --quality high \
+  -f docs/tattoo-design/realistic-black-grey-sleeve-study.png
 ```
 
 **OpenAI SDK**
@@ -6299,42 +7634,139 @@ client = OpenAI()
 
 result = client.images.generate(
     model="gpt-image-2",
-    prompt="""A quintessential vaporwave aesthetic image featuring a classical marble bust of a Greek god wearing pink mirrored sunglasses, placed next to a splashing indoor fountain in an abandoned 1980s shopping mall. The color palette is a surreal 'Sunset Gradient' of hot pink, neon blue, and soft purple. Floating geometric 3D shapes, like checkered spheres and wireframe grids, drift in the air. A lone palm tree stands in a plastic pot, illuminated by a neon light. The lighting is dreamy and artificial, with a soft 'VHS' scanline overlay and a slight chromatic aberration at the edges. The composition is a nostalgic, low-fidelity dreamscape that feels both familiar and impossible. The text 'A E S T H E T I C' is written in a spaced-out, full-width serif font across the bottom. The mood is one of ironic nostalgia and digital melancholy.""",
-    size="1536x1024",
+    prompt="""Create a portrait tattoo design sheet for a realistic black-and-grey forearm sleeve. Subject: a highly detailed raven skull nested with realistic peonies, smoke ribbons, tiny moths, and cracked marble fragments. Present it as premium tattoo flash on warm off-white paper with a faint arm-placement silhouette behind the main artwork. Style: ultra-realistic tattoo shading, smooth dotwork gradients, crisp stencil-ready outlines, high contrast but not muddy, strong negative-space gaps for skin breathing room. Include small layout notes in clean text: "BLACK & GREY" / "FOREARM SLEEVE" / "NEGATIVE SPACE". No gore, no body horror, no brand logos, no actual person, no photorealistic skin photo; make it a professional tattoo design presentation.""",
+    size="1024x1536",
     quality="high",
 )
 
 import base64
-open("docs/example-vaporwave-mall-fountain.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+open("docs/tattoo-design/realistic-black-grey-sleeve-study.png", "wb").write(base64.b64decode(result.data[0].b64_json))
 ```
 
 </details>
 
 ---
 
-## 🙏 Acknowledgements
+#### No. 149 · Color neo-traditional fox and flora
 
-Per-entry source links are **inline with every community entry** above. This section lists only the large archives and official sources we built on top of:
+<img src="docs/tattoo-design/color-neo-traditional-fox-flora.png" width="460" alt="Color neo-traditional fox and flora tattoo design"/>
 
-- **OpenAI** — the `gpt-image-2` model + the [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb) (the cookbook examples are included inline in the gallery).
-- [`ZeroLu/awesome-gpt-image`](https://github.com/ZeroLu/awesome-gpt-image) — original community prompt archive, CC BY 4.0. Foundational entries in `skills/gpt-image/references/gallery.md` trace back here.
-- [`YouMind-OpenLab/awesome-gpt-image-2`](https://github.com/YouMind-OpenLab/awesome-gpt-image-2) — the numbered-gallery layout is modeled after their README.
-- [`EvoLinkAI/awesome-gpt-image-2-prompts`](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts) — gap-filling prompts for Watercolor / Ink / Isometric / Cyberpunk.
-- [`ResearAI/AutoFigure`](https://github.com/ResearAI/AutoFigure) — related LLM scientific-figure project that inspired our Research Figures category.
+<sub>Tattoo Design · `portrait` · `1024x1536` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a colorful neo-traditional tattoo flash poster. Central subject: a clever red fox head framed by chrysanthemum, peony, bluebells, small sparks, and decorative leaves. Use bold clean outlines, saturated but tasteful color fills, limited palette of vermilion, teal, golden ochre, deep navy, and cream highlights. Composition: symmetrical badge-like upper-arm tattoo design with separate small color swatches and a tiny stencil thumbnail on the side. Text must be small and readable: "NEO TRADITIONAL" / "FOX & FLORA". Make it vibrant, tattooable, and polished, with visible paper grain. Avoid cartoon mascot feel, avoid clutter, avoid gradients that would not tattoo well, no brand logos.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a colorful neo-traditional tattoo flash poster. Central subject: a clever red fox head framed by chrysanthemum, peony, bluebells, small sparks, and decorative leaves. Use bold clean outlines, saturated but tasteful color fills, limited palette of vermilion, teal, golden ochre, deep navy, and cream highlights. Composition: symmetrical badge-like upper-arm tattoo design with separate small color swatches and a tiny stencil thumbnail on the side. Text must be small and readable: "NEO TRADITIONAL" / "FOX & FLORA". Make it vibrant, tattooable, and polished, with visible paper grain. Avoid cartoon mascot feel, avoid clutter, avoid gradients that would not tattoo well, no brand logos.' \
+  --size portrait --quality high \
+  -f docs/tattoo-design/color-neo-traditional-fox-flora.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a colorful neo-traditional tattoo flash poster. Central subject: a clever red fox head framed by chrysanthemum, peony, bluebells, small sparks, and decorative leaves. Use bold clean outlines, saturated but tasteful color fills, limited palette of vermilion, teal, golden ochre, deep navy, and cream highlights. Composition: symmetrical badge-like upper-arm tattoo design with separate small color swatches and a tiny stencil thumbnail on the side. Text must be small and readable: "NEO TRADITIONAL" / "FOX & FLORA". Make it vibrant, tattooable, and polished, with visible paper grain. Avoid cartoon mascot feel, avoid clutter, avoid gradients that would not tattoo well, no brand logos.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/tattoo-design/color-neo-traditional-fox-flora.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
 
 ---
 
-## 📄 License
+#### No. 150 · Japanese traditional dragon and koi back piece
 
-CC BY 4.0 — see [`LICENSE`](LICENSE). Community prompts retain their original author attribution as listed above; use commercially requires preserving those credits.
+<img src="docs/tattoo-design/japanese-traditional-dragon-koi.png" width="460" alt="Japanese traditional dragon and koi tattoo back-piece design"/>
+
+<sub>Tattoo Design · `portrait` · `1024x1536` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a Japanese traditional irezumi tattoo design poster for a full back piece. Subject: a powerful coiling dragon above a koi fish leaping through stylized waves, maple leaves, wind bars, and storm clouds. Use traditional Japanese tattoo aesthetics: bold black linework, strong flat color blocks, deep indigo waves, red-orange maple leaves, emerald dragon scales, cream highlights, and rhythmic negative space. Present as a clean tattoo flash / back-piece layout on rice-paper texture, not on a real person. Include small calligraphy-style labels: "龍" and "鯉". Make the composition balanced, tattooable, dramatic, and respectful of classic irezumi design language. Avoid anime style, avoid modern cyberpunk, avoid random fake kanji clutter.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a Japanese traditional irezumi tattoo design poster for a full back piece. Subject: a powerful coiling dragon above a koi fish leaping through stylized waves, maple leaves, wind bars, and storm clouds. Use traditional Japanese tattoo aesthetics: bold black linework, strong flat color blocks, deep indigo waves, red-orange maple leaves, emerald dragon scales, cream highlights, and rhythmic negative space. Present as a clean tattoo flash / back-piece layout on rice-paper texture, not on a real person. Include small calligraphy-style labels: "龍" and "鯉". Make the composition balanced, tattooable, dramatic, and respectful of classic irezumi design language. Avoid anime style, avoid modern cyberpunk, avoid random fake kanji clutter.' \
+  --size portrait --quality high \
+  -f docs/tattoo-design/japanese-traditional-dragon-koi.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a Japanese traditional irezumi tattoo design poster for a full back piece. Subject: a powerful coiling dragon above a koi fish leaping through stylized waves, maple leaves, wind bars, and storm clouds. Use traditional Japanese tattoo aesthetics: bold black linework, strong flat color blocks, deep indigo waves, red-orange maple leaves, emerald dragon scales, cream highlights, and rhythmic negative space. Present as a clean tattoo flash / back-piece layout on rice-paper texture, not on a real person. Include small calligraphy-style labels: "龍" and "鯉". Make the composition balanced, tattooable, dramatic, and respectful of classic irezumi design language. Avoid anime style, avoid modern cyberpunk, avoid random fake kanji clutter.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/tattoo-design/japanese-traditional-dragon-koi.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>
 
 ---
 
-## 🤝 Contributing
+#### No. 151 · Dark surrealist moth cathedral
 
-Contributions welcome — especially in gap categories (Watercolor, Pixel Art, Isometric, Ink & Chinese, 3D Render). Rules:
+<img src="docs/tattoo-design/dark-surrealist-moth-cathedral.png" width="460" alt="Dark surrealist moth cathedral tattoo design"/>
 
-1. **Full prompt text** — no placeholders, no `[subject]` templates that don't run.
-2. **Attribution mandatory** — include the original author's @handle and a direct URL.
-3. **One-shot generation** — the prompt must work in a single `gpt-image -p "…"` call (no multi-turn refinement).
-4. Open a PR against `docs/` and `references/gallery.md`, add an entry here at the next free number.
+<sub>Tattoo Design · `portrait` · `1024x1536` · Original</sub>
+
+<details>
+<summary>📝 Prompt · ⚡ CLI · 🐍 OpenAI SDK</summary>
+
+**Prompt**
+```text
+Create a dark surrealist tattoo design sheet in portrait format. Subject: a giant lunar moth with eye-like wing markings, its body transforming into a tiny gothic cathedral, black roses, thorn halos, melting moon phases, and a staircase fading into mist. Style: dark surrealism meets fine-line tattoo and blackwork, with selective muted color accents in bruised violet, cold blue, and oxidized gold. Composition: vertical sternum-or-back tattoo concept with clean stencil-ready silhouette, ornamental framing, and clear negative-space breaks. Include small readable labels: "DARK SURREAL" / "MOTH CATHEDRAL". Mood: mysterious and elegant, not gore. Avoid horror splatter, avoid excessive tiny details that cannot tattoo, no real human body, no brand logos.
+```
+
+**CLI**
+```bash
+gpt-image \
+  -p 'Create a dark surrealist tattoo design sheet in portrait format. Subject: a giant lunar moth with eye-like wing markings, its body transforming into a tiny gothic cathedral, black roses, thorn halos, melting moon phases, and a staircase fading into mist. Style: dark surrealism meets fine-line tattoo and blackwork, with selective muted color accents in bruised violet, cold blue, and oxidized gold. Composition: vertical sternum-or-back tattoo concept with clean stencil-ready silhouette, ornamental framing, and clear negative-space breaks. Include small readable labels: "DARK SURREAL" / "MOTH CATHEDRAL". Mood: mysterious and elegant, not gore. Avoid horror splatter, avoid excessive tiny details that cannot tattoo, no real human body, no brand logos.' \
+  --size portrait --quality high \
+  -f docs/tattoo-design/dark-surrealist-moth-cathedral.png
+```
+
+**OpenAI SDK**
+```python
+from openai import OpenAI
+client = OpenAI()
+
+result = client.images.generate(
+    model="gpt-image-2",
+    prompt="""Create a dark surrealist tattoo design sheet in portrait format. Subject: a giant lunar moth with eye-like wing markings, its body transforming into a tiny gothic cathedral, black roses, thorn halos, melting moon phases, and a staircase fading into mist. Style: dark surrealism meets fine-line tattoo and blackwork, with selective muted color accents in bruised violet, cold blue, and oxidized gold. Composition: vertical sternum-or-back tattoo concept with clean stencil-ready silhouette, ornamental framing, and clear negative-space breaks. Include small readable labels: "DARK SURREAL" / "MOTH CATHEDRAL". Mood: mysterious and elegant, not gore. Avoid horror splatter, avoid excessive tiny details that cannot tattoo, no real human body, no brand logos.""",
+    size="1024x1536",
+    quality="high",
+)
+
+import base64
+open("docs/tattoo-design/dark-surrealist-moth-cathedral.png", "wb").write(base64.b64decode(result.data[0].b64_json))
+```
+
+</details>

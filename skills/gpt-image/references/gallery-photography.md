@@ -1,30 +1,36 @@
 # 📷 Photography
 
-Range: No. 62–65 · Count: 4
+Range: No. 63–66 · Count: 4
 
 Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
-### No. 62 · RAW iPhone — 42nd Street subway
+### No. 63 · RAW iPhone — 42nd Street subway
 
 - Image: `docs/photography/photoreal-subway.png`
+
+  <img src="../../../docs/photography/photoreal-subway.png" alt="photoreal subway" width="420"/>
 - Metadata: Photography · `landscape` · `1536x1024` · Author: @WolfRiccardo · Source: [X](https://x.com/WolfRiccardo)
 
 ```text
 Create a completely RAW quality, unprocessed, unedited image with full iPhone camera quality. A subway station in USA, a momentary blur. The subway is in motion. In front of the subway, there is an elderly woman and man.
 ```
 
-### No. 63 · Handwritten notebook flatlay
+### No. 64 · Handwritten notebook flatlay
 
 - Image: `docs/photography/handwritten-notebook.png`
+
+  <img src="../../../docs/photography/handwritten-notebook.png" alt="handwritten notebook" width="420"/>
 - Metadata: Photography · `landscape` · `1536x1024` · Author: @patrickassale · Source: [X](https://x.com/patrickassale)
 
 ```text
 Amateur photo of an open notebook lying flat, filled with handwritten notes in black ballpoint pen. The handwriting is casual and slightly messy, like personal notes, natural imperfections, crossed out words, underlined headings. Shot from slightly above, natural daylight from a window, no flash. Casual desk setting, shot on iPhone
 ```
 
-### No. 64 · Chess board mid-tournament game
+### No. 65 · Chess board mid-tournament game
 
 - Image: `docs/photography/chess-midgame.png`
+
+  <img src="../../../docs/photography/chess-midgame.png" alt="chess midgame" width="420"/>
 - Metadata: Photography · `landscape` · `1536x1024` · Author: @EddGorenstein · Source: [X](https://x.com/EddGorenstein)
 
 ```text
@@ -33,9 +39,11 @@ Generate a photorealistic photo of a chess board during the middle of a serious 
 Materials: polished wooden staunton-style pieces — dark side in rosewood, light side in maple. Board made of inlaid maple and walnut squares. A digital chess clock sits to the left showing "00:14:28 / 00:08:47". Soft overhead tournament lighting, blurred tournament-hall background. All pieces accurate, no mutants, no extra sets.
 ```
 
-### No. 65 · 360° equirectangular jungle panorama
+### No. 66 · 360° equirectangular jungle panorama
 
 - Image: `docs/photography/panorama-jungle.png`
+
+  <img src="../../../docs/photography/panorama-jungle.png" alt="panorama jungle" width="420"/>
 - Metadata: Photography · `wide` · `2048x1152` · Author: @AIimagined · Source: [X](https://x.com/AIimagined)
 
 ```text

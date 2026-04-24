@@ -5,12 +5,12 @@ description: General-purpose image generation and reference-image editing via Op
 
 # gpt-image
 
-General image generation/editing CLI for OpenAI's `gpt-image-2`. Designed for agents: all API parameters are first-class flags, defaults are sane, output is a file on disk. The skill auto-loads when Claude detects an image-generation intent — no slash command needed.
+General image generation/editing CLI for OpenAI's `gpt-image-2`. Designed for skill-capable agents: all API parameters are first-class flags, defaults are sane, output is a file on disk. Use it whenever a runtime or user asks for image generation, reference-image editing, inpainting, dense typography, or gallery-informed prompt drafting.
 
 ## One-line usage
 
 ```bash
-# As a Claude Code plugin (installed via /plugin install):
+# As an agentic skill plugin (installed through your runtime/plugin manager):
 uv run "$CLAUDE_PLUGIN_ROOT/skills/gpt-image/scripts/generate.py" -p "PROMPT" [-f OUT] [-i REF...] [-m MASK] [options]
 
 # As a direct CLI (installed via uvx or uv tool install):
@@ -132,7 +132,7 @@ When an agent hits exit 1, it should surface the response body verbatim — it u
 
 The CLI is only the execution layer. The main value of this skill is the prompt Scale: agents should use the reference files to read concrete gallery patterns before drafting or generating images.
 
-- `references/gallery.md` — routing index for the split 151-prompt Gallery Atlas generated from the README. It maps each category to `references/gallery-<category>.md`; load the index first, then only the relevant category file(s) to avoid context bloat. Use this when the user asks for a style/category we already cover, wants diverse ideas, asks to extend the gallery, or needs a prompt that should inherit the repo's collected taste.
+- `references/gallery.md` — routing index for the split 162-prompt Reference Gallery Atlas. The Reference Gallery is canonical; README is only a selected visual showcase. It maps each category to `references/gallery-<category>.md`; load the index first, then only the relevant category file(s) to avoid context bloat. Use this when the user asks for a style/category we already cover, wants diverse ideas, asks to extend the gallery, or needs a prompt that should inherit the repo's collected taste.
 - `references/craft.md` — expanded 19-section prompt-writing checklist distilled from the gallery: Scale-first usage, exact text, JSON/config-style prompts, fixed-region infographics, data visualization mini-schemas, research/diagram grammar, UI specs, multi-panel consistency, reference-based unlocks, three-glances test, edit invariants, dense text, and category mini-schemas. Load this when improving or debugging a prompt.
 - `references/openai-cookbook.md` — verbatim Markdown capture of OpenAI's [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb). Load this when the user asks about official parameter semantics, endpoint behavior, migration, or model capabilities.
 
@@ -140,7 +140,7 @@ Reference loading policy:
 - For generation/editing requests, first read `references/gallery.md` only as the category index, then load the relevant `references/gallery-<category>.md` file(s); do not load every category and do not rely on generic one-line prompting if the atlas contains a matching pattern.
 - Use `craft.md` to refine structure after selecting a gallery pattern.
 - Use `openai-cookbook.md` for authoritative API/model questions or when the gallery does not cover the requested workflow.
-- Preserve `Original` versus `Author + Source` metadata when adapting examples into README/gallery entries.
+- Preserve `Curated` versus `Author + Source` metadata when adapting examples. Add new collected prompts to the Reference Gallery first; promote only representative examples to README.
 
 ## Attribution
 

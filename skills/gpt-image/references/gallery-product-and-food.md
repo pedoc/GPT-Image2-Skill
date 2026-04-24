@@ -1,21 +1,25 @@
 # 📦 Product & Food
 
-Range: No. 55–58 · Count: 4
+Range: No. 56–59 · Count: 4
 
 Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
-### No. 55 · 3D product box from dieline
+### No. 56 · 3D product box from dieline
 
 - Image: `docs/product-food/product-dieline-box.png`
+
+  <img src="../../../docs/product-food/product-dieline-box.png" alt="product dieline box" width="420"/>
 - Metadata: Product & Food · `portrait` · `1024x1536` · Author: @Salmaaboukarr · Source: [X](https://x.com/Salmaaboukarr)
 
 ```text
 Assemble the dieline into a flawless 3D box with accurate panels, clean folds, undistorted type, and artwork preserved exactly. Shoot it upright at a refined three-quarter angle in a minimal premium studio setting with a soft neutral background, diffused light, subtle shadows, no props, true colours, matte paperboard texture, and realistic editorial detail. The box front reads "AURAE / COLD-BREW MATCHA / 12 fl oz" in clean sans-serif. Side panel shows small ingredient list in 8pt type, nutrition-facts-style block. Clean, editorial, award-winning packshot aesthetic.
 ```
 
-### No. 56 · Chocolate wafer product render (JSON-style)
+### No. 57 · Chocolate wafer product render (JSON-style)
 
 - Image: `docs/product-food/product-chocolate-wafer.png`
+
+  <img src="../../../docs/product-food/product-chocolate-wafer.png" alt="product chocolate wafer" width="420"/>
 - Metadata: Product & Food · `portrait` · `1024x1536` · Author: @mehvishs25 · Source: [X](https://x.com/mehvishs25)
 
 ```text
@@ -47,9 +51,11 @@ Assemble the dieline into a flawless 3D box with accurate panels, clean folds, u
 }
 ```
 
-### No. 57 · Salad-explosion food photography (JSON-style)
+### No. 58 · Salad-explosion food photography (JSON-style)
 
 - Image: `docs/product-food/food-salad-explosion.png`
+
+  <img src="../../../docs/product-food/food-salad-explosion.png" alt="food salad explosion" width="420"/>
 - Metadata: Product & Food · `portrait` · `1024x1536` · Author: @ChillaiKalan__ · Source: [X](https://x.com/ChillaiKalan__)
 
 ```text
@@ -78,9 +84,11 @@ Assemble the dieline into a flawless 3D box with accurate panels, clean folds, u
 }
 ```
 
-### No. 58 · Universal commercial poster template
+### No. 59 · Universal commercial poster template
 
 - Image: `docs/product-food/aurora-oolong-poster.png`
+
+  <img src="../../../docs/product-food/aurora-oolong-poster.png" alt="aurora oolong poster" width="420"/>
 - Metadata: Product & Food · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e7878300000000230050bb)
 
 ```text

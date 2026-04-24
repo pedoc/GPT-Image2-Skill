@@ -49,3 +49,4 @@ config/mcporter.json
 
 # Local Codex handoff
 AGENTS.md
+CLAUDE.md

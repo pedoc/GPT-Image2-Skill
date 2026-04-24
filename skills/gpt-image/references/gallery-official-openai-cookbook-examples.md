@@ -1,12 +1,14 @@
 # 🏢 Official OpenAI Cookbook Examples
 
-Range: No. 91–94 · Count: 4
+Range: No. 96–99 · Count: 4
 
 Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
-### No. 91 · Automatic coffee machine infographic
+### No. 96 · Automatic coffee machine infographic
 
 - Image: `docs/official-openai-cookbook/coffee-infographic.png`
+
+  <img src="../../../docs/official-openai-cookbook/coffee-infographic.png" alt="coffee infographic" width="420"/>
 - Metadata: Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
 
 ```text
@@ -15,9 +17,11 @@ From bean basket, to grinding, to scale, water tank, boiler, etc.
 I'd like to understand technically and visually the flow.
 ```
 
-### No. 92 · Photorealistic elderly sailor
+### No. 97 · Photorealistic elderly sailor
 
 - Image: `docs/official-openai-cookbook/sailor.png`
+
+  <img src="../../../docs/official-openai-cookbook/sailor.png" alt="sailor" width="420"/>
 - Metadata: Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
 
 ```text
@@ -28,9 +32,11 @@ Soft coastal daylight, shallow depth of field, subtle film grain, natural color 
 The image should feel honest and unposed, with real skin texture, worn materials, and everyday detail. No glamorization, no heavy retouching.
 ```
 
-### No. 93 · Minimalist bakery logo — Field & Flour
+### No. 98 · Minimalist bakery logo — Field & Flour
 
 - Image: `docs/official-openai-cookbook/logo-bakery.png`
+
+  <img src="../../../docs/official-openai-cookbook/logo-bakery.png" alt="logo bakery" width="420"/>
 - Metadata: Official OpenAI Cookbook Examples · `square` · `1024x1024` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
 
 ```text
@@ -40,9 +46,11 @@ Favor simplicity over detail so it reads clearly at small and large sizes. Flat 
 Plain background. Deliver a single centered logo with generous padding. No watermark.
 ```
 
-### No. 94 · 4-panel pet comic strip
+### No. 99 · 4-panel pet comic strip
 
 - Image: `docs/official-openai-cookbook/comic-pet.png`
+
+  <img src="../../../docs/official-openai-cookbook/comic-pet.png" alt="comic pet" width="420"/>
 - Metadata: Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
 
 ```text

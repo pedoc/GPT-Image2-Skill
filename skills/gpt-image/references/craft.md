@@ -2,6 +2,28 @@
 
 Cross-cutting principles distilled from the full 151-prompt Gallery Atlas. Use this file as the prompt-design checklist; use `gallery.md` as the concrete Scale/case atlas.
 
+## Table of contents
+
+0. Use the Scale before writing from scratch
+1. Exact text goes in quotes
+2. Put canvas, aspect ratio, and layout before subject
+3. JSON / config-style prompts are a core pattern
+4. Use fixed-region schemas for infographics and educational boards
+5. Research/data figures need diagram grammar
+6. UI prompts should read like product specs
+7. Multi-panel boards need consistency constraints
+8. Camera and capture context unlock photorealism
+9. Scene density beats adjectives
+10. Style anchors should be specific and bounded
+11. Promotional hierarchy for commercial posters
+12. Material, lighting, and palette are separate controls
+13. Edit endpoint prompts must preserve invariants
+14. Negation is for strong priors
+15. Category-specific mini-schemas
+16. Dense Chinese and multilingual layouts need extra constraints
+17. Attribution and gallery metadata
+18. Safety and copyright notes
+
 ## 0. Use the Scale before writing from scratch
 
 Before drafting a prompt, identify the closest `gallery.md` category and read 3–8 nearby cases. The skill should not behave like a bare CLI wrapper: it should remix the repo's collected patterns.

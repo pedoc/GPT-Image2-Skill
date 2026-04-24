@@ -1,7 +1,6 @@
 ---
 name: gpt-image
 description: General-purpose image generation and reference-image editing via OpenAI GPT Image 2 (`gpt-image-2`). Wraps the two official endpoints from the OpenAI cookbook — `/v1/images/generations` for text-to-image and `/v1/images/edits` for reference-image edits (including alpha-channel masks). Use whenever an agent or user needs to (a) generate an image from a text prompt, (b) restyle or transform an image using a reference image, (c) combine multiple reference images, (d) inpaint a region using a PNG mask, or (e) render dense typography / Chinese text. Reads `OPENAI_API_KEY` from env; writes PNG/JPEG/WebP to disk. Optional Scale references under `references/` for the full prompt-gallery atlas, cross-cutting prompt craft, and official OpenAI parameter guidance.
-license: CC BY 4.0 (prompt patterns attributed to original authors)
 ---
 
 # gpt-image
@@ -145,4 +144,4 @@ Reference loading policy:
 
 ## Attribution
 
-Prompt patterns are curated from the original repo gallery, OpenAI Cookbook, and community prompt collections credited in the README. Individual source metadata is preserved per entry in `references/gallery.md` where applicable.
+License: CC BY 4.0 for prompt patterns and gallery documentation unless a referenced upstream source states otherwise. Prompt patterns are curated from the original repo gallery, OpenAI Cookbook, and community prompt collections credited in the README. Individual source metadata is preserved per entry in `references/gallery.md` where applicable.

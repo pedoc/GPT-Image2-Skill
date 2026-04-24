@@ -1,66 +1,710 @@
-# GPT Image 2 Prompt Gallery
+# GPT Image 2 Prompt Gallery Atlas
 
-56 curated prompts from the community, organized by category. Each entry: title, prompt text (copy-paste ready), source.
+Complete Scale reference atlas generated from `README.md`. This file intentionally includes **all 151 gallery prompts**, including original prompts and outside-source prompts, so an agent can read the category patterns directly instead of only learning how to call the CLI.
+
+Use `craft.md` for cross-cutting prompt-writing principles. Use this file when you need concrete prompt templates, category coverage, visual patterns, or examples to remix. Keep source metadata intact when adapting outside-source entries.
+
+## Category index
+
+| Category | Range | Count |
+|---|---:|---:|
+| 🎌 Anime & Manga | No. 1–12 | 12 |
+| 🎮 Gaming | No. 13–21 | 9 |
+| 🤖 Retro & Cyberpunk | No. 22–24 | 3 |
+| 🎬 Cinematic & Animation | No. 25–29 | 5 |
+| 👤 Character Design | No. 30–31 | 2 |
+| 📝 Typography & Posters | No. 32–44 | 13 |
+| 🎨 Illustration | No. 45–46 | 2 |
+| 💧 Watercolor | No. 47–48 | 2 |
+| 🖌️ Ink & Chinese | No. 49–50 | 2 |
+| 🕹️ Pixel Art | No. 51–52 | 2 |
+| 📐 Isometric | No. 53–54 | 2 |
+| 📦 Product & Food | No. 55–58 | 4 |
+| 🧩 Brand Systems & Identity | No. 59–61 | 3 |
+| 📷 Photography | No. 62–65 | 4 |
+| 📊 Infographics & Field Guides | No. 66–73 | 8 |
+| 📚 Research Paper Figures | No. 74–90 | 17 |
+| 🏢 Official OpenAI Cookbook Examples | No. 91–94 | 4 |
+| ✨ Edit Endpoint Showcase | No. 95–96 | 2 |
+| 📱 UI/UX Mockups | No. 97–101 | 5 |
+| 📊 Data Visualization | No. 102–106 | 5 |
+| ⚙️ Technical Illustration | No. 107–111 | 5 |
+| 🏛️ Architecture & Interior | No. 112–116 | 5 |
+| 🔬 Scientific & Educational | No. 117–121 | 5 |
+| 👗 Fashion Editorial | No. 122–128 | 7 |
+| 🎨 Fine Art Painting | No. 129–133 | 5 |
+| ✏️ More Illustration Styles | No. 134–139 | 6 |
+| 🎥 Cinematic Film References | No. 140–144 | 5 |
+| 💄 Beauty & Lifestyle | No. 145–145 | 1 |
+| 🎟️ Events & Experience | No. 146–146 | 1 |
+| 🛵 Automotive & Mobility | No. 147–147 | 1 |
+| 🖋️ Tattoo Design | No. 148–151 | 4 |
 
 ---
 
-## Photography <a id="photography"></a>
+## 🎌 Anime & Manga
 
-Prompts for ultra-realistic scenes, authentic photography characteristics, and complex lighting.
+### No. 1 · MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)
 
-### Celebrity in real life
+- Image: `docs/anime-manga/anime-jjk-action.png`
+- Metadata: Anime & Manga · `landscape` · `1536x1024` · Original
+
 ```text
-Sam Altman, Donald Trump, and Elon Musk working behind the counter of a busy movie theater
-```
-Source: [@flowersslop](https://x.com/flowersslop/status/2044334054380552438)
+An anime action still in the visual style of MAPPA's Jujutsu Kaisen (2020 TV anime). Landscape 16:9.
 
-### Convenience store night scene
+A silver-white-haired young man in a dark navy school-uniform jacket, a blue blindfold across his eyes, in a mid-fight stance — one palm extended outward releasing a swirling dense-blue energy sphere with lightning-like crackles around its edge. Opposite him, a demonic shadow creature made of liquid black mass with multiple eyes lunges from the right.
+
+Backdrop: ruined urban street at dusk, shattered asphalt, cracked neon kanji sign "呪術" in split red LED, destroyed vehicles, rubble suspended mid-air by the shockwave, rain particles caught mid-flight.
+
+Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp line-art, rim-light on both figures, motion-blur streaks around the energy sphere. Palette of deep navy, electric cyan, crimson splashes. Kinetic-impact composition in the tradition of JJK's Shibuya arc.
+```
+
+### No. 2 · Shōnen battle key-visual (Naruto-Shippuden aesthetic)
+
+- Image: `docs/anime-manga/anime-naruto-clash.png`
+- Metadata: Anime & Manga · `landscape` · `1536x1024` · Original
+
 ```text
-Create an ultra-realistic urban street group photo at a convenience store entrance at 10 PM summer night. 3-4 young people briefly chatting at the entrance, someone holding drinks, someone sitting on plastic outdoor chairs, someone standing looking at their phone. Bright white light streaming through the glass doors and windows, warm yellow street lights and distant car headlights outside. Characters wearing everyday clothes: T-shirts, shirts, shorts, jeans, sneakers. No internet celebrity styling. Faces and postures must look like real pedestrians, not overly polished. Environment must include real convenience store elements: freezer stickers, promotional posters, trash cans, entrance mats, glass reflections, shared bikes on roadside, water droplets from drink bottles on ground. The image should look like a very authentic life slice captured by a photographer in the city. Focus on testing natural multi-person interactions, night convenience store lighting, glass reflections, and ordinary people's vibe restoration.
-```
-Source: 卡尔的AI沃茨
+A shōnen anime battle key-visual in the visual style of Studio Pierrot's Naruto Shippuden. Landscape 16:9.
 
-### RAW iPhone quality — subway station
+Two ninja figures clash mid-air at the exact instant their signature jutsu collide — a glowing blue spiral of swirling chakra on the left fighter's right palm, a crackling white lightning blade on the right fighter's right palm. The collision point sends a circular shockwave outward.
+
+Both fighters wear hitai-ate forehead protectors, jounin-style tactical vests with scroll pouches, ninja sandals. Left: spiky blond hair, whisker cheek marks, focused snarl, blue eyes. Right: dark hair, one red sharingan-like eye with three tomoe, calm expression.
+
+Backdrop: nighttime valley, cracked earth, giant uprooted trees mid-crash, moonlit clouds parting, sakura petals caught in the shockwave.
+
+Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective, strong speed lines radiating from the collision, anime-action key-frame quality, digital 2D cel shading, saturated but not neon, visible genga-quality line-art, dramatic backlight.
+```
+
+### No. 3 · Shōnen manga two-page spread (basketball slam dunk)
+
+- Image: `docs/anime-manga/manga-spread.png`
+- Metadata: Anime & Manga · `landscape` · `1536x1024` · Original
+
 ```text
-Create a completely RAW quality, unprocessed, unedited image with full iPhone camera quality. A subway station in USA, a momentary blur. The subway is in motion. In front of the subway, there is an elderly woman and man.
-```
-Source: [@WolfRiccardo](https://x.com/WolfRiccardo/status/2041192232623972441)
+A black-and-white shōnen manga two-page spread (landscape 16:9 as a single composition, with a faint centre-gutter line). High-contrast ink plus screentone, Weekly Shōnen Jump basketball-manga tradition (Inoue's Slam Dunk / Fujimaki's Kuroko no Basuke).
 
-### Apple Park keynote crowd shot
+Composition: 5 irregular panels plus one large diagonal panel spanning both pages at bottom-right for the climactic slam dunk.
+
+- Top-left: close-up of the protagonist's intense eyes, sweat beading, headband tied tight
+- Top-centre: wide shot of a packed high-school gymnasium, scoreboard reading "42 — 40 · 4Q 0:03"
+- Top-right: rival team captain's shocked face, mouth agape
+- Centre-left: protagonist leaping skyward with both hands gripping a basketball
+- Centre-right-small: sound-effect katakana "バッ" in thick black letters
+- Large diagonal bottom-right (half of both pages): protagonist slamming the ball through the hoop, rim bending, massive ink-brushed kanji "決" (decide) filling the negative space
+
+Art direction: professional mangaka quality — confident inking, dramatic screentone gradients, speed lines radiating from the dunk, varied line-weights, off-white paper texture with faint page-edge shading.
+
+Dialogue balloons intentionally blank; only the two sound effects are visible.
+```
+
+### No. 4 · Manga relationship map — *A Tale of Two Cities*
+
+- Image: `docs/anime-manga/manga-relationship.png`
+- Metadata: Anime & Manga · `portrait` · `1024x1536` · Author: @cht0001 · Source: [X](https://x.com/cht0001)
+
 ```text
-Amateur iPhone photo at Apple Park during the iPhone 20 keynote, Tim Cook presenting on stage. Shot from the crowd at a distance
-```
-Source: [@patrickassale](https://x.com/patrickassale/status/2044687244368441742)
+A manga-style illustration showing the person-relationship map for "A Tale of Two Cities" by Charles Dickens. Single full-frame composition, monochrome ink + screentone, classic shōjo / historical-manga aesthetic.
 
-### Handwritten notebook photo
+Characters as small portrait panels connected by labeled relationship lines:
+- Charles Darnay ↔ Lucie Manette: "marriage"
+- Sydney Carton → Lucie: "unrequited love → ultimate sacrifice"
+- Lucie ↔ Dr. Manette: "father / daughter"
+- Madame Defarge → Darnay family: "vengeance"
+- Monsieur & Madame Defarge: "husband / wife, revolutionaries"
+- Jarvis Lorry → Manette family: "loyal banker & guardian"
+- Miss Pross → Lucie: "devoted protector"
+
+Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 18th-century Paris (guillotine silhouette) / London (Tower of London). Monochrome black-ink linework with grey screentone shading.
+```
+
+### No. 5 · 16-panel anime expression grid
+
+- Image: `docs/anime-manga/anime-expression-grid.png`
+- Metadata: Anime & Manga · `square` · `1024x1024` · Author: Unknown · Source: [source article](https://mp.weixin.qq.com/s/ASxig6mFVYxrIE8-8Fthew)
+
 ```text
-Amateur photo of an open notebook lying flat, filled with handwritten notes in black ballpoint pen. The handwriting is casual and slightly messy, like personnal notes, natural imperfections, crossed out words, underlined headings. Shot from slightly above, natural daylight from a window, no flash. Casual desk setting, shot on iPhone
+Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her face shape, hairstyle, and clothing must remain highly consistent across all panels. The 16 expressions should include: happy, sad, angry, surprised, shy, speechless, evil grin, contemplative, curious, proud, wronged, disdainful, confused, scared, crying, and a heart expression.
 ```
-Source: [@patrickassale](https://x.com/patrickassale/status/2044569086013718958)
 
-### Rice grain micro typography
+### No. 6 · Elegant cafe anime fashion portrait
+
+- Image: `docs/anime-manga/anime-cafe-stockings-fashion.png`
+- Metadata: Anime & Manga · `portrait` · `1024x1536` · Original
+
 ```text
-A massive pile of rice, and on one single grain of rice there is tiny text that reads "wOw"
+Create a tasteful portrait-oriented anime fashion illustration of an adult woman, age 24, with a cute playful expression, looking at the camera in a cozy European cafe at golden hour. She wears a cream blouse, charcoal pleated skirt, tailored cropped jacket, sheer black stockings, loafers, and a small ribbon hair clip; she is seated sideways at a small marble table with latte art, a sketchbook, and warm window light. Composition: three-quarter fashion portrait, elegant legs visible but relaxed and non-explicit, wholesome editorial mood, no nudity, no lingerie, no school uniform, no explicit pose, adult character only. Use polished modern anime rendering, crisp line art, luminous eyes, soft cel shading, subtle fabric texture, gentle blush, background bokeh, and a refined magazine-cover color palette.
 ```
-Source: [@adonis_singh](https://x.com/adonis_singh/status/2046673729082560919)
 
-### 360° equirectangular panorama
+### No. 7 · Neon arcade anime fashion portrait
+
+- Image: `docs/anime-manga/anime-arcade-stockings-fashion.png`
+- Metadata: Anime & Manga · `portrait` · `1024x1536` · Original
+
 ```text
-360 equirectangular image of [place]
+Create a portrait-oriented anime fashion illustration of an adult woman, age 25, in a neon arcade district at night. She has a cute confident smile and looks directly at the viewer while standing beside glowing claw machines and retro game cabinets. Outfit: black turtleneck, red satin bomber jacket, high-waisted skirt, patterned dark stockings, platform shoes, small crossbody bag, star earrings. Composition: full-body fashion portrait with strong silhouette, neon reflections on wet pavement, vending machines, sticker-covered walls, colorful signage, and cinematic rim light. Keep the pose playful but non-explicit, no nudity, no lingerie, no fetish framing, adult character only. Use high-end anime key visual rendering, crisp line art, saturated magenta-cyan lighting, clean readable background details, and glossy cyber-pop atmosphere.
 ```
-Source: [@LexnLin](https://x.com/LexnLin/status/2046725722320888313)
 
-### 360° equirectangular panorama — jungle + dinosaurs (filled example)
+### No. 8 · Spring cafe anime ensemble
+
+- Image: `docs/anime-manga/anime-girls-sweet-group.png`
+- Metadata: Anime & Manga · `landscape` · `1536x1024` · Original
+
 ```text
-360 equirectangular panorama of a dense prehistoric jungle scene. Cinematic detail. Strict 2:1 aspect ratio (e.g. 4096×2048). No distortion at the seams — the left and right edges must wrap seamlessly.
-
-Scene: towering fern-covered trees, shafts of golden sunlight piercing the canopy, a slow river winding through the centre foreground, mist rising off the water. Scattered dinosaurs of varied species — a grazing Brachiosaurus neck visible among distant tree canopy, two small Gallimimus drinking at the river's edge, a Triceratops in the background underbrush. Tropical birds in flight, butterflies, dragonflies over the water.
-
-Lighting: late-afternoon golden hour, warm directional backlight through the canopy. High dynamic range, slight atmospheric haze. Equirectangular projection suitable for spherical / 360 viewers.
+Create a landscape anime ensemble key visual featuring six distinct adult young women, ages 22 to 27, with cute gentle personalities, gathered together in a cozy spring campus-cafe courtyard. The composition should feel like a polished slice-of-life anime promotional poster rather than a single portrait: one central seated character holding a sketchbook, two friends leaning in with warm smiles, one shy character holding a small bouquet, one cheerful character waving, and one calm bookish character pouring tea. Give each character a clearly different hairstyle, outfit palette, accessory, and expression while keeping the whole group harmonious and wholesome. Fashion: soft cardigans, pleated skirts, berets, ribbons, loafers, light stockings, pastel jackets, modest stylish outfits. Mood: sweet, well-behaved, playful, friendly, no fanservice, no nudity, no explicit pose, adult characters only. Use modern high-end anime rendering with crisp line art, luminous eyes, soft cel shading, warm afternoon light, cherry blossoms, cafe signage, small pastries, balanced depth, clean background details, and a strong readable group silhouette.
 ```
-Source: [@AIimagined](https://x.com/AIimagined/status/2046915800263802880) — popularised the filled-in 360° panorama pattern with GPT Image 2. Pairs with [@icreatelife's](https://x.com/icreatelife/status/2046923911082717555) panorama → Codex mouse-controlled 3D viewer workflow.
 
-### Product render — Chocolate wafer (JSON-style)
+### No. 9 · Ten-panel anime character grid
+
+- Image: `docs/anime-manga/anime-ten-panel-character-grid.png`
+- Metadata: Anime & Manga · `landscape` · `1536x1024` · Original
+
+```text
+Create a single landscape image containing a clean 2×5 ten-panel anime character grid. Each panel shows a different adult young woman, age 22 to 26, designed as a cute gentle heroine archetype: bookish librarian, cheerful cafe barista, shy violinist, sporty tennis player, elegant student-council president, sleepy illustrator, flower-shop assistant, soft-spoken witch apprentice, city-pop singer, and cozy winter commuter. Keep all panels consistent in art direction: modern polished anime, crisp line art, soft cel shading, luminous eyes, pastel accent colors, tidy white gutters, small readable name tag at the bottom of each panel, and a balanced character-design-sheet feel. Every character should have a distinct hairstyle, outfit, prop, and expression. The overall board should feel like a collectible anime cast sheet / ten-grid poster, cute and wholesome, no nudity, no lingerie, no explicit pose, adult characters only.
+```
+
+### No. 10 · Tide Brothers 19-page manga proof sheet
+
+- Image: `docs/anime-manga/tide-brothers-19-page-manga.png`
+- Metadata: Anime & Manga · `tall` · `2160x3840` · Original
+
+```text
+Create one tall manga chapter proof sheet containing 19 numbered miniature pages for an original shonen pirate manga, not based on any existing series. Title: "TIDE BROTHERS: THE STARFALL MAP". Main characters: Rune, a cheerful rubbery-armed young pirate captain with a straw-colored scarf but original costume; and Ash, his older flame-wielding brother with a red coat, freckles, and a calm smile. They are original characters, not existing IP. Show 19 small pages arranged as a readable contact sheet, each page with 1 to 3 manga panels, black-and-white ink, screentone, dynamic speed lines, expressive faces, and clear speech bubbles. Complete plot beats: 1 cover page with the brothers on a stormy deck; 2 reunion at a floating harbor; 3 discovery of a star-shaped map; 4 alien sea-beast emerges; 5 Rune jokes "Adventure found us first!"; 6 Ash replies "Then we answer together."; 7 rival sky pirates attack; 8 slapstick cooking scene; 9 quiet flashback promise; 10 double-page-style action pose compressed into one page; 11 map glows with alien constellations; 12 crew cheers; 13 villain captain steals the compass; 14 chase across rooftop sails; 15 Ash shields Rune with fire; 16 Rune launches a spring-like punch; 17 brothers laugh after victory; 18 cliffhanger: moon door opens; 19 final page text "NEXT: THE ISLAND ABOVE THE CLOUDS". Keep dialogue short, legible, and complete. Style: classic weekly shonen manga energy, original pirate adventure, wholesome brotherhood, no gore, no existing copyrighted characters.
+```
+
+### No. 11 · Roadside mirror anime fashion selfie
+
+- Image: `docs/anime-manga/anime-roadside-mirror-fashion.png`
+- Metadata: Anime & Manga · `portrait` · `1024x1536` · Original
+
+```text
+Create a portrait-oriented anime fashion illustration of an adult woman, age 24, taking a playful roadside mirror selfie in the reflection of a parked scooter mirror on a quiet Tokyo side street. She looks into the mirror with a bright mischievous smile, one hand making a small peace sign near her cheek, the other holding a phone with a cute sticker case. Outfit: soft ivory knit cardigan, navy pleated skirt, sheer black stockings, loafers, small shoulder bag, ribbon hair clip, tasteful everyday street fashion. Composition: the mirror reflection is the main frame, with blurred street signs, vending machine glow, crosswalk stripes, and spring evening light around the mirror edge. Keep the pose cute, stylish, and non-explicit; no nudity, no lingerie, no fetish framing, adult character only. Use polished modern anime rendering, crisp line art, luminous eyes, soft cel shading, warm reflections, natural street-photo energy, and a charming slice-of-life mood.
+```
+
+### No. 12 · Rainy bus-stop mirror anime portrait
+
+- Image: `docs/anime-manga/anime-rainy-bus-stop-mirror.png`
+- Metadata: Anime & Manga · `portrait` · `1024x1536` · Original
+
+```text
+Create a portrait anime key visual of an adult woman, age 25, posing cutely in a convex traffic safety mirror beside a rainy roadside bus stop at blue hour. The image should show both the round mirror reflection and a bit of the real street around it: wet asphalt, umbrellas, blurred bus headlights, a small timetable sign, and glowing convenience-store windows. She wears a camel duffle coat, short plaid skirt, sheer black stockings, ankle boots, knitted scarf, and a tiny charm bracelet; her expression is playful and bashful, looking at the viewer through the mirror reflection. Keep the styling tasteful and wholesome: no nudity, no lingerie, no explicit pose, no school-uniform framing, adult character only. Use high-end anime rendering, delicate rain highlights, crisp line art, luminous eyes, soft cel shading, realistic mirror distortion, and a cozy rainy-city atmosphere.
+```
+
+---
+
+## 🎮 Gaming
+
+### No. 13 · Hitman gameplay — OpenAI HQ
+
+- Image: `docs/gaming/hitman-openai.png`
+- Metadata: Gaming · `landscape` · `1536x1024` · Author: @flowersslop · Source: [X](https://x.com/flowersslop)
+
+```text
+A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6 without getting caught
+```
+
+### No. 14 · GTA 6 gameplay — Vice City beach
+
+- Image: `docs/gaming/gta6-beach.png`
+- Metadata: Gaming · `landscape` · `1536x1024` · Author: @WolfRiccardo · Source: [X](https://x.com/WolfRiccardo)
+
+```text
+GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a stationary 4k monitor. (There's a slight blurriness in the image, as it feels like it was taken handheld). A wide, bright environment. Realistic details. The character is walking on the beach with /:dog.
+```
+
+### No. 15 · Dark-fantasy swamp boss hunt
+
+- Image: `docs/gaming/dark-fantasy-hunt.png`
+- Metadata: Gaming · `landscape` · `1536x1024` · Original
+
+```text
+Create an original AAA dark-fantasy action RPG screenshot. A silver-haired monster hunter in layered leather armor stands in a ruined marsh at blue hour, sword drawn toward a huge winged swamp beast rising from mist. Cinematic over-the-shoulder framing, believable HUD with health, stamina, potion icons, quest text, and minimap. Wet stones, dead trees, torchlight, moonlit fog, subtle alchemy glyphs, highly detailed materials, dramatic but readable composition, premium next-gen game look, 16:9 landscape.
+```
+
+### No. 16 · Epic fellowship bridge approach
+
+- Image: `docs/gaming/epic-fellowship-bridge.png`
+- Metadata: Gaming · `landscape` · `1536x1024` · Original
+
+```text
+Create an original epic fantasy RPG key-art screenshot. A small fellowship of travelers crosses a colossal ancient stone bridge toward a luminous mountain city at sunrise. One ranger leads, a mage carries a lantern, a dwarf-like smith bears a hammer, and banners whip in the wind. Vast valley below, waterfalls, golden clouds, weathered masonry, cinematic scale, subtle HUD quest marker and compass, richly detailed armor and environment, AAA fantasy adventure tone, 16:9 landscape, highly detailed and uplifting.
+```
+
+### No. 17 · Retro Japanese town pixel RPG
+
+- Image: `docs/gaming/retro-japan-rpg.png`
+- Metadata: Gaming · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1kozn4u/retro_video_games_in_japan_prompts_included/)
+
+```text
+Create an isometric pixel-art RPG screenshot of a traditional Japanese village during cherry blossom season. Sakura petals drift through the air, a samurai player character practices sword moves in the square, villagers watch nearby, and the interface includes an inventory panel, stamina gauge, skill cooldown timers, and subtle quest UI. Cozy retro console feeling, soft ambient pastel lighting, crisp pixel details, 16:9 gameplay composition.
+```
+
+### No. 18 · Cyberpunk Europe action HUD
+
+- Image: `docs/gaming/cyberpunk-europe-action.png`
+- Metadata: Gaming · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1kzzy77/cyberpunk_video_games_in_european_cities_prompts/)
+
+```text
+Create a third-person cyberpunk action game screenshot set in a neon-soaked European capital at night. The protagonist has glowing cybernetic implants and stands on rain-slick streets near a famous landmark while holograms, drones, and flying traffic crowd the skyline. Add a polished game HUD with health bar, ammo count, radar, stealth/energy meters, and mission overlays. Vivid cyan-magenta palette, wet reflections, cinematic intensity, 16:9.
+```
+
+### No. 19 · Anime open-world adventure HUD
+
+- Image: `docs/gaming/anime-open-world.png`
+- Metadata: Gaming · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1lh2l98/anime_style_video_games_prompts_included/)
+
+```text
+Create a third-person over-the-shoulder screenshot from a nostalgic anime-style open-world adventure game. The protagonist stands in a lush forest with detailed foliage and vibrant shading, drawing a bow toward distant enemies. Add a clean on-screen HUD: quest log, compass at the top, character portrait and status effects at bottom left, subtle rain droplets on screen, and sun rays filtering through trees. Keep the composition dynamic, the forest immersive, and the UI believable like a premium action-RPG screenshot.
+```
+
+### No. 20 · Low-poly samurai strategy village
+
+- Image: `docs/gaming/lowpoly-samurai-strategy.png`
+- Metadata: Gaming · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1l2d5dr/lowpoly_strategy_video_games_in_japan_prompts/)
+
+```text
+Create an isometric low-poly strategy game screenshot of a mountainous Japanese village with rice terraces, torii gates, samurai and archer units in formation, and a tactical RTS interface. Include unit selection boxes, resource counters for rice and wood, fog-of-war minimap, command overlays, and warm daylight with soft shadows. Stylized but readable, modern indie strategy game key art, 16:9.
+```
+
+### No. 21 · Nine-panel dark-fantasy worldbuilding set
+
+- Image: `docs/gaming/worldbuilding-nine-panel-set.png`
+- Metadata: Gaming · `square` · `1024x1024` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2046866168208916503)
+
+```text
+Create a square 3x3 worldbuilding set for an original dark-fantasy universe called "Saltwind Reach". Each panel is a distinct but consistent scene: a storm-battered coastal fortress at dawn, a foggy market street, a knight relic close-up, a handwritten map fragment, a monster silhouette study, a candlelit tavern interior, an alchemist kit flat lay, a moonlit harbor, and a faction banner concept. Keep one cohesive art direction across all nine panels: painterly realism, muted teal / rust / bone palette, cinematic weather, premium concept-art presentation, small caption labels, and strong consistency across costume motifs, architecture, symbols, and lighting. The full board should feel like a polished pre-production worldbuilding sheet rather than a collage of unrelated images.
+```
+
+---
+
+## 🤖 Retro & Cyberpunk
+
+### No. 22 · Cyberpunk mecha girl over sea fortress
+
+- Image: `docs/retro-cyberpunk/cyberpunk-mecha.png`
+- Metadata: Retro & Cyberpunk · `landscape` · `1536x1024` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
+
+```text
+A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar, standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind, a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes, moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor, 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes, cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic. Format 16:9.
+```
+
+### No. 23 · Neon Orchid District design board
+
+- Image: `docs/retro-cyberpunk/neon-orchid-district-board.png`
+- Metadata: Retro & Cyberpunk · `landscape` · `1536x1024` · Original
+
+```text
+Create a cyberpunk character-and-city design board in a premium magazine-layout format, landscape 16:9. Title text: "NEON ORCHID DISTRICT". The board is divided into five asymmetric panels: one large cinematic street scene of a rain-soaked elevated night market, two close-up portrait panels of original adult cyberpunk couriers with glowing orchid tattoos, one small isometric map panel showing alleys and drone routes, and one artifact panel showing encrypted transit passes, cybernetic gloves, and vending-machine stickers. Use layered neon magenta, cyan, acid green, wet asphalt reflections, holographic signage, dense but readable composition, editorial margins, small labels, and a cohesive retro-future anime/cyberpunk style. Original characters only, no existing IP, no explicit content.
+```
+
+### No. 24 · Synth Moon Crew alien nightlife grid
+
+- Image: `docs/retro-cyberpunk/synth-moon-crew-grid.png`
+- Metadata: Retro & Cyberpunk · `square` · `1024x1024` · Original
+
+```text
+Create a square cyberpunk alien nightclub catalog sheet called "SYNTH MOON CREW". Layout: a clean 3×3 grid of nine cards with thin chrome borders. Each card shows a different original alien or android nightlife character: glass-horn DJ, koi-scale bartender, moth-wing hacker, chrome geisha bassist, jellyfish courier, neon priestess, reptile fashion model, vending-machine oracle, and masked dancer. Each card has a tiny readable name tag and a unique color accent, but the whole grid shares a polished late-90s anime cyberpunk aesthetic, black background, fluorescent rim lights, glossy materials, sticker-like UI glyphs, playful stylish energy, no gore, no explicit content, original designs only.
+```
+
+---
+
+## 🎬 Cinematic & Animation
+
+### No. 25 · Pixar-style 3D animation still (kitten)
+
+- Image: `docs/cinematic-animation/pixar-kitchen.png`
+- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Original
+
+```text
+A Pixar-quality 3D animation still, landscape 16:9. Cinematic feature-film look, warm studio lighting.
+
+Scene: a cozy apartment kitchen at dawn. A small orange tabby kitten sits on the countertop reaching a paw toward a rising soufflé in the oven; oven glow lighting the scene from below. Soft morning light through linen curtains. A wooden chopping board with a half-peeled lemon, a copper whisk with a small cloud of flour still airborne, a tiny succulent in a clay pot.
+
+Character: kitten with expressive, slightly oversized eyes (classic Pixar proportions), individually sculpted whiskers, believable fur with micro-groom direction, curious-slightly-worried expression.
+
+Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.
+```
+
+### No. 26 · 1940s film-noir still
+
+- Image: `docs/cinematic-animation/noir-detective.png`
+- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Original
+
+```text
+A 1940s film-noir black-and-white movie still, landscape 16:9, high contrast. Shot on 35mm with visible grain.
+
+Scene: a detective in trench coat and fedora stands alone at a rain-soaked street corner at 2 a.m., cigarette in hand, smoke curling upward. Wet cobblestones reflecting a single buzzing street lamp. A "HOTEL" neon sign on brick facade with letters "HOTE_" (the L flickered out). A vintage 1946 sedan parked at the curb, tail-lights glowing through drizzle.
+
+Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".
+```
+
+### No. 27 · Professional 6-panel film storyboard
+
+- Image: `docs/cinematic-animation/storyboard.png`
+- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Original
+
+```text
+A 6-panel film storyboard laid out as a 3×2 grid, landscape 16:9 overall. Each panel is a rectangular pencil-and-marker sketch with a white margin border and a small information strip underneath.
+
+Scene: a chase through a rainy Tokyo alleyway, ending in a rooftop jump.
+
+Panel 1 — WIDE establishing: wet neon alleyway, runner entering from left; kanji signage on both walls. Info: "PANEL 1 · EXT. ALLEY · NIGHT · WIDE / static / 2s"
+Panel 2 — OTS tracking: runner mid-stride from behind; pursuer silhouette 10 m back. Info: "PANEL 2 · OTS TRACKING / follow-cam / pan-L 45° / 3s"
+Panel 3 — Close-up: runner's face, sweat, eyes darting up toward fire escape. Info: "PANEL 3 · CU RUNNER / static / 1.5s / SFX: breath"
+Panel 4 — Low angle: runner leaping onto fire-escape ladder; rain streaks. Info: "PANEL 4 · LOW ANGLE / tilt-up 30° / 2s"
+Panel 5 — Wide aerial: runner silhouetted against neon skyline, about to leap rooftops. Info: "PANEL 5 · WIDE AERIAL / crane-down / 4s"
+Panel 6 — Match cut: runner's boots landing on wet rooftop; splash. Info: "PANEL 6 · MATCH CUT CU / static / 1s / SFX: splash"
+
+Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.
+```
+
+### No. 28 · Studio-Ghibli-style animation still
+
+- Image: `docs/cinematic-animation/ghibli-cottage.png`
+- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Original
+
+```text
+A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wooden cottage sits on a grassy hillside overlooking a valley at golden hour. A child stands barefoot at the cottage doorway waving to a small furry forest spirit half-hidden in the meadow grass. A distant train cuts across the valley floor, swallows dip overhead.
+
+Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki's Delivery Service", not a 3D render.
+```
+
+### No. 29 · VHS grocery-store chaos still
+
+- Image: `docs/cinematic-animation/vhs-grocery-chaos.png`
+- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/)
+
+```text
+Create a chaotic security-camera still from a 1990s grocery store. A man in full medieval armor is frozen mid-sprint stealing several rotisserie chickens past the dairy section. Overhead fluorescent lights reflect off the armor. The floor is baby-blue tile. Add a timestamp reading "08/13/96 04:44 AM" and a wall poster saying "NEW! TOASTER STRUDELS!". Make it low-fidelity, absurd, slightly intense, with motion blur, VHS color bleed, surveillance noise, and authentic analog-store lighting.
+```
+
+---
+
+## 👤 Character Design
+
+### No. 30 · Official character reference sheet
+
+- Image: `docs/character-design/character-sheet.png`
+- Metadata: Character Design · `landscape` · `1536x1024` · Author: @MANISH1027512 · Source: [X](https://x.com/MANISH1027512)
+
+```text
+Based on this character and background, please create a character reference sheet similar to official setting materials.
+- Includes three-view drawings: front view, side view, and back view
+- Add variations of the character's facial expressions
+- Break down and display detailed parts of the clothing and equipment
+- Add a color palette
+- Include a brief explanation of the worldview setting
+- Overall, use an organized layout (white background, illustration style)
+```
+
+### No. 31 · Elven archer sketchbook concept sheet
+
+- Image: `docs/character-design/elven-archer-sheet.png`
+- Metadata: Character Design · `portrait` · `1024x1536` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1jrcpan/fantasy_concept_arts_with_v7_prompts_included/)
+
+```text
+Create a fantasy concept art sketchbook page centered on a mystical elven archer with flowing robes. Render the main figure in loose graphite strokes with precise ink detailing. Surround the hero sketch with side views exploring cloak variations, a half-finished bow study with measurements, thumbnail action poses, handwritten annotations about enchanted embroidery patterns, and faint watercolor tests bleeding into the margins in forest-green and silver. The page should feel like a real art director's development sheet: exploratory, beautiful, readable, and richly tactile.
+```
+
+---
+
+## 📝 Typography & Posters
+
+### No. 32 · Chinese tea launch poster
+
+- Image: `docs/typography-posters/tea-poster.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Original
+
+```text
+Design a 3:4 vertical poster for a new Chinese trendy tea launch. Use a New Chinese visual style that feels light-luxury and restrained. The palette should be dark green, off-white, and gold, with rice-paper texture, elegant negative space, landscape accents, and modern layout design.
+
+Main subject:
+a visually appealing cold-brew tea with tea leaves, citrus, ice cubes, and touches of gold foil.
+
+The poster must accurately display the following exact Chinese copy:
+"山川茶事" / "山柚观音" / "冷泡系列" / "新品上市"
+"一口清醒，半城入夏" / "限定尝鲜价"
+"中杯 16 元" / "大杯 19 元"
+"门店活动" / "第二杯半价" / "加 3 元升级轻乳版" / "每日前 100 名赠限定杯套"
+"推荐风味" / "观音茶底 / 西柚果香 / 轻乳云顶 / 冰感回甘"
+"活动时间 4月20日 至 5月10日" / "扫码点单" / "SHANCHUAN TEA"
+
+Fine print: "图片仅供参考，请以门店实际售卖为准"
+
+Maintain a clear promotional hierarchy while keeping the overall feeling sophisticated rather than cheap or overly e-commerce-like. Pay special attention to small text, numbers, prices, info modules, and Chinese typography aesthetics.
+```
+
+### No. 33 · 1980s propaganda poster
+
+- Image: `docs/typography-posters/propaganda-poster.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @akokoi1 · Source: [X](https://x.com/akokoi1)
+
+```text
+Generate a 1980s propaganda poster. Use the exact slogan "热烈庆祝GPT-Image-2全量开放". Include Sam Altman, Dario Amodei, and Elon Musk, and give Dario Amodei a red scarf.
+```
+
+### No. 34 · Saul-Bass-style thriller movie poster
+
+- Image: `docs/typography-posters/saul-bass-poster.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Original
+
+```text
+A Saul-Bass-style minimalist thriller movie poster, 3:4 portrait. Off-white paper background with subtle vintage grain. Large flat-color cut-paper shapes, bold geometry, negative-space illusion.
+
+Composition: a single stylised human silhouette in crimson running across centre; the shadow warps into a knife blade pointing up into the title. Black ink-brush splatter across the lower third. A single yellow eye motif in the upper-left negative space.
+
+Exact typography:
+- Title (large hand-lettered serif, black): "THE LAST HEIR"
+- Tagline (small caps sans-serif, dark red): "EVERY FAMILY KEEPS A SECRET. HIS WILL BURY THEM ALL."
+- Bottom credit block: "PRODUCERS JANE NORRIS  LEWIS HAHN    DIRECTED BY MAYA ALVAREZ    A CINERA RELEASE    IN CINEMAS OCTOBER 31"
+
+Palette: cream, charcoal black, crimson red, mustard-yellow accent. Pure flat graphic design, no photo elements, no gradients, no 3D — in the lineage of Bass's "Anatomy of a Murder", "Vertigo", and "The Man with the Golden Arm".
+```
+
+### No. 35 · Vogue-style fashion magazine cover
+
+- Image: `docs/typography-posters/vogue-cover.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Original
+
+```text
+A high-fashion magazine cover, 3:4 portrait, Vogue Paris / British Vogue editorial aesthetic.
+
+Subject: a tall female model, medium-dark skin tone, mid-thirties, standing three-quarters to camera, direct piercing gaze. She wears a sculptural high-collared ivory wool coat over a silk slip dress in deep aubergine. Minimalist silver spiral earrings. Hair in a sleek low chignon with a single escaped strand. Makeup: matte bronze-warm, glossy plum lip.
+
+Background: muted concrete-grey seamless paper backdrop, vertical shaft of cool daylight from upper left. Shallow depth of field.
+
+Exact cover typography (all English, crisp, correctly spelled):
+- Masthead, huge uppercase serif, white: "VOGUE"
+- Date strip top-left, tiny caps: "NOVEMBER 2026 · PARIS EDITION · €9.00"
+- Main cover line, bold sans-serif centered: "THE QUIET POWER ISSUE"
+- Right-edge cover lines, stacked:
+   "THE NEW MINIMALISTS — a 40-page portfolio"
+   "HOW AI TOOLS ARE REWRITING THE ATELIER"
+   "MARTIN MARGIELA'S UNREVEALED ARCHIVE"
+   "SKIN · INVESTMENT · WHERE THE MONEY GOES NEXT"
+- Bottom-left barcode with catalog code "VG1126"
+
+Lighting: classic fashion editorial — soft single-source key, subtle fill, deep shadow on one cheek, fine film grain.
+```
+
+### No. 36 · 1950s Astounding Stories pulp cover
+
+- Image: `docs/typography-posters/pulp-scifi-cover.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Original
+
+```text
+A vintage sci-fi pulp magazine cover from the 1950s, 3:4 portrait. Classic "Astounding Science Fiction" / "Galaxy" aesthetic — painted gouache illustration with pulp-yellow paper texture, screen-printing registration slightly off, pale browned paper tone around edges.
+
+Cover illustration: a chrome-silver rocket ship descending toward an alien red-desert planet with two Saturn-like ringed moons in a violet sky. A lone astronaut in a bulbous 1950s-style glass-dome space helmet stands foreground-left in a crimson pressurised suit, holding a ray-gun, facing a many-tentacled translucent green creature emerging from a fissure.
+
+Exact typography:
+- Masthead, huge yellow retro display serif arched across the top: "ASTOUNDING STORIES"
+- Volume banner, red, under masthead: "VOL. XXXVII · NO. 5 · MARCH 1957 · 25¢"
+- Featured story callout, bold red sans-serif bottom-left: "THE MEN FROM RIGEL — a novelette by E. A. KLEIN"
+
+Art direction: painted gouache with visible brush strokes, saturated pulp palette (canary yellow, orange, red, electric violet, chrome silver), hand-lettered headlines, slightly rough paper texture, faint foxing on corners.
+```
+
+### No. 37 · Boston Spring 2026 city poster
+
+- Image: `docs/typography-posters/boston-poster.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @BubbleBrain · Source: [X](https://x.com/BubbleBrain)
+
+```text
+A striking Spring 2026 city poster for Boston with an elegant celebratory mood and a bold contemporary design. On a clean off-white textured background with large areas of negative space, a miniature single sculler rows across the lower right corner of the image on a narrow ribbon of reflective water. The wake from the oar sweeps upward in a dynamic calligraphic curve, gradually transforming into the Charles River and then into a dreamlike hand-painted panorama of Boston. Inside this flowing river-shaped composition are iconic Boston elements: the Back Bay skyline, Beacon Hill brownstones, Acorn Street, Boston Public Garden, Swan Boats, Zakim Bridge, Fenway-inspired details, historic brick architecture, harbor ferries, and the city's waterfront atmosphere. Soft morning fog, golden spring light, subtle festive accents in crimson and gold, rich detail, layered depth, sophisticated city-poster aesthetics, fresh and refined, visually powerful but not overcrowded. Elegant typography in the lower left reads "SPRING 2026" with a vertical slogan "BOSTON, A CITY OF RIVER, MEMORY, AND INVENTION", text clear and beautifully composed, premium graphic design, 9:16
+```
+
+### No. 38 · Epic silhouette worldbuilding poster
+
+- Image: `docs/typography-posters/epic-silhouette-poster.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e324cd0000000021039ca9)
+
+```text
+Design a collector's-edition epic poster for an original fantasy theme called "The Celestial Archive". The outer silhouette is a graceful side profile of a lone archivist, and inside that silhouette a complete world naturally grows: observatories, floating stairways, bridges, ancient libraries, moons, towers, relics, and distant pilgrims. Make it feel like a narrative silhouette composition rather than a collage. Style: cinematic poster fused with dreamy watercolor illustration, quiet and majestic, sacred and nostalgic, with paper grain, soft mist, brush-edge texture, elegant negative space, and a discreet signature "WHY" integrated naturally as part of the layout.
+```
+
+### No. 39 · Dual-exposure narrative poster
+
+- Image: `docs/typography-posters/dual-exposure-poster.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e7a01700000000230153f3)
+
+```text
+Create a high-aesthetic collector poster in a "silhouette universe / dual-exposure narrative" style for an original theme called "Moonlit Dragon Court". Choose the most symbolic outer contour yourself — not a bottle or hourglass, but a more resonant form like a mask, archway, wing, throne, face profile, or luminous gate. Inside and around that contour, let a complete theme world naturally unfold: palaces, bridges, moonlit water, dragon motifs, relics, banners, distant figures, and layered atmospheric depth. The image must feel like a premium novel/anime poster: elegant, mythic, poetic, not cluttered, not collage-like, with strong visual memory and restrained luxurious design.
+```
+
+### No. 40 · Journey to the West silhouette epic poster
+
+- Image: `docs/typography-posters/journey-west-silhouette.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e78cd4000000002103bdd3)
+
+```text
+Create a collector-edition epic narrative poster for 《西游记》. Use a giant elegant side-profile silhouette as the outer contour, and let the interior grow into a complete Journey to the West world: Monkey King, monk, pig and sand monk, flaming mountain, heavenly palace, demons, magic staff, clouds, temples, mountains, relics, and symbolic motifs. Not a collage but a refined silhouette-filled narrative composition, blending cinematic poster design with dreamy watercolor illustration, soft atmospheric perspective, paper grain, restrained layout, large breathing space, poetic and legendary mood. Add a subtle refined signature mark “WHY” integrated into the poster design.
+```
+
+### No. 41 · Japanese pachinko rainbow flyer
+
+- Image: `docs/typography-posters/japanese-pachinko-flyer.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @midori_tatsuta · Source: [X](https://x.com/midori_tatsuta/status/2045441358530498797)
+
+```text
+パチンコ屋のギラギラチラシを3:4で作って。リアルで精密な今どきの可愛い日本人女性を1人配置。ギラギラで立体感のあるリッチな装飾のレインボーフォントなどを駆使し、とにかく豪華に。実在しない架空の新台の紹介をいくつか並べて。価格・特典・煽り文句・小さな注意書きまで入れて、日本の量販広告らしい情報量と熱量で仕上げて。
+```
+
+### No. 42 · Spanish fantasy film mobile poster
+
+- Image: `docs/typography-posters/spanish-fantasy-mobile-poster.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @palabraseca · Source: [X](https://x.com/palabraseca/status/2047079358326849911)
+
+```text
+Haz un póster vertical 4:5 para una película fantástica inexistente llamada "La Última Ciudad Sumergida". Debe sentirse como un gran estreno cinematográfico: detallado, elegante, épico y pensado como wallpaper de móvil. Muestra a una heroína sola sobre un puente inundado mirando una ciudad luminosa bajo el mar. Usa tipografía dramática en español, créditos falsos creíbles, niebla dorada, luz azul verdosa, composición premium y acabado de cartel internacional de cine.
+```
+
+### No. 43 · Chongqing rainy-night city promo poster
+
+- Image: `docs/typography-posters/city-tourism-promo-poster.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e5cb85000000001a027aa8)
+
+```text
+做一张 3:4 城市宣传海报，主题是“山城雨夜·重庆”。整体像高端城市文旅 campaign poster，不要廉价旅行社风格。画面中心是层叠山城建筑、轻轨穿楼、湿润街道、霓虹倒影、江边雾气和夜色中的坡道。用现代中文排版，加入少量准确标题与副标题："山城雨夜" / "CHONGQING" / "8D 城市 / 江雾 / 火锅 / 轻轨 / 夜景"。信息密度适中，留白克制，色彩以深蓝、暖橙、湿润霓虹红为主，像一本设计年鉴里的城市品牌海报。
+```
+
+### No. 44 · Athlete journey poster: Aya Navarro
+
+- Image: `docs/typography-posters/athlete-journey-poster-aya-navarro.png`
+- Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2047325329052823996)
+
+```text
+Cinematic portrait poster of fictional athlete Aya Navarro showing her full journey from local school courts to world-stage champion, bold editorial typography listing milestone years, medals, best performances, dramatic split-era composition, premium sports documentary design, mobile-poster format, high text clarity.
+```
+
+---
+
+## 🎨 Illustration
+
+### No. 45 · Vintage Amalfi Coast travel poster
+
+- Image: `docs/illustration/amalfi-poster.png`
+- Metadata: Illustration · `portrait` · `1024x1536` · Author: @WolfRiccardo · Source: [X](https://x.com/WolfRiccardo)
+
+```text
+Modern pencil illustration of Vintage travel poster illustration of the Amalfi Coast, Italy, panoramic coastal cliff road scene, classic 1960s white car driving along a curved seaside road, deep blue Mediterranean sea with small sailboats, colorful pastel hillside village, bright blue sky with soft clouds, lemon tree branches with vibrant yellow lemons framing the foreground, warm summer sunlight, bold vibrant colors, retro 1950s travel poster style, cinematic composition, high detail, screen print texture, graphic illustration. Hand-drawn style, illustration with loose strokes and defined contours. High-contrast color palette, maintaining chromatic harmony between background and elements. Contemporary and decorative aesthetic.
+```
+
+### No. 46 · Paper-cut forest night market
+
+- Image: `docs/illustration/papercut-forest-market.png`
+- Metadata: Illustration · `landscape` · `1536x1024` · Original
+
+```text
+Create a landscape editorial illustration in layered paper-cut style: a tiny forest night market hidden beneath giant mushrooms and fern leaves. Include warm lantern stalls selling acorn cakes, beetle taxis, a fox calligrapher, a badger tea vendor, children holding leaf umbrellas, and fireflies forming soft dotted paths. Style anchor: mid-century children’s book illustration meets contemporary layered paper diorama, visible cut-paper edges, soft shadows between layers, muted moss green, pumpkin orange, cream, and ink-blue palette. First glance: a cozy glowing market silhouette. Second glance: many small vendor stories. Third glance: handmade paper texture, tiny signage, and playful animal gestures. No photorealism, no 3D plastic look, no cluttered unreadable faces.
+```
+
+---
+
+## 💧 Watercolor
+
+### No. 47 · Dreamy watercolor — young woman at lily pond
+
+- Image: `docs/watercolor/watercolor-lily-pond.png`
+- Metadata: Watercolor · `portrait` · `1024x1536` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
+
+```text
+Dreamy watercolor illustration of a young woman in a cream linen dress sitting on a weathered stone bench, contemplating a lily pond at late golden hour. Impressionist-light aesthetic, loose confident brush strokes, translucent washes in muted teal and warm ochre tones with soft lavender shadows. Soft blur of water lilies and reflected clouds in the pond surface. Gentle sunlight filters through overhanging willow branches. Cold-pressed paper texture visible throughout, edges of wet-on-wet bleeds, delicate lighting, clean composition with generous negative space, minimalist focus on mood, sense of calm, lightness, and ephemeral beauty. Editorial high-quality illustration, in the tradition of Turner's watercolor studies and modern editorial magazine illustration.
+```
+
+### No. 48 · Rainy botanical greenhouse watercolor
+
+- Image: `docs/watercolor/rainy-botanical-greenhouse.png`
+- Metadata: Watercolor · `landscape` · `1536x1024` · Original
+
+```text
+Create a delicate watercolor illustration of a rainy botanical greenhouse in early morning. Landscape composition, transparent washes, granulating pigments, soft wet-on-wet blooms, visible cold-pressed paper texture. Scene: arched glass greenhouse ribs, raindrops streaming down panes, hanging ferns, orchids, clay pots, a narrow stone path, a wooden bench with an open gardening notebook, and diffused silver daylight. Palette: sage green, eucalyptus gray, pale lavender, warm terracotta, and tiny yellow flower accents. Keep the image airy and poetic, with preserved white paper highlights, no hard digital gradients, no photorealistic lens effects, and no heavy outlines.
+```
+
+---
+
+## 🖌️ Ink & Chinese
+
+### No. 49 · Chinese ink-wash mountain landscape
+
+- Image: `docs/ink-chinese/ink-landscape.png`
+- Metadata: Ink & Chinese · `portrait` · `1024x1536` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
+
+```text
+A traditional Chinese ink-wash (水墨) landscape painting of mist-shrouded mountains, rendered on aged xuan rice paper. Layered mountain ranges receding into distance through gradations of black ink — bold dark foreground peaks with sharp brushwork, mid-ground ranges in medium wash, far peaks almost dissolved into pale grey mist. A single traditional pavilion perched on a cliff midway up, a small solitary figure crossing a wooden bridge over a waterfall. Pine trees with calligraphic branches, curling cloud-mist flowing between peaks (留白 negative-space clouds). A vertical seal stamp in red (篆刻 zhu-wen style) bottom-left, a vertical column of calligraphic characters reading "山高水長" top-right in elegant caoshu (草書) brushwork. Paper has faint warm beige tone with visible fiber texture. Aesthetic in the tradition of 范寬 Fan Kuan / 馬遠 Ma Yuan Song-dynasty landscape painting — contemplative, restrained, deep negative space, brush-energy (气韵) visible in every stroke.
+```
+
+### No. 50 · Song dynasty night-market handscroll
+
+- Image: `docs/ink-chinese/song-night-market-scroll.png`
+- Metadata: Ink & Chinese · `landscape` · `1536x1024` · Original
+
+```text
+Create a horizontal Chinese ink-and-wash handscroll scene of a Song dynasty riverside night market. Use gongbi-level architectural detail combined with loose ink atmosphere: arched stone bridge, lantern boats, teahouse balconies, book stalls, noodle steam, scholars reading under lamps, children chasing paper rabbits, and distant city walls fading into mist. Add small readable Chinese shop signs in brush style: "茶", "书", "面", "灯市". Palette: black ink, warm lantern ochre, muted cinnabar seals, and pale blue-gray moonlight. Composition should read as a continuous scroll with rhythmic clusters of people and negative-space water. Avoid modern objects, anime faces, fake calligraphy clutter, and overly saturated poster lighting.
+```
+
+---
+
+## 🕹️ Pixel Art
+
+### No. 51 · Pixel art car sprite sheet
+
+- Image: `docs/pixel-art/pixel-sprite-cars.png`
+- Metadata: Pixel Art · `square` · `1024x1024` · Author: @RoundtableSpace · Source: [X](https://x.com/RoundtableSpace)
+
+```text
+A 10x10 pixel art sprite sheet of retro video game cars, 16-bit era aesthetic. Ten rows by ten columns of small vehicle sprites on a clean light-grey grid background, each cell 64x64 pixels. Variety across sprites: sedans, sports cars, muscle cars, SUVs, pickup trucks, vans, taxi cabs, police cruisers, convertibles, and hot rods, in a full rainbow of colors. All sprites rendered in a consistent 3/4 top-down perspective with matching shading, crisp pixel edges, no anti-aliasing, palette limited to ~16 tones per sprite, SNES / Super Nintendo cart-racing game tradition.
+```
+
+### No. 52 · Pixel art breakfast still life
+
+- Image: `docs/pixel-art/pixel-breakfast.png`
+- Metadata: Pixel Art · `square` · `1024x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1jmodcx/animated_pixel_art_food_prompts_included/)
+
+```text
+Create a nostalgic pixel-art breakfast still life. Show a tall stack of fluffy golden pancakes drizzled with glossy maple syrup, topped with strawberries and blueberries, with pixelated steam rising into the air. The plate sits on a pastel tablecloth and a hot cup of coffee rests in the background. Use rich breakfast colors, careful lighting, and delicious texture detail while staying true to clean, readable pixel art.
+```
+
+---
+
+## 📐 Isometric
+
+### No. 53 · Isometric miniature cafe district
+
+- Image: `docs/isometric/isometric-cafe.png`
+- Metadata: Isometric · `square` · `1024x1024` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
+
+```text
+A detailed isometric 3D miniature scene of a two-block cafe district, clean geometric forms, precise 30° isometric perspective alignment. A corner cafe with outdoor umbrella seating, a bookstore next door with stacks of books visible through the window, a bakery with a window display of pastries, a bicycle parked at the curb, a small fountain in a mini-plaza, planter boxes with tiny trees, a food cart on the corner selling coffee, stylised miniature pedestrians in various poses, tiled roof tops with ventilation details. Soft ambient lighting from upper-left, no harsh shadows, pastel-plus-muted palette (terracotta rooftops, cream walls, sage greens, dusty blue accents), slight atmospheric haze, subtle ambient occlusion in corners, high-detail miniature texturing. Professional rendering quality, suitable for editorial or marketing materials. Flat colored background in a single soft cream tone, no ground plane shadow, scene floating like a diorama.
+```
+
+### No. 54 · Isometric fantasy village map
+
+- Image: `docs/isometric/isometric-fantasy-village.png`
+- Metadata: Isometric · `square` · `1024x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1hkqr4x/isometric_maps_prompts_included/)
+
+```text
+Create a vibrant isometric fantasy village map with a clean grid-based layout using 3x3 meter tiles. Include wooden houses with thatched roofs, cobblestone paths, and a central stone fountain. One corner of the map rises into a small grassy hill about 2 meters high with stairs connecting to the lower ground. Keep the isometric angle precise and game-ready. Warm sunlight sends clear rays and long shadows across the rooftops. Make the scene readable like a handcrafted strategy-game map, with crisp tile logic, charming environmental detail, and rich but controlled color.
+```
+
+---
+
+## 📦 Product & Food
+
+### No. 55 · 3D product box from dieline
+
+- Image: `docs/product-food/product-dieline-box.png`
+- Metadata: Product & Food · `portrait` · `1024x1536` · Author: @Salmaaboukarr · Source: [X](https://x.com/Salmaaboukarr)
+
+```text
+Assemble the dieline into a flawless 3D box with accurate panels, clean folds, undistorted type, and artwork preserved exactly. Shoot it upright at a refined three-quarter angle in a minimal premium studio setting with a soft neutral background, diffused light, subtle shadows, no props, true colours, matte paperboard texture, and realistic editorial detail. The box front reads "AURAE / COLD-BREW MATCHA / 12 fl oz" in clean sans-serif. Side panel shows small ingredient list in 8pt type, nutrition-facts-style block. Clean, editorial, award-winning packshot aesthetic.
+```
+
+### No. 56 · Chocolate wafer product render (JSON-style)
+
+- Image: `docs/product-food/product-chocolate-wafer.png`
+- Metadata: Product & Food · `portrait` · `1024x1536` · Author: @mehvishs25 · Source: [X](https://x.com/mehvishs25)
+
 ```text
 /* PRODUCT_RENDER_CONFIG: Chocolate Wafer Hazelnut Edition
    VERSION: 2.0.1
@@ -89,9 +733,12 @@ Source: [@AIimagined](https://x.com/AIimagined/status/2046915800263802880) — p
   "RENDER_OUTPUT": { "Resolution": "8K_UHD", "Aspect_Ratio": "3:4", "Quality_Flags": ["Hyper_Realistic", "Sharp_Foreground", "Indulgent_Mood"] }
 }
 ```
-Source: [@mehvishs25](https://x.com/mehvishs25/status/2020693181730598932) — pioneered the structured JSON-object prompt style for premium product shots. gpt-image-2 handles nested config keys surprisingly well.
 
-### Food photography — Salad explosion (JSON-style)
+### No. 57 · Salad-explosion food photography (JSON-style)
+
+- Image: `docs/product-food/food-salad-explosion.png`
+- Metadata: Product & Food · `portrait` · `1024x1536` · Author: @ChillaiKalan__ · Source: [X](https://x.com/ChillaiKalan__)
+
 ```text
 {
   "global_settings": {
@@ -117,406 +764,111 @@ Source: [@mehvishs25](https://x.com/mehvishs25/status/2020693181730598932) — p
   "render_flags": ["food photography award-winning", "no CGI tell", "editorial cookbook cover feel"]
 }
 ```
-Source: [@ChillaiKalan__](https://x.com/ChillaiKalan__) — same JSON-object pattern applied to editorial food photography.
 
-### Chess board — mid-tournament game
+### No. 58 · Universal commercial poster template
+
+- Image: `docs/product-food/aurora-oolong-poster.png`
+- Metadata: Product & Food · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e7878300000000230050bb)
+
+```text
+Design a high-end commercial poster for a product called "Aurora Oolong Cold Brew". Minimalist style, clean frame, centered hero bottle and tea glass, soft studio lighting, realistic material textures, elegant condensation details, generous negative space, premium brand visual language, cinematic light and shadow, refined packaging typography, and ultra-detailed finish. Make it feel like a luxury beverage campaign that could run in a subway lightbox or fashion magazine.
+```
+
+---
+
+## 🧩 Brand Systems & Identity
+
+### No. 59 · Moss Radio brand identity showcase board
+
+- Image: `docs/brand-systems-identity/brand-identity-moss-radio.png`
+- Metadata: Brand Systems & Identity · `square` · `1024x1024` · Author: @LexnLin · Source: [X](https://x.com/LexnLin/status/2046952493213429886)
+
+```text
+Create a square high-end brand identity showcase board for a fictional brand called "Moss Radio". The brand should feel analog, cultured, warm, tactile, and design-forward. It operates in independent audio hardware and café-retail and should appeal to creative professionals and music obsessives. The overall mood should be nostalgic but modern. Design a polished modular grid of multiple tiles, each showing a different application of one cohesive visual identity system. Include logo explorations, wordmarks, app icon variations, editorial posters, product cards, landing page fragments, packaging concepts, typography specimens, interface snippets, color palette presentations, sticker systems, patterns, branded mockups, and small motion-inspired compositions. Use Swiss-inspired typography, rounded industrial shapes, and a moss green / parchment / charcoal / copper palette. Dense but elegant layout, sharp alignment, strong hierarchy, premium case-study presentation.
+```
+
+### No. 60 · PS1 nostalgia reboot brand kit
+
+- Image: `docs/brand-systems-identity/ps1-reboot-brand-kit.png`
+- Metadata: Brand Systems & Identity · `square` · `1024x1024` · Author: @den_turbin · Source: [X](https://x.com/den_turbin/status/2046863385791467773)
+
+```text
+Create a clean brand kit presented as one square modular board for a fictional revival of the PlayStation One era called "PS1 1998 Reboot". The identity should merge Japanese editorial design, Y2K nostalgia, acid green accents, VHS texture, silver plastics, disc-menu UI motifs, retail stickers, controller packaging, startup-screen typography, and memory-card iconography. Show multiple coordinated tiles including posters, packaging, interface snippets, collectible cards, typography studies, icons, and branded mockups. Keep it polished, cohesive, art-directed, and emotionally nostalgic, like a real top-tier design studio case study rather than generic merch.
+```
+
+### No. 61 · Playful brand kit: Mochi Metro
+
+- Image: `docs/brand-systems-identity/playful-brand-kit-mochi-metro.png`
+- Metadata: Brand Systems & Identity · `square` · `1024x1024` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2047207315976368584)
+
+```text
+Playful brand kit for "Mochi Metro", bold colors, fun typography, modern layout, modular square board with logo studies, packaging snippets, posters, app icons, stickers, UI fragments, and a cheerful Tokyo-snack visual system. Crisp alignment, dense but clean, highly polished design presentation.
+```
+
+---
+
+## 📷 Photography
+
+### No. 62 · RAW iPhone — 42nd Street subway
+
+- Image: `docs/photography/photoreal-subway.png`
+- Metadata: Photography · `landscape` · `1536x1024` · Author: @WolfRiccardo · Source: [X](https://x.com/WolfRiccardo)
+
+```text
+Create a completely RAW quality, unprocessed, unedited image with full iPhone camera quality. A subway station in USA, a momentary blur. The subway is in motion. In front of the subway, there is an elderly woman and man.
+```
+
+### No. 63 · Handwritten notebook flatlay
+
+- Image: `docs/photography/handwritten-notebook.png`
+- Metadata: Photography · `landscape` · `1536x1024` · Author: @patrickassale · Source: [X](https://x.com/patrickassale)
+
+```text
+Amateur photo of an open notebook lying flat, filled with handwritten notes in black ballpoint pen. The handwriting is casual and slightly messy, like personal notes, natural imperfections, crossed out words, underlined headings. Shot from slightly above, natural daylight from a window, no flash. Casual desk setting, shot on iPhone
+```
+
+### No. 64 · Chess board mid-tournament game
+
+- Image: `docs/photography/chess-midgame.png`
+- Metadata: Photography · `landscape` · `1536x1024` · Author: @EddGorenstein · Source: [X](https://x.com/EddGorenstein)
+
 ```text
 Generate a photorealistic photo of a chess board during the middle of a serious tournament game. Top-down three-quarter view, shallow depth of field. All pieces clearly distinguishable and correctly shaped: pawns, rooks, knights (with horse-head silhouette), bishops (mitre tops), queens, kings (with cross finials). The position is mid-game: several pieces already captured and set aside to the right of the board, some pawns advanced, pieces clustered around the central files d4-e5-f4.
 
 Materials: polished wooden staunton-style pieces — dark side in rosewood, light side in maple. Board made of inlaid maple and walnut squares. A digital chess clock sits to the left showing "00:14:28 / 00:08:47". Soft overhead tournament lighting, blurred tournament-hall background. All pieces accurate, no mutants, no extra sets.
 ```
-Source: [@EddGorenstein](https://x.com/EddGorenstein/status/2046923077993259196) — classic gpt-image-2 spatial-reasoning stress test; shows the model can finally render legible staunton pieces.
 
-### Person-profile poster (Chinese template)
+### No. 65 · 360° equirectangular jungle panorama
+
+- Image: `docs/photography/panorama-jungle.png`
+- Metadata: Photography · `wide` · `2048x1152` · Author: @AIimagined · Source: [X](https://x.com/AIimagined)
+
 ```text
-按这张图的 layout，research {人物}，做一份同款人物海报。
+360 equirectangular panorama of a dense prehistoric jungle scene. Cinematic detail. Strict 2:1 aspect ratio (e.g. 4096×2048). No distortion at the seams — the left and right edges must wrap seamlessly.
 
-需要包含：
-1. 头部：姓名 + slogan + 金句 + 肖像
-2. 基本信息：出生 / 教育 / 关键节点
-3. 职业履历时间轴
-4. 核心理念（4 条）
-5. 代表作品（6 个）
-6. 金句与演讲（3 条）
-7. 管理 / 个人风格（4 个关键词）
-8. 未来方向（4 个）
-9. 底部总结 + 金句横幅
+Scene: towering fern-covered trees, shafts of golden sunlight piercing the canopy, a slow river winding through the centre foreground, mist rising off the water. Scattered dinosaurs of varied species — a grazing Brachiosaurus neck visible among distant tree canopy, two small Gallimimus drinking at the river's edge, a Triceratops in the background underbrush. Tropical birds in flight, butterflies, dragonflies over the water.
 
-真实资料优先，虚构部分标注。
+Lighting: late-afternoon golden hour, warm directional backlight through the canopy. High dynamic range, slight atmospheric haze. Equirectangular projection suitable for spherical / 360 viewers.
 ```
-Source: [@PANewsLab](https://x.com/PANewsLab/status/2046922799802187877) (two-tweet thread) — template Chinese layout for researcher / founder / figure profile posters. Feed a reference layout image via the edit endpoint + replace `{人物}` with a target name.
 
 ---
 
-## Games <a id="games"></a>
+## 📊 Infographics & Field Guides
 
-Prompts leveraging GPT Image 2's ability to replicate specific game aesthetics and gameplay screenshots.
+### No. 66 · Song Dynasty social-media feed
 
-### Hitman style in-game footage
-```text
-A Hitman level where you are in the OpenAI HQ and your mission is to steal GPT-6 without getting caught
-```
-Source: [@flowersslop](https://x.com/flowersslop/status/2044734896321532390)
+- Image: `docs/infographics-field-guides/song-dynasty-feed.png`
+- Metadata: Infographics & Field Guides · `portrait` · `1024x1536` · Author: @Panda20230902 · Source: [X](https://x.com/Panda20230902)
 
-### Black Myth: Wukong game scene
-```text
-Generate a Black Myth: Wukong game scene where Wukong is knocked away by Erlang Shen
-```
-
-### GTA 6 style in-game footage
-```text
-GTA 6 in-game footage, very detailed, very realistic. Close-up shot taken from a stationary 4k monitor. (There's a slight blurriness in the image, as it feels like it was taken handheld). A wide, bright environment. Realistic details. The character is walking on the beach with / :dog.
-```
-Source: [@WolfRiccardo](https://x.com/WolfRiccardo/status/2041187268711321735)
-
-### GTA 6 mission screenshot (template)
-```text
-Generate a GTA 6 gameplay screenshot of [scene description]
-```
-Source: [@MrLarus](https://x.com/MrLarus/status/2046109786840711246)
-
-### League of Legends mid lane screenshot
-```text
-Help me generate a screenshot of Trump versus Khamenei in the mid lane in League of Legends
-```
-Source: [@underwoodxie96](https://x.com/underwoodxie96/status/2046529342415790275)
-
-### 100 pixel-art items grid
-```text
-Create a single image containing a grid of 100 completely unique pixel art items, each with a meaningful label
-```
-Source: [@ProperPrompter](https://x.com/ProperPrompter/status/2046534215311970694)
-
-### Zelda: Tears of the Kingdom style
-```text
-In the game Zelda totk link is in a e531 series train made by him
-```
-Source: [@marmaduke091](https://x.com/marmaduke091/status/2040820686751432990)
-
-### GTA San Andreas gameplay screenshot
-```text
-gameplay screenshot of a lion fighting against an npc in gta san andreas
-```
-Source: [@flowersslop](https://x.com/flowersslop/status/2040693687500341568)
-
----
-
-## UI / UX <a id="ui-ux"></a>
-
-Prompts for authentic-looking app interfaces, social-media posts, and digital designs.
-
-### TikTok livestream screenshot
-```text
-Generate a screenshot of a TikTok live stream featuring a beautiful woman streaming.
-```
-
-### Douyin livestream screenshot
-```text
-9:16 aspect ratio, generate a screenshot of a Douyin live stream, inside is Liu Yifei live streaming, Liu Yifei is holding a sign in her hand, the sign says Tonight's live stream, welcome to join Yifei for a chat!
-```
-Source: [@alanblogsooo](https://x.com/alanblogsooo/status/2044784762594918516)
-
-### YouTube time-travel screenshot
-```text
-Screenshot of a YouTube video showing someone who time-traveled to the Middle Ages
-```
-Source: [@flowersslop](https://x.com/flowersslop/status/2040261168460108213)
-
-### Song Dynasty social media feed
 ```text
 "Song Dynasty People's Moments"/"SONG DYNASTY SOCIAL MEDIA FEED", Ancient and modern time-travel humor fusion interface design style, The image simulates a mobile phone social media interface, but the content is entirely Song Dynasty scenes, The avatar is a portrait of a Song Dynasty literati, Username "Su Dongpo SuShi_Official", Post content "Just arrived in Huangzhou, demoted but feeling okay. Made Dongpo pork myself today, tastes amazing, recipe attached:", The attached image is a close-up of Dongpo pork in Gongbi painting style, Likes list "Huang Tingjian, Qin Guan, Fo Yin etc. 126 people", Comments section "Wang Anshi: Hehe" "Sima Guang: Still the same taste", Interface elements such as the like icon are replaced with Song Dynasty patterns, The status bar shows "Great Song Mobile 5G" and "Third Year of Yuanfeng", The color scheme is mobile phone dark mode paired with elegant Song Dynasty tones, A masterpiece of fun collision between history and social media
 ```
-Source: [@Panda20230902](https://x.com/Panda20230902/status/2045385588065313057)
 
-### Ancient figures on modern platforms (template)
-```text
-Generate a screenshot of [historical figure name] on [platform name]
-```
-Tip: Add story background (historical moment, platform behavior, punchline) to land the meme. Source: [@MrLarus](https://x.com/MrLarus/status/2046585220393324553)
+### No. 67 · Museum catalog disassembly infographic (唐代襦裙)
 
-### E-commerce app homepage (high-fidelity)
-```text
-Generate a high-fidelity mobile e-commerce app homepage screenshot inspired by mainstream Chinese e-commerce apps in 2026. The interface should look fully realistic, with complete mobile-app UI logic and strong commercial design polish.
+- Image: `docs/infographics-field-guides/museum-infographic.png`
+- Metadata: Infographics & Field Guides · `portrait` · `1024x1536` · Author: @MrLarus · Source: [X](https://x.com/MrLarus)
 
-Layout requirements:
-- status bar with time 9:41, 5G signal, and battery icon
-- search area with a city selector on the left, a rounded search box in the center, and message plus scan icons on the right
-- horizontal category tabs below the search area
-- top promotional carousel banner
-- 10-icon function grid
-- flash-sale module with countdown and three product cards
-- "guess you like" two-column product waterfall with at least 6 product cards
-- bottom tab bar with five tabs
-
-Use these exact Chinese labels where appropriate:
-- city: "杭州"
-- search placeholder: "搜索耳机、咖啡机、运动鞋"
-- category tabs: "推荐、数码、家电、服饰、美妆、食品、运动、家居"
-- top banner: "618 预售开启" and "每满300减50"
-- function grid: "超市、百亿补贴、秒杀、直播、充值中心、到家、领券、品牌馆、全球购、排行榜"
-- flash sale title: "限时秒杀"
-- recommendation section: "猜你喜欢"
-- bottom tabs: "首页、分类、购物车、消息、我的"
-
-All Chinese text must be clear and readable with realistic fonts. Spacing, icon style, white space, shadows, rounded corners, dividers, and tag treatments should closely resemble a real app screenshot rather than concept art.
-```
-Source: 卡尔的AI沃茨
-
-### Music player interface
-```text
-Create a high-fidelity Chinese music app player interface screenshot in mobile portrait orientation, with refined visuals similar to a modern streaming player. Use dark mode, with the background derived from a blurred and diffused version of the album cover colors. Place a large square album cover in the center with subtle shadow and rounded corners.
-
-Interface requirements:
-- top status bar with time 18:26
-- navigation bar with a back arrow on the left, a centered title, and a more-options icon on the right
-- playback progress bar showing current time 01:42 and total duration 04:18
-- playback controls for shuffle, previous, play/pause, next, and repeat
-- lyrics section showing 5 to 7 scrolling lines, with the current line highlighted
-- action row with like, comment, download, add to playlist, and share
-- bottom area with device casting and playback queue entry
-
-Use these exact Chinese labels and names:
-- title: "正在播放"
-- song name: "海边的晚风"
-- artist: "林秋"
-- album: "夏夜实验室"
-
-The lyrics layout, button icons, reflections, shadows, and dark-mode layering should feel like a real production interface rather than a Dribbble concept.
-```
-Source: 卡尔的AI沃茨
-
-### Custom-style UI design system
-```text
-Generate a UI design system for me in xx style, including web pages, mobile, cards, controls, buttons, and others
-```
-Source: [@stark_nico99](https://x.com/stark_nico99/status/2045836554451706125)
-
-### T-800 Taobao product detail page
-```text
-Generate image:
-Taobao product detail page of a T-800 robot, showing:
-front, side, and back three-view drawings of the robot,
-product price,
-product details,
-functions and usage scenarios
-```
-Source: [@rionaifantasy](https://x.com/rionaifantasy/status/2045356799751303194)
-
----
-
-## Typography & Posters <a id="typography"></a>
-
-Prompts for typography, posters, and commercial designs — especially with Chinese text.
-
-### 1980s propaganda poster
-```text
-Generate a 1980s propaganda poster. Use the exact slogan "热烈庆祝GPT-Image-2全量开放". Include Sam Altman, Dario Amodei, and Elon Musk, and give Dario Amodei a red scarf.
-```
-Source: [@akokoi1](https://x.com/akokoi1/status/2046558658096738672)
-
-### Chinese tea drink product launch poster
-```text
-Design a 3:4 vertical poster for a new Chinese trendy tea launch. Use a New Chinese visual style that feels light-luxury and restrained. The palette should be dark green, off-white, and gold, with rice-paper texture, elegant negative space, landscape accents, and modern layout design.
-
-Main subject:
-a visually appealing cold-brew tea with tea leaves, citrus, ice cubes, and touches of gold foil.
-
-The poster must accurately display the following exact Chinese copy:
-"山川茶事"
-"山柚观音"
-"冷泡系列"
-"新品上市"
-"一口清醒，半城入夏"
-"限定尝鲜价"
-"中杯 16 元"
-"大杯 19 元"
-"门店活动"
-"第二杯半价"
-"加 3 元升级轻乳版"
-"每日前 100 名赠限定杯套"
-"推荐风味"
-"观音茶底 / 西柚果香 / 轻乳云顶 / 冰感回甘"
-"活动时间 4月20日 至 5月10日"
-"扫码点单"
-"SHANCHUAN TEA"
-
-Fine print:
-"图片仅供参考，请以门店实际售卖为准"
-
-Maintain a clear promotional hierarchy while keeping the overall feeling sophisticated rather than cheap or overly e-commerce-like. Pay special attention to small text, numbers, prices, info modules, and Chinese typography aesthetics.
-```
-
-### High-end skincare product poster
-```text
-Create a high-end skincare e-commerce hero poster for "澄光维稳精华" ("Clarifying Stabilizing Essence"). The style should be clean, light-luxury, and strongly science-skincare oriented. In the center, place a semi-transparent frosted-glass essence bottle filled with golden liquid and subtle water-droplet reflections. Use an off-white to warm gray gradient background with liquid-flow elements and microscopic molecular-structure decoration.
-
-The poster must include the following exact Chinese copy:
-"澄光"
-"维稳精华"
-"修护屏障"
-"舒缓泛红"
-"细腻透亮"
-"第 2 代升级配方"
-"核心成分"
-"神经酰胺"
-"泛醇 B5"
-"积雪草提取物"
-"微囊脂质体"
-"适合人群"
-"敏感肌"
-"熬夜肌"
-"换季不稳定肌"
-"限时到手价 229 元"
-"买 1 送 3"
-"赠洁面 15ml"
-"赠精华 5ml"
-"赠面霜 10g"
-
-Fine print:
-"实际效果因人而异，请坚持使用"
-
-Focus on product selling points, pricing hierarchy, gift-list modules, product naming, and short functional phrases. The result should feel premium and not tacky or overly live-commerce styled.
-```
-
-### Minimal design prompt collection
-```text
-Generate a series of gongbi-style bookmark designs
-Design a postcard collaboration between The Little Prince and SpaceX
-Generate a single-day calendar for April 19, 2026 themed around The Garden of Words
-Generate a series of Labor Day hand-held sign designs
-Generate a poster for the 2026 Grain Rain solar term
-Generate a set of icon fonts for a sports app
-Design a film-photography-style poster with the theme "Toward the mountains and sea"
-Design a Shanghai postcard in black line-art style
-Design a set of seal carvings for "Elon Musk"
-Design a set of co-branded promotional materials for Durex and Chayan Yuese
-```
-Source: [@akokoi1](https://x.com/akokoi1/status/2045693939584516441)
-
-### Chinese calligraphy manuscript recreation
-```text
-Generate an image of the authentic manuscript of [classic text title]
-
-Generate an image of the authentic manuscript of [classic text title], and incorporate the emotional core of the work into the calligraphy
-```
-Tip: add style cues like `in Wang Xizhi style`, `in Yan Zhenqing style`, or `with stronger emotional expression`. Source: [@MrLarus](https://x.com/MrLarus/status/2046201836525302032)
-
-### Chinese calligraphy copybook sheet
-```text
-Generate a calligraphy copybook practice sheet in [script style]
-```
-Tip: upload a reference image of the exact style for stronger fidelity. Source: [@MrLarus](https://x.com/MrLarus/status/2046510310253539764)
-
-### Silhouette universe narrative poster
-```text
-Automatically generate a high-aesthetic "Silhouette Universe / Collector's Edition Narrative Poster" based on [theme: xxx]. Do not default to common containers such as bottles, hourglasses, glass domes, or pocket watches. Instead, let the AI choose the most symbolic, visually strong, and narratively suitable outer silhouette for the theme. The silhouette can be an artifact, building, gate, tower, archway, dome, stairwell, corridor, statue, profile, eye, hand, skull, wing, mask, mirror, throne, ring, crack, light curtain, shadow, geometric form, spatial cross-section, stage frame, abstract symbol, or any more creative contour that best represents the theme.
-
-The goal is not to simply place a world inside an object, but to make the entire themed universe grow naturally within, around, and through the silhouette itself. The silhouette should be elegant, recognizable, and compositionally dominant. Inside or along its boundary, generate a rich and layered narrative world strongly tied to the theme, including iconic scenes, key architecture or spaces, symbols and metaphors, traces of characters or civilizations, foreground-midground-background depth, and atmosphere with emotional tension.
-
-Blend the feeling of a collector's edition film poster, high-end narrative visual design, dreamy watercolor texture, and fine printed paper. Emphasize paper grain, feathered edges, watercolor brush marks, gentle diffusion, atmospheric perspective, soft haze, selective volumetric light, light passing through mist, generous negative space, and restrained layout. The image should feel premium, poetic, majestic, sacred, nostalgic, quiet, and mythic.
-
-Final requirement: the first glance should give strong theme recognition and a memorable silhouette, the second glance should reveal a complete narrative world, and the third glance should still reward close inspection with depth and aftertaste. Avoid generic backgrounds, hard cut-and-paste compositions, templated fantasy assets, video-game promo art vibes, excessive cartooning, or realism that kills the artistic mood.
-```
-Source: [@MrLarus](https://x.com/MrLarus/status/2045418028733538620)
-
-### E-commerce product detail page (template)
-```text
-Generate an e-commerce product detail page for [product name]
-```
-Source: [@MrLarus](https://x.com/MrLarus/status/2046544209117634735)
-
-### Dense Chinese layout stress test (template)
-```text
-Generate an image of [scene / content]
-```
-Tip: provide exact content or upload a source image (real menu, document photo) for production use. Source: [@MrLarus](https://x.com/MrLarus/status/2044824800909054181)
-
-### Handwritten Chinese medical prescription
-```text
-Generate an image of a handwritten Chinese medicine or Western medicine prescription
-```
-Tip: reference images for layout, handwriting, or stamp style produce much better results. Source: [@MrLarus](https://x.com/MrLarus/status/2046514998965371144)
-
-### Vogue-style fashion magazine cover
-```text
-A high-fashion magazine cover, 3:4 portrait, Vogue Paris / British Vogue editorial aesthetic.
-
-Subject: a tall female model, medium-dark skin tone, mid-thirties, standing three-quarters to camera, direct piercing gaze. She wears a sculptural high-collared ivory wool coat over a silk slip dress in deep aubergine. Minimalist silver spiral earrings. Hair in a sleek low chignon with a single escaped strand. Makeup: matte bronze-warm, glossy plum lip.
-
-Background: muted concrete-grey seamless paper backdrop, vertical shaft of cool daylight from upper left. Shallow depth of field.
-
-Exact cover typography (all English, crisp, correctly spelled):
-- Masthead, huge uppercase serif, white: "VOGUE"
-- Date strip top-left, tiny caps: "NOVEMBER 2026 · PARIS EDITION · €9.00"
-- Main cover line, bold sans-serif centered: "THE QUIET POWER ISSUE"
-- Right-edge cover lines, stacked:
-   "THE NEW MINIMALISTS — a 40-page portfolio"
-   "HOW AI TOOLS ARE REWRITING THE ATELIER"
-   "MARTIN MARGIELA'S UNREVEALED ARCHIVE"
-   "SKIN · INVESTMENT · WHERE THE MONEY GOES NEXT"
-- Bottom-left barcode with catalog code "VG1126"
-
-Lighting: classic fashion editorial — soft single-source key, subtle fill, deep shadow on one cheek, fine film grain.
-```
-Source: original prompt by this repo; aesthetic reference to Vogue Paris / British Vogue editorial covers.
-
-### Vintage 1950s sci-fi pulp magazine cover
-```text
-A vintage sci-fi pulp magazine cover from the 1950s, 3:4 portrait. Classic "Astounding Science Fiction" / "Galaxy" aesthetic — painted gouache illustration with pulp-yellow paper texture, screen-printing registration slightly off, pale browned paper tone around edges.
-
-Cover illustration: a chrome-silver rocket ship descending toward an alien red-desert planet with two Saturn-like ringed moons in a violet sky. A lone astronaut in a bulbous 1950s-style glass-dome space helmet stands foreground-left in a crimson pressurised suit, holding a ray-gun, facing a many-tentacled translucent green creature emerging from a fissure.
-
-Exact typography (all English, crisp, correctly spelled):
-- Masthead, huge yellow retro display serif arched across the top: "ASTOUNDING STORIES"
-- Volume banner, red, under masthead: "VOL. XXXVII · NO. 5 · MARCH 1957 · 25¢"
-- Featured story callout, bold red sans-serif bottom-left: "THE MEN FROM RIGEL — a novelette by E. A. KLEIN"
-- Secondary cover lines, smaller stacked:
-   "THE CRYSTAL VINE by Olive Barnaby"
-   "REPORT FROM EUROPA · Science Fact"
-   "plus — three new stories from across the galaxy"
-- Bottom-right white circle stamp: "PLUS 32 FULL-COLOR ILLUSTRATIONS"
-
-Art direction: painted gouache with visible brush strokes, saturated pulp palette (canary yellow, orange, red, electric violet, chrome silver), hand-lettered headlines, slightly rough paper texture, faint foxing on corners.
-```
-Source: original prompt by this repo; aesthetic reference to "Astounding Stories" / "Galaxy" 1950s pulp magazines.
-
----
-
-## Infographics & Education <a id="infographics"></a>
-
-Prompts for structured knowledge cards, exam papers, travel guides, training plans, and information-dense Chinese layouts.
-
-### Coffee journey infographic
-```text
-Create a Chinese infographic poster themed "一杯咖啡 如何来到你手里" ("How a Cup of Coffee Reaches You"). Use a premium information-design style with both educational clarity and commercial appeal. The layout should include directional flow, arrows, data boxes, icons, simple illustrations, and modular cards. Use coffee brown, milk white, ink black, and copper accents.
-
-The infographic must include:
-- 01 Planting: elevation 1200-2200m, suitable temperature 18-24C, picking season Nov-March
-- 02 Processing: sun-dried, washed, honey process
-- 03 Roasting: light roast = brighter, medium roast = balanced, dark roast = richer
-- 04 Grinding: pour-over = coarse, espresso = fine, cold brew = medium-coarse
-- 05 Extraction: powder-water ratio, water temperature, and time all affect flavor
-- flavor keywords: floral / citrus / nutty / caramel / chocolate / smoky
-
-Use this exact fine print:
-"适合用于咖啡入门科普与门店展示"
-
-The composition should balance text and visuals while keeping the design elegant. Focus on long infographic handling, numeric information, temperatures, numbered sections, concise descriptions, slash-separated flavor words, and modular layout. It should look like a premium display board, not a classroom slide deck.
-```
-
-### Key character relationship map
-```text
-Please generate a key character relationship diagram for "XXX".
-```
-Source: [@yihui_indie](https://x.com/yihui_indie/status/2045179926270361890)
-
-### Jingdezhen blue-and-white porcelain diagram
-```text
-Generate a detailed explanatory diagram of Jingdezhen blue and white porcelain, accompanied by detailed Chinese knowledge analysis.
-```
-Source: [@joshesye](https://x.com/joshesye/status/2045764695827562686)
-
-### Museum catalog-style Chinese disassembly infographic
 ```text
 Please automatically generate a "museum catalog-style Chinese disassembly infographic" based on the [Subject].
 
@@ -535,15 +887,12 @@ If the subject is suitable for character display, use a full-body standing postu
 
 Avoid: poster feel, studio portrait feel, e-commerce feel, anime feel, cosplay feel, random annotations, incorrect structures, blurry text, fake materials, excessive decoration.
 ```
-Source: [@MrLarus](https://x.com/MrLarus/status/2045504669401653414)
 
-### World time analog clock wall
-```text
-It's 10 AM in Los Angeles, 11 AM in Denver, 12 PM in Chicago, 1 PM in New York, 6 PM in London, and 2 AM in Tokyo. Render a wall with different analog clocks, each showing the correct time for its city, with the city label below each clock.
-```
-Source: [@Angaisb_](https://x.com/Angaisb_/status/2046666389734179018)
+### No. 68 · Encyclopedia field guide (Giant Panda)
 
-### Encyclopedia-style knowledge card
+- Image: `docs/infographics-field-guides/encyclopedia-panda.png`
+- Metadata: Infographics & Field Guides · `portrait` · `1024x1536` · Author: @MrLarus · Source: [X](https://x.com/MrLarus)
+
 ```text
 Generate a high-quality vertical encyclopedia-style infographic for [topic].
 
@@ -557,283 +906,67 @@ The image should include:
 - concise but information-rich educational content
 - visual scoring, quick takeaways, or a Top 5 module
 
-Adapt the content sections automatically based on the topic. Useful categories include:
-basic profile, classification, appearance, habits or ecology, formation mechanism or structure, growth or usage conditions, care or maintenance advice, risks and cautions, suitable users or use cases, pros and cons, and a quick scorecard.
+Adapt the content sections automatically based on the topic. Useful categories include: basic profile, classification, appearance, habits or ecology, formation mechanism or structure, growth or usage conditions, care or maintenance advice, risks and cautions, suitable users or use cases, pros and cons, and a quick scorecard.
 
-Visual requirements:
-use a clean light background, soft colors, subtle shadows, refined small icons, rounded information cards, and neat layout. The information density should be high but not crowded, and the final image should feel publishable, collectible, and repeatable as a knowledge-card format rather than an advertisement.
+Visual requirements: use a clean light background, soft colors, subtle shadows, refined small icons, rounded information cards, and neat layout. The information density should be high but not crowded, and the final image should feel publishable, collectible, and repeatable as a knowledge-card format rather than an advertisement.
 
 Do not make it look like a commercial promo poster. Emphasize knowledge organization, modular information, and a field-guide presentation.
 ```
-Source: [@MrLarus](https://x.com/MrLarus/status/2046231542817497392)
 
-### Alphabet / topic grid
+### No. 69 · Weekend Seoul travel guide poster
+
+- Image: `docs/infographics-field-guides/seoul-travel-guide.png`
+- Metadata: Infographics & Field Guides · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e8cd0d0000000023007215)
+
 ```text
-Create an image with a 10x10 grid of objects whose names all start with the letter A
-```
-Source: [@umesh_ai](https://x.com/umesh_ai/status/2046510988367945983)
-
-### 100 technology topics grid
-```text
-Create a 10 × 10 grid of 100 different topics representing recent technological progress. Use a realistic, polished editorial illustration style. Each topic should appear in its own square with a short clear label underneath. Keep the grid neat on a white background. Make every topic visually different and every label correctly spelled. Use these row themes: Row 1: AI models and agents Row 2: robotics Row 3: semiconductors and compute Row 4: networks and smart devices Row 5: biotech and health technology Row 6: energy and power systems Row 7: transport and autonomy Row 8: space and aerospace Row 9: manufacturing and materials Row 10: climate and environmental technology. Show each tile as a realistic mini-scene, product-class object, lab instrument, robot, chip, vehicle, or device that clearly conveys the topic. Keep the overall style consistent, modern, realistic, and visually impressive.
-```
-Source: [@chetaslua](https://x.com/chetaslua/status/2046489044243403029)
-
-### Fitness training infographic
-```text
-Generate a Chinese fitness infographic for [topic].
-
-The graphic should be both professional and practical for a normal adult to use as a training reference. Unless otherwise specified, assume the audience is a healthy adult with no major injuries, the goal is muscle gain plus basic strength improvement, the level is beginner to intermediate, the setting is a normal gym, and the total session length should stay within 40 to 60 minutes.
-
-Choose the output format automatically based on the training topic:
-1. If the topic is a muscle group or body part (chest, lats, biceps, abs, shoulders, legs), generate a training-plan infographic for that body part.
-2. If the topic is an exercise or skill goal (pull-up, push-up, dips, squat), generate an exercise-unlock or progression-plan infographic.
-
-Use a clear, modern, professional, easy-to-read Chinese infographic style in vertical format. The visual design should be clean and suitable for social sharing or personal training reference. Do not write long paragraphs. Each module should use short concise phrases, and numerical information should be prominent.
-
-The infographic must include:
-A. Title area with main title and subtitle
-B. Training goal area
-C. Warm-up area
-D. Main training area with 4 to 6 core exercises
-E. Progression or unlock logic area
-F. Alternative exercises area
-G. Execution reminders area
-H. Recovery suggestions area
-```
-Source: [@MrLarus](https://x.com/MrLarus/status/2046560406760505727)
-
-### Gaokao exam paper replica
-```text
-Generate an image of a 2026 Gaokao exam paper for [subject name]
-```
-Source: [@MrLarus](https://x.com/MrLarus/status/2045529134915600868)
-
-### Three-day travel guide card
-```text
-Generate a three-day travel guide image for [city]
-```
-Source: [@MrLarus](https://x.com/MrLarus/status/2046523494003851300)
-
-### Character relationship diagram poster
-```text
-Generate a high-design character relationship poster for [theme]. This should not be a normal illustration, but a relationship map that combines information visualization, narrative structure, poster-level design, and strong fidelity to the style of the original work.
-
-Automatically do the following:
-- identify the source work and its core setting
-- select the 6 to 12 most representative key characters, with an upper limit of 15 if needed
-- identify and show the most important relationships, such as family ties, romance, friendship, alliances, hostility, mentor-student links, master-servant links, manipulation, betrayal, and hidden relationships
-- choose the most suitable composition automatically, such as protagonist-centered, dual-core confrontation, faction layout, family tree, or time-evolution structure
-- extract the work's style DNA, including color palette, worldbuilding symbols, texture language, emotional tone, layout rhythm, and iconic motifs
-- convert those style elements into the overall visual design of the relationship map rather than simply copying an official poster
-- use different colors, line styles, and arrows to distinguish relationship types while keeping the layout clear and readable
-- emphasize the core characters most strongly, secondary characters next, and minor characters less prominently to create a clear visual hierarchy
-- keep every character name easy to read, optionally with role or faction tags if useful
-
-The final piece should:
-- make the main relationships understandable at a glance
-- strongly evoke the original work's identity and setting
-- combine infographic clarity with premium poster design
-- feel unified, polished, complete, and suitable for social sharing or poster display
-- avoid cheap flowchart vibes, clutter, or information overload
-```
-Source: [@MrLarus](https://x.com/MrLarus/status/2046263153546174935)
-
----
-
-## Character & Consistency <a id="character"></a>
-
-Prompts testing character consistency across multiple images and reference-sheet generation.
-
-### 16-panel anime expression grid
-```text
-Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her face shape, hairstyle, and clothing must remain highly consistent across all panels. The 16 expressions should include: happy, sad, angry, surprised, shy, speechless, evil grin, contemplative, curious, proud, wronged, disdainful, confused, scared, crying, and a heart expression.
-```
-Source: 卡尔的AI沃茨
-
-### Official character reference sheet
-```text
-Based on this character and background, please create a character reference sheet similar to official setting materials.
-- Includes three-view drawings: front view, side view, and back view
-- Add variations of the character's facial expressions
-- Break down and display detailed parts of the clothing and equipment
-- Add a color palette
-- Include a brief explanation of the worldview setting
-- Overall, use an organized layout (white background, illustration style)
-```
-Source: [@MANISH1027512](https://x.com/MANISH1027512/status/2045013913901867334)
-
----
-
-## Image Editing & Style Transfer <a id="editing"></a>
-
-Prompts for image editing, style transfer, and reference-based generation. Use `scripts/generate.py --edit ref.png`.
-
-### Pet brand collaboration poster
-```text
-Theme: "77 (cat's name) X KFC" collaboration poster. Generate a collaboration poster featuring the same pet (absolutely consistent in appearance and coloring) with KFC brand identity (red-and-white color scheme, classic logo, restaurant scenes, etc.). Have the cat wear a KFC employee uniform, KFC employee hat, and name badge while standing at the counter, selling fried chicken, burgers, and combo meals, and interacting with chicken buckets, fries, soda, and other brand elements. The style should be lively and fun with a commercial co-branding feel, suitable for online promotion and event posters. Add appropriate Chinese copy freely for the poster.
+Generate a polished one-page Chinese travel guide poster for a fast weekend trip from Nanjing to Seoul in May. Use LARGE highly legible Chinese text, short phrases only, and no paragraph blocks. Focus on shopping, skincare, and a stylish Seongsu-dong route. Layout: big title, 4 modules only (行程 / 区域推荐 / 购物清单 / 美妆护肤), each with 2 to 4 short bullet points, plus a small cute route map with icons. Clean editorial infographic style, soft pastel colors, neat spacing, high readability, modern Xiaohongshu travel card aesthetic. Avoid tiny text, avoid dense explanations, avoid garbled characters.
 ```
 
-### Comic page coloring & translation
+### No. 70 · Modular encyclopedia infographic card
+
+- Image: `docs/infographics-field-guides/snow-leopard-encyclopedia-card.png`
+- Metadata: Infographics & Field Guides · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e832170000000023012116)
+
 ```text
-Colorize this comic page and translate it into Chinese, placing the text in the original positions while maintaining composition and image details consistently
+Generate a high-quality vertical science encyclopedia card about "雪豹 Snow Leopard". It should feel like a collectible modular knowledge infographic rather than a normal poster. Include one beautiful hero illustration, several zoomed-in detail callouts, rounded information modules, clear title hierarchy, compact encyclopedia content, rating cards, and a Top 5 facts module. Suggested sections: basic profile, habitat, appearance, hunting behavior, conservation risks, climate adaptation, suitable environment, and quick scorecard. Visual style: clean light background, soft palette, subtle shadows, refined icons, rounded info boxes, dense but readable information, polished editorial layout, high collection value.
+```
+
+### No. 71 · Xiaohongshu cooking tutorial card
+
+- Image: `docs/infographics-field-guides/cooking-tutorial-card.png`
+- Metadata: Infographics & Field Guides · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e8eeed0000000021004a54)
+
+```text
+Create a Xiaohongshu-style viral cooking tutorial image in a 3:4 vertical layout for homemade scallion oil noodles. Cozy home-cooking vibe, warm inviting lifestyle aesthetic, 4 to 6 step grid layout, clean spacing, realistic food photography, soft natural lighting, slight film tone, warm color grading, visible oil sheen, steam, sauce texture, and hands interacting with the food. Add small Chinese annotations such as 切葱, 熬油, 拌面, 出锅. Avoid overcrowding or excessive text.
+```
+
+### No. 72 · Camera styles reference board for iPhone photographers
+
+- Image: `docs/infographics-field-guides/camera-styles-infographic.png`
+- Metadata: Infographics & Field Guides · `landscape` · `1536x1024` · Author: @Vtrivedy10 · Source: [X](https://x.com/Vtrivedy10/status/2046771959157887014)
+
+```text
+Make me an image in 35 mm film style of a diagram showing the knowledge of camera styles, presets, and what to know about them as an aspiring iPhone photographer that wants to pursue their passion. Build it as a rich multi-panel reference board with labeled sections for film looks, digital presets, portrait approaches, street photography styles, color temperature, grain, contrast, flash, framing, and common mistakes. Each camera and preset style should appear in its actual style instead of being rendered uniformly in one style. Make it visually dense, highly educational, beautifully designed, and easy to scan.
+```
+
+### No. 73 · Chinese endangered-animal infographic
+
+- Image: `docs/infographics-field-guides/endangered-animal-chinese-infographic.png`
+- Metadata: Infographics & Field Guides · `portrait` · `1024x1536` · Author: @billtheinvestor · Source: [X](https://x.com/billtheinvestor/status/2047153211560399009)
+
+```text
+Create a visually rich infographic in Chinese about an endangered animal. Start by finding one online, research its habitat, diet, and unique traits. Present information through annotated visuals and structured callouts, not generic sections. Style it like a bold graphic illustration: a detailed, photorealistic central animal as the focal point, supported by diagrams, callouts, and concise text elements. Use clean backgrounds and a mix of photorealism with strong graphic elements (shapes, icons, color blocking) in a layered composition. Make it dense, tactile, and professionally authored.
 ```
 
 ---
 
-## Video / Animation / Collage <a id="video-collage"></a>
+## 📚 Research Paper Figures
 
-Prompts for multi-frame content, manga sequences, and collages.
+### No. 74 · Transformer encoder–decoder architecture
 
-### Movie collage
-```text
-entire superman movie image collage one shot in one output
-```
-Source: [@chetaslua](https://x.com/chetaslua/status/2044462992176386532)
+- Image: `docs/research-paper-figures/transformer-arch.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Vaswani et al., 2017
 
-### "Where is [Your Name]" crowd search poster
-```text
-Create a "Where is [Your Name]" crowd search poster set in the city of your choosing
-```
-Source: [@icreatelife](https://x.com/icreatelife/status/2046639884421550482)
-
-### Eight-panel GPT Image 2 launch manga
-```text
-Create an eight-panel manga about GPT-Image-2 launching today
-```
-Source: [@venturetwins](https://x.com/venturetwins/status/2046620134933250409)
-
-### Manga person-relationship — classic literature
-```text
-A manga-style illustration showing the person-relationship map for "A Tale of Two Cities" by Charles Dickens. Single full-frame composition, monochrome ink + screentone, classic shōjo / historical-manga aesthetic.
-
-Characters as small portrait panels connected by labeled relationship lines:
-- Charles Darnay ↔ Lucie Manette: "marriage"
-- Sydney Carton → Lucie: "unrequited love → ultimate sacrifice"
-- Lucie ↔ Dr. Manette: "father / daughter"
-- Madame Defarge → Darnay family: "vengeance"
-- Monsieur & Madame Defarge: "husband / wife, revolutionaries"
-- Jarvis Lorry → Manette family: "loyal banker & guardian"
-- Miss Pross → Lucie: "devoted protector"
-
-Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 18th-century Paris (guillotine silhouette) / London (Tower of London). Monochrome black-ink linework with grey screentone shading.
-```
-Source: [@cht0001](https://x.com/cht0001/status/2046920121239908380) — "manga illustration of person relationship of [literary work]" pattern; the terse original prompt reproduces well, the expanded version above gives better character fidelity.
-
-### Studio-Ghibli-style animation still
-```text
-A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wooden cottage sits on a grassy hillside overlooking a valley at golden hour. A child stands barefoot at the cottage doorway waving to a small furry forest spirit half-hidden in the meadow grass. A distant train cuts across the valley floor, swallows dip overhead.
-
-Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki's Delivery Service", not a 3D render.
-```
-Source: community pattern — "Studio Ghibli style" is one of the most-requested aesthetic idioms across Twitter/X and 小红书. Expanded version above anchors the style with specific film references and brush-texture cues.
-
-### Saul-Bass-style thriller movie poster
-```text
-A Saul-Bass-style minimalist thriller movie poster, 3:4 portrait. Off-white paper background with subtle vintage grain. Large flat-color cut-paper shapes, bold geometry, negative-space illusion.
-
-Composition: a single stylised human silhouette in crimson running across centre; the shadow warps into a knife blade pointing up into the title. Black ink-brush splatter across the lower third. A single yellow eye motif in the upper-left negative space.
-
-Exact typography:
-- Title (large hand-lettered serif, black): "THE LAST HEIR"
-- Tagline (small caps sans-serif, dark red): "EVERY FAMILY KEEPS A SECRET. HIS WILL BURY THEM ALL."
-- Bottom credit block: "PRODUCERS JANE NORRIS  LEWIS HAHN    DIRECTED BY MAYA ALVAREZ    A CINERA RELEASE    IN CINEMAS OCTOBER 31"
-
-Palette: cream, charcoal black, crimson red, mustard-yellow accent. Pure flat graphic design, no photo elements, no gradients, no 3D — in the lineage of Bass's "Anatomy of a Murder", "Vertigo", and "The Man with the Golden Arm".
-```
-Source: original prompt by this repo, inspired by Saul Bass's 1955–1970 poster work. "Saul-Bass-style" is a recurring community prompt idiom.
-
-### Pixar-style 3D animation still
-```text
-A Pixar-quality 3D animation still, landscape 16:9. Cinematic feature-film look, warm studio lighting.
-
-Scene: a cozy apartment kitchen at dawn. A small orange tabby kitten sits on the countertop reaching a paw toward a rising soufflé in the oven; oven glow lighting the scene from below. Soft morning light through linen curtains. A wooden chopping board with a half-peeled lemon, a copper whisk with a small cloud of flour still airborne, a tiny succulent in a clay pot.
-
-Character: kitten with expressive, slightly oversized eyes (classic Pixar proportions), individually sculpted whiskers, believable fur with micro-groom direction, curious-slightly-worried expression.
-
-Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.
-```
-Source: community pattern — "Pixar style" is a ubiquitous prompt idiom on Twitter/X and 小红书. Expanded version above anchors the CG specifics (SSS, micro-groom, ambient occlusion) to avoid generic 3D-render output.
-
-### 1940s film-noir photograph
-```text
-A 1940s film-noir black-and-white movie still, landscape 16:9, high contrast. Shot on 35mm with visible grain.
-
-Scene: a detective in trench coat and fedora stands alone at a rain-soaked street corner at 2 a.m., cigarette in hand, smoke curling upward. Wet cobblestones reflecting a single buzzing street lamp. A "HOTEL" neon sign on brick facade with letters "HOTE_" (the L flickered out). A vintage 1946 sedan parked at the curb, tail-lights glowing through drizzle.
-
-Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".
-```
-Source: original prompt by this repo, inspired by 1940s noir cinematography (John Alton, Gregg Toland). "Film-noir style" is a broadly used community prompt idiom.
-
-### Professional storyboard (6-panel)
-```text
-A 6-panel film storyboard laid out as a 3×2 grid, landscape 16:9 overall. Each panel is a rectangular pencil-and-marker sketch with a white margin border and a small information strip underneath.
-
-Scene: a chase through a rainy Tokyo alleyway, ending in a rooftop jump.
-
-Panel 1 — WIDE establishing: wet neon alleyway, runner entering from left; kanji signage on both walls. Info: "PANEL 1 · EXT. ALLEY · NIGHT · WIDE / static / 2s"
-Panel 2 — OTS tracking: runner mid-stride from behind; pursuer silhouette 10 m back. Info: "PANEL 2 · OTS TRACKING / follow-cam / pan-L 45° / 3s"
-Panel 3 — Close-up: runner's face, sweat, eyes darting up toward fire escape. Info: "PANEL 3 · CU RUNNER / static / 1.5s / SFX: breath"
-Panel 4 — Low angle: runner leaping onto fire-escape ladder; rain streaks. Info: "PANEL 4 · LOW ANGLE / tilt-up 30° / 2s"
-Panel 5 — Wide aerial: runner silhouetted against neon skyline, about to leap rooftops. Info: "PANEL 5 · WIDE AERIAL / crane-down / 4s"
-Panel 6 — Match cut: runner's boots landing on wet rooftop; splash. Info: "PANEL 6 · MATCH CUT CU / static / 1s / SFX: splash"
-
-Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.
-```
-Source: original prompt by this repo — adapts the classic animation-school storyboard format.
-
-### MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)
-```text
-An anime action still in the visual style of MAPPA's Jujutsu Kaisen (2020 TV anime). Landscape 16:9.
-
-A silver-white-haired young man in a dark navy school-uniform jacket, a blue blindfold across his eyes, in a mid-fight stance — one palm extended outward releasing a swirling dense-blue energy sphere with lightning-like crackles around its edge. Opposite him, a demonic shadow creature made of liquid black mass with multiple eyes lunges from the right.
-
-Backdrop: ruined urban street at dusk, shattered asphalt, cracked neon kanji sign "呪術" in split red LED, destroyed vehicles, rubble suspended mid-air by the shockwave, rain particles caught mid-flight.
-
-Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp line-art, rim-light on both figures, motion-blur streaks around the energy sphere. Palette of deep navy, electric cyan, crimson splashes. Kinetic-impact composition in the tradition of JJK's Shibuya arc.
-```
-Source: original prompt by this repo; aesthetic reference to MAPPA's Jujutsu Kaisen (2020 TV anime). "MAPPA-style" is a recurring prompt idiom across Twitter/X and 小红书.
-
-### Shōnen battle key-visual (Naruto-Shippuden aesthetic)
-```text
-A shōnen anime battle key-visual in the visual style of Studio Pierrot's Naruto Shippuden. Landscape 16:9.
-
-Two ninja figures clash mid-air at the exact instant their signature jutsu collide — a glowing blue spiral of swirling chakra on the left fighter's right palm, a crackling white lightning blade on the right fighter's right palm. The collision point sends a circular shockwave outward.
-
-Both fighters wear hitai-ate forehead protectors, jounin-style tactical vests with scroll pouches, ninja sandals. Left: spiky blond hair, whisker cheek marks, focused snarl, blue eyes. Right: dark hair, one red sharingan-like eye with three tomoe, calm expression.
-
-Backdrop: nighttime valley, cracked earth, giant uprooted trees mid-crash, moonlit clouds parting, sakura petals caught in the shockwave.
-
-Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective, strong speed lines radiating from the collision, anime-action key-frame quality, digital 2D cel shading, saturated but not neon, visible genga-quality line-art, dramatic backlight.
-```
-Source: original prompt by this repo; aesthetic reference to Studio Pierrot's Naruto Shippuden.
-
-### Shōnen manga two-page spread (basketball)
-```text
-A black-and-white shōnen manga two-page spread (landscape 16:9 as a single composition, with a faint centre-gutter line). High-contrast ink plus screentone, Weekly Shōnen Jump basketball-manga tradition (Inoue's Slam Dunk / Fujimaki's Kuroko no Basuke).
-
-Composition: 5 irregular panels plus one large diagonal panel spanning both pages at bottom-right for the climactic slam dunk.
-
-- Top-left: close-up of the protagonist's intense eyes, sweat beading, headband tied tight
-- Top-centre: wide shot of a packed high-school gymnasium, scoreboard reading "42 — 40 · 4Q 0:03"
-- Top-right: rival team captain's shocked face, mouth agape
-- Centre-left: protagonist leaping skyward with both hands gripping a basketball
-- Centre-right-small: sound-effect katakana "バッ" in thick black letters
-- Large diagonal bottom-right (half of both pages): protagonist slamming the ball through the hoop, rim bending, massive ink-brushed kanji "決" (decide) filling the negative space
-
-Art direction: professional mangaka quality — confident inking, dramatic screentone gradients, speed lines radiating from the dunk, varied line-weights, off-white paper texture with faint page-edge shading.
-
-Dialogue balloons intentionally blank; only the two sound effects are visible.
-```
-Source: original prompt by this repo — adapts Weekly Shōnen Jump two-page spread composition to a non-violent basketball climax (safety-moderation-safe).
-
----
-
-## Research paper figures <a id="research"></a>
-
-Publication-ready Figure-1 templates for ML / AI papers. Every entry cites the paper whose figure style it emulates. Shared convention: muted academic palette (slate gray, dusty teal, muted navy, soft terracotta, warm copper), flat vector style, off-white background, no 3D, no cartoon, no gradient sky, no saturated neon. Bias toward `--quality high` for dense typography.
-
-### Transformer encoder–decoder architecture
 ```text
 Landscape 16:9 academic concept figure of the Transformer encoder-decoder architecture, NeurIPS camera-ready style. Two vertical column stacks side-by-side with a dashed divider.
 
@@ -843,9 +976,12 @@ RIGHT column header: "DECODER (×N)". Blocks bottom-to-top: "Output tokens (shif
 
 Title: "Transformer: encoder–decoder with multi-head attention". Subtitle: "Vaswani et al., 2017".
 ```
-Source: inspired by Vaswani et al., 2017 ("Attention is All You Need").
 
-### Retrieval-Augmented Generation pipeline
+### No. 75 · Retrieval-Augmented Generation pipeline
+
+- Image: `docs/research-paper-figures/rag-pipeline.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Lewis et al., 2020
+
 ```text
 Landscape 16:9 academic systems diagram of a RAG pipeline, 6-stage left-to-right flow.
 
@@ -860,9 +996,12 @@ Dashed outline around (2)-(3) labeled "OFFLINE — built once". Dashed outline a
 
 Title: "Retrieval-Augmented Generation pipeline". Subtitle: "Lewis et al., 2020".
 ```
-Source: inspired by Lewis et al., 2020 ("Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks").
 
-### Multi-agent LLM system architecture
+### No. 76 · Multi-agent LLM system architecture
+
+- Image: `docs/research-paper-figures/agent-architecture.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** AutoGen (Wu 2023), LangGraph, Anthropic Managed Agents
+
 ```text
 Landscape 16:9 high-fidelity systems figure of a multi-agent LLM architecture, in the style of a richly detailed AutoGen / LangGraph / Anthropic Managed Agents Figure 1. Subtle drop-shadows, warm-copper highlights, numbered flow markers ①②③④.
 
@@ -878,9 +1017,12 @@ Bottom inset "Example trace": 8-step horizontal timeline chips from "User asks" 
 
 Title: "Agentic LLM system: planner orchestrates specialised workers over a shared tool and memory layer". Subtitle: "adapted from AutoGen (Wu et al., 2023), LangGraph, and Anthropic Managed Agents patterns".
 ```
-Source: inspired by Wu et al., 2023 (AutoGen), LangGraph, and Anthropic Managed Agents design patterns.
 
-### Denoising diffusion forward / reverse chain
+### No. 77 · Denoising diffusion forward/reverse chain
+
+- Image: `docs/research-paper-figures/diffusion-chain.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Ho et al., 2020
+
 ```text
 Landscape 16:9 academic figure of diffusion forward + reverse chains, two horizontal chains stacked vertically.
 
@@ -892,25 +1034,12 @@ Far-right curved arrow "T diffusion steps" connecting top-right to bottom-right;
 
 Title: "Denoising Diffusion: forward corruption and learned reverse". Subtitle: "Ho et al., 2020".
 ```
-Source: inspired by Ho et al., 2020 ("Denoising Diffusion Probabilistic Models").
 
-### LLM pretraining data-mixture sankey
-```text
-Landscape 16:9 sankey diagram of a pretraining data mixture, three stages with translucent colored ribbons.
+### No. 78 · Empirical scaling laws plot
 
-LEFT (8 source blocks, heights proportional to tokens): "Common Crawl (web) 540B" (muted navy, largest), "arXiv papers 180B" (dusty teal), "GitHub code 160B" (slate gray), "Wikipedia 40B" (soft terracotta), "StackExchange QA 30B" (warm copper), "Books (public domain) 25B" (pale olive), "Patents 18B" (pale navy), "Curated news & forums 15B" (dusty teal).
+- Image: `docs/research-paper-figures/scaling-curves.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Kaplan 2020 / Chinchilla (Hoffmann 2022)
 
-MIDDLE (3 processing blocks, stacked): "Deduplicated (MinHash + exact)", "Quality-filtered (classifier + heuristics)", "PII-scrubbed (regex + NER)".
-
-RIGHT (3 final splits): "Pretraining set 1.4T tokens" (largest), "Instruction-tune pool 12B tokens", "RLHF preference pool 3B tokens".
-
-Flow ribbons inherit source color with mid-labels showing token counts ("85B", "320B", "44B"). Legend strip at bottom.
-
-Title: "LLM pretraining data mixture and downstream splits". Subtitle: "token counts after deduplication and quality filtering; ribbon thickness ∝ token flow."
-```
-Source: design inspired by pretraining-data compositions in GPT-3 (Brown et al., 2020), LLaMA 2 (Touvron et al., 2023), and The Pile (Gao et al., 2020).
-
-### Empirical scaling laws plot
 ```text
 Landscape 16:9 log-scaled plot of training loss vs compute, four curves for different model sizes.
 
@@ -923,9 +1052,12 @@ Warm-copper dashed diagonal line labeled "compute-optimal frontier"; open circle
 
 Title: "Empirical scaling laws: loss vs training compute". Subtitle: "four model sizes on a fixed data mixture; shaded bands = ±1 std over 3 seeds."
 ```
-Source: inspired by Kaplan et al., 2020 and Hoffmann et al., 2022 (Chinchilla).
 
-### Benchmark comparison heatmap
+### No. 79 · Benchmark comparison heatmap
+
+- Image: `docs/research-paper-figures/benchmark-heatmap.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** HELM (Liang 2023)
+
 ```text
 Landscape 16:9 heatmap matrix of models × benchmarks.
 
@@ -938,9 +1070,12 @@ Vertical color bar on the right with ticks "0", "25", "50", "75", "100" and labe
 
 Title: "Benchmark comparison across 10 frontier LLMs". Subtitle: "zero-shot accuracy; best per benchmark outlined in bold. Evaluated March 2026."
 ```
-Source: design adapted from HELM (Liang et al., 2023) and the Open LLM Leaderboard.
 
-### Ablation bar chart with error bars
+### No. 80 · Ablation bar chart with error bars
+
+- Image: `docs/research-paper-figures/ablation-bars.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
 ```text
 Landscape 16:9 grouped-bar ablation chart.
 
@@ -956,32 +1091,31 @@ Thin black ±1σ error bars on each; numeric label above each bar in monospace. 
 
 Title: "Ablation of core reasoning components across 5 benchmarks". Subtitle: "error bars = ±1 std over 3 runs; numeric drops relative to full model shown above each bar."
 ```
-Source: generic layout common across reasoning papers (e.g. Wei et al., 2022; Wang et al., 2023).
 
-### Algorithm pseudocode block
+### No. 81 · LLM pretraining data-mixture sankey
+
+- Image: `docs/research-paper-figures/data-sankey.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
 ```text
-Portrait 3:4 figure of a LaTeX algorithm2e-style pseudocode block, centered with thin slate-gray border and warm-copper top hairline.
+Landscape 16:9 sankey diagram of a pretraining data mixture, three stages with translucent colored ribbons.
 
-Header bold serif: "Algorithm 1  Self-Refine: iterative response improvement".
-Under a thin divider, italic lines: "Require: LLM M, input prompt x, max iterations T, scalar judge J, margin ε" / "Ensure: refined output y*".
+LEFT (8 source blocks, heights proportional to tokens): "Common Crawl (web) 540B" (muted navy, largest), "arXiv papers 180B" (dusty teal), "GitHub code 160B" (slate gray), "Wikipedia 40B" (soft terracotta), "StackExchange QA 30B" (warm copper), "Books (public domain) 25B" (pale olive), "Patents 18B" (pale navy), "Curated news & forums 15B" (dusty teal).
 
-9 numbered pseudocode lines, crisp monospace, bold keywords, italic variables, inline gray-italic comments on the right:
+MIDDLE (3 processing blocks, stacked): "Deduplicated (MinHash + exact)", "Quality-filtered (classifier + heuristics)", "PII-scrubbed (regex + NER)".
 
-1: y_0 ← M(x)                                            ▷ initial draft
-2: for t ← 1, 2, ..., T do
-3:   f_t ← M( concat(x, y_{t-1}, "give feedback") )      ▷ self-feedback
-4:   y_t ← M( concat(x, y_{t-1}, f_t, "refine") )        ▷ refined draft
-5:   if J(y_t) ≥ J(y_{t-1}) − ε then
-6:     break                                             ▷ early stop: no gain
-7:   end if
-8: end for
-9: return y* ← argmax_{y_0, ..., y_t} J(y)               ▷ pick best by judge
+RIGHT (3 final splits): "Pretraining set 1.4T tokens" (largest), "Instruction-tune pool 12B tokens", "RLHF preference pool 3B tokens".
 
-Caption outside the box: "Figure 2. Pseudocode of the Self-Refine procedure. Madaan et al., 2023."
+Flow ribbons inherit source color with mid-labels showing token counts ("85B", "320B", "44B"). Legend strip at bottom.
+
+Title: "LLM pretraining data mixture and downstream splits". Subtitle: "token counts after deduplication and quality filtering; ribbon thickness ∝ token flow."
 ```
-Source: inspired by Madaan et al., 2023 ("Self-Refine"), rendered in LaTeX algorithm2e style.
 
-### Multi-head attention weight heatmaps
+### No. 82 · Multi-head attention heatmaps
+
+- Image: `docs/research-paper-figures/attention-heatmap.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Clark et al., 2019
+
 ```text
 Landscape 16:9 figure of 4 attention heatmaps (2×2 grid), shared 12-token input.
 
@@ -997,9 +1131,12 @@ Cells: dusty-teal gradient, darker = higher weight. Peak cells outlined in 1px s
 
 Title: "Representative multi-head attention patterns in a 16-layer Transformer". Subtitle: "four of 256 heads, hand-picked for illustrative head-role diversity; inspired by Clark et al., 2019."
 ```
-Source: inspired by Clark et al., 2019 ("What Does BERT Look At?") and Rogers et al., 2020.
 
-### Frontier LLM family tree
+### No. 83 · Frontier LLM family tree (2018–2026)
+
+- Image: `docs/research-paper-figures/model-timeline.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
 ```text
 Landscape 16:9 timeline / family tree of frontier LLMs 2018–2026, three vertically stacked lanes over a horizontal time axis.
 
@@ -1013,9 +1150,12 @@ Solid slate-gray arcs = intra-family successors; warm-copper dashed arcs = cross
 
 Title: "Frontier LLM lineage, 2018 – 2026". Subtitle: "chips = model releases; solid arcs = intra-family successors; dashed arcs = cross-family distillation."
 ```
-Source: design adapted from community lineage charts and survey timelines (e.g. Yang et al., 2023 — "Harnessing the Power of LLMs: A Survey").
 
-### ReAct reasoning trace
+### No. 84 · ReAct reasoning trace
+
+- Image: `docs/research-paper-figures/react-trace.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Yao et al., 2022
+
 ```text
 Landscape 16:9 figure of a ReAct trace on a factual-QA task, vertical sequence of 7 alternating blocks.
 
@@ -1036,9 +1176,57 @@ Bottom: pill-shaped "Final answer: 2013" with a check glyph.
 
 Title: "ReAct trace: interleaved reasoning and tool-use on a factual-QA task". Subtitle: "Yao et al., 2022."
 ```
-Source: inspired by Yao et al., 2022 ("ReAct: Synergizing Reasoning and Acting in Language Models").
 
-### Indirect prompt-injection attack flow
+### No. 85 · Memory Router for Multimodal Agents
+
+- Image: `docs/research-paper-figures/memory-router-figure.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
+```text
+Design a premium conference-paper figure for an imaginary method called Memory Router for Multimodal Agents. Landscape layout, pure white background, large readable labels, elegant vector-clean boxes and curved arrows, tasteful teal slate and amber palette. Top strip shows the failure mode of a crowded baseline pipeline with red warning accents. Main panel shows User Query, Planner, Retriever, Tool Executor, Memory Router, Working Memory, Long-term Memory, Verifier, and a feedback loop. Beautiful spacing, crisp legend, subtle depth, polished academic styling, highly detailed but uncluttered.
+```
+
+### No. 86 · Frontier Safety Eval Loop
+
+- Image: `docs/research-paper-figures/frontier-safety-eval-loop.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
+```text
+Create a beautiful research flowchart for an AI safety benchmark pipeline called Frontier Safety Eval Loop. Landscape figure, white background, large typography, vector-like shapes, soft indigo, coral, sage, and graphite palette. Show stages Prompt Suite, Model Runs, Judge Models, Human Audit, Failure Taxonomy, Patch Queue, and Re-run. Use clean swimlanes, numbered callouts, compact legends, and premium paper-ready styling. High detail, excellent color harmony, generous whitespace, no clutter, conference-quality diagram.
+```
+
+### No. 87 · ICLR-style method figure
+
+- Image: `docs/research-paper-figures/hmr-iclr-figure.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69d396140000000023012282)
+
+```text
+Create a polished ICLR-style Figure 1 for an imaginary method called "Hierarchical Memory Routing for Long-Context Multimodal Reasoning (HMR)". The top band shows the failure mode of naive long-context multimodal processing: one overcrowded horizontal token stream mixing text, image patches, retrieved documents, tool traces, and audio snippets, with red-orange warning accents for interference, attention dilution, memory collision, and quadratic compute cost. A clean horizontal divider separates the main lower panel, which presents the HMR framework as a spacious modular loop. Center: a Reasoning Controller with stages Observe_t to Update_t. Left: a three-level Memory Hierarchy with working cache, episodic memory, and semantic knowledge base. Right: Multimodal Streams entering selectively through routing paths. Bottom right: sparse experts activated only when needed. White background, vector-clean styling, neutral gray plus cool accents, minimal but legible labels, conference-paper clarity, no poster aesthetics.
+```
+
+### No. 88 · Minimal research illustration prompt
+
+- Image: `docs/research-paper-figures/llm-agent-research-illustration.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/67e414010000000007037315)
+
+```text
+Draw a research-paper illustration showing a closed-loop LLM agent system. The left side begins with a user prompt, then flows into a planner, tool-use engine, retrieval module, memory buffer, and a final verifier that feeds corrections back into the system. Use a restrained academic palette of blue, slate, and orange accents. Style it like a clean paper illustration: vector-like blocks, precise arrows, sparse labels, balanced whitespace, and a clear Figure 1 narrative from problem input to verified output.
+```
+
+### No. 89 · Multimodal agent experiment workflow figure
+
+- Image: `docs/research-paper-figures/multimodal-agent-experiment-workflow.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e997a90000000022027c30)
+
+```text
+Create a polished research workflow figure for a multimodal agent evaluation experiment. Landscape academic diagram on white background. Show stages Dataset Curation, Prompt Design, Tool Sandbox, Model Runs, Judge Ensemble, Error Taxonomy, Human Audit, and Final Report. Use a restrained blue, slate, and orange palette, vector-clean boxes, thin arrows, numbered callouts, tiny legends, and paper-ready typography. It should look like Figure 1 from a strong systems paper rather than a marketing poster.
+```
+
+### No. 90 · Indirect prompt-injection attack flow
+
+- Image: `docs/research-paper-figures/prompt-injection-flow.png`
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Greshake et al., 2023
+
 ```text
 Landscape 16:9 security-paper figure of an indirect prompt-injection attack against a tool-using LLM agent. Four columns left-to-right, numbered flow markers ①②③④ along the main arrows.
 
@@ -1051,8 +1239,629 @@ ARROWS: solid slate-gray = benign flow; dashed soft-terracotta = injection path.
 
 Title: "Indirect prompt injection: attacker hides payloads in third-party content consumed by the agent". Subtitle: "Greshake et al., 2023; applies whenever an LLM agent consumes untrusted text."
 ```
-Source: inspired by Greshake et al., 2023 ("Not What You've Signed Up For").
 
 ---
 
-_Editorial / commercial / photo patterns curated from [`ZeroLu/awesome-gpt-image`](https://github.com/ZeroLu/awesome-gpt-image) under CC BY 4.0 — individual `@handle` attributions preserved per-entry. Research-paper-figure prompts are original contributions that cite their paper inspirations per-entry._
+## 🏢 Official OpenAI Cookbook Examples
+
+### No. 91 · Automatic coffee machine infographic
+
+- Image: `docs/official-openai-cookbook/coffee-infographic.png`
+- Metadata: Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
+
+```text
+Create a detailed Infographic of the functioning and flow of an automatic coffee machine like a Jura.
+From bean basket, to grinding, to scale, water tank, boiler, etc.
+I'd like to understand technically and visually the flow.
+```
+
+### No. 92 · Photorealistic elderly sailor
+
+- Image: `docs/official-openai-cookbook/sailor.png`
+- Metadata: Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
+
+```text
+Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat.
+He has weathered skin with visible wrinkles, pores, and sun texture, and a few faded traditional sailor tattoos on his arms.
+He is calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.
+Soft coastal daylight, shallow depth of field, subtle film grain, natural color balance.
+The image should feel honest and unposed, with real skin texture, worn materials, and everyday detail. No glamorization, no heavy retouching.
+```
+
+### No. 93 · Minimalist bakery logo — Field & Flour
+
+- Image: `docs/official-openai-cookbook/logo-bakery.png`
+- Metadata: Official OpenAI Cookbook Examples · `square` · `1024x1024` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
+
+```text
+Create an original, non-infringing logo for a company called Field & Flour, a local bakery.
+The logo should feel warm, simple, and timeless. Use clean, vector-like shapes, a strong silhouette, and balanced negative space.
+Favor simplicity over detail so it reads clearly at small and large sizes. Flat design, minimal strokes, no gradients unless essential.
+Plain background. Deliver a single centered logo with generous padding. No watermark.
+```
+
+### No. 94 · 4-panel pet comic strip
+
+- Image: `docs/official-openai-cookbook/comic-pet.png`
+- Metadata: Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
+
+```text
+Create a short vertical comic-style reel with 4 equal-sized panels.
+Panel 1: The owner leaves through the front door. The pet is framed in the window behind them, small against the glass, eyes wide, paws pressed high, the house suddenly quiet.
+Panel 2: The door clicks shut. Silence breaks. The pet slowly turns toward the empty house, posture shifting, eyes sharp with possibility.
+Panel 3: The house transformed. The pet sprawls across the couch like it owns the place, crumbs nearby, sunlight cutting across the room like a spotlight.
+Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and composed, as if nothing happened.
+```
+
+---
+
+## ✨ Edit Endpoint Showcase
+
+### No. 95 · Chess board → winter evening (edit via `/v1/images/edits`) 🆕
+
+- Images:
+  - `docs/photography/chess-midgame.png` — Chess mid-game original
+  - `docs/edit-endpoint-showcase/edit-chess-winter.png` — Chess mid-game restyled as winter scene
+- Metadata: Edit Endpoint Showcase · `landscape` · `1536x1024` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
+
+```text
+Make it a winter evening with heavy snowfall, snow dusted on the board and pieces, breath vapor in the air, cold blue-grey lighting, chess position still clearly readable.
+```
+
+### No. 96 · Tea poster → metro lightbox mockup
+
+- Image: `docs/edit-endpoint-showcase/tea-poster-metro-lightbox.png`
+- Metadata: Edit Endpoint Showcase · `portrait` · `1024x1536` · Original
+
+```text
+Transform the provided tea poster into a realistic metro-station lightbox mockup while preserving the poster artwork and Chinese typography as much as possible. Show the poster behind glossy glass in a vertical illuminated advertising frame on a clean subway platform wall. Add subtle reflections, brushed metal frame, floor tiles, soft overhead transit lighting, and a few blurred commuters in the distance. Keep the poster straight, legible, and dominant; do not redesign the poster, do not change its main text, and do not add fake brand logos.
+```
+
+---
+
+## 📱 UI/UX Mockups
+
+### No. 97 · Mobile Budgeting App Mockup
+
+- Image: `docs/uiux-mockups/mobile-budgeting-app-neobank.png`
+- Metadata: UI/UX Mockups · `portrait` · `1024x1536` · Original
+
+```text
+Design a polished mobile finance app UI mockup for a fictional neobank called AURAE, shown on a 1290x2796 smartphone screen, front-facing, with a soft off-white background and subtle shadow. Use a calm palette of deep navy, mint green, warm gray, and white. Create a complete home screen with crisp typography, clean spacing, rounded cards, and precise icon alignment. Include a top header with the in-image text "AURAE", "Good morning, Lina", and "Total balance $12,480.36". Add three summary chips labeled "Income +$4,200", "Spent -$1,830", and "Saved 32%". Show a weekly spending bar chart labeled "Mon Tue Wed Thu Fri Sat Sun" and a recent transactions list with "Metro Pass $18.50", "Green Bowl $14.20", and "Rent $1,240.00". Include a bottom nav with "Home", "Cards", "Budget", and "Profile". Prioritize crisp UI hierarchy, realistic mobile app styling, sharp labels, and production-quality mockup presentation.
+```
+
+### No. 98 · Desktop Operations Dashboard
+
+- Image: `docs/uiux-mockups/desktop-analytics-dashboard-operations.png`
+- Metadata: UI/UX Mockups · `landscape` · `1536x1024` · Original
+
+```text
+Create a high-end desktop SaaS analytics dashboard mockup for a fictional platform named HELIX OPS, displayed on a 16:10 monitor canvas at 1600x1000. Use a cool palette of slate, cobalt blue, teal, pale gray, and white, with subtle glass panels and tight grid alignment. The layout should include a left sidebar, top filter bar, KPI cards, line charts, data table, and alert panel. Use crisp typography and correct labels. Include in-image text: "HELIX OPS", "Operations Overview", "Last 30 Days", "Uptime 99.982%", "Tickets 184", "Latency 42 ms", and "Conversion 6.4%". Show a line chart labeled "Apr 1" through "Apr 30", a donut chart titled "Traffic Sources", and a table with columns "Site", "Status", "Region", and "Load". Add alert pills reading "3 Critical" and "12 Warning". Composition should feel realistic and presentation-ready, with clean hierarchy, precise spacing, balanced negative space, and ultra-sharp dashboard UI rendering.
+```
+
+### No. 99 · Design System Card Set
+
+- Image: `docs/uiux-mockups/design-system-component-card-set.png`
+- Metadata: UI/UX Mockups · `square` · `1024x1024` · Original
+
+```text
+Generate a clean design system overview board for a fictional product language called LUMEN UI, arranged as a square component gallery on a 2048x2048 canvas. Use a neutral palette of ivory, charcoal, muted blue, sage, and coral accents. The composition should be an orderly grid of cards showing buttons, input fields, badges, toggles, tabs, avatars, alerts, and pricing cards. Include crisp typography, even spacing, subtle shadows, and exact alignment as if exported from a professional design tool. Add labeled sections with the in-image text "LUMEN UI", "Buttons", "Inputs", "Status", "Cards", and "Type Scale". Include sample button labels "Primary", "Secondary", and "Danger"; badge labels "Success", "Pending", and "Error"; and typography specimens "Display 48", "Heading 24", and "Body 16". Ensure the board feels systematic, editorial, and highly legible, with clean hierarchy, correct labels, and polished component consistency suitable for a design systems gallery.
+```
+
+### No. 100 · Web3 Wallet Interface Concept
+
+- Image: `docs/uiux-mockups/web3-wallet-app-concept.png`
+- Metadata: UI/UX Mockups · `portrait` · `1024x1536` · Original
+
+```text
+Design a premium mobile web3 wallet app mockup for a fictional wallet called NOVA VAULT on a 1179x2556 phone screen, centered on a dark graphite background with faint aurora gradients. Use a refined palette of black, electric cyan, emerald, violet-blue, and soft white. The app should feel modern but credible, with crisp typography, glassmorphism only where useful, and strong financial UI clarity. Include in-image text: "NOVA VAULT", "Portfolio $48,920.14", "24h +3.82%", "Send", "Receive", "Swap", and "History". Show token cards labeled "SOLAR 18.42", "LATTICE 244.7", and "USDX 12,840.00" with small sparkline charts. Add a security section reading "Shield Level 96" and a network selector labeled "Mainnet". Include a recent activity list with "Swap SOLAR to USDX", "Received 240 LATTICE", and "Gas 0.0021". Prioritize crisp labels, exact numbers, clean hierarchy, believable wallet UX, and polished gpt-image-2-friendly UI detail.
+```
+
+### No. 101 · Health Tracker App Mockup
+
+- Image: `docs/uiux-mockups/health-tracker-wellness-app.png`
+- Metadata: UI/UX Mockups · `portrait` · `1024x1536` · Original
+
+```text
+Create a refined mobile health tracking app screen for a fictional wellness product named VITA LOOP, displayed on a tall smartphone with a bright editorial UI aesthetic. Use a palette of soft mint, deep forest green, cream, coral, and cool gray. Compose a daily overview screen with clean cards, circular progress rings, miniature charts, and a tidy bottom navigation. Include crisp in-image text: "VITA LOOP", "Daily Summary", "Steps 8,420", "Sleep 7.6 h", "Heart Rate 64 bpm", and "Hydration 2.1 L". Add three progress rings labeled "Move 78%", "Recovery 84%", and "Focus 66%". Show a weekly chart labeled "Mon Tue Wed Thu Fri Sat Sun" and two buttons reading "Log Meal" and "Start Session". Add a health insight card with the text "Recovery improved 12% this week". The result should feel production-ready, medically clean, carefully spaced, sharply rendered, and optimized for crisp typography and accurate labels.
+```
+
+---
+
+## 📊 Data Visualization
+
+### No. 102 · Small Multiples Climate Grid
+
+- Image: `docs/data-visualization/small-multiples-climate-grid.png`
+- Metadata: Data Visualization · `wide` · `2048x1152` · Original
+
+```text
+Produce a clean editorial data visualization poster showing a 4x3 small-multiples grid of monthly climate charts for 12 fictional cities. Use a white background, generous margins, and a restrained palette of navy, rust, sky blue, olive, and charcoal. Each mini-panel should contain a temperature line and precipitation bars with consistent axes and ultra-legible labels. Include a title block with the in-image text "Annual Climate Profiles" and subtitle "12 Cities, 2025". Label panels "Northport", "Solmere", "Aster Bay", "Ridgefall", "Halcyon", "Verdin", "Glass Harbor", "Red Mesa", "Moonfield", "Lake Arden", "Cinder Point", and "Juniper". Use month labels "J F M A M J J A S O N D" and axis labels "Temp °C" and "Rain mm". Add numeric legend values "0", "10", "20", "30", and "100". Keep the composition highly structured, scientifically clear, and visually elegant, with crisp typography, aligned scales, and publication-grade chart rendering.
+```
+
+### No. 103 · Network Graph Collaboration Map
+
+- Image: `docs/data-visualization/network-graph-collaboration-map.png`
+- Metadata: Data Visualization · `landscape` · `1536x1024` · Original
+
+```text
+Generate a sophisticated network graph visualization on a dark charcoal canvas showing collaborations across a fictional research consortium called ORBIT GRID. Use glowing node colors in teal, amber, coral, pale blue, and white, with fine connecting lines and clean labels. The composition should be balanced, readable, and intentionally designed rather than random. Include a title in crisp text reading "ORBIT GRID Collaboration Network" and a legend with "Institute", "Lab", "Project", and "Advisory". Show approximately 36 nodes, with larger hubs labeled "Helix Center", "Nova Lab", "Aster Institute", "Cinder Bio", and "Polar Systems". Add edge labels sparingly, such as "shared data", "joint grant", and "coauthor". Include a right-side stats card reading "Nodes 36", "Edges 92", and "Density 0.146". Emphasize clean hierarchy, accurate node-label placement, anti-overlap spacing, subtle depth, and crisp typography suited for a polished technical visualization generated by gpt-image-2.
+```
+
+### No. 104 · Chord Diagram of Energy Flows
+
+- Image: `docs/data-visualization/chord-diagram-energy-flows.png`
+- Metadata: Data Visualization · `square` · `1024x1024` · Original
+
+```text
+Create a publication-quality chord diagram visualizing fictional regional energy flows in 2025. Use a bright ivory background with a centered circular composition and a harmonious palette of cobalt, teal, ochre, coral, plum, and graphite. The diagram should feel mathematically precise, with clean arcs, semi-transparent ribbons, and highly legible labels. Add a title block with the in-image text "Regional Energy Exchange" and subtitle "TWh, 2025". Label outer segments "North", "South", "East", "West", "Coastal", and "Grid Reserve". Include a small legend reading "Hydro", "Solar", "Wind", and "Storage". Place tiny numeric ticks around the ring at "0", "50", "100", and "150". Use ribbon thickness to imply volume, but keep the composition readable and elegant. Prioritize crisp labels, clear hierarchy, accurate geometry, balanced white space, and a refined data-journalism aesthetic rather than generic infographic styling.
+```
+
+### No. 105 · Treemap Budget Allocation
+
+- Image: `docs/data-visualization/treemap-startup-budget-allocation.png`
+- Metadata: Data Visualization · `landscape` · `1536x1024` · Original
+
+```text
+Design a modern treemap infographic showing a fictional company budget allocation for LUMEN BIO in fiscal year 2026. Use a light neutral background and a controlled palette of forest green, desaturated blue, amber, terracotta, lavender-gray, and charcoal outlines. The composition should be a clean rectangular treemap with strong visual grouping and crisp typography. Include a header with the in-image text "LUMEN BIO Budget Allocation" and "FY 2026". Major blocks should be labeled "R&D 38%", "Manufacturing 22%", "Clinical 14%", "Operations 10%", "Marketing 7%", "IT 5%", and "Legal 4%". Within some blocks, add smaller labels like "Prototypes", "Reagents", "QA", "Cloud", and "Field Trials". Include a compact side legend reading "Total Budget $84.0M". Ensure the chart has precise edges, balanced annotation density, clean hierarchy, and sharp text rendering suitable for a technical gallery prompt.
+```
+
+### No. 106 · Geographic Choropleth Yield Map
+
+- Image: `docs/data-visualization/geographic-choropleth-harvest-yield.png`
+- Metadata: Data Visualization · `wide` · `2048x1152` · Original
+
+```text
+Produce a polished geographic choropleth map infographic of a fictional agricultural region called the Solterra Basin, showing harvest yield by district. Use a minimalist cartographic style on an off-white background with muted terrain hints and a sequential palette from pale sand to deep green. The map should include 14 clearly separated districts with clean borders, crisp labels, and a right-side legend. Include in-image text: "Solterra Basin Harvest Yield", "2025", and legend title "tons / hectare". Label districts with names such as "North Vale", "Riverbend", "Copper Plain", "East Orchard", and "Cinder Ridge". Include legend values "1.2", "2.4", "3.6", "4.8", and "6.0". Add a compact annotation box reading "Highest yield: East Orchard 5.8" and "Lowest yield: Dry Steppe 1.4". Prioritize clean typography, accurate map-like geometry, balanced composition, subtle cartographic detail, and publication-grade infographic clarity.
+```
+
+---
+
+## ⚙️ Technical Illustration
+
+### No. 107 · Mechanical Watch Exploded View
+
+- Image: `docs/technical-illustration/mechanical-watch-exploded-view.png`
+- Metadata: Technical Illustration · `square` · `1024x1024` · Original
+
+```text
+Create a premium technical exploded-view illustration of a fictional mechanical wristwatch called the Meridian 8, centered on a dark slate background with fine blueprint grid accents. Show the watch components separated vertically with precise spacing: sapphire crystal, dial, hands, chapter ring, movement plates, escapement, balance wheel, mainspring barrel, case, crown, and leather strap sections. Use realistic brushed steel, brass, ruby jewel accents, and deep navy dial details. Add crisp callouts and labels with the in-image text "Meridian 8", "Exploded Assembly", "42 mm Case", "25 Jewels", and "Power Reserve 72 h". Include numbered callouts "01" through "10" with short labels like "Balance Wheel", "Mainspring Barrel", and "Sapphire Crystal". The result should be highly detailed, technically believable, sharply rendered, and suitable for an industrial design plate with clean hierarchy, exact labeling, and refined material realism.
+```
+
+### No. 108 · Rocket Cutaway Diagram
+
+- Image: `docs/technical-illustration/rocket-cutaway-launch-vehicle.png`
+- Metadata: Technical Illustration · `tall` · `2160x3840` · Original
+
+```text
+Generate a highly detailed vertical cutaway illustration of a fictional two-stage launch vehicle named Aster-9 on a clean white technical background. Show the full rocket from nose cone to engines, sliced to reveal internal tanks, avionics, payload fairing, interstage, turbopumps, and thrust structure. Use a restrained palette of white, gunmetal, orange, pale blue, and safety red accents. Add precise leader lines and crisp labels. Include in-image text: "ASTER-9", "Payload 8,400 kg", "Height 62.4 m", "Stage 1 RP-1 / LOX", and "Stage 2 Methalox". Label internal parts such as "Payload Bay", "Guidance Computer", "LOX Tank", "Fuel Tank", "Helium COPV", and "Engine Cluster x9". Add a small scale marker with "0 m", "20 m", "40 m", and "60 m". Prioritize accurate engineering-diagram composition, clean typography, believable hardware detail, and razor-sharp annotations optimized for gpt-image-2.
+```
+
+### No. 109 · Mechanical Keyboard Exploded Assembly
+
+- Image: `docs/technical-illustration/mechanical-keyboard-exploded-assembly.png`
+- Metadata: Technical Illustration · `wide` · `2048x1152` · Original
+
+```text
+Design a crisp exploded-view product illustration of a custom mechanical keyboard named LUMEN K65, shown in three-quarter perspective on a pale gray background with subtle shadow. Separate the layers clearly: keycaps, switches, plate, PCB, foam, gasket mounts, case top, battery module, rotary knob, and case bottom. Use anodized silver, matte black, translucent smoke keycaps, and small teal accent parts. Add clean technical callouts and in-image text reading "LUMEN K65", "Exploded Assembly", "65% Layout", "Hot-Swap PCB", and "3,200 mAh". Include labels for "PBT Keycaps", "Linear Switch", "Aluminum Plate", "Poron Foam", "USB-C", and "Encoder Knob". Show a compact dimension note "317 mm x 112 mm x 31 mm". The composition should feel like an industrial design presentation board: precise spacing, realistic materials, sharp typography, correct labels, and highly legible component hierarchy.
+```
+
+### No. 110 · Car Powertrain Transparent Cutaway
+
+- Image: `docs/technical-illustration/car-powertrain-transparent-cutaway.png`
+- Metadata: Technical Illustration · `landscape` · `1536x1024` · Original
+
+```text
+Create a high-detail transparent cutaway illustration of a fictional hybrid sports coupe powertrain on a dark neutral studio background. Show the vehicle in side profile with semi-transparent bodywork revealing the front electric motor, battery pack, rear combustion engine, transmission tunnel, cooling loops, and rear differential. Use realistic metallic surfaces, matte graphite body panels, orange high-voltage cables, and blue coolant lines. Add clean engineering callouts with crisp in-image text: "Project VELA GT", "Hybrid Powertrain", "System Output 412 kW", "Battery 18.6 kWh", and "0-100 km/h 3.8 s". Label key parts "Inverter", "Motor", "Battery Pack", "Turbo Inline-4", "Radiator", and "Rear Differential". Include a simple legend showing cable colors for "HV", "Coolant", and "Fuel". The rendering should be technically believable, photorealistic where appropriate, sharply annotated, and composed like a premium automotive engineering poster.
+```
+
+### No. 111 · Smartphone Internals Layered View
+
+- Image: `docs/technical-illustration/smartphone-internals-layered-view.png`
+- Metadata: Technical Illustration · `portrait` · `1024x1536` · Original
+
+```text
+Produce a sleek exploded-view illustration of a fictional flagship smartphone called the HELIX ONE, shown front and back in a vertically layered assembly on a soft charcoal gradient background. Separate the glass, OLED panel, midframe, battery, camera island, wireless charging coil, logic board, cooling vapor chamber, speakers, and rear shell. Use realistic materials including brushed titanium edges, ceramic back, black glass, copper thermal elements, and blue PCB traces. Add crisp labels and in-image text: "HELIX ONE", "Layered Internal Architecture", "6.7 in OLED", "5,100 mAh", and "Vapor Chamber 3,200 mm2". Label components "Main Camera 50 MP", "Ultrawide 13 MP", "Coil", "Battery", "Logic Board", and "Speaker Module". Keep the composition elegant, technical, and believable, with exact spacing, sharp typography, clean callout leaders, and premium product-visualization quality.
+```
+
+---
+
+## 🏛️ Architecture & Interior
+
+### No. 112 · Japanese Minimalist Living Room
+
+- Image: `docs/architecture-interior/japanese-minimalist-living-room-render.png`
+- Metadata: Architecture & Interior · `landscape` · `1536x1024` · Original
+
+```text
+Render a serene Japanese minimalist living room interior in photorealistic architectural visualization style, viewed from eye level with a 28 mm lens feel. The space should feature light oak flooring, shoji-inspired sliding panels, low modular seating, a recessed tokonoma niche, linen textures, and soft morning light entering from the left. Use a restrained palette of warm beige, pale oak, charcoal, muted moss green, and rice-paper white. Include subtle in-image text on a small framed floor plan board that reads "Room 6.4 m x 4.8 m" and "AURAE House". Add a low tea table, one ceramic vase, a bonsai-like plant, and indirect cove lighting at 3000 K. Composition should be calm and balanced with strong negative space, realistic shadows, accurate material behavior, and magazine-quality interior rendering. Prioritize photorealism, architectural detail, crisp edges, and tasteful minimalism rather than stylized fantasy.
+```
+
+### No. 113 · Brutalist Concrete Museum Atrium
+
+- Image: `docs/architecture-interior/brutalist-concrete-museum-atrium.png`
+- Metadata: Architecture & Interior · `wide` · `2048x1152` · Original
+
+```text
+Create a photorealistic interior render of a monumental brutalist museum atrium with exposed board-formed concrete, dramatic skylights, long ramps, and massive geometric voids. Viewpoint is slightly low and wide, emphasizing vertical scale and shadow. Use a palette of cool gray concrete, black steel, muted sandstone, pale daylight, and a few rust-colored wayfinding accents. Include sparse signage with crisp in-image text: "Gallery A", "Level 02", and "Atrium 18.0 m". Add a few small human figures for scale, but keep the architecture dominant. The space should include suspended walkways, a central sculpture plinth, and reflected light from polished concrete floors. Composition must feel cinematic yet architecturally precise, with realistic material textures, accurate lighting, controlled contrast, and gallery-quality rendering. Prioritize believable spatial depth, clean geometry, subtle atmospheric perspective, and sharp signage.
+```
+
+### No. 114 · Mid-Century Modern Office
+
+- Image: `docs/architecture-interior/mid-century-modern-office-studio.png`
+- Metadata: Architecture & Interior · `landscape` · `1536x1024` · Original
+
+```text
+Render a sophisticated mid-century modern creative office in photorealistic interior style, with walnut millwork, brass accents, olive upholstery, terrazzo flooring, smoked glass partitions, and large windows casting late-afternoon light. Use a rich palette of walnut brown, olive green, cream, brass gold, and muted terracotta. The composition should show a central executive desk, built-in shelving, a lounge corner, and a wall-mounted planning board. On the board, include subtle in-image text "Studio North", "Q3 Review", and "14:30". Add realistic accessories like drafting tools, books, ceramic lamps, and a record player, but keep the scene curated and uncluttered. Camera angle should feel editorial, around 32 mm, with balanced perspective lines and realistic depth of field. Prioritize tactile materials, believable lighting, clean geometry, and polished architectural-visualization quality with crisp details and intentional composition.
+```
+
+### No. 115 · Biophilic Biotech Lab
+
+- Image: `docs/architecture-interior/biophilic-biotech-lab-render.png`
+- Metadata: Architecture & Interior · `wide` · `2048x1152` · Original
+
+```text
+Generate a high-end photorealistic render of a future-facing biotech laboratory that integrates biophilic design. Show a bright open lab with glass partitions, living moss walls, hanging plants, pale wood details, white composite worktops, and advanced research equipment. Use a fresh palette of white, sage green, pale oak, stainless steel, and clear cyan monitor accents. Include precise architectural lighting at 4200 K, skylight diffusion, and clean reflections. Add subtle wall graphics with crisp in-image text "HELIX BIO LAB 03", "Clean Zone", and "22 C". The scene should include lab benches, microscopes, sample storage towers, and collaborative seating, arranged with strong spatial clarity. Composition must feel aspirational but credible, with realistic equipment proportions, hygienic surfaces, controlled clutter, and premium visualization quality. Emphasize photorealism, accurate material rendering, clean hierarchy, and an elegant fusion of nature and scientific workspace design.
+```
+
+### No. 116 · Gothic Cathedral Interior
+
+- Image: `docs/architecture-interior/gothic-cathedral-interior-render.png`
+- Metadata: Architecture & Interior · `tall` · `2160x3840` · Original
+
+```text
+Render a majestic Gothic cathedral interior in photorealistic architectural style, viewed down the central nave with towering ribbed vaults, pointed arches, intricate tracery, and colored light from stained glass windows. Use a palette of cool stone gray, deep burgundy, sapphire blue, candle gold, and dusty ambient light. Include realistic worn limestone textures, carved choir stalls, a patterned stone floor, and a distant altar. Add a discreet informational plaque near the foreground with the in-image text "Nave Height 28.5 m" and "Westminster Hall of Light". The composition should emphasize verticality, symmetry, and sacred atmosphere while remaining architecturally believable. Lighting should mix soft daylight shafts and warm candlelight, with subtle volumetric dust. Prioritize accurate Gothic detailing, strong perspective, material realism, and crisp small text, producing a museum-grade architectural render rather than a fantasy scene.
+```
+
+---
+
+## 🔬 Scientific & Educational
+
+### No. 117 · Anatomy Poster
+
+- Image: `docs/scientific-educational/human-anatomy-muscular-poster.png`
+- Metadata: Scientific & Educational · `tall` · `2160x3840` · Original
+
+```text
+Create a clean educational anatomy poster showing the human muscular system in anterior and posterior views on a pale cream background. Use an academic but visually refined style with precise linework, muted reds and umbers for muscle groups, cool gray bones, and thin charcoal labels. Include a centered title with crisp in-image text "Human Muscular System" and a subtitle "Anterior and Posterior Views". Label key structures such as "Deltoid", "Pectoralis Major", "Rectus Abdominis", "Biceps Femoris", "Gastrocnemius", and "Trapezius". Add a compact scale note reading "Adult height reference 175 cm" and a small legend with "Superficial" and "Deep". Keep the composition symmetrical, scientifically accurate in appearance, and suitable for a classroom wall chart. Prioritize correct labels, crisp typography, clean hierarchy, subtle shading, and publication-quality educational clarity without gore or excessive realism.
+```
+
+### No. 118 · Periodic Table Spectral Variant
+
+- Image: `docs/scientific-educational/periodic-table-spectral-variant.png`
+- Metadata: Scientific & Educational · `wide` · `2048x1152` · Original
+
+```text
+Design a distinctive periodic table poster variant where each element tile is colored by fictional emission-spectrum families while preserving clean scientific layout. Use a dark navy background with luminous but disciplined colors: cyan, magenta, amber, lime, and silver-white. Arrange the periodic table accurately with clear periods and groups, including separate lanthanide and actinide rows. Add a crisp title reading "Periodic Table of the Elements" and subtitle "Spectral Classification Variant". Ensure visible labels for representative tiles such as "H 1", "He 2", "C 6", "Fe 26", "Ag 47", and "U 92". Include side legends titled "Alkali", "Transition", "Metalloid", "Noble Gas", and "Actinide". Add small group numbers "1" through "18" and period numbers "1" through "7". The result should feel educational, modern, and highly legible, with precise typography, clean cell alignment, balanced glow effects, and accurate table structure.
+```
+
+### No. 119 · Tree of Life Poster
+
+- Image: `docs/scientific-educational/tree-of-life-phylogeny-poster.png`
+- Metadata: Scientific & Educational · `square` · `1024x1024` · Original
+
+```text
+Generate an elegant scientific poster visualizing a stylized tree of life as a radial phylogeny diagram on an ivory background. Use fine botanical-meets-scientific linework with a restrained palette of moss green, deep teal, amber, plum, and charcoal. The diagram should branch outward from a central root labeled with crisp in-image text "Last Universal Common Ancestor". Main clades should be labeled "Bacteria", "Archaea", and "Eukaryota", with outer branches including "Plants", "Fungi", "Animals", "Protists", and "Cyanobacteria". Add a title at the top reading "Tree of Life" and a subtitle "Simplified Radial Phylogeny". Include a small scale note "Approximate branching only". Keep labels readable and branch geometry balanced, with clean hierarchy and educational clarity. The overall design should feel like a museum-science graphic: structured, accurate in spirit, visually rich, and rendered with crisp text and refined detail.
+```
+
+### No. 120 · Weather Systems Diagram
+
+- Image: `docs/scientific-educational/weather-systems-fronts-diagram.png`
+- Metadata: Scientific & Educational · `landscape` · `1536x1024` · Original
+
+```text
+Create a polished meteorology infographic showing a mid-latitude cyclone system from a top-down synoptic view. Use a cool palette of ocean blue, cloud white, storm gray, crimson, and cobalt, with smooth contour lines and crisp symbols. Include pressure isobars, cloud bands, warm and cold fronts, arrows for wind direction, and rainfall zones. Add clear in-image text: "Mid-Latitude Cyclone", "Low Pressure 984 hPa", "Warm Front", "Cold Front", and "Occluded Front". Include city labels "Northport", "Elmside", and "Cedar Bay" for context, plus a legend reading "Rain", "Snow", and "Thunderstorm". Show temperature markers "8 C", "14 C", and "21 C" in different air masses. The composition should be educational and publication-ready, with sharp labels, clean hierarchy, accurate diagram conventions, and strong visual readability suitable for a textbook or science exhibit panel.
+```
+
+### No. 121 · Geological Strata Cross-Section
+
+- Image: `docs/scientific-educational/geological-strata-cross-section.png`
+- Metadata: Scientific & Educational · `wide` · `2048x1152` · Original
+
+```text
+Produce a detailed geological cross-section poster of layered earth strata cutting through a fictional canyon basin. Use a natural scientific palette of sandstone beige, iron oxide red, shale gray, limestone cream, basalt charcoal, and muted green vegetation above ground. Show clearly differentiated layers, a fault line, an aquifer, fossil-bearing beds, and a volcanic intrusion. Add crisp in-image text: "Geological Cross-Section", "Solterra Basin", "Scale 0-500 m", and labels "Sandstone", "Shale", "Limestone", "Coal Seam", "Aquifer", and "Basalt Dike". Include a vertical scale with "0 m", "100 m", "250 m", and "500 m". Add small annotations "Marine fossils" and "Groundwater flow" with arrows. The composition should be highly legible, educational, and neatly diagrammed, with clean linework, correct label placement, balanced annotation density, and publication-quality scientific illustration clarity.
+```
+
+---
+
+## 👗 Fashion Editorial
+
+### No. 122 · Urban Streetwear Lookbook: Shibuya Night
+
+- Image: `docs/fashion-editorial/streetwear-tokyo-lookbook.png`
+- Metadata: Fashion Editorial · `portrait` · `1024x1536` · Original
+
+```text
+Full-body lookbook photography of a model standing in the center of a rain-slicked Shibuya crossing at twilight. The model wears an oversized, multi-pocketed technical puffer jacket in 'Electric Cobalt' with reflective silver detailing, paired with wide-leg cargo trousers in matte black and chunky platform sneakers. The composition is a sharp medium-wide shot using a 35mm lens, capturing the vibrant neon signs of the background blurred into a soft bokeh of pinks and cyans. Lighting is dramatic and directional, sourced from the surrounding digital billboards, creating high-contrast highlights on the jacket's texture. The mood is urban and fast-paced, with a subtle film grain characteristic of Portra 400. The image features a clean vertical layout suitable for a fashion magazine, with the text 'NEO-URBAN' subtly embossed in the corner in a minimalist sans-serif font. No brand logos are visible.
+```
+
+### No. 123 · Avant-Garde Haute Couture Runway
+
+- Image: `docs/fashion-editorial/haute-couture-sculptural-runway.png`
+- Metadata: Fashion Editorial · `tall` · `2160x3840` · Original
+
+```text
+High-angle editorial photograph of a haute couture runway show set within a brutalist concrete cathedral. The model is draped in a sculptural gown made of pleated iridescent organza that mimics the fluid movement of liquid mercury. The color palette is dominated by 'Champagne Gold' and 'Shadow Grey'. Lighting is a single, powerful overhead spotlight that creates sharp, dramatic shadows and emphasizes the architectural volume of the garment. The model has a minimalist, ethereal makeup look with silver leaf accents on the brow. The camera uses a 50mm prime lens with a deep depth of field to capture both the intricate texture of the fabric and the cold, vast scale of the concrete architecture in the background. The atmosphere is solemn, artistic, and high-fashion, focusing on the intersection of textile and space.
+```
+
+### No. 124 · Y2K Revival: Cyber-Pop Studio Session
+
+- Image: `docs/fashion-editorial/y2k-revival-cyber-pop.png`
+- Metadata: Fashion Editorial · `square` · `1024x1024` · Original
+
+```text
+A vibrant Y2K-inspired fashion editorial shot in a studio with a high-gloss white floor and a curved lavender backdrop. The model is styled in a 'Cyber-Pink' velour tracksuit with butterfly motifs, tinted translucent sunglasses, and frosted blue eyeshadow. The lighting is bright and 'bubbly,' using ring lights to create circular catchlights in the eyes and a soft, glowy skin texture reminiscent of early 2000s music videos. The composition is a close-up fish-eye lens shot, distorting the proportions for a playful, energetic effect. Colors are saturated neon greens, hot pinks, and icy blues. Floating around the model are low-poly 3D heart shapes and plastic-textured stars. The text 'GLOSS' is written in a chunky, 3D chrome bubble font across the top. The overall aesthetic is nostalgic, plastic, and hyper-digital.
+```
+
+### No. 125 · Old Money Aesthetic: Equestrian Estate
+
+- Image: `docs/fashion-editorial/old-money-equestrian-estate.png`
+- Metadata: Fashion Editorial · `landscape` · `1536x1024` · Original
+
+```text
+Quiet luxury editorial photography set on a sprawling English country estate during the golden hour. A model sits gracefully on a stone wall, dressed in a tailored 'Camel' cashmere coat, a silk neck scarf with a heritage print, and dark brown leather riding boots. In the background, a vintage dark green convertible is parked near a stable of limestone and ivy. The lighting is warm and diffused, casting long, soft shadows across the manicured lawn. The color palette is earthy and sophisticated: forest green, rich tan, cream, and mahogany. The camera is a medium-format Hasselblad, producing a rich, creamy texture and incredibly fine detail in the wool and leather. The mood is one of timeless elegance, inherited wealth, and serene countryside life. There are no modern logos or distracting elements; the focus is on quality and tradition.
+```
+
+### No. 126 · Avant-Garde: Organic Surrealism
+
+- Image: `docs/fashion-editorial/avant-garde-organic-high-fashion.png`
+- Metadata: Fashion Editorial · `portrait` · `1024x1536` · Original
+
+```text
+A high-fashion editorial shot in a surreal desert landscape where the sand is white and the sky is a deep, dark indigo. The model wears an avant-garde garment that appears to be grown from bioluminescent fungi and dried desert vines, featuring intricate organic textures and glowing veins of 'Acid Green'. The silhouette is exaggerated and asymmetrical, blending into the surrounding rock formations. The lighting is otherworldly, with the model illuminated by a soft internal glow from the dress and a faint lunar backlight. The composition is a low-angle shot to make the model appear monumental and god-like. The camera uses a wide-angle lens to capture the vast, empty horizon. The color palette is strictly limited to white, indigo, and bioluminescent green, creating a haunting and futuristic aesthetic that challenges the boundaries of clothing.
+```
+
+### No. 127 · Muted streetwear studio editorial portrait
+
+- Image: `docs/fashion-editorial/editorial-studio-portrait.png`
+- Metadata: Fashion Editorial · `portrait` · `1024x1536` · Author: @john_my07 · Source: [X](https://x.com/john_my07/status/2047182640760140198)
+
+```text
+A high-end studio photoshoot featuring a half-body portrait of a person in their mid-30s to early 40s with a naturally fit build. The subject stands in a relaxed yet confident pose, with a calm, neutral, self-assured expression. They are dressed in modern, minimal casual streetwear, such as a well-fitted t-shirt or a light jacket, using neutral, muted tones. Shot at eye level using an 85mm portrait lens with an aperture of f/2.8, keeping the subject tack sharp while creating a soft, shallow depth of field that gently blurs the background. The lighting is professional studio quality: a softbox key light from the front, subtle fill lighting to balance shadows, and a gentle rim light to separate the subject from the background. Shadows are soft and natural, with accurate, realistic skin tones. The background is a clean studio backdrop with a smooth, minimal texture and a soft neutral gradient, completely distraction-free. The overall style is highly realistic with an editorial fashion portrait look. Color grading is natural and balanced, with no filters or overprocessing. Rendered in ultra-high detail.
+```
+
+### No. 128 · Eiffel Tower luxury night editorial
+
+- Image: `docs/fashion-editorial/eiffel-tower-luxury-editorial.png`
+- Metadata: Fashion Editorial · `portrait` · `1024x1536` · Author: @Sheldon056 · Source: [X](https://x.com/Sheldon056/status/2047157379020861782)
+
+```text
+Dramatic, low-angle ground perspective full-body shot captured with a 50mm lens at f/1.4, featuring a stylish bearded man with slicked-back hair and aviator glasses, wearing tailored high-fashion modern clothing, standing on the platform of Trocadéro at night. He is dressed in a structured black velvet blazer over a black cashmere roll-neck sweater, tailored black trousers, and polished black boots, looking up intently at the fully illuminated Eiffel Tower, which dominates the background. Directly behind him is a deep sapphire blue Bugatti Chiron reflecting the surrounding city lights. One foot is planted on the rear tire, with his body leaning casually back. Use a shallow depth of field, rendering distant Parisian street lights and crowd into creamy bokeh. Spotlighting from city lamps creates dramatic, high-contrast shadows. Photorealistic, cinematic, luxury high-fashion editorial aesthetic.
+```
+
+---
+
+## 🎨 Fine Art Painting
+
+### No. 129 · Vibrant Impasto: Floral Rhythms
+
+- Image: `docs/fine-art-painting/impasto-floral-swirls.png`
+- Metadata: Fine Art Painting · `square` · `1024x1024` · Original
+
+```text
+A vivid oil painting in the lineage of post-impressionist impasto, featuring a dense garden of sunflowers and irises. The paint is applied in thick, rhythmic swirls and heavy dollops with a palette knife, creating a tangible 3D texture on the canvas. The color palette is an explosion of 'Chrome Yellow', 'Deep Ultramarine', and 'Vermilion Red', with visible strokes of white lead to indicate shimmering light. The composition is a tight, chaotic floral arrangement that seems to vibrate with energy. The lighting is harsh midday sun, which creates deep shadows within the ridges of the thick paint. There are no flat surfaces; every inch of the 'canvas' is covered in expressive, turbulent movement. The overall effect is one of raw emotion and the physical presence of the medium, focusing on the light-play over the peaks of the oil paint.
+```
+
+### No. 130 · Impressionist Lineage: River at Dusk
+
+- Image: `docs/fine-art-painting/impressionist-river-dusk.png`
+- Metadata: Fine Art Painting · `wide` · `2048x1152` · Original
+
+```text
+A serene landscape painting in the lineage of late 19th-century Impressionism, depicting a wide river reflecting a hazy violet and gold sunset. The water is rendered with short, horizontal dabs of color—'Lavender', 'Pale Peach', and 'Sage Green'—that suggest the gentle ripple of the surface. On the banks, weeping willows are suggested by soft, blurred strokes of dark emerald and charcoal. The atmosphere is thick with moisture and light, where the sky and water seem to merge at the horizon. There are no sharp lines or defined edges; the entire scene is a study of light, color, and atmospheric perspective. The lighting is the fleeting 'blue hour,' where the last rays of sun catch the tips of the waves. The mood is tranquil and meditative, capturing a fleeting moment of natural beauty through a soft, atmospheric lens.
+```
+
+### No. 131 · Mid-Century Modern: The Blue Pool
+
+- Image: `docs/fine-art-painting/hockney-california-backyard.png`
+- Metadata: Fine Art Painting · `landscape` · `1536x1024` · Original
+
+```text
+A flat, vibrant acrylic painting in the lineage of 1960s California modernism. The scene features a sparkling turquoise swimming pool in the foreground, with highly stylized white splash lines indicating a recent dive. In the background, a minimalist glass-and-steel house sits under a cloudless 'Cerulean' sky, flanked by two perfectly manicured palm trees. The color palette is dominated by saturated primaries: 'Turquoise Blue', 'Lemon Yellow', and 'Terracotta'. The lighting is the flat, shadowless glare of a Los Angeles afternoon, emphasizing the geometric shapes and clean lines of the architecture. The composition is strictly horizontal and balanced, with a sense of artificial stillness and leisure. The texture is smooth and matte, avoiding any visible brushstrokes to maintain a clean, graphic quality. It is a portrait of a sunny, suburban utopia.
+```
+
+### No. 132 · Color Field Abstract: Crimson and Ochre
+
+- Image: `docs/fine-art-painting/rothko-color-field-meditation.png`
+- Metadata: Fine Art Painting · `tall` · `2160x3840` · Original
+
+```text
+A large-scale abstract painting in the lineage of mid-century Color Field expressionism. The composition consists of three stacked, soft-edged rectangular forms that appear to float against a darker background. The top rectangle is a deep 'Oxblood Red', the middle is a vibrating 'Burnt Orange', and the bottom is a dusty 'Ochre'. The edges of the shapes are hazy and feathered, allowing the colors to bleed into one another and create a sense of profound depth. The texture of the canvas is subtly visible through the thin, layered washes of pigment. There is no representational subject matter; the focus is entirely on the emotional resonance of the color and the monumental scale. The lighting is soft and ambient, making the colors seem to glow from within the canvas. The mood is spiritual, somber, and deeply immersive.
+```
+
+### No. 133 · Social Realism: The Great Foundry
+
+- Image: `docs/fine-art-painting/rivera-social-industrial-mural.png`
+- Metadata: Fine Art Painting · `wide` · `2048x1152` · Original
+
+```text
+A grand-scale public mural in the lineage of early 20th-century social realism and Mexican muralism. The scene depicts an industrial foundry where diverse workers are engaged in the heroic labor of forging massive steel gears. The figures are rendered with heavy, rounded forms and powerful muscularity, colored in earthy tones of 'Sienna', 'Slate Grey', and 'Iron Rust'. The composition is dense and rhythmic, filled with the interlocking shapes of machinery, pipes, and human bodies. In the center, a golden glow emanates from a crucible of molten metal, illuminating the faces of the workers with a dramatic 'Fire Orange'. The style is bold and graphic, with strong black outlines and a flattened perspective that emphasizes the collective effort. The mural covers a vast curved wall, suggesting a narrative of progress, unity, and the dignity of the working class.
+```
+
+---
+
+## ✏️ More Illustration Styles
+
+### No. 134 · Flat Design: Modern Wellness
+
+- Image: `docs/more-illustration-styles/flat-design-editorial-wellness.png`
+- Metadata: More Illustration Styles · `square` · `1024x1024` · Original
+
+```text
+A clean, vector-based flat design illustration for a modern health and wellness editorial. The scene features a diverse group of stylized people practicing yoga and meditation in a minimalist park. The characters have simplified, elegant proportions with no facial features, wearing activewear in a palette of 'Muted Sage', 'Dusty Rose', and 'Sand'. The background consists of geometric semi-circles representing hills and simple leaf shapes in varying shades of green. There are no gradients or shadows; the entire image is composed of solid, overlapping color blocks with crisp edges. The composition is balanced and airy, with plenty of negative space. The lighting is represented by a single yellow circle for the sun, casting no shadows. The overall aesthetic is friendly, professional, and very 'Behance 2024,' emphasizing clarity and calm.
+```
+
+### No. 135 · Chibi Style: The Starry Bakery
+
+- Image: `docs/more-illustration-styles/chibi-kawaii-bakery.png`
+- Metadata: More Illustration Styles · `square` · `1024x1024` · Original
+
+```text
+A hyper-cute 'Q-style' or chibi illustration of a tiny, magical bakery run by a group of small forest animals. The characters have oversized heads, large twinkling eyes, and tiny limbs, dressed in miniature baker hats and aprons. They are decorating giant, glowing cupcakes that look like planets. The color palette is 'Pastel Rainbow': mint, strawberry pink, lavender, and lemon. The line art is soft and rounded, in a dark chocolate brown rather than black. The background is a cozy, rounded kitchen with jars of sparkling stardust and windows looking out onto a crescent moon. The lighting is warm and sparkly, with many small 'twinkle' effects and soft white glows around the pastries. The mood is sugary-sweet, whimsical, and extremely comforting, designed for a sticker set or a children's book.
+```
+
+### No. 136 · Low-Poly Geometric: Alpine Sunset
+
+- Image: `docs/more-illustration-styles/low-poly-mountain-voyage.png`
+- Metadata: More Illustration Styles · `landscape` · `1536x1024` · Original
+
+```text
+A stylized landscape illustration composed entirely of sharp, flat-shaded geometric polygons. The subject is a range of snow-capped mountains at sunset. Every surface is a triangle or quadrilateral, with no curves or gradients. The lighting is calculated by the angle of the polygons, creating distinct facets of light and shadow. The color palette transitions from 'Deep Indigo' in the valleys to 'Fiery Crimson' and 'Gold' on the mountain peaks. In the foreground, a low-poly pine forest is represented by simple green tetrahedrons. The sky is a series of horizontal bands of color, with a low-poly sun made of concentric yellow circles. The overall look is reminiscent of early 3D video game aesthetics but with a modern, high-resolution finish. The mood is clean, digital, and strangely peaceful in its mathematical simplicity.
+```
+
+### No. 137 · Sticker Design: Cyber-Explorer Club
+
+- Image: `docs/more-illustration-styles/holographic-sticker-badge.png`
+- Metadata: More Illustration Styles · `square` · `1024x1024` · Original
+
+```text
+A collection of five high-quality die-cut sticker designs arranged on a dark carbon-fiber background. The central sticker is a circular badge featuring a stylized astronaut helmet with the text 'EXPLORE' in a bold, futuristic font. The other stickers include a retro-style rocket, a planet with rings, and a lightning bolt. The art style is 'Neo-Traditional Sticker,' with thick white borders and vibrant, saturated colors. A 'holographic' texture overlay is applied to certain areas, creating a rainbow-sheen effect that shifts with the light. The lighting features bright specular highlights to give the stickers a 3D, plastic, and slightly glossy feel. The colors are 'Electric Purple', 'Cyan', and 'Neon Yellow'. Each sticker has a subtle drop shadow to make it appear as if it's peeling slightly off the surface.
+```
+
+### No. 138 · Kawaii sticker pack: Mexico icons
+
+- Image: `docs/more-illustration-styles/kawaii-sticker-pack-mexico.png`
+- Metadata: More Illustration Styles · `square` · `1024x1024` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2046875573574877663)
+
+```text
+Design a cute kawaii sticker pack featuring famous things from Mexico, including iconic food, landmarks, and traditional objects, all with adorable faces, soft pastel colors, rounded shapes, minimal shading, chibi style, glossy sticker finish, high resolution, arranged as a sticker sheet.
+```
+
+### No. 139 · Risograph Print: City Shadows
+
+- Image: `docs/more-illustration-styles/risograph-urban-landscape.png`
+- Metadata: More Illustration Styles · `portrait` · `1024x1536` · Original
+
+```text
+An urban landscape illustration created in the style of a two-color Risograph print. The palette is limited to 'Fluorescent Pink' and 'Teal Blue', with a dark navy created where the two inks overlap. The image has the characteristic grainy, tactile texture of Riso printing, with visible halftones and a slight, intentional 'misregistration' where the colors don't perfectly align. The subject is a high-contrast view of a city street with fire escapes and power lines. The lighting is represented through the density of the dot patterns, creating a gritty, lo-fi aesthetic. The composition uses flat shapes and bold silhouettes, with the pink ink used for the sky and the teal for the building shadows. The mood is indie, artistic, and nostalgic for DIY zine culture. The text 'SHIFT' is printed in the bottom corner in a distorted, ink-heavy typeface.
+```
+
+---
+
+## 🎥 Cinematic Film References
+
+### No. 140 · Symmetric Pastel: The Grand Conservatory
+
+- Image: `docs/cinematic-film-references/anderson-symmetric-pastel-hotel.png`
+- Metadata: Cinematic Film References · `landscape` · `1536x1024` · Original
+
+```text
+A perfectly symmetrical, wide-angle cinematic shot in the lineage of Wes Anderson's whimsical aesthetic. The scene is a grand glass conservatory filled with exotic plants and pink flamingos, centered on a perfectly placed yellow velvet sofa. The color palette is a strict pastel scheme of 'Millennial Pink', 'Pistachio Green', and 'Mustard Yellow'. Every element in the frame is meticulously arranged, with a flat, front-on perspective that feels like a dollhouse. The lighting is soft and even, with no harsh shadows, giving the scene a surreal, painterly quality. In the center of the frame, a man in a lavender bellhop uniform stands perfectly still, holding a single red rose. The camera is a vintage Panavision, capturing a crisp, detailed image with a slight, nostalgic warmth. The mood is quirky, charming, and highly controlled, emphasizing the beauty of obsessive organization.
+```
+
+### No. 141 · Monolithic Scifi: The Obsidian Gate
+
+- Image: `docs/cinematic-film-references/villeneuve-monolithic-desert.png`
+- Metadata: Cinematic Film References · `wide` · `2048x1152` · Original
+
+```text
+A breathtaking cinematic wide shot in the lineage of Denis Villeneuve's monolithic sci-fi. A lone, tiny figure stands before a gargantuan, featureless obsidian slab that rises miles into a dusty orange sky. The scale is incomprehensible, making the person look like a grain of sand. The environment is a vast, flat salt plain under a hazy, dim sun. The lighting is low-contrast and atmospheric, with the monolith's surface reflecting a dull, oily sheen. The color palette is 'Industrial Monochrome': deep blacks, slate greys, and a muted, sandy ochre. There is a sense of immense weight and ancient silence. The camera uses a wide-angle lens with a deep focus to emphasize the terrifying scale of the structure. The mood is one of awe, dread, and the sublime mystery of an advanced, alien intelligence. Minimalist and brutalist in design.
+```
+
+### No. 142 · Dreamscape: The Floating Garden
+
+- Image: `docs/cinematic-film-references/miyazaki-floating-island-garden.png`
+- Metadata: Cinematic Film References · `landscape` · `1536x1024` · Original
+
+```text
+A lush, hand-painted cinematic frame in the lineage of Hayao Miyazaki's dreamlike animation. The scene features a series of small, grassy islands floating in a sea of puffy, white cumulus clouds under a brilliant turquoise sky. Ancient stone ruins covered in vibrant 'Emerald Green' moss sit among flowering fruit trees. A gentle wind is visible through the swaying of long grass and the flight of white birds. The lighting is the bright, optimistic clarity of a summer morning, with soft, painted shadows and a gentle glow on every surface. The color palette is rich and natural: cerulean, spring green, and blossom pink. The composition is open and airy, with a sense of infinite wonder and peace. The textures have a soft, gouache-like quality, with every leaf and blade of grass feeling alive and cared for. It is a world of pure imagination and environmental harmony.
+```
+
+### No. 143 · Slow Cinema: The Misty Orchard
+
+- Image: `docs/cinematic-film-references/tarkovsky-misty-dacha-morning.png`
+- Metadata: Cinematic Film References · `wide` · `2048x1152` · Original
+
+```text
+A contemplative, long-take cinematic frame in the lineage of Tarkovsky's slow cinema. A dense, silver mist clings to a neglected apple orchard at dawn. In the center, a simple wooden table with a single glass of water sits among the tall, wet grass. The colors are nearly monochromatic, dominated by 'Mossy Green', 'Cold Grey', and 'Damp Brown', with a single spark of amber from a distant lantern. The lighting is natural and melancholy, filtered through the thick fog and the canopy of trees. There is a profound sense of time passing, silence, and spiritual weight. The camera is static, with a slow, almost imperceptible zoom. The textures are tangible: the rot on the wood, the droplets of dew on the glass, the dampness of the air. The mood is philosophical, lonely, and deeply grounded in the natural world and the memory of a home.
+```
+
+### No. 144 · Neo-Noir: The Orange Fog
+
+- Image: `docs/cinematic-film-references/blade-runner-neo-noir-orange.png`
+- Metadata: Cinematic Film References · `wide` · `2048x1152` · Original
+
+```text
+A cinematic wide shot in the lineage of Blade Runner 2049, depicting a futuristic city buried in a thick, toxic orange radioactive fog. The silhouettes of crumbling, ancient statues and jagged skyscrapers are barely visible through the haze. A lone hover-vehicle with blue thruster lights cuts through the orange gloom, creating a sharp color contrast. The lighting is oppressive and diffused, with no visible sun, only a constant, eerie orange glow that flattens all features. The color palette is a striking 'Amber and Cobalt' duo-tone. The composition is low-angle, looking up at the oppressive structures of the city. The camera uses a 35mm anamorphic lens, creating a cinematic wide aspect ratio and subtle lens flares. The mood is apocalyptic, lonely, and visually stunning in its desolation, focusing on the atmospheric density and the scale of the ruins.
+```
+
+---
+
+## 💄 Beauty & Lifestyle
+
+### No. 145 · Quiet-luxury skincare morning tray
+
+- Image: `docs/beauty-lifestyle/skincare-morning-routine-tray.png`
+- Metadata: Beauty & Lifestyle · `portrait` · `1024x1536` · Original
+
+```text
+Create a 3:4 vertical beauty lifestyle photograph for a premium skincare morning routine. Scene: a travertine bathroom counter beside a soft frosted window, with a minimal glass serum bottle, ceramic cleanser tube, cream jar, folded linen towel, jade roller, small dish of pearl hair clips, and a single dewy white camellia flower. Lighting: natural morning side light, gentle reflections, realistic glass thickness, soft shadows, clean negative space. Aesthetic: quiet luxury, Japanese minimalism meets modern spa editorial, cream / warm stone / translucent pale green palette. No visible brand logos, no readable fake labels except a tiny generic mark "AM ROUTINE", no human face, no clutter, no overdone CGI shine.
+```
+
+---
+
+## 🎟️ Events & Experience
+
+### No. 146 · Riverside makers market wayfinding poster
+
+- Image: `docs/events-experience/indie-market-wayfinding-poster.png`
+- Metadata: Events & Experience · `portrait` · `1024x1536` · Original
+
+```text
+Design a vertical event-experience wayfinding poster for an imaginary weekend indie maker market. Exact readable text: "RIVERSIDE MAKERS MARKET" / "SAT 10–6" / "CERAMICS · PRINTS · COFFEE · MUSIC" / "ENTRY FREE". Layout: cheerful modular grid with a small illustrated map at the bottom, booth icons, arrow markers, stage, coffee cart, workshop tent, and riverside lawn. Style anchor: Swiss grid discipline meets friendly risograph community poster, two-color overprint texture, rounded icon system, off-white paper, coral red, river blue, moss green. Make the poster visually useful, charming, and legible from a distance. Avoid generic festival chaos, fake sponsor logos, and unreadable microtext.
+```
+
+---
+
+## 🛵 Automotive & Mobility
+
+### No. 147 · Electric city scooter sunrise ad
+
+- Image: `docs/automotive-mobility/electric-city-scooter-ad.png`
+- Metadata: Automotive & Mobility · `landscape` · `1536x1024` · Original
+
+```text
+Create a landscape automotive-mobility advertising render for an elegant compact electric city scooter at sunrise. The scooter is parked on a quiet Copenhagen-style bike lane beside warm brick buildings and clean street furniture. Hero object: matte sage-green scooter with rounded minimal body, leather tan seat, integrated LED headlight, visible charging port, and small digital dashboard. Composition: low three-quarter angle, leading lane lines, soft morning haze, realistic metal and rubber materials, subtle motion blur from passing cyclists in the background. Exact small headline text on a nearby poster: "QUIET CITY, CLEAN RIDE". Aesthetic: Scandinavian product design, premium but practical. Avoid motorcycle aggression, sci-fi excess, fake brand logos, and toy-like proportions.
+```
+
+---
+
+## 🖋️ Tattoo Design
+
+### No. 148 · Realistic black-and-grey sleeve study
+
+- Image: `docs/tattoo-design/realistic-black-grey-sleeve-study.png`
+- Metadata: Tattoo Design · `portrait` · `1024x1536` · Original
+
+```text
+Create a portrait tattoo design sheet for a realistic black-and-grey forearm sleeve. Subject: a highly detailed raven skull nested with realistic peonies, smoke ribbons, tiny moths, and cracked marble fragments. Present it as premium tattoo flash on warm off-white paper with a faint arm-placement silhouette behind the main artwork. Style: ultra-realistic tattoo shading, smooth dotwork gradients, crisp stencil-ready outlines, high contrast but not muddy, strong negative-space gaps for skin breathing room. Include small layout notes in clean text: "BLACK & GREY" / "FOREARM SLEEVE" / "NEGATIVE SPACE". No gore, no body horror, no brand logos, no actual person, no photorealistic skin photo; make it a professional tattoo design presentation.
+```
+
+### No. 149 · Color neo-traditional fox and flora
+
+- Image: `docs/tattoo-design/color-neo-traditional-fox-flora.png`
+- Metadata: Tattoo Design · `portrait` · `1024x1536` · Original
+
+```text
+Create a colorful neo-traditional tattoo flash poster. Central subject: a clever red fox head framed by chrysanthemum, peony, bluebells, small sparks, and decorative leaves. Use bold clean outlines, saturated but tasteful color fills, limited palette of vermilion, teal, golden ochre, deep navy, and cream highlights. Composition: symmetrical badge-like upper-arm tattoo design with separate small color swatches and a tiny stencil thumbnail on the side. Text must be small and readable: "NEO TRADITIONAL" / "FOX & FLORA". Make it vibrant, tattooable, and polished, with visible paper grain. Avoid cartoon mascot feel, avoid clutter, avoid gradients that would not tattoo well, no brand logos.
+```
+
+### No. 150 · Japanese traditional dragon and koi back piece
+
+- Image: `docs/tattoo-design/japanese-traditional-dragon-koi.png`
+- Metadata: Tattoo Design · `portrait` · `1024x1536` · Original
+
+```text
+Create a Japanese traditional irezumi tattoo design poster for a full back piece. Subject: a powerful coiling dragon above a koi fish leaping through stylized waves, maple leaves, wind bars, and storm clouds. Use traditional Japanese tattoo aesthetics: bold black linework, strong flat color blocks, deep indigo waves, red-orange maple leaves, emerald dragon scales, cream highlights, and rhythmic negative space. Present as a clean tattoo flash / back-piece layout on rice-paper texture, not on a real person. Include small calligraphy-style labels: "龍" and "鯉". Make the composition balanced, tattooable, dramatic, and respectful of classic irezumi design language. Avoid anime style, avoid modern cyberpunk, avoid random fake kanji clutter.
+```
+
+### No. 151 · Dark surrealist moth cathedral
+
+- Image: `docs/tattoo-design/dark-surrealist-moth-cathedral.png`
+- Metadata: Tattoo Design · `portrait` · `1024x1536` · Original
+
+```text
+Create a dark surrealist tattoo design sheet in portrait format. Subject: a giant lunar moth with eye-like wing markings, its body transforming into a tiny gothic cathedral, black roses, thorn halos, melting moon phases, and a staircase fading into mist. Style: dark surrealism meets fine-line tattoo and blackwork, with selective muted color accents in bruised violet, cold blue, and oxidized gold. Composition: vertical sternum-or-back tattoo concept with clean stencil-ready silhouette, ornamental framing, and clear negative-space breaks. Include small readable labels: "DARK SURREAL" / "MOTH CATHEDRAL". Mood: mysterious and elegant, not gore. Avoid horror splatter, avoid excessive tiny details that cannot tattoo, no real human body, no brand logos.
+```
+
+---

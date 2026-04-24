@@ -1,6 +1,6 @@
 ---
 name: gpt-image
-description: General-purpose image generation and reference-image editing via OpenAI GPT Image 2 (`gpt-image-2`). Wraps the two official endpoints from the OpenAI cookbook — `/v1/images/generations` for text-to-image and `/v1/images/edits` for reference-image edits (including alpha-channel masks). Use whenever an agent or user needs to (a) generate an image from a text prompt, (b) restyle or transform an image using a reference image, (c) combine multiple reference images, (d) inpaint a region using a PNG mask, or (e) render dense typography / Chinese text. Reads `OPENAI_API_KEY` from env; writes PNG/JPEG/WebP to disk. Optional prompt-craft references under `references/` for photorealism, posters, infographics, and character sheets.
+description: General-purpose image generation and reference-image editing via OpenAI GPT Image 2 (`gpt-image-2`). Wraps the two official endpoints from the OpenAI cookbook — `/v1/images/generations` for text-to-image and `/v1/images/edits` for reference-image edits (including alpha-channel masks). Use whenever an agent or user needs to (a) generate an image from a text prompt, (b) restyle or transform an image using a reference image, (c) combine multiple reference images, (d) inpaint a region using a PNG mask, or (e) render dense typography / Chinese text. Reads `OPENAI_API_KEY` from env; writes PNG/JPEG/WebP to disk. Optional Scale references under `references/` for the full prompt-gallery atlas, cross-cutting prompt craft, and official OpenAI parameter guidance.
 license: CC BY 4.0 (prompt patterns attributed to original authors)
 ---
 
@@ -129,16 +129,20 @@ When an agent hits exit 1, it should surface the response body verbatim — it u
 | Widescreen cinematic, dashboard hero | `3840x2160` (4k) |
 | Tall story banner, vertical video thumbnail | `2160x3840` (tall) |
 
-## Prompt-craft references (optional, load only when needed)
+## Scale references (load for prompt leverage, not just CLI calls)
 
-These are not required to use the script — they exist for prompt-quality uplift when the user's intent needs more structure than a one-liner.
+The CLI is only the execution layer. The main value of this skill is the prompt Scale: agents should use the reference files to read concrete gallery patterns before drafting or generating images.
 
-- `references/craft.md` — 12 cross-cutting principles: exact-text-in-quotes, aspect-ratio-first, camera/shot language, scene density, style anchoring, negation, reference-based unlocks, dense Chinese text, three-glances test.
-- `references/gallery.md` — 56 community-curated templates across 8 categories: photography, games, UI/UX, typography, infographics, character consistency, editing, collage. Each entry keeps its original `Source: @handle` attribution.
-- `references/openai-cookbook.md` — verbatim Markdown capture of OpenAI's [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb). Load this when the user asks about OpenAI's own parameter semantics, wants a use-case beyond what our gallery covers (UI mockups, pitch-deck slides, scientific diagrams, virtual try-on, billboard mockups, translation edits), or needs the authoritative parameter-coverage table.
+- `references/gallery.md` — complete 151-prompt Gallery Atlas generated from the README. It includes every current category, every original prompt, every outside-source prompt, image paths, metadata, and attribution/source notes where present. Load this when the user asks for a style/category we already cover, wants diverse ideas, asks to extend the gallery, or needs a prompt that should inherit the repo's collected taste.
+- `references/craft.md` — cross-cutting prompt-writing principles distilled from the gallery: exact-text-in-quotes, aspect-ratio-first, camera/shot language, scene density, style anchoring, negation, reference-based unlocks, dense Chinese text, three-glances test, and promotional hierarchy. Load this when improving or debugging a prompt.
+- `references/openai-cookbook.md` — verbatim Markdown capture of OpenAI's [official GPT Image prompting guide](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb). Load this when the user asks about official parameter semantics, endpoint behavior, migration, or model capabilities.
 
-Load a reference file only when the user's request signals that category (e.g. asks for a poster → load `typography` section of gallery; asks about rendering Chinese → load craft.md sections 1, 7, 10; asks "how does the edits endpoint actually work?" → load `openai-cookbook.md`).
+Reference loading policy:
+- For generation/editing requests, first identify the closest Gallery Atlas category and read the relevant entries from `references/gallery.md`; do not rely on generic one-line prompting if the atlas contains a matching pattern.
+- Use `craft.md` to refine structure after selecting a gallery pattern.
+- Use `openai-cookbook.md` for authoritative API/model questions or when the gallery does not cover the requested workflow.
+- Preserve `Original` versus `Author + Source` metadata when adapting examples into README/gallery entries.
 
 ## Attribution
 
-Prompt patterns curated from [`ZeroLu/awesome-gpt-image`](https://github.com/ZeroLu/awesome-gpt-image) under CC BY 4.0. Individual `@handle` attributions preserved per-entry in `references/gallery.md`.
+Prompt patterns are curated from the original repo gallery, OpenAI Cookbook, and community prompt collections credited in the README. Individual source metadata is preserved per entry in `references/gallery.md` where applicable.

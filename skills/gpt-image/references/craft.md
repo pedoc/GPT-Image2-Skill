@@ -1,6 +1,6 @@
 # GPT Image 2 Prompt Craft
 
-Cross-cutting principles distilled from 56 community prompts. This is the checklist to run through before shipping any prompt back to the user.
+Cross-cutting principles distilled from the full 151-prompt Gallery Atlas. This is the checklist to run through before shipping any prompt back to the user.
 
 ## 1. Exact text → in quotes
 
@@ -118,7 +118,7 @@ Without hierarchy, GPT Image 2 treats all text as equally sized, producing flat 
 
 ## 11. Attribution — keep source tags
 
-Every pattern in `gallery.md` retains `Source: @handle`. When adapting a pattern, keep the attribution as a trailing line (in a comment or caption). It doubles as a debug trace — the original X/Twitter thread usually shows the exact failure modes the prompt was engineered to fix.
+Every pattern in `gallery.md` retains either `Original` metadata or visible `Author + Source` attribution when it came from an outside source. When adapting a pattern, keep the attribution as a trailing line (in a comment or caption). It doubles as a debug trace — the original source usually shows the exact failure modes the prompt was engineered to fix.
 
 ## 12. Safety & copyright notes
 

@@ -1,6 +1,6 @@
 # GPT Image 2 Prompt Craft
 
-Cross-cutting principles distilled from the full 151-prompt Gallery Atlas. Use this file as the prompt-design checklist; use `gallery.md` as the routing index for the split concrete Scale/case atlas as `gallery-*.md` files.
+Cross-cutting principles distilled from the full 162-prompt Gallery Atlas. Use this file as the prompt-design checklist; use `gallery.md` as the routing index for the split concrete Scale/case atlas as `gallery-*.md` files.
 
 ## Table of contents
 
@@ -30,11 +30,11 @@ Before drafting a prompt, open `gallery.md` as the category index, then read 3�
 
 Fast routing examples:
 - Anime/manga or multi-character boards → No. 1–12.
-- Product/food commercial render, especially structured config prompts → No. 55–58.
-- Brand, poster, typography, dense Chinese copy → No. 32–44, 59–61, 66–73.
-- Research, data, technical, scientific figures → No. 74–90, 102–121.
-- UI / app / dashboard mockups → No. 97–101.
-- Edit endpoint / reference transformations → No. 95–96.
+- Product/food commercial render, especially structured config prompts → No. 56–58.
+- Brand, poster, typography, dense Chinese copy → No. 33–44, 59–61, 66–73.
+- Research, data, technical, scientific figures → No. 75–95, 107–128.
+- UI / app / dashboard mockups → No. 102–106.
+- Edit endpoint / reference transformations → No. 100–101.
 
 ## 1. Exact text goes in quotes
 
@@ -58,17 +58,17 @@ Rules:
 The strongest gallery prompts allocate space before describing surface detail.
 
 Useful first clauses:
-- `Landscape 16:9 academic concept figure…` (No. 74–90).
-- `Design a 3:4 vertical poster…` (No. 32, No. 146).
-- `Create a square 3×3 grid…` (No. 21, No. 24).
-- `A 6-panel film storyboard laid out as a 3×2 grid…` (No. 27).
+- `Landscape 16:9 academic concept figure…` (No. 75–95).
+- `Design a 3:4 vertical poster…` (No. 33–45).
+- `Create a square 3×3 grid…` (No. 22, No. 25).
+- `A 6-panel film storyboard laid out as a 3×2 grid…` (No. 28).
 - `Create one tall manga chapter proof sheet containing 19 numbered miniature pages…` (No. 10).
 
 When structure matters, state the structure before the subject. Otherwise the model spends detail budget on the object and improvises the layout.
 
 ## 3. JSON / config-style prompts are a core pattern
 
-Do not omit this. The gallery uses JSON-like structured prompts for premium product and food rendering (No. 56, No. 57). This pattern works when the output has many interacting systems: environment, subject, materials, lighting, particles, motion, and render goals.
+Do not omit this. The gallery uses JSON-like structured prompts for premium product and food rendering (No. 57, No. 58). This pattern works when the output has many interacting systems: environment, subject, materials, lighting, particles, motion, and render goals.
 
 When to use:
 - Product hero renders with material/lighting precision.
@@ -121,7 +121,7 @@ Craft rules:
 
 ## 4. Use fixed-region schemas for infographics and educational boards
 
-Several high-performing prompts are not just descriptions; they are layout contracts. See the museum catalog disassembly infographic (No. 67), field guides (No. 68, No. 73), travel/cooking cards (No. 69, No. 71), and anatomy/science posters (No. 117–121).
+Several high-performing prompts are not just descriptions; they are layout contracts. See the museum catalog disassembly infographic (No. 68), field guides (No. 69, No. 74), travel/cooking cards (No. 70, No. 72), and anatomy/science posters (No. 122–127).
 
 Pattern:
 1. Name the artifact type: `museum catalog-style Chinese disassembly infographic`, `field guide`, `classroom wall chart`.
@@ -151,10 +151,10 @@ Include:
 - Cleanliness constraints: `large readable labels`, `white background`, `uncluttered`, `publication-grade`.
 
 Examples:
-- No. 74 uses left/right encoder-decoder columns with exact block labels.
-- No. 76 uses zones, worker nodes, tool registry, memory panels, and trace timeline.
-- No. 81 uses Sankey source blocks, processing blocks, final splits, and proportional ribbons.
-- No. 90 uses four columns plus benign/injection arrow semantics.
+- No. 79 uses left/right encoder-decoder columns with exact block labels.
+- No. 81 uses zones, worker nodes, tool registry, memory panels, and trace timeline.
+- No. 86 uses Sankey source blocks, processing blocks, final splits, and proportional ribbons.
+- No. 95 uses four columns plus benign/injection arrow semantics.
 
 Security / agent-safety figure pattern:
 - Show the attack surface as an explicit visual object, e.g. `Attacker-controlled document`, `Public Slack message`, or `Web page`.
@@ -162,7 +162,7 @@ Security / agent-safety figure pattern:
 - Separate benign flow and attack flow with line semantics: solid slate-gray for benign, dashed terracotta/red for injection path.
 - Keep the figure explanatory/defensive; do not turn the payload into operational instructions.
 
-Data visualization mini-schema (No. 102–106):
+Data visualization mini-schema (No. 107–111):
 - Name the chart family first: `small-multiples grid`, `network graph`, `chord diagram`, `treemap`, `geographic choropleth`.
 - Specify canvas and structure: `4×3`, node groups, ribbon groups, nested rectangles, map regions.
 - Provide exact labels, panel names, legend values, units, and axis labels.
@@ -172,7 +172,7 @@ Data visualization mini-schema (No. 102–106):
 
 ## 6. UI prompts should read like product specs
 
-The UI/UX examples (No. 97–101) succeed because they specify product context, device frame, information architecture, real copy, and data.
+The UI/UX examples (No. 102–106) succeed because they specify product context, device frame, information architecture, real copy, and data.
 
 Pattern:
 - Fictional product name to avoid real-brand leakage.
@@ -193,10 +193,10 @@ Examples:
 - No. 5: 16-panel expression grid.
 - No. 9: ten-panel character grid.
 - No. 10: 19-page manga proof sheet.
-- No. 21: 3×3 dark-fantasy worldbuilding set.
-- No. 27: 6-panel storyboard with shot/camera metadata.
-- No. 30: official character reference sheet.
-- No. 102: 4×3 small-multiples data grid with consistent axes.
+- No. 22: 3×3 dark-fantasy worldbuilding set.
+- No. 28: 6-panel storyboard with shot/camera metadata.
+- No. 31: official character reference sheet.
+- No. 107: 4×3 small-multiples data grid with consistent axes.
 
 Rules:
 - State the grid/page count exactly: `3×3`, `4×3`, `3×2`, `16-panel`, `19 numbered miniature pages`.
@@ -343,9 +343,9 @@ Chinese calligraphy or brush-signage prompts should specify style (`brush style`
 
 ## 17. Attribution and gallery metadata
 
-Every split `gallery-*.md` entry preserves either `Original` metadata or visible `Author + Source` attribution when it came from an outside source. When adapting an outside-source pattern into README/gallery entries, keep attribution in the metadata/footer.
+Every split `gallery-*.md` entry preserves either `Curated` metadata for repo-curated/reworked entries or visible `Author + Source` attribution when it came from an outside source. When adapting an outside-source pattern into README/gallery entries, keep attribution in the metadata/footer.
 
-Use `Original` only for repo-created prompts/images.
+Use `Curated` for repo-created, repo-curated, or substantially reworked prompts/images; keep `Author + Source` for outside-source entries.
 
 ## 18. Safety and copyright notes
 

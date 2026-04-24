@@ -1,13 +1,15 @@
 # 🎬 Cinematic & Animation
 
-Range: No. 25–29 · Count: 5
+Range: No. 26–30 · Count: 5
 
 Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
-### No. 25 · Pixar-style 3D animation still (kitten)
+### No. 26 · Pixar-style 3D animation still (kitten)
 
 - Image: `docs/cinematic-animation/pixar-kitchen.png`
-- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Original
+
+  <img src="../../../docs/cinematic-animation/pixar-kitchen.png" alt="pixar kitchen" width="420"/>
+- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Curated
 
 ```text
 A Pixar-quality 3D animation still, landscape 16:9. Cinematic feature-film look, warm studio lighting.
@@ -19,10 +21,12 @@ Character: kitten with expressive, slightly oversized eyes (classic Pixar propor
 Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whiskers, physically based materials, soft shadow ambient occlusion, volumetric morning beam, shallow depth of field. Clean stylised shapes consistent with "Luca", "Soul", "Elemental" — not photoreal uncanny-valley.
 ```
 
-### No. 26 · 1940s film-noir still
+### No. 27 · 1940s film-noir still
 
 - Image: `docs/cinematic-animation/noir-detective.png`
-- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Original
+
+  <img src="../../../docs/cinematic-animation/noir-detective.png" alt="noir detective" width="420"/>
+- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Curated
 
 ```text
 A 1940s film-noir black-and-white movie still, landscape 16:9, high contrast. Shot on 35mm with visible grain.
@@ -32,10 +36,12 @@ Scene: a detective in trench coat and fedora stands alone at a rain-soaked stree
 Lighting: classic chiaroscuro — single hard key light above right, venetian-blind shadows on the wall behind him. Deep blacks, silvered highlights, full tonal range from pure white to pure black. No colour. Frame should feel lifted from "The Maltese Falcon", "Double Indemnity", or "The Third Man".
 ```
 
-### No. 27 · Professional 6-panel film storyboard
+### No. 28 · Professional 6-panel film storyboard
 
 - Image: `docs/cinematic-animation/storyboard.png`
-- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Original
+
+  <img src="../../../docs/cinematic-animation/storyboard.png" alt="storyboard" width="420"/>
+- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Curated
 
 ```text
 A 6-panel film storyboard laid out as a 3×2 grid, landscape 16:9 overall. Each panel is a rectangular pencil-and-marker sketch with a white margin border and a small information strip underneath.
@@ -52,10 +58,12 @@ Panel 6 — Match cut: runner's boots landing on wet rooftop; splash. Info: "PAN
 Art direction: classic animation-school storyboard — pencil line-work, grey marker shading, red-pencil arrow annotations on panels 2 and 5 (camera move and action arc). Off-white paper texture background.
 ```
 
-### No. 28 · Studio-Ghibli-style animation still
+### No. 29 · Studio-Ghibli-style animation still
 
 - Image: `docs/cinematic-animation/ghibli-cottage.png`
-- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Original
+
+  <img src="../../../docs/cinematic-animation/ghibli-cottage.png" alt="ghibli cottage" width="420"/>
+- Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Curated
 
 ```text
 A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wooden cottage sits on a grassy hillside overlooking a valley at golden hour. A child stands barefoot at the cottage doorway waving to a small furry forest spirit half-hidden in the meadow grass. A distant train cuts across the valley floor, swallows dip overhead.
@@ -63,9 +71,11 @@ A Studio-Ghibli-style hand-painted animation still, landscape 16:9. A small wood
 Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft painterly edges, slightly desaturated greens and warm skin tones, visible brush texture in the clouds and grass. Thin ink line art on the characters. Gentle atmospheric perspective. The whole frame should feel like a cel from "My Neighbor Totoro" or "Kiki's Delivery Service", not a 3D render.
 ```
 
-### No. 29 · VHS grocery-store chaos still
+### No. 30 · VHS grocery-store chaos still
 
 - Image: `docs/cinematic-animation/vhs-grocery-chaos.png`
+
+  <img src="../../../docs/cinematic-animation/vhs-grocery-chaos.png" alt="vhs grocery chaos" width="420"/>
 - Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/)
 
 ```text

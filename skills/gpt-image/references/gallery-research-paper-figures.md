@@ -1,13 +1,98 @@
 # 📚 Research Paper Figures
 
-Range: No. 74–90 · Count: 17
+Range: No. 75–95 · Count: 21
 
 Load this file only when the request matches this category. For cross-cutting writing rules, pair it with `craft.md`.
 
-### No. 74 · Transformer encoder–decoder architecture
+### No. 75 · Patient cohort and multimodal biomarker workflow
+
+- Image: `docs/research-paper-figures/clinical-cohort-flow.png`
+
+  <img src="../../../docs/research-paper-figures/clinical-cohort-flow.png" alt="clinical cohort flow" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
+
+```text
+Create a Nature Medicine / Science Translational Medicine style research paper figure, landscape 3:2 (1536×1024), soft literature-science palette, minimal and elegant.
+
+Figure title: "Patient cohort and multimodal biomarker workflow".
+
+Layout: a clean 4-panel academic figure labeled A–D with small bold panel letters.
+A. CONSORT-style patient cohort flow diagram: "Screened n=1,248" → "Eligible n=612" → branch into "Training cohort n=428" and "External validation n=184". Include exclusion side boxes: "missing imaging n=81", "insufficient follow-up n=43", "quality-control fail n=32".
+B. Multimodal sample-processing flow: icons for "CT imaging", "blood proteomics", "EHR timeline", "outcome labels" flowing into a pale-blue fusion box "feature harmonization".
+C. Small Kaplan–Meier survival plot with two clean curves labeled "low-risk" and "high-risk", muted teal vs soft rose, x-axis "Months", y-axis "Event-free survival".
+D. Compact table-style performance summary with three rows: "AUROC", "C-index", "Calibration slope" and two columns "Internal" / "External".
+
+Style requirements: white background, light gray axes, thin lines, ample margins, muted teal, dusty blue, soft coral, pale sand, no neon, no dark background, Nature journal figure aesthetics, readable labels, precise arrows, subtle gridlines, no decorative clutter, no fake logos, no watermark.
+```
+
+### No. 76 · Single-cell immune atlas reveals treatment-response states
+
+- Image: `docs/research-paper-figures/single-cell-immune-atlas.png`
+
+  <img src="../../../docs/research-paper-figures/single-cell-immune-atlas.png" alt="single cell immune atlas" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
+
+```text
+Create a polished Nature / Cell style biomedical research figure, landscape 3:2 (1536×1024), soft minimal palette, publication-ready.
+
+Figure title: "Single-cell immune atlas reveals treatment-response states".
+
+Layout: 4-panel figure labeled A–D.
+A. Large UMAP scatter plot with 8 softly colored immune clusters; labels: "CD8 T", "CD4 T", "B cells", "NK", "Mono", "DC", "Treg", "Plasma". Use pastel teal, sage, lavender, peach, slate, amber.
+B. Dot plot of marker genes with rows "GZMB", "IFNG", "CXCL13", "MS4A1", "LYZ", "FOXP3" and columns matching immune clusters; dot size = fraction, color = expression.
+C. Small stacked bar chart comparing "Responder" vs "Non-responder" cell-state proportions, with 5 muted segments and a tidy legend.
+D. Pseudotime trajectory diagram: a clean branching curve from "naive" to "effector" and "exhausted", with small arrows and gradient color.
+
+Style requirements: literature-science design, white background, thin gray axes, compact legends, readable micro-labels, restrained typography, soft colors, elegant spacing, no 3D, no glossy UI, no fake journal logo, no watermark.
+```
+
+### No. 77 · Multimodal medical-AI method figure
+
+- Image: `docs/research-paper-figures/multimodal-medical-ai-method.png`
+
+  <img src="../../../docs/research-paper-figures/multimodal-medical-ai-method.png" alt="multimodal medical ai method" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
+
+```text
+Create a Nature Biomedical Engineering / NeurIPS medical-AI method figure, landscape 3:2 (1536×1024), soft literature-science colors and minimal academic layout.
+
+Figure title: "Multimodal foundation model for clinical decision support".
+
+Layout: a left-to-right method pipeline with three horizontal bands and panel labels A–C.
+A. Inputs on the left: small clean icons and labeled cards "Radiology image", "Pathology tile", "EHR sequence", "Lab values", "Genomics". Use subtle rounded rectangles.
+B. Middle architecture: five modality encoders feeding into a central pale-teal block "Shared clinical representation"; include small modules "contrastive alignment", "missing-modality mask", "temporal attention". Add thin arrows and skip connections.
+C. Outputs on the right: three task heads "diagnosis", "risk score", "treatment response" with small calibrated probability bars. Add a lower inset "external validation" showing two hospital icons and an arrow labeled "site transfer".
+
+Style requirements: soft Nature/Science palette (muted teal, dusty blue, sage green, warm sand, coral accents), white background, precise vector-like arrows, modest shadows only, readable labels, lots of whitespace, no futuristic HUD, no clinical gore, no real hospital logos, no watermark.
+```
+
+### No. 78 · Therapeutic response bar and forest plot
+
+- Image: `docs/research-paper-figures/therapeutic-response-bar-forest.png`
+
+  <img src="../../../docs/research-paper-figures/therapeutic-response-bar-forest.png" alt="therapeutic response bar forest" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
+
+```text
+Create a Nature Medicine style statistical results figure, landscape 3:2 (1536×1024), soft, restrained, publication-quality.
+
+Figure title: "Therapeutic response across molecular subgroups".
+
+Layout: 4-panel figure labeled A–D.
+A. Grouped bar chart: response rate (%) for four subgroups "A", "B", "C", "D" across two treatments "standard" and "adaptive". Use muted navy and soft teal bars, thin error bars, numeric labels.
+B. Forest plot of hazard ratios for subgroups with a vertical reference line at HR=1.0; rows "age <65", "age ≥65", "high inflammation", "low inflammation", "mutation-positive", "mutation-negative". Use small squares and confidence intervals.
+C. Volcano-style biomarker association plot with pale gray background points and highlighted labeled markers "IL6", "CXCL10", "TP53", "MKI67".
+D. Minimal mechanism schematic: adaptive therapy reduces inflammatory signaling and restores immune surveillance; use three clean nodes connected by arrows, no complex biology drawings.
+
+Style requirements: literature-science aesthetic, white background, soft desaturated colors, thin gray axes, clear legends, compact labels, generous margins, Nature-style figure polish, no fake values that look too random, no decorative background, no watermark.
+```
+
+### No. 79 · Transformer encoder–decoder architecture
 
 - Image: `docs/research-paper-figures/transformer-arch.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Vaswani et al., 2017
+
+  <img src="../../../docs/research-paper-figures/transformer-arch.png" alt="transformer arch" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Vaswani et al., 2017
 
 ```text
 Landscape 16:9 academic concept figure of the Transformer encoder-decoder architecture, NeurIPS camera-ready style. Two vertical column stacks side-by-side with a dashed divider.
@@ -19,10 +104,12 @@ RIGHT column header: "DECODER (×N)". Blocks bottom-to-top: "Output tokens (shif
 Title: "Transformer: encoder–decoder with multi-head attention". Subtitle: "Vaswani et al., 2017".
 ```
 
-### No. 75 · Retrieval-Augmented Generation pipeline
+### No. 80 · Retrieval-Augmented Generation pipeline
 
 - Image: `docs/research-paper-figures/rag-pipeline.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Lewis et al., 2020
+
+  <img src="../../../docs/research-paper-figures/rag-pipeline.png" alt="rag pipeline" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Lewis et al., 2020
 
 ```text
 Landscape 16:9 academic systems diagram of a RAG pipeline, 6-stage left-to-right flow.
@@ -39,10 +126,12 @@ Dashed outline around (2)-(3) labeled "OFFLINE — built once". Dashed outline a
 Title: "Retrieval-Augmented Generation pipeline". Subtitle: "Lewis et al., 2020".
 ```
 
-### No. 76 · Multi-agent LLM system architecture
+### No. 81 · Multi-agent LLM system architecture
 
 - Image: `docs/research-paper-figures/agent-architecture.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** AutoGen (Wu 2023), LangGraph, Anthropic Managed Agents
+
+  <img src="../../../docs/research-paper-figures/agent-architecture.png" alt="agent architecture" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** AutoGen (Wu 2023), LangGraph, Anthropic Managed Agents
 
 ```text
 Landscape 16:9 high-fidelity systems figure of a multi-agent LLM architecture, in the style of a richly detailed AutoGen / LangGraph / Anthropic Managed Agents Figure 1. Subtle drop-shadows, warm-copper highlights, numbered flow markers ①②③④.
@@ -60,10 +149,12 @@ Bottom inset "Example trace": 8-step horizontal timeline chips from "User asks" 
 Title: "Agentic LLM system: planner orchestrates specialised workers over a shared tool and memory layer". Subtitle: "adapted from AutoGen (Wu et al., 2023), LangGraph, and Anthropic Managed Agents patterns".
 ```
 
-### No. 77 · Denoising diffusion forward/reverse chain
+### No. 82 · Denoising diffusion forward/reverse chain
 
 - Image: `docs/research-paper-figures/diffusion-chain.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Ho et al., 2020
+
+  <img src="../../../docs/research-paper-figures/diffusion-chain.png" alt="diffusion chain" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Ho et al., 2020
 
 ```text
 Landscape 16:9 academic figure of diffusion forward + reverse chains, two horizontal chains stacked vertically.
@@ -77,10 +168,12 @@ Far-right curved arrow "T diffusion steps" connecting top-right to bottom-right;
 Title: "Denoising Diffusion: forward corruption and learned reverse". Subtitle: "Ho et al., 2020".
 ```
 
-### No. 78 · Empirical scaling laws plot
+### No. 83 · Empirical scaling laws plot
 
 - Image: `docs/research-paper-figures/scaling-curves.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Kaplan 2020 / Chinchilla (Hoffmann 2022)
+
+  <img src="../../../docs/research-paper-figures/scaling-curves.png" alt="scaling curves" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Kaplan 2020 / Chinchilla (Hoffmann 2022)
 
 ```text
 Landscape 16:9 log-scaled plot of training loss vs compute, four curves for different model sizes.
@@ -95,10 +188,12 @@ Warm-copper dashed diagonal line labeled "compute-optimal frontier"; open circle
 Title: "Empirical scaling laws: loss vs training compute". Subtitle: "four model sizes on a fixed data mixture; shaded bands = ±1 std over 3 seeds."
 ```
 
-### No. 79 · Benchmark comparison heatmap
+### No. 84 · Benchmark comparison heatmap
 
 - Image: `docs/research-paper-figures/benchmark-heatmap.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** HELM (Liang 2023)
+
+  <img src="../../../docs/research-paper-figures/benchmark-heatmap.png" alt="benchmark heatmap" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** HELM (Liang 2023)
 
 ```text
 Landscape 16:9 heatmap matrix of models × benchmarks.
@@ -113,10 +208,12 @@ Vertical color bar on the right with ticks "0", "25", "50", "75", "100" and labe
 Title: "Benchmark comparison across 10 frontier LLMs". Subtitle: "zero-shot accuracy; best per benchmark outlined in bold. Evaluated March 2026."
 ```
 
-### No. 80 · Ablation bar chart with error bars
+### No. 85 · Ablation bar chart with error bars
 
 - Image: `docs/research-paper-figures/ablation-bars.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
+  <img src="../../../docs/research-paper-figures/ablation-bars.png" alt="ablation bars" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
 Landscape 16:9 grouped-bar ablation chart.
@@ -134,10 +231,12 @@ Thin black ±1σ error bars on each; numeric label above each bar in monospace. 
 Title: "Ablation of core reasoning components across 5 benchmarks". Subtitle: "error bars = ±1 std over 3 runs; numeric drops relative to full model shown above each bar."
 ```
 
-### No. 81 · LLM pretraining data-mixture sankey
+### No. 86 · LLM pretraining data-mixture sankey
 
 - Image: `docs/research-paper-figures/data-sankey.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
+  <img src="../../../docs/research-paper-figures/data-sankey.png" alt="data sankey" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
 Landscape 16:9 sankey diagram of a pretraining data mixture, three stages with translucent colored ribbons.
@@ -153,10 +252,12 @@ Flow ribbons inherit source color with mid-labels showing token counts ("85B", "
 Title: "LLM pretraining data mixture and downstream splits". Subtitle: "token counts after deduplication and quality filtering; ribbon thickness ∝ token flow."
 ```
 
-### No. 82 · Multi-head attention heatmaps
+### No. 87 · Multi-head attention heatmaps
 
 - Image: `docs/research-paper-figures/attention-heatmap.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Clark et al., 2019
+
+  <img src="../../../docs/research-paper-figures/attention-heatmap.png" alt="attention heatmap" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Clark et al., 2019
 
 ```text
 Landscape 16:9 figure of 4 attention heatmaps (2×2 grid), shared 12-token input.
@@ -174,10 +275,12 @@ Cells: dusty-teal gradient, darker = higher weight. Peak cells outlined in 1px s
 Title: "Representative multi-head attention patterns in a 16-layer Transformer". Subtitle: "four of 256 heads, hand-picked for illustrative head-role diversity; inspired by Clark et al., 2019."
 ```
 
-### No. 83 · Frontier LLM family tree (2018–2026)
+### No. 88 · Frontier LLM family tree (2018–2026)
 
 - Image: `docs/research-paper-figures/model-timeline.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
+  <img src="../../../docs/research-paper-figures/model-timeline.png" alt="model timeline" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
 Landscape 16:9 timeline / family tree of frontier LLMs 2018–2026, three vertically stacked lanes over a horizontal time axis.
@@ -193,10 +296,12 @@ Solid slate-gray arcs = intra-family successors; warm-copper dashed arcs = cross
 Title: "Frontier LLM lineage, 2018 – 2026". Subtitle: "chips = model releases; solid arcs = intra-family successors; dashed arcs = cross-family distillation."
 ```
 
-### No. 84 · ReAct reasoning trace
+### No. 89 · ReAct reasoning trace
 
 - Image: `docs/research-paper-figures/react-trace.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Yao et al., 2022
+
+  <img src="../../../docs/research-paper-figures/react-trace.png" alt="react trace" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Yao et al., 2022
 
 ```text
 Landscape 16:9 figure of a ReAct trace on a factual-QA task, vertical sequence of 7 alternating blocks.
@@ -219,55 +324,67 @@ Bottom: pill-shaped "Final answer: 2013" with a check glyph.
 Title: "ReAct trace: interleaved reasoning and tool-use on a factual-QA task". Subtitle: "Yao et al., 2022."
 ```
 
-### No. 85 · Memory Router for Multimodal Agents
+### No. 90 · Memory Router for Multimodal Agents
 
 - Image: `docs/research-paper-figures/memory-router-figure.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
+  <img src="../../../docs/research-paper-figures/memory-router-figure.png" alt="memory router figure" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
 Design a premium conference-paper figure for an imaginary method called Memory Router for Multimodal Agents. Landscape layout, pure white background, large readable labels, elegant vector-clean boxes and curved arrows, tasteful teal slate and amber palette. Top strip shows the failure mode of a crowded baseline pipeline with red warning accents. Main panel shows User Query, Planner, Retriever, Tool Executor, Memory Router, Working Memory, Long-term Memory, Verifier, and a feedback loop. Beautiful spacing, crisp legend, subtle depth, polished academic styling, highly detailed but uncluttered.
 ```
 
-### No. 86 · Frontier Safety Eval Loop
+### No. 91 · Frontier Safety Eval Loop
 
 - Image: `docs/research-paper-figures/frontier-safety-eval-loop.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original
+
+  <img src="../../../docs/research-paper-figures/frontier-safety-eval-loop.png" alt="frontier safety eval loop" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
 Create a beautiful research flowchart for an AI safety benchmark pipeline called Frontier Safety Eval Loop. Landscape figure, white background, large typography, vector-like shapes, soft indigo, coral, sage, and graphite palette. Show stages Prompt Suite, Model Runs, Judge Models, Human Audit, Failure Taxonomy, Patch Queue, and Re-run. Use clean swimlanes, numbered callouts, compact legends, and premium paper-ready styling. High detail, excellent color harmony, generous whitespace, no clutter, conference-quality diagram.
 ```
 
-### No. 87 · ICLR-style method figure
+### No. 92 · ICLR-style method figure
 
 - Image: `docs/research-paper-figures/hmr-iclr-figure.png`
+
+  <img src="../../../docs/research-paper-figures/hmr-iclr-figure.png" alt="hmr iclr figure" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69d396140000000023012282)
 
 ```text
 Create a polished ICLR-style Figure 1 for an imaginary method called "Hierarchical Memory Routing for Long-Context Multimodal Reasoning (HMR)". The top band shows the failure mode of naive long-context multimodal processing: one overcrowded horizontal token stream mixing text, image patches, retrieved documents, tool traces, and audio snippets, with red-orange warning accents for interference, attention dilution, memory collision, and quadratic compute cost. A clean horizontal divider separates the main lower panel, which presents the HMR framework as a spacious modular loop. Center: a Reasoning Controller with stages Observe_t to Update_t. Left: a three-level Memory Hierarchy with working cache, episodic memory, and semantic knowledge base. Right: Multimodal Streams entering selectively through routing paths. Bottom right: sparse experts activated only when needed. White background, vector-clean styling, neutral gray plus cool accents, minimal but legible labels, conference-paper clarity, no poster aesthetics.
 ```
 
-### No. 88 · Minimal research illustration prompt
+### No. 93 · Minimal research illustration prompt
 
 - Image: `docs/research-paper-figures/llm-agent-research-illustration.png`
+
+  <img src="../../../docs/research-paper-figures/llm-agent-research-illustration.png" alt="llm agent research illustration" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/67e414010000000007037315)
 
 ```text
 Draw a research-paper illustration showing a closed-loop LLM agent system. The left side begins with a user prompt, then flows into a planner, tool-use engine, retrieval module, memory buffer, and a final verifier that feeds corrections back into the system. Use a restrained academic palette of blue, slate, and orange accents. Style it like a clean paper illustration: vector-like blocks, precise arrows, sparse labels, balanced whitespace, and a clear Figure 1 narrative from problem input to verified output.
 ```
 
-### No. 89 · Multimodal agent experiment workflow figure
+### No. 94 · Multimodal agent experiment workflow figure
 
 - Image: `docs/research-paper-figures/multimodal-agent-experiment-workflow.png`
+
+  <img src="../../../docs/research-paper-figures/multimodal-agent-experiment-workflow.png" alt="multimodal agent experiment workflow" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e997a90000000022027c30)
 
 ```text
 Create a polished research workflow figure for a multimodal agent evaluation experiment. Landscape academic diagram on white background. Show stages Dataset Curation, Prompt Design, Tool Sandbox, Model Runs, Judge Ensemble, Error Taxonomy, Human Audit, and Final Report. Use a restrained blue, slate, and orange palette, vector-clean boxes, thin arrows, numbered callouts, tiny legends, and paper-ready typography. It should look like Figure 1 from a strong systems paper rather than a marketing poster.
 ```
 
-### No. 90 · Indirect prompt-injection attack flow
+### No. 95 · Indirect prompt-injection attack flow
 
 - Image: `docs/research-paper-figures/prompt-injection-flow.png`
-- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Original · **Cites:** Greshake et al., 2023
+
+  <img src="../../../docs/research-paper-figures/prompt-injection-flow.png" alt="prompt injection flow" width="420"/>
+- Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Greshake et al., 2023
 
 ```text
 Landscape 16:9 security-paper figure of an indirect prompt-injection attack against a tool-using LLM agent. Four columns left-to-right, numbered flow markers ①②③④ along the main arrows.

@@ -204,7 +204,7 @@ gpt-image -p "将天空替换为极光" \
 7. **文本内嵌、密集图表、小标签和多面板布局用 `quality="high"`。** 中档会明显降低效果。
 
 **技能会按需加载三个本地参考：**
-- [`skills/gpt-image/references/gallery.md`](skills/gpt-image/references/gallery.md) — 完整的 151 条 Prompt Gallery Atlas，包含 Original Prompt、外部来源 Prompt、图片路径、metadata，以及 attribution/source 标记。
+- [`skills/gpt-image/references/gallery.md`](skills/gpt-image/references/gallery.md) — 拆分后的 151 条 Prompt Gallery Atlas 路由索引。先在这里选择 category，再只加载对应的 `references/gallery/<category>.md`，避免撑爆上下文。
 - [`skills/gpt-image/references/craft.md`](skills/gpt-image/references/craft.md) — 扩展后的 19 节 Prompt Craft 清单，覆盖 Scale-first 使用方式、JSON/config-style Prompt、多面板排版、UI 规格、数据/图表语法、编辑不变量、参考图工作流、密集文本和分类 mini-schema。
 - [`skills/gpt-image/references/openai-cookbook.md`](skills/gpt-image/references/openai-cookbook.md) — OpenAI Cookbook 的逐字 Markdown 捕获（1004 行），包括权威的参数覆盖表和所有第4/5节用例示例。
 

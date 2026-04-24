@@ -7770,3 +7770,30 @@ open("docs/tattoo-design/dark-surrealist-moth-cathedral.png", "wb").write(base64
 ```
 
 </details>
+
+---
+
+## 🙏 致谢
+
+这个 Gallery 建立在很多公开资料和社区探索之上：
+
+- [OpenAI Cookbook](https://github.com/openai/openai-cookbook)
+- [Anil-matcha/Awesome-GPT-Image-2-API-Prompts](https://github.com/Anil-matcha/Awesome-GPT-Image-2-API-Prompts)
+- [EvoLinkAI/awesome-gpt-image-2-prompts](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
+- [YouMind-OpenLab/awesome-gpt-image-2](https://github.com/YouMind-OpenLab/awesome-gpt-image-2)
+- [ZeroLu/awesome-gpt-image](https://github.com/ZeroLu/awesome-gpt-image)
+
+## 🤝 参与贡献
+
+欢迎贡献。新增 Prompt、图片、分类或运行时集成前，请先阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+社区规范：
+
+- [行为准则](CODE_OF_CONDUCT.md)
+- [安全政策](SECURITY.md)
+- [支持说明](SUPPORT.md)
+- [Pull request 模板](.github/PULL_REQUEST_TEMPLATE.md)
+
+## 📄 License
+
+本项目基于 [CC BY 4.0](LICENSE) 发布。请保留外部来源 Prompt 的 attribution，并尊重 Gallery 条目中链接到的原作者。

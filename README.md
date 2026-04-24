@@ -7770,3 +7770,30 @@ open("docs/tattoo-design/dark-surrealist-moth-cathedral.png", "wb").write(base64
 ```
 
 </details>
+
+---
+
+## 🙏 Acknowledgments
+
+This gallery stands on top of excellent public work and community exploration:
+
+- [OpenAI Cookbook](https://github.com/openai/openai-cookbook)
+- [Anil-matcha/Awesome-GPT-Image-2-API-Prompts](https://github.com/Anil-matcha/Awesome-GPT-Image-2-API-Prompts)
+- [EvoLinkAI/awesome-gpt-image-2-prompts](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
+- [YouMind-OpenLab/awesome-gpt-image-2](https://github.com/YouMind-OpenLab/awesome-gpt-image-2)
+- [ZeroLu/awesome-gpt-image](https://github.com/ZeroLu/awesome-gpt-image)
+
+## 🤝 Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before adding prompts, images, categories, or runtime integrations.
+
+Community standards:
+
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Security Policy](SECURITY.md)
+- [Support](SUPPORT.md)
+- [Pull request template](.github/PULL_REQUEST_TEMPLATE.md)
+
+## 📄 License
+
+This project is released under [CC BY 4.0](LICENSE). Please preserve attribution for outside-source prompts and respect the original authors linked in each gallery entry.

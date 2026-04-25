@@ -62,8 +62,29 @@
 <details>
 <summary><strong>Codex</strong></summary>
 
+Codex 内置了 `$skill-installer`、`$skill-creator` 等 Skill 管理工具。
+打开 Codex，然后让内置安装器安装这个 GitHub skill 文件夹：
+
 ```text
-$skill-installer https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/gpt-image
+$skill-installer install https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/gpt-image
+```
+
+Codex 会下载这个 GitHub 文件夹，并放到你的 Codex skills 目录，通常是：
+
+```bash
+~/.codex/skills/gpt-image
+```
+
+安装后重启 Codex，让新的 `$gpt-image` skill 生效。
+
+如果你想手动安装，可以把 skill 文件夹复制到 Codex 的 skills 目录：
+
+```bash
+git clone https://github.com/wuyoscar/gpt_image_2_skill.git
+cd gpt_image_2_skill
+
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R skills/gpt-image "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
 </details>

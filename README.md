@@ -1,5 +1,5 @@
-<h1 align="center">GPT Image 2 Agentic Skill</h1>
-<p align="center"><em>OpenAI GPT Image 2 agentic skill + CLI — curated, copy-paste prompts and runnable examples for skill-capable agents.</em></p>
+<h1 align="center">GPT Image 2 Prompt Gallery + Agentic Skill + CLI</h1>
+<p align="center"><em>OpenAI GPT Image 2 prompt gallery, image prompt library, agentic skill, and CLI — curated, copy-paste prompts and runnable examples for skill-capable agents.</em></p>
 
 <p align="center">
   <a href="README.md"><strong>English</strong></a> · <a href="README.zh.md">中文</a>
@@ -42,6 +42,12 @@
     <td><strong>English + 中文</strong></td>
   </tr>
 </table>
+
+---
+
+## 🔎 What this repo is for
+
+Use this repo as a **GPT Image 2 prompt gallery**, **image prompt library**, **text-to-image prompt collection**, **image-to-prompt scale / reference**, **prompt-to-image examples repo**, **Codex / Claude Code agent skill**, and **gpt-image-2 CLI**. It includes reusable AI image prompts for research paper figures, posters, UI mockups, game HUDs, anime / manga, photography, typography, maps, tattoo design, and reference-image editing workflows.
 
 ---
 
@@ -2759,6 +2765,14 @@ Community standards:
 - [Security Policy](SECURITY.md)
 - [Support](SUPPORT.md)
 - [Pull request template](.github/PULL_REQUEST_TEMPLATE.md)
+
+## ⭐ Star History
+
+<p align="center">
+  <a href="https://www.star-history.com/#wuyoscar/gpt_image_2_skill&Date">
+    <img src="https://api.star-history.com/svg?repos=wuyoscar/gpt_image_2_skill&type=Date" alt="Star History Chart" width="100%"/>
+  </a>
+</p>
 
 ## 📄 License
 

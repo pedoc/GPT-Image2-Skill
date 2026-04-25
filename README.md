@@ -62,8 +62,29 @@ Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_C
 <details>
 <summary><strong>Codex</strong></summary>
 
+Codex ships with built-in skill helpers such as `$skill-installer` and `$skill-creator`.
+Open Codex and ask the built-in installer to install this GitHub skill folder:
+
 ```text
-$skill-installer https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/gpt-image
+$skill-installer install https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/gpt-image
+```
+
+Codex will download the GitHub folder and place it under your Codex skills directory, usually:
+
+```bash
+~/.codex/skills/gpt-image
+```
+
+Restart Codex after installation so the new `$gpt-image` skill is loaded.
+
+If you prefer to install it manually, copy the skill folder into Codex's skills directory:
+
+```bash
+git clone https://github.com/wuyoscar/gpt_image_2_skill.git
+cd gpt_image_2_skill
+
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R skills/gpt-image "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
 </details>

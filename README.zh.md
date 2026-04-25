@@ -1,5 +1,5 @@
-<h1 align="center">GPT Image 2 Agentic Skill</h1>
-<p align="center"><em>OpenAI GPT Image 2 Agentic Skill + CLI — 面向支持 Skill 的 Agent 运行时的精选可复用提示词与可运行示例。</em></p>
+<h1 align="center">GPT Image 2 Prompt Gallery + Agentic Skill + CLI</h1>
+<p align="center"><em>OpenAI GPT Image 2 Prompt Gallery、Image Prompt Library、Agentic Skill + CLI — 面向支持 Skill 的 Agent 运行时的精选可复用提示词与可运行示例。</em></p>
 
 <p align="center">
   <a href="README.md">English</a> · <a href="README.zh.md"><strong>中文</strong></a>
@@ -42,6 +42,12 @@
     <td><strong>English + 中文</strong></td>
   </tr>
 </table>
+
+---
+
+## 🔎 这个仓库适合什么场景
+
+你可以把它当作 **GPT Image 2 Prompt Gallery**、**Image Prompt Library**、**Text-to-Image Prompt Collection**、**Image-to-Prompt Scale / Reference**、**Prompt-to-Image 示例仓库**、**Codex / Claude Code Agent Skill** 和 **gpt-image-2 CLI**。目前收录了科研配图、海报设计、UI Mockup、游戏 HUD、动漫 / 漫画、摄影风格、字体设计、地图导航、纹身设计，以及参考图编辑等 AI image prompts / examples。
 
 ---
 
@@ -2793,6 +2799,14 @@ Create a dark surrealist tattoo design sheet in portrait format. Subject: a gian
 - [安全政策](SECURITY.md)
 - [支持说明](SUPPORT.md)
 - [Pull request 模板](.github/PULL_REQUEST_TEMPLATE.md)
+
+## ⭐ Star History
+
+<p align="center">
+  <a href="https://www.star-history.com/#wuyoscar/gpt_image_2_skill&Date">
+    <img src="https://api.star-history.com/svg?repos=wuyoscar/gpt_image_2_skill&type=Date" alt="Star History Chart" width="100%"/>
+  </a>
+</p>
 
 ## 📄 License
 

@@ -47,7 +47,7 @@
 
 ## 🔎 What this repo is for
 
-Use this repo as a **GPT Image 2 prompt gallery**, **image prompt library**, **text-to-image prompt collection**, **image-to-prompt scale / reference**, **prompt-to-image examples repo**, **Codex / Claude Code agent skill**, and **gpt-image-2 CLI**. It includes reusable AI image prompts for research paper figures, posters, UI mockups, game HUDs, anime / manga, photography, typography, maps, tattoo design, and reference-image editing workflows.
+Use this repo as a **GPT Image 2 prompt gallery**, **image prompt library**, **example of generation showcase**, **Codex / Claude Code agent skill**, and **gpt-image-2 CLI**. It includes reusable AI image prompts for research paper figures, posters, UI mockups, game HUDs, anime / manga, photography, typography, maps, tattoo design, and reference-image editing workflows.
 
 ---
 

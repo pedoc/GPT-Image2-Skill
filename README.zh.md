@@ -47,7 +47,7 @@
 
 ## 🔎 这个仓库适合什么场景
 
-你可以把它当作 **GPT Image 2 Prompt Gallery**、**Image Prompt Library**、**Text-to-Image Prompt Collection**、**Image-to-Prompt Scale / Reference**、**Prompt-to-Image 示例仓库**、**Codex / Claude Code Agent Skill** 和 **gpt-image-2 CLI**。目前收录了科研配图、海报设计、UI Mockup、游戏 HUD、动漫 / 漫画、摄影风格、字体设计、地图导航、纹身设计，以及参考图编辑等 AI image prompts / examples。
+你可以把它当作 **GPT Image 2 Prompt Gallery**、**Image Prompt Library**、**Text-to-Image Prompt Collection**、**Prompt-to-Image 示例仓库**、**Codex / Claude Code Agent Skill** 和 **gpt-image-2 CLI**。目前收录了科研配图、海报设计、UI Mockup、游戏 HUD、动漫 / 漫画、摄影风格、字体设计、地图导航、纹身设计，以及参考图编辑等 AI image prompts / examples。
 
 ---
 

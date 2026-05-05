@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/wuyoscar/gpt_image_2_skill/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg" alt="CC BY 4.0"/></a>
+  <a href="https://github.com/wuyoscar/gpt_image_2_skill/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"/></a>
   <a href="https://github.com/wuyoscar/gpt_image_2_skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"/></a>
   <img src="https://img.shields.io/badge/model-gpt--image--2-purple.svg" alt="模型: gpt-image-2"/>
   <img src="https://img.shields.io/badge/python-%E2%89%A53.11-blue.svg" alt="Python ≥ 3.11"/>
@@ -35,7 +35,7 @@
   </tr>
   <tr>
     <td>最后更新</td>
-    <td><strong>2026-04-25</strong></td>
+    <td><strong>2026-05-05</strong></td>
   </tr>
   <tr>
     <td>文档</td>
@@ -49,11 +49,21 @@
 
 你可以把它当作 **GPT Image 2 Prompt Gallery**、**Image Prompt Library**、**Text-to-Image Prompt Collection**、**Prompt-to-Image 示例仓库**、**Codex / Claude Code Agent Skill** 和 **gpt-image-2 CLI**。目前收录了科研配图、海报设计、UI Mockup、游戏 HUD、动漫 / 漫画、摄影风格、字体设计、地图导航、纹身设计，以及参考图编辑等 AI image prompts / examples。
 
+对 Agent 来说，这个 Skill 的核心是 **CLI-first**：帮助 Agent 选择图库 / craft 参考并调用已经封装好的 `gpt-image` CLI，而不是每次图片请求都重新写一个 `generate.py`。
+
 ---
 
 欢迎贡献 — 请查看 [CONTRIBUTING.md](CONTRIBUTING.md)、[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) 和 [SECURITY.md](SECURITY.md)。
 
 ## 📥 安装
+
+安装前先检查 Skill 或 CLI 是否已经可用。不要盲目重复安装、覆盖已有 skill 文件夹，或创建 / 替换 API Key 文件。优先使用你的运行时自带的 skill list/status 命令；全局 / 共享安装必须是用户明确选择，而不是自动 setup 的默认动作。
+
+```bash
+command -v gpt-image || true
+command -v uv >/dev/null && uv tool list | grep -E '^gpt-image-cli([[:space:]]|$)' || true
+test -n "${OPENAI_API_KEY:-}" && echo "OPENAI_API_KEY is already set (value hidden)"
+```
 
 <details>
 <summary><strong>Claude Code</strong></summary>
@@ -69,13 +79,15 @@
 <summary><strong>Codex</strong></summary>
 
 Codex 内置了 `$skill-installer`、`$skill-creator` 等 Skill 管理工具。
-打开 Codex，然后让内置安装器安装这个 GitHub skill 文件夹：
+打开 Codex，用这个 GitHub skill 文件夹 URL 调用内置安装器：
 
 ```text
-$skill-installer install https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/gpt-image
+$skill-installer
+Install this skill from GitHub:
+https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/gpt-image
 ```
 
-Codex 会下载这个 GitHub 文件夹，并放到你的 Codex skills 目录，通常是：
+安装器会下载这个 GitHub 文件夹，并放到你的 Codex skills 目录，通常是：
 
 ```bash
 ~/.codex/skills/gpt-image
@@ -90,8 +102,30 @@ git clone https://github.com/wuyoscar/gpt_image_2_skill.git
 cd gpt_image_2_skill
 
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+test -e "${CODEX_HOME:-$HOME/.codex}/skills/gpt-image" && echo "gpt-image skill already exists; stop before overwriting" && exit 1
 cp -R skills/gpt-image "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
+
+</details>
+
+<details>
+<summary><strong>AgentSkills / npx skills</strong></summary>
+
+对于 cross-agent `skills` 安装器已经支持的运行时，可以直接从 GitHub 安装同一个 `skills/gpt-image` 文件夹：
+
+```bash
+# Codex
+npx --yes skills@latest add wuyoscar/gpt_image_2_skill \
+  --skill gpt-image --agent codex --copy
+
+# OpenClaw
+npx --yes skills@latest add wuyoscar/gpt_image_2_skill \
+  --skill gpt-image --agent openclaw --copy
+```
+
+这些示例刻意不加 `--global`。只有当你明确想把这个 Skill 安装到该运行时的全局 / 共享 skills 目录时，才添加 `--global`。
+
+如果你的运行时还没有被 `skills@latest` 列出，请使用下面的手动 Agent Skill 安装方式。
 
 </details>
 
@@ -111,6 +145,7 @@ cd gpt_image_2_skill
 export AGENT_SKILLS_DIR="/path/to/your/agent/skills"
 
 mkdir -p "$AGENT_SKILLS_DIR"
+test -e "$AGENT_SKILLS_DIR/gpt-image" && echo "gpt-image skill already exists; stop before overwriting" && exit 1
 ln -s "$PWD/skills/gpt-image" "$AGENT_SKILLS_DIR/gpt-image"
 ```
 
@@ -122,8 +157,8 @@ ln -s "$PWD/skills/gpt-image" "$AGENT_SKILLS_DIR/gpt-image"
 ```bash
 uvx --from git+https://github.com/wuyoscar/gpt_image_2_skill gpt-image -p "a cat astronaut"
 
-# 或安装到 PATH
-uv tool install git+https://github.com/wuyoscar/gpt_image_2_skill
+# 或在尚未安装时安装到 PATH
+command -v gpt-image >/dev/null || uv tool install git+https://github.com/wuyoscar/gpt_image_2_skill
 gpt-image -p "a cat astronaut"
 ```
 
@@ -144,7 +179,9 @@ uv tool upgrade gpt-image-cli
 
 </details>
 
-从环境变量或 `~/.env` 读取 `OPENAI_API_KEY`。
+按 process env、`.env`、`~/.env` 的顺序读取 `OPENAI_API_KEY`，且不会覆盖已经设置好的环境变量。
+
+> **Agent 与 API Key 提醒。** 本仓库提供 Prompt Gallery 和本地 `gpt-image` CLI。CLI 会使用你自己的 OpenAI API Key，因此成功调用图片接口可能产生 OpenAI API 费用。有些 Agent 宿主也自带平台托管的图片生成功能；如果你不想走本地 Key，就使用宿主自带的生图能力。如果 Key 只在 shell 环境变量里，想临时避免误用本地 API Key，可以在调用 CLI/Skill 前运行 `unset OPENAI_API_KEY`；如果你把 Key 写在 `.env` 或 `~/.env`，也需要在本次会话中移除或临时改名。
 
 ---
 
@@ -256,9 +293,9 @@ result = client.images.generate(
 7. **文本内嵌、密集图表、小标签和多面板布局用 `quality="high"`。** 中档会明显降低效果。
 
 **这个 skill 提供四个本地 reference surface：**
-- [`skills/gpt-image/references/gallery.md`](skills/gpt-image/references/gallery.md) — 轻量级路由索引，用来为拆分后的 162 条 Prompt Scale Atlas 选择 category；它本身**不是**完整 Prompt dump。
-- `skills/gpt-image/references/gallery-*.md` — 每个 category 一个文件，只在相关任务中加载，例如 [`gallery-product-and-food.md`](skills/gpt-image/references/gallery-product-and-food.md)、[`gallery-ui-ux-mockups.md`](skills/gpt-image/references/gallery-ui-ux-mockups.md)、[`gallery-research-paper-figures.md`](skills/gpt-image/references/gallery-research-paper-figures.md)。这样既能复用 Scale，又不会撑爆上下文。
-- [`skills/gpt-image/references/craft.md`](skills/gpt-image/references/craft.md) — 扩展后的 19 节 Prompt Craft 清单，覆盖 Scale-first 使用方式、JSON/config-style Prompt、多面板排版、UI 规格、数据/图表语法、编辑不变量、参考图工作流、密集文本和分类 mini-schema。
+- [`skills/gpt-image/references/gallery.md`](skills/gpt-image/references/gallery.md) — 轻量级路由索引，用来为拆分后的 162 条 Reference Gallery Atlas 选择 category；它本身**不是**完整 Prompt dump。
+- `skills/gpt-image/references/gallery-*.md` — 每个 category 一个文件，只在相关任务中加载，例如 [`gallery-product-and-food.md`](skills/gpt-image/references/gallery-product-and-food.md)、[`gallery-ui-ux-mockups.md`](skills/gpt-image/references/gallery-ui-ux-mockups.md)、[`gallery-research-paper-figures.md`](skills/gpt-image/references/gallery-research-paper-figures.md)。这样既能复用 Skill 的参考图库，又不会撑爆上下文。
+- [`skills/gpt-image/references/craft.md`](skills/gpt-image/references/craft.md) — 扩展后的 19 节 Prompt Craft 清单，覆盖 gallery-first 使用方式、JSON/config-style Prompt、多面板排版、UI 规格、数据/图表语法、编辑不变量、参考图工作流、密集文本和分类 mini-schema。
 - [`skills/gpt-image/references/openai-cookbook.md`](skills/gpt-image/references/openai-cookbook.md) — OpenAI Cookbook 的逐字 Markdown 捕获（1004 行），包括权威的参数覆盖表和所有第4/5节用例示例。
 
 </details>
@@ -2810,4 +2847,4 @@ Create a dark surrealist tattoo design sheet in portrait format. Subject: a gian
 
 ## 📄 License
 
-本项目基于 [CC BY 4.0](LICENSE) 发布。请保留外部来源 Prompt 的 attribution，并尊重 Gallery 条目中链接到的原作者。
+本项目基于 [MIT License](LICENSE) 发布。仍请保留外部来源 Prompt 的 attribution，并尊重 Gallery 条目中链接到的原作者。

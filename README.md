@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/wuyoscar/gpt_image_2_skill/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg" alt="CC BY 4.0"/></a>
+  <a href="https://github.com/wuyoscar/gpt_image_2_skill/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"/></a>
   <a href="https://github.com/wuyoscar/gpt_image_2_skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"/></a>
   <img src="https://img.shields.io/badge/model-gpt--image--2-purple.svg" alt="Model: gpt-image-2"/>
   <img src="https://img.shields.io/badge/python-%E2%89%A53.11-blue.svg" alt="Python ≥ 3.11"/>
@@ -35,7 +35,7 @@
   </tr>
   <tr>
     <td>Last update</td>
-    <td><strong>2026-04-25</strong></td>
+    <td><strong>2026-05-05</strong></td>
   </tr>
   <tr>
     <td>Docs</td>
@@ -49,11 +49,21 @@
 
 Use this repo as a **GPT Image 2 prompt gallery**, **image prompt library**, **example of generation showcase**, **Codex / Claude Code agent skill**, and **gpt-image-2 CLI**. It includes reusable AI image prompts for research paper figures, posters, UI mockups, game HUDs, anime / manga, photography, typography, maps, tattoo design, and reference-image editing workflows.
 
+For agents, the skill is intentionally **CLI-first**: it should help the agent choose gallery/craft references and call the packaged `gpt-image` CLI, not invent a new `generate.py` script for every image request.
+
 ---
 
 Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [SECURITY.md](SECURITY.md).
 
 ## 📥 Install
+
+Before installing, check whether the skill or CLI is already available. Do not reinstall blindly, overwrite an existing skill folder, or create/replace API-key files. Use your runtime's own skill list/status command when available; global/shared installs should be an explicit user choice, not an automatic setup step.
+
+```bash
+command -v gpt-image || true
+command -v uv >/dev/null && uv tool list | grep -E '^gpt-image-cli([[:space:]]|$)' || true
+test -n "${OPENAI_API_KEY:-}" && echo "OPENAI_API_KEY is already set (value hidden)"
+```
 
 <details>
 <summary><strong>Claude Code</strong></summary>
@@ -69,13 +79,15 @@ Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_C
 <summary><strong>Codex</strong></summary>
 
 Codex ships with built-in skill helpers such as `$skill-installer` and `$skill-creator`.
-Open Codex and ask the built-in installer to install this GitHub skill folder:
+Open Codex and invoke the built-in installer with this GitHub skill-folder URL:
 
 ```text
-$skill-installer install https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/gpt-image
+$skill-installer
+Install this skill from GitHub:
+https://github.com/wuyoscar/gpt_image_2_skill/tree/main/skills/gpt-image
 ```
 
-Codex will download the GitHub folder and place it under your Codex skills directory, usually:
+The installer downloads that GitHub folder and places it under your Codex skills directory, usually:
 
 ```bash
 ~/.codex/skills/gpt-image
@@ -90,8 +102,30 @@ git clone https://github.com/wuyoscar/gpt_image_2_skill.git
 cd gpt_image_2_skill
 
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+test -e "${CODEX_HOME:-$HOME/.codex}/skills/gpt-image" && echo "gpt-image skill already exists; stop before overwriting" && exit 1
 cp -R skills/gpt-image "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
+
+</details>
+
+<details>
+<summary><strong>AgentSkills / npx skills</strong></summary>
+
+For runtimes supported by the cross-agent `skills` installer, install the same `skills/gpt-image` folder directly from GitHub:
+
+```bash
+# Codex
+npx --yes skills@latest add wuyoscar/gpt_image_2_skill \
+  --skill gpt-image --agent codex --copy
+
+# OpenClaw
+npx --yes skills@latest add wuyoscar/gpt_image_2_skill \
+  --skill gpt-image --agent openclaw --copy
+```
+
+These examples intentionally avoid `--global`. Add `--global` only when you explicitly want this skill installed into that runtime's global/shared skills directory.
+
+If your runtime is not listed by `skills@latest` yet, use the manual Agent Skill install below.
 
 </details>
 
@@ -111,6 +145,7 @@ cd gpt_image_2_skill
 export AGENT_SKILLS_DIR="/path/to/your/agent/skills"
 
 mkdir -p "$AGENT_SKILLS_DIR"
+test -e "$AGENT_SKILLS_DIR/gpt-image" && echo "gpt-image skill already exists; stop before overwriting" && exit 1
 ln -s "$PWD/skills/gpt-image" "$AGENT_SKILLS_DIR/gpt-image"
 ```
 
@@ -122,8 +157,8 @@ ln -s "$PWD/skills/gpt-image" "$AGENT_SKILLS_DIR/gpt-image"
 ```bash
 uvx --from git+https://github.com/wuyoscar/gpt_image_2_skill gpt-image -p "a cat astronaut"
 
-# or install to PATH
-uv tool install git+https://github.com/wuyoscar/gpt_image_2_skill
+# or install to PATH if not already installed
+command -v gpt-image >/dev/null || uv tool install git+https://github.com/wuyoscar/gpt_image_2_skill
 gpt-image -p "a cat astronaut"
 ```
 
@@ -144,7 +179,9 @@ uv tool upgrade gpt-image-cli
 
 </details>
 
-Reads `OPENAI_API_KEY` from the environment or `~/.env`.
+Reads `OPENAI_API_KEY` from process env, then `.env`, then `~/.env` without overriding an already-set env var.
+
+> **Agent + API-key note.** This repo provides a prompt gallery plus a local `gpt-image` CLI. The CLI uses your own OpenAI API key, so successful image calls may incur OpenAI API charges. Some agent hosts also provide native/platform-managed image generation; use that path instead if you do not want to route through your local key. To prevent accidental local API use when the key is only in your shell, temporarily run `unset OPENAI_API_KEY` before invoking the CLI/skill; if you store keys in `.env` or `~/.env`, remove or rename that entry for the session too.
 
 ---
 
@@ -256,9 +293,9 @@ Distilled from OpenAI's [official GPT Image prompting guide](https://github.com/
 7. **Use `quality="high"` for in-image text, dense diagrams, small labels, and multi-panel layouts.** Those cases degrade visibly at `medium`.
 
 **The skill ships four local reference surfaces:**
-- [`skills/gpt-image/references/gallery.md`](skills/gpt-image/references/gallery.md) — lightweight routing index for the split 162-prompt Scale Atlas. It should be read first to pick a category; it does **not** contain the full prompt dump.
-- `skills/gpt-image/references/gallery-*.md` — one category per file, loaded only when relevant, e.g. [`gallery-product-and-food.md`](skills/gpt-image/references/gallery-product-and-food.md), [`gallery-ui-ux-mockups.md`](skills/gpt-image/references/gallery-ui-ux-mockups.md), [`gallery-research-paper-figures.md`](skills/gpt-image/references/gallery-research-paper-figures.md). This keeps the Scale useful without overflowing context.
-- [`skills/gpt-image/references/craft.md`](skills/gpt-image/references/craft.md) — expanded 19-section prompt-craft checklist covering Scale-first usage, JSON/config-style prompts, multi-panel boards, UI specs, data/diagram grammar, edit invariants, reference workflows, dense text, and category mini-schemas.
+- [`skills/gpt-image/references/gallery.md`](skills/gpt-image/references/gallery.md) — lightweight routing index for the split 162-prompt Reference Gallery Atlas. It should be read first to pick a category; it does **not** contain the full prompt dump.
+- `skills/gpt-image/references/gallery-*.md` — one category per file, loaded only when relevant, e.g. [`gallery-product-and-food.md`](skills/gpt-image/references/gallery-product-and-food.md), [`gallery-ui-ux-mockups.md`](skills/gpt-image/references/gallery-ui-ux-mockups.md), [`gallery-research-paper-figures.md`](skills/gpt-image/references/gallery-research-paper-figures.md). This keeps the skill useful without overflowing context.
+- [`skills/gpt-image/references/craft.md`](skills/gpt-image/references/craft.md) — expanded 19-section prompt-craft checklist covering gallery-first usage, JSON/config-style prompts, multi-panel boards, UI specs, data/diagram grammar, edit invariants, reference workflows, dense text, and category mini-schemas.
 - [`skills/gpt-image/references/openai-cookbook.md`](skills/gpt-image/references/openai-cookbook.md) — verbatim Markdown capture of OpenAI's cookbook (1004 lines), including the authoritative parameter-coverage table and every §4 / §5 use-case example.
 
 </details>
@@ -2776,4 +2813,4 @@ Community standards:
 
 ## 📄 License
 
-This project is released under [CC BY 4.0](LICENSE). Please preserve attribution for outside-source prompts and respect the original authors linked in each gallery entry.
+This project is released under the [MIT License](LICENSE). Please still preserve attribution for outside-source prompts and respect the original authors linked in each gallery entry.

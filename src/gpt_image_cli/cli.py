@@ -14,9 +14,9 @@ Mirrors the two official endpoints from the OpenAI cookbook using the official
     client.images.generate(...)   — text → image          (no  -i)
     client.images.edit(...)       — text + image(s) → image (with -i; mask via -m)
 
-Every documented parameter is exposed as a flag. Reads OPENAI_API_KEY from env
-or ~/.env. Writes the returned PNG/JPEG/WebP bytes to disk and prints the output
-path(s) on stdout.
+Every documented parameter is exposed as a flag. Reads OPENAI_API_KEY from
+process env, then .env, then ~/.env without overriding existing env. Writes the
+returned PNG/JPEG/WebP bytes to disk and prints the output path(s) on stdout.
 
 Exit codes: 0 success, 1 API error, 2 bad args.
 
@@ -39,8 +39,8 @@ Examples:
     # Grid of 4, transparent background, webp
     gpt-image -p "isometric chair, minimalist" -n 4 --background opaque --format webp
 
-    # Skill shim (same implementation, plugin-local path)
-    uv run "$CLAUDE_PLUGIN_ROOT/skills/gpt-image/scripts/generate.py" -p "a cat astronaut on the moon"
+    # Skill launcher (same implementation, installed skill-folder path)
+    uv run "$SKILL_DIR/scripts/generate.py" -p "a cat astronaut on the moon"
 """
 from __future__ import annotations
 
@@ -59,13 +59,13 @@ from openai import APIError, OpenAI
 
 
 def _load_env_chain() -> None:
-    """Resolve OPENAI_API_KEY from the canonical config chain.
+    """Resolve OPENAI_API_KEY without overriding runtime-provided env.
 
-    Order: process env → ./.env → ~/.env (later wins for ~/.env so the user's
-    canonical secret store beats stale shell exports).
+    Order: process env → ./.env → ~/.env. Existing process env wins so
+    hosted agents or explicit shell exports are not replaced by local files.
     """
     load_dotenv(Path.cwd() / ".env", override=False)
-    load_dotenv(Path.home() / ".env", override=True)
+    load_dotenv(Path.home() / ".env", override=False)
 
 
 SIZE_SHORTCUTS: dict[str, str] = {
@@ -258,9 +258,9 @@ def main() -> int:
     args = parse_args()
 
     _load_env_chain()
-    if "OPENAI_API_KEY" not in os.environ:
+    if not os.environ.get("OPENAI_API_KEY"):
         print(
-            "error: OPENAI_API_KEY not set. Add it to ~/.env or `export OPENAI_API_KEY=...`.",
+            "error: OPENAI_API_KEY not set. Add it to env / .env / ~/.env, or use your host agent's native image tool.",
             file=sys.stderr,
         )
         return 2

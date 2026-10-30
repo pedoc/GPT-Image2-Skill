@@ -33,7 +33,7 @@ class ConfigTests(unittest.TestCase):
         self.home = self.root / 'home'
         self.cwd.mkdir()
         self.home.mkdir()
-        self.config = self.home / '.config/gpt-image/config.toml'
+        self.config = self.home / '.config/GPT-Image2-Skill/config.toml'
         self.enterContext(patch.dict(os.environ, {}, clear=True))
         self.enterContext(patch.object(generate.Path, 'cwd', return_value=self.cwd))
         self.enterContext(patch.object(generate.Path, 'home', return_value=self.home))

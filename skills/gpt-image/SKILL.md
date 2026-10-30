@@ -44,7 +44,7 @@ Replace the example path with the installed skill's actual location; no standard
 
 ## Saved image connection
 
-The script automatically reads `~/.config/gpt-image/config.toml` for the user running the agent. This location is independent of the agent's project and skill installation directory. Use the bundled `config.example.toml` as a setup template; never overwrite a real config during image requests or display its credential contents.
+The script automatically reads `~/.config/GPT-Image2-Skill/config.toml` for the user running the agent. This location is independent of the agent's project and skill installation directory. Use the bundled `config.example.toml` as a setup template; never overwrite a real config during image requests or display its credential contents.
 
 ```toml
 base_url = "https://gateway.example/v1"

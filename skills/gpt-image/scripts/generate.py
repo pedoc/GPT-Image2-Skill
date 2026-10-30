@@ -8,7 +8,7 @@
 # ///
 """Generate or edit images with the skill's self-contained uv script.
 
-Reads image-specific settings from GPT_IMAGE_* or ~/.config/gpt-image/config.toml.
+Reads image-specific settings from GPT_IMAGE_* or ~/.config/GPT-Image2-Skill/config.toml.
 Falls back to OPENAI_* from process env, ./.env, then ~/.env without replacing
 an existing variable. Saves PNG/JPEG/WebP and prints output paths.
 Exit codes: 0 success, 1 API error, 2 bad arguments or missing key.
@@ -83,7 +83,7 @@ def read_config(parser: argparse.ArgumentParser, path: Path | None) -> dict[str,
                 parser.error("GPT_IMAGE_CONFIG must not be empty")
             path = Path(configured_path)
     required = path is not None
-    path = path.expanduser() if path is not None else Path.home() / ".config/gpt-image/config.toml"
+    path = path.expanduser() if path is not None else Path.home() / ".config/GPT-Image2-Skill/config.toml"
     try:
         config = tomllib.loads(path.read_text(encoding="utf-8-sig"))
     except FileNotFoundError:
@@ -149,7 +149,7 @@ def parse_args() -> argparse.Namespace:
         help="Alpha-channel PNG mask (opaque = preserved, transparent = regenerated). "
              "Edits endpoint only; requires -i.",
     )
-    p.add_argument("--config", type=Path, help="TOML config path. Default GPT_IMAGE_CONFIG or ~/.config/gpt-image/config.toml.")
+    p.add_argument("--config", type=Path, help="TOML config path. Default GPT_IMAGE_CONFIG or ~/.config/GPT-Image2-Skill/config.toml.")
     p.add_argument("--base-url", help="Images API base URL, including its API prefix (for example https://gateway.example/v1). Overrides saved settings.")
     p.add_argument("--timeout", type=float, help=f"API request timeout in seconds. Default GPT_IMAGE_TIMEOUT, config timeout, or {DEFAULT_TIMEOUT:g}.")
     p.add_argument("--model", help=f"Model ID or gateway alias. Default GPT_IMAGE_MODEL, config model, or {DEFAULT_MODEL}.")

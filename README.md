@@ -17,7 +17,7 @@ The image-generation skill requires `uv`, Python 3.11+, and an image-service API
 
 ## Configure the image service once
 
-Create `~/.config/gpt-image/config.toml` for the user running your agents. On Windows this is normally `C:\Users\<you>\.config\gpt-image\config.toml`. Every installed copy of this skill uses the same file, regardless of the current project. A [template](skills/gpt-image/config.example.toml) is included:
+Create `~/.config/GPT-Image2-Skill/config.toml` for the user running your agents. On Windows this is normally `C:\Users\<you>\.config\GPT-Image2-Skill\config.toml`. Every installed copy of this skill uses the same file, regardless of the current project. A [template](skills/gpt-image/config.example.toml) is included:
 
 ```toml
 base_url = "https://gateway.example/v1"

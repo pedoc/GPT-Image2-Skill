@@ -17,7 +17,7 @@
 
 ## 一次配置图片服务
 
-为运行 Agent 的用户创建 `~/.config/gpt-image/config.toml`。Windows 下通常为 `C:\Users\<用户名>\.config\gpt-image\config.toml`。同一用户安装的各份 Skill 共用这个文件，不依赖当前项目目录。仓库提供了[配置模板](skills/gpt-image/config.example.toml)：
+为运行 Agent 的用户创建 `~/.config/GPT-Image2-Skill/config.toml`。Windows 下通常为 `C:\Users\<用户名>\.config\GPT-Image2-Skill\config.toml`。同一用户安装的各份 Skill 共用这个文件，不依赖当前项目目录。仓库提供了[配置模板](skills/gpt-image/config.example.toml)：
 
 ```toml
 base_url = "https://gateway.example/v1"

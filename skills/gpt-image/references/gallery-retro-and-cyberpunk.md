@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 23 · Cyberpunk mecha girl over sea fortress
 
-- Image: `docs/retro-cyberpunk/cyberpunk-mecha.png`
-
-  <img src="../../../docs/retro-cyberpunk/cyberpunk-mecha.png" alt="cyberpunk mecha" width="420"/>
 - Metadata: Retro & Cyberpunk · `landscape` · `1536x1024` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
 
 ```text
@@ -17,9 +14,6 @@ A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber 
 
 ### No. 24 · Neon Orchid District design board
 
-- Image: `docs/retro-cyberpunk/neon-orchid-district-board.png`
-
-  <img src="../../../docs/retro-cyberpunk/neon-orchid-district-board.png" alt="neon orchid district board" width="420"/>
 - Metadata: Retro & Cyberpunk · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -28,9 +22,6 @@ Create a cyberpunk character-and-city design board in a premium magazine-layout 
 
 ### No. 25 · Synth Moon Crew alien nightlife grid
 
-- Image: `docs/retro-cyberpunk/synth-moon-crew-grid.png`
-
-  <img src="../../../docs/retro-cyberpunk/synth-moon-crew-grid.png" alt="synth moon crew grid" width="420"/>
 - Metadata: Retro & Cyberpunk · `square` · `1024x1024` · Curated
 
 ```text

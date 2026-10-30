@@ -6,9 +6,6 @@ Load this file only when the request matches photo-of-screen realism, laptop-scr
 
 ### No. 162 · Music app + webcam preview
 
-- Image: `docs/screen-photography/laptop-music-webcam-screen.png`
-
-  <img src="../../../docs/screen-photography/laptop-music-webcam-screen.png" alt="laptop music webcam screen" width="420"/>
 - Metadata: Screen Photography · `1152x1536` · Source structure: [Reddit](https://www.reddit.com/r/OpenAI/comments/1st5kcd/gpt2_cooked_this_photo_of_a_screen_prompt_macbook/) adapted
 
 ```text
@@ -17,9 +14,6 @@ Create a raw smartphone photo of a laptop screen, not a screenshot. Aspect ratio
 
 ### No. 163 · Notes + FaceTime work screen
 
-- Image: `docs/screen-photography/laptop-notes-facetime-screen.png`
-
-  <img src="../../../docs/screen-photography/laptop-notes-facetime-screen.png" alt="laptop notes facetime screen" width="420"/>
 - Metadata: Screen Photography · `1152x1536` · Curated
 
 ```text

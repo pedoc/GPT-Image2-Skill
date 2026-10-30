@@ -33,7 +33,7 @@ of [craft.md](craft.md), not the full file. For type-led deliverables, switch to
 starting point is needed, see the **Natural editorial photograph** section of
 [community templates](templates-gpt-image-2.5.md), retaining its source label.
 
-## Before calling the CLI
+## Before calling the bundled script
 
 - Resolve factual details from the brief; do not inherit dates or claims from a
   historical gallery example.

@@ -1,13 +1,13 @@
-name: Gallery entry proposal
-description: Suggest a new prompt, image, or category for the gallery.
-title: "[Gallery]: "
-labels: [gallery, enhancement]
+name: Prompt reference proposal
+description: Suggest a reusable prompt or improvement to a skill reference.
+title: "[Prompt]: "
+labels: [enhancement]
 body:
   - type: textarea
     id: concept
     attributes:
       label: Concept
-      description: What should this prompt/image demonstrate?
+      description: What should this prompt demonstrate?
       placeholder: "A multi-panel poster, product render, UI mockup, tattoo design, etc."
     validations:
       required: true
@@ -33,4 +33,4 @@ body:
     id: notes
     attributes:
       label: Notes
-      description: Visual quality notes, safety constraints, or examples to compare against.
+      description: Intended use, constraints, or examples to compare against. Generated image files are not required.

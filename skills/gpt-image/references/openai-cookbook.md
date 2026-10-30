@@ -979,11 +979,11 @@ In this notebook, we demonstrate how to use gpt-image generation models to build
 
 ---
 
-## Parameter coverage cross-check (for gpt-image-cli maintainers)
+## Bundled script parameter cross-check
 
 Parameters used in the cookbook notebook:
 
-| Notebook parameter | Used in | CLI flag | Exposed? |
+| Notebook parameter | Used in | Script flag | Exposed? |
 |---|---|---|---|
 | `model` | both | `--model` | ✅ |
 | `prompt` | both | `-p` / `--prompt` | ✅ |
@@ -999,7 +999,7 @@ Parameters used in the cookbook notebook:
 | `mask` | edits | `-m` / `--mask` | ✅ |
 | `user` | both | `--user` | ✅ |
 
-**All cookbook parameters covered by `gpt-image-cli` v1.3+.** No gaps.
+**The bundled script exposes these cookbook parameters.** Check [models.md](models.md) for model-specific support and validation.
 
 ---
 

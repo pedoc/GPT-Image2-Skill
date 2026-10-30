@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-This project is a lightweight agentic skill and CLI. Security fixes are handled on the `main` branch.
+This project contains lightweight agent skills and a self-contained generation script. Security fixes are handled on the `main` branch.
 
 ## Reporting a vulnerability
 
@@ -20,5 +20,5 @@ When reporting, include:
 ## Secret handling
 
 - Never commit `OPENAI_API_KEY`, `.env`, or other credentials.
-- The CLI reads `OPENAI_API_KEY` from process env, then `.env`, then `~/.env` without overriding an already-set env var.
+- The script reads `OPENAI_API_KEY` from process env, then `.env`, then `~/.env` without overriding an already-set env var.
 - Generated examples and issue reports should not include private prompts, private images, or API response bodies containing secrets.

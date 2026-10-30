@@ -2,8 +2,11 @@
 
 ## Unreleased
 
-- Clarified the GPT Image skill as a gallery-first, CLI-first agent runbook: analyze user prompts, search Reference Gallery/craft files, confer when useful, then invoke the packaged CLI.
-- Added safer install and API-key guidance: check existing CLI/skill state first, avoid blind reinstall/overwrite, keep global/shared installs opt-in, and never write secrets unless explicitly requested.
+- Removed the tracked image gallery, sample records, and plugin packaging; kept self-contained skills and text-only prompt references. Reduced the bilingual READMEs to installation, usage, and development instructions.
+- Replaced the standalone CLI package and launcher fallback chain with one self-contained `skills/gpt-image/scripts/generate.py` entrypoint. Run it with `uv run`; the `gpt-image` console command is no longer provided.
+- Added uv-managed repository and script lockfiles, a Python version pin, and offline coverage for running a copied script outside the checkout.
+- Simplified the skill runbook to invoke its bundled script directly, preserving model selection, credentials, API flags, and no-retry behavior.
+- Added safer install and API-key guidance: avoid blind reinstall/overwrite, keep global/shared installs opt-in, and never write secrets unless explicitly requested.
 - Updated cross-agent installation wording for Codex, OpenClaw, Claude Code, and manual skill runtimes.
 
 ## v0.2.0 — 2026-04-25

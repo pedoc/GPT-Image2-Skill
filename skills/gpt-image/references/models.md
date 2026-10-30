@@ -23,11 +23,11 @@ already supplied. If the user delegates the choice, explain the selection and
 proceed. Model selection belongs in the conversation, never inside the image
 prompt. Always pass the selected ID explicitly with `--model`.
 
-The noninteractive CLI keeps `gpt-image-2` as its compatibility default. This
+The noninteractive script keeps `gpt-image-2` as its compatibility default. This
 is not permission for an agent to skip the model-choice step. Do not generate
 multiple models or prompt variants without authorization. Do not change models
 or materially rewrite the prompt in response to permission, quota, or policy
-errors. The CLI disables automatic SDK retries; report errors rather than
+errors. The script disables automatic SDK retries; report errors rather than
 silently repeating potentially billable requests.
 
 ## Parameters
@@ -37,14 +37,14 @@ endpoints. No Responses API migration is needed.
 
 | Parameter | Contract |
 |---|---|
-| `quality` | 2.5: `low`, `medium`, `high`, `xhigh`, `max`, `auto`. Image 2: through `high` plus `auto`. CLI default remains `high`. |
-| `size` | `auto`, a CLI shortcut, or `WIDTHxHEIGHT`; see limits below. |
+| `quality` | 2.5: `low`, `medium`, `high`, `xhigh`, `max`, `auto`. Image 2: through `high` plus `auto`. script default remains `high`. |
+| `size` | `auto`, a script shortcut, or `WIDTHxHEIGHT`; see limits below. |
 | `background` | `auto`, `opaque`, `transparent`. Transparency requires `png` or `webp`, not `jpeg`. |
 | `output_format` | `png` (default), `jpeg`, `webp`. |
 | `output_compression` | Integer 0–100 for JPEG/WebP. Do not request compression for PNG. |
 | `n` | 1–10; default 1. More images require the user's authorization. |
 | `user` | Optional end-user identifier, forwarded unchanged. |
-| `moderation` | `auto` or `low`; this CLI exposes it for generation only. Existing CLI default remains `low`. |
+| `moderation` | `auto` or `low`; this script exposes it for generation only. Existing script default remains `low`. |
 | `input_fidelity` | Edits only, omitted by default. See the qualification below. |
 
 For Image 2 and 2.5, both edges must be positive multiples of 16 and at most
@@ -53,13 +53,13 @@ and 8,294,400 inclusive. Above 2560×1440 is experimental. A size shortcut contr
 the actual request; saying “4K” inside a prompt does not set the API dimensions.
 
 For references, repeat `-i`; for a mask, use `-i` plus `-m`. Validate the actual
-input image and mask requirements before a live call. The CLI checks file
+input image and mask requirements before a live call. The script checks file
 existence; that alone does not prove valid format, alpha channel, or size.
 
 ### Parameters requiring care
 
 - **Input fidelity:** official documentation explicitly requires omission for
-  `gpt-image-2`. The CLI drops it only for Image 2 and its dated snapshots, not
+  `gpt-image-2`. The script drops it only for Image 2 and its dated snapshots, not
   all names starting with `gpt-image-2`. Explicit `low`/`high` on 2.5 is passed
   through as an opt-in request, not advertised as verified API support. Prefer
   omission until the chosen model's behavior is confirmed.
@@ -75,37 +75,22 @@ existence; that alone does not prove valid format, alpha channel, or size.
 
 ## Validation boundary
 
-The dependency floor is `openai>=2.32.0`. Offline request-serialization tests
-pass on both 2.32.0 and the freshly resolved 3.10.0 (which uses httpx2). This is
-a tested version pair, not a claim that 2.32.0 introduced every 2.5 feature or
-that all intervening and future versions were tested.
-Run `PYTHONPATH=src python -m unittest discover -s tests -v` for offline tests.
-They use in-process HTTP responses, no credentials or paid image generation.
+The dependency floor is `openai>=2.32.0`; the uv lockfiles pin the tested
+repository and standalone-script environments. Run the offline suite with:
 
-Live checks on 2026-09-09: the model list omitted 2.5 and
-`models.retrieve` returned `404 model_not_found`, while the repository CLI
-successfully completed three Sunburst generation requests and two reference edits
-(HTTP 200, `quality=high`, PNG, one image per request). The initial three runs
-did not record credential fingerprints. The two replacement-showcase runs
-captured a private fingerprint and passed the verified credential to the CLI.
-A separate read-only audit verified the current local credential and account
-through `/v1/me` and `/v1/models` (HTTP 200). Model metadata lookup
-alone cannot establish generation availability. See the
-[samples, exact settings and visual checks](../../../docs/sunburst-samples.md).
+```bash
+uv run --locked python -m unittest discover -s tests -v
+```
 
-These runs cover Sunburst generation and single-reference editing. Flare,
-masks, transparency, `xhigh`/`max`, explicit 2.5 input fidelity, and the separate
-community templates still require live validation. The poster's knife shadow
-points in the wrong direction despite successful generation.
+The tests exercise request serialization, parameter validation, credential
+precedence, error handling, and a copied script outside the repository.
+They do not prove account access, model availability, or generated-image quality.
 
-Before release testing, verify the effective key source, endpoint, project
-and organization. Keep a non-secret credential fingerprint in private run
-evidence; never publish keys or account details. Report blocking failures
-before proposing a release. Run a separately authorized small live sample for
-each selected model and endpoint. Record exact model, prompt, size, quality,
-response/error, and output path. Check transparency, exact text, requested edits and preserved regions.
-Do not treat mocked requests, model listings, or another author's examples as
-successful local image generation.
+Run live checks only when authorized. Record the exact model, prompt, inputs,
+settings, response/error, and output path in the user's working area. Check
+transparency, exact text, requested edits, and preserved regions against the
+actual output. Do not commit generated images, private credentials, or
+sample-run artifacts to this repository.
 
 ## Official sources
 

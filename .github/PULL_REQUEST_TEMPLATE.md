@@ -1,32 +1,28 @@
 ## Summary
 
-<!-- What changed? Keep it short and concrete. -->
+<!-- Describe the resulting behavior and affected skills or references. Link relevant issues. -->
 
 ## Type of change
 
-- [ ] Prompt / gallery entry
-- [ ] Image asset / docs organization
-- [ ] CLI / skill behavior
-- [ ] Documentation / wording
-- [ ] Maintenance / community files
+- [ ] Skill instructions or metadata
+- [ ] Script behavior
+- [ ] Prompt reference
+- [ ] Documentation or maintenance
 
-## Gallery checklist
+## Checklist
 
-If this PR changes the prompt gallery:
-
-- [ ] Updated both `README.md` and `README.zh.md`
-- [ ] Kept English/Chinese entry order and image paths aligned
-- [ ] Placed gallery images under `docs/<category-slug>/<short-slug>.png`
-- [ ] Updated gallery numbering, index ranges, and top gallery count
-- [ ] Used `Original` for repo-generated images or preserved `Author + Source` for outside-source prompts
-- [ ] Checked for duplicate dividers and broken local image refs
+- [ ] Updated bilingual usage instructions when applicable
+- [ ] Preserved prompt attribution and reference index consistency
+- [ ] Checked local Markdown links; no generated images or sample artifacts added
 
 ## Verification
 
+- [ ] `uv sync --locked`
+- [ ] `uv run --locked python -m unittest discover -s tests -v`
+- [ ] `uv run --locked python -m py_compile skills/gpt-image/scripts/generate.py`
+- [ ] `uv run --locked skills/gpt-image/scripts/generate.py --help`
 - [ ] `git diff --check`
-- [ ] `python3 -m py_compile src/gpt_image_cli/cli.py src/gpt_image_cli/__init__.py`
-- [ ] `uv run gpt-image --help`
 
 ## Notes
 
-<!-- Anything reviewers should know: attribution, rejected alternatives, visual quality caveats, etc. -->
+<!-- Explain dependency changes, compatibility limits, or remaining validation. -->

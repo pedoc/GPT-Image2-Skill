@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 60 · Moss Radio brand identity showcase board
 
-- Image: `docs/brand-systems-identity/brand-identity-moss-radio.png`
-
-  <img src="../../../docs/brand-systems-identity/brand-identity-moss-radio.png" alt="brand identity moss radio" width="420"/>
 - Metadata: Brand Systems & Identity · `square` · `1024x1024` · Author: @LexnLin · Source: [X](https://x.com/LexnLin/status/2046952493213429886)
 
 ```text
@@ -17,9 +14,6 @@ Create a square high-end brand identity showcase board for a fictional brand cal
 
 ### No. 61 · PS1 nostalgia reboot brand kit
 
-- Image: `docs/brand-systems-identity/ps1-reboot-brand-kit.png`
-
-  <img src="../../../docs/brand-systems-identity/ps1-reboot-brand-kit.png" alt="ps1 reboot brand kit" width="420"/>
 - Metadata: Brand Systems & Identity · `square` · `1024x1024` · Author: @den_turbin · Source: [X](https://x.com/den_turbin/status/2046863385791467773)
 
 ```text
@@ -28,9 +22,6 @@ Create a clean brand kit presented as one square modular board for a fictional r
 
 ### No. 62 · Playful brand kit: Mochi Metro
 
-- Image: `docs/brand-systems-identity/playful-brand-kit-mochi-metro.png`
-
-  <img src="../../../docs/brand-systems-identity/playful-brand-kit-mochi-metro.png" alt="playful brand kit mochi metro" width="420"/>
 - Metadata: Brand Systems & Identity · `square` · `1024x1024` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2047207315976368584)
 
 ```text

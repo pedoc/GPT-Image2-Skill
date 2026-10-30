@@ -6,28 +6,16 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 113 · Mechanical Watch Exploded View
 
-- Image: `docs/technical-illustration/mechanical-watch-exploded-view.png`
-
-  <img src="../../../docs/technical-illustration/mechanical-watch-exploded-view.png" alt="mechanical watch exploded view" width="420"/>
 - Metadata: Technical Illustration · `square` · `1024x1024` · Curated
 
 ```text
 Create a premium technical exploded-view illustration of a fictional mechanical wristwatch called the Meridian 8, centered on a dark slate background with fine blueprint grid accents. Show the watch components separated vertically with precise spacing: sapphire crystal, dial, hands, chapter ring, movement plates, escapement, balance wheel, mainspring barrel, case, crown, and leather strap sections. Use realistic brushed steel, brass, ruby jewel accents, and deep navy dial details. Add crisp callouts and labels with the in-image text "Meridian 8", "Exploded Assembly", "42 mm Case", "25 Jewels", and "Power Reserve 72 h". Include numbered callouts "01" through "10" with short labels like "Balance Wheel", "Mainspring Barrel", and "Sapphire Crystal". The result should be highly detailed, technically believable, sharply rendered, and suitable for an industrial design plate with clean hierarchy, exact labeling, and refined material realism.
 ```
 
-- Sunburst output using the same prompt: `docs/technical-illustration/meridian8-sunburst.png`
-
-  <img src="../../../docs/technical-illustration/meridian8-sunburst.png" alt="Sunburst Meridian 8 exploded assembly with numbered callouts" width="420"/>
-- Output metadata: `gpt-image-2.5-sunburst` · `high` · `2048x2048` · `2026-09-09`
 - Prompt attribution: Curated
-- Visual QA: Required headline strings and callouts 01–10 are present and readable. Additional specifications and mechanical geometry need engineering review before real-world use.
-- Run evidence: [Sunburst sample runs](../../../docs/sunburst-samples.md).
 
 ### No. 114 · Rocket Cutaway Diagram
 
-- Image: `docs/technical-illustration/rocket-cutaway-launch-vehicle.png`
-
-  <img src="../../../docs/technical-illustration/rocket-cutaway-launch-vehicle.png" alt="rocket cutaway launch vehicle" width="420"/>
 - Metadata: Technical Illustration · `tall` · `2160x3840` · Curated
 
 ```text
@@ -36,9 +24,6 @@ Generate a highly detailed vertical cutaway illustration of a fictional two-stag
 
 ### No. 115 · Mechanical Keyboard Exploded Assembly
 
-- Image: `docs/technical-illustration/mechanical-keyboard-exploded-assembly.png`
-
-  <img src="../../../docs/technical-illustration/mechanical-keyboard-exploded-assembly.png" alt="mechanical keyboard exploded assembly" width="420"/>
 - Metadata: Technical Illustration · `wide` · `2048x1152` · Curated
 
 ```text
@@ -47,9 +32,6 @@ Design a crisp exploded-view product illustration of a custom mechanical keyboar
 
 ### No. 116 · Car Powertrain Transparent Cutaway
 
-- Image: `docs/technical-illustration/car-powertrain-transparent-cutaway.png`
-
-  <img src="../../../docs/technical-illustration/car-powertrain-transparent-cutaway.png" alt="car powertrain transparent cutaway" width="420"/>
 - Metadata: Technical Illustration · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -58,9 +40,6 @@ Create a high-detail transparent cutaway illustration of a fictional hybrid spor
 
 ### No. 117 · Smartphone Internals Layered View
 
-- Image: `docs/technical-illustration/smartphone-internals-layered-view.png`
-
-  <img src="../../../docs/technical-illustration/smartphone-internals-layered-view.png" alt="smartphone internals layered view" width="420"/>
 - Metadata: Technical Illustration · `portrait` · `1024x1536` · Curated
 
 ```text

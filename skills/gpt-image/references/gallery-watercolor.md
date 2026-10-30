@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 48 · Dreamy watercolor — young woman at lily pond
 
-- Image: `docs/watercolor/watercolor-lily-pond.png`
-
-  <img src="../../../docs/watercolor/watercolor-lily-pond.png" alt="watercolor lily pond" width="420"/>
 - Metadata: Watercolor · `portrait` · `1024x1536` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
 
 ```text
@@ -17,9 +14,6 @@ Dreamy watercolor illustration of a young woman in a cream linen dress sitting o
 
 ### No. 49 · Rainy botanical greenhouse watercolor
 
-- Image: `docs/watercolor/rainy-botanical-greenhouse.png`
-
-  <img src="../../../docs/watercolor/rainy-botanical-greenhouse.png" alt="rainy botanical greenhouse" width="420"/>
 - Metadata: Watercolor · `landscape` · `1536x1024` · Curated
 
 ```text

@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 142 · Flat Design: Modern Wellness
 
-- Image: `docs/more-illustration-styles/flat-design-editorial-wellness.png`
-
-  <img src="../../../docs/more-illustration-styles/flat-design-editorial-wellness.png" alt="flat design editorial wellness" width="420"/>
 - Metadata: More Illustration Styles · `square` · `1024x1024` · Curated
 
 ```text
@@ -17,9 +14,6 @@ A clean, vector-based flat design illustration for a modern health and wellness 
 
 ### No. 143 · Chibi Style: The Starry Bakery
 
-- Image: `docs/more-illustration-styles/chibi-kawaii-bakery.png`
-
-  <img src="../../../docs/more-illustration-styles/chibi-kawaii-bakery.png" alt="chibi kawaii bakery" width="420"/>
 - Metadata: More Illustration Styles · `square` · `1024x1024` · Curated
 
 ```text
@@ -28,9 +22,6 @@ A hyper-cute 'Q-style' or chibi illustration of a tiny, magical bakery run by a 
 
 ### No. 144 · Low-Poly Geometric: Alpine Sunset
 
-- Image: `docs/more-illustration-styles/low-poly-mountain-voyage.png`
-
-  <img src="../../../docs/more-illustration-styles/low-poly-mountain-voyage.png" alt="low poly mountain voyage" width="420"/>
 - Metadata: More Illustration Styles · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -39,9 +30,6 @@ A stylized landscape illustration composed entirely of sharp, flat-shaded geomet
 
 ### No. 145 · Sticker Design: Cyber-Explorer Club
 
-- Image: `docs/more-illustration-styles/holographic-sticker-badge.png`
-
-  <img src="../../../docs/more-illustration-styles/holographic-sticker-badge.png" alt="holographic sticker badge" width="420"/>
 - Metadata: More Illustration Styles · `square` · `1024x1024` · Curated
 
 ```text
@@ -50,9 +38,6 @@ A collection of five high-quality die-cut sticker designs arranged on a dark car
 
 ### No. 146 · Kawaii sticker pack: Mexico icons
 
-- Image: `docs/more-illustration-styles/kawaii-sticker-pack-mexico.png`
-
-  <img src="../../../docs/more-illustration-styles/kawaii-sticker-pack-mexico.png" alt="kawaii sticker pack mexico" width="420"/>
 - Metadata: More Illustration Styles · `square` · `1024x1024` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2046875573574877663)
 
 ```text
@@ -61,9 +46,6 @@ Design a cute kawaii sticker pack featuring famous things from Mexico, including
 
 ### No. 147 · Risograph Print: City Shadows
 
-- Image: `docs/more-illustration-styles/risograph-urban-landscape.png`
-
-  <img src="../../../docs/more-illustration-styles/risograph-urban-landscape.png" alt="risograph urban landscape" width="420"/>
 - Metadata: More Illustration Styles · `portrait` · `1024x1536` · Curated
 
 ```text

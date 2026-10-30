@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 158 · Realistic black-and-grey sleeve study
 
-- Image: `docs/tattoo-design/realistic-black-grey-sleeve-study.png`
-
-  <img src="../../../docs/tattoo-design/realistic-black-grey-sleeve-study.png" alt="realistic black grey sleeve study" width="420"/>
 - Metadata: Tattoo Design · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -17,9 +14,6 @@ Create a portrait tattoo design sheet for a realistic black-and-grey forearm sle
 
 ### No. 159 · Color neo-traditional fox and flora
 
-- Image: `docs/tattoo-design/color-neo-traditional-fox-flora.png`
-
-  <img src="../../../docs/tattoo-design/color-neo-traditional-fox-flora.png" alt="color neo traditional fox flora" width="420"/>
 - Metadata: Tattoo Design · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -28,9 +22,6 @@ Create a colorful neo-traditional tattoo flash poster. Central subject: a clever
 
 ### No. 160 · Japanese traditional dragon and koi back piece
 
-- Image: `docs/tattoo-design/japanese-traditional-dragon-koi.png`
-
-  <img src="../../../docs/tattoo-design/japanese-traditional-dragon-koi.png" alt="japanese traditional dragon koi" width="420"/>
 - Metadata: Tattoo Design · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -39,9 +30,6 @@ Create a Japanese traditional irezumi tattoo design poster for a full back piece
 
 ### No. 161 · Dark surrealist moth cathedral
 
-- Image: `docs/tattoo-design/dark-surrealist-moth-cathedral.png`
-
-  <img src="../../../docs/tattoo-design/dark-surrealist-moth-cathedral.png" alt="dark surrealist moth cathedral" width="420"/>
 - Metadata: Tattoo Design · `portrait` · `1024x1536` · Curated
 
 ```text

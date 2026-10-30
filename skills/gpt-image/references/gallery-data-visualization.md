@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 108 · Small Multiples Climate Grid
 
-- Image: `docs/data-visualization/small-multiples-climate-grid.png`
-
-  <img src="../../../docs/data-visualization/small-multiples-climate-grid.png" alt="small multiples climate grid" width="420"/>
 - Metadata: Data Visualization · `wide` · `2048x1152` · Curated
 
 ```text
@@ -17,9 +14,6 @@ Produce a clean editorial data visualization poster showing a 4x3 small-multiple
 
 ### No. 109 · Network Graph Collaboration Map
 
-- Image: `docs/data-visualization/network-graph-collaboration-map.png`
-
-  <img src="../../../docs/data-visualization/network-graph-collaboration-map.png" alt="network graph collaboration map" width="420"/>
 - Metadata: Data Visualization · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -28,9 +22,6 @@ Generate a sophisticated network graph visualization on a dark charcoal canvas s
 
 ### No. 110 · Chord Diagram of Energy Flows
 
-- Image: `docs/data-visualization/chord-diagram-energy-flows.png`
-
-  <img src="../../../docs/data-visualization/chord-diagram-energy-flows.png" alt="chord diagram energy flows" width="420"/>
 - Metadata: Data Visualization · `square` · `1024x1024` · Curated
 
 ```text
@@ -39,9 +30,6 @@ Create a publication-quality chord diagram visualizing fictional regional energy
 
 ### No. 111 · Treemap Budget Allocation
 
-- Image: `docs/data-visualization/treemap-startup-budget-allocation.png`
-
-  <img src="../../../docs/data-visualization/treemap-startup-budget-allocation.png" alt="treemap startup budget allocation" width="420"/>
 - Metadata: Data Visualization · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -50,9 +38,6 @@ Design a modern treemap infographic showing a fictional company budget allocatio
 
 ### No. 112 · Geographic Choropleth Yield Map
 
-- Image: `docs/data-visualization/geographic-choropleth-harvest-yield.png`
-
-  <img src="../../../docs/data-visualization/geographic-choropleth-harvest-yield.png" alt="geographic choropleth harvest yield" width="420"/>
 - Metadata: Data Visualization · `wide` · `2048x1152` · Curated
 
 ```text

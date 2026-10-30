@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a CLI, skill, install, or documentation bug.
+description: Report a script, skill, install, or documentation bug.
 title: "[Bug]: "
 labels: [bug]
 body:
@@ -34,7 +34,7 @@ body:
     id: environment
     attributes:
       label: Environment
-      description: Agent runtime, OS, Python version, install method, and CLI version if available.
+      description: Agent runtime, OS, Python and uv versions, and install method.
       placeholder: |
         Runtime: Codex / Claude Code / OpenClaw / Hermes Agent / other
         OS:

@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 46 · Vintage Amalfi Coast travel poster
 
-- Image: `docs/illustration/amalfi-poster.png`
-
-  <img src="../../../docs/illustration/amalfi-poster.png" alt="amalfi poster" width="420"/>
 - Metadata: Illustration · `portrait` · `1024x1536` · Author: @WolfRiccardo · Source: [X](https://x.com/WolfRiccardo)
 
 ```text
@@ -17,9 +14,6 @@ Modern pencil illustration of Vintage travel poster illustration of the Amalfi C
 
 ### No. 47 · Paper-cut forest night market
 
-- Image: `docs/illustration/papercut-forest-market.png`
-
-  <img src="../../../docs/illustration/papercut-forest-market.png" alt="papercut forest market" width="420"/>
 - Metadata: Illustration · `landscape` · `1536x1024` · Curated
 
 ```text

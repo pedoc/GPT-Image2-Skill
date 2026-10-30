@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 103 · Mobile Budgeting App Mockup
 
-- Image: `docs/uiux-mockups/mobile-budgeting-app-neobank.png`
-
-  <img src="../../../docs/uiux-mockups/mobile-budgeting-app-neobank.png" alt="mobile budgeting app neobank" width="420"/>
 - Metadata: UI/UX Mockups · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -17,9 +14,6 @@ Design a polished mobile finance app UI mockup for a fictional neobank called AU
 
 ### No. 104 · Desktop Operations Dashboard
 
-- Image: `docs/uiux-mockups/desktop-analytics-dashboard-operations.png`
-
-  <img src="../../../docs/uiux-mockups/desktop-analytics-dashboard-operations.png" alt="desktop analytics dashboard operations" width="420"/>
 - Metadata: UI/UX Mockups · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -28,9 +22,6 @@ Create a high-end desktop SaaS analytics dashboard mockup for a fictional platfo
 
 ### No. 105 · Design System Card Set
 
-- Image: `docs/uiux-mockups/design-system-component-card-set.png`
-
-  <img src="../../../docs/uiux-mockups/design-system-component-card-set.png" alt="design system component card set" width="420"/>
 - Metadata: UI/UX Mockups · `square` · `1024x1024` · Curated
 
 ```text
@@ -39,9 +30,6 @@ Generate a clean design system overview board for a fictional product language c
 
 ### No. 106 · Web3 Wallet Interface Concept
 
-- Image: `docs/uiux-mockups/web3-wallet-app-concept.png`
-
-  <img src="../../../docs/uiux-mockups/web3-wallet-app-concept.png" alt="web3 wallet app concept" width="420"/>
 - Metadata: UI/UX Mockups · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -50,9 +38,6 @@ Design a premium mobile web3 wallet app mockup for a fictional wallet called NOV
 
 ### No. 107 · Health Tracker App Mockup
 
-- Image: `docs/uiux-mockups/health-tracker-wellness-app.png`
-
-  <img src="../../../docs/uiux-mockups/health-tracker-wellness-app.png" alt="health tracker wellness app" width="420"/>
 - Metadata: UI/UX Mockups · `portrait` · `1024x1536` · Curated
 
 ```text

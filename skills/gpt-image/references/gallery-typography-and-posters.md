@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 33 · Chinese tea launch poster
 
-- Image: `docs/typography-posters/tea-poster.png`
-
-  <img src="../../../docs/typography-posters/tea-poster.png" alt="tea poster" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -32,9 +29,6 @@ Maintain a clear promotional hierarchy while keeping the overall feeling sophist
 
 ### No. 34 · 1980s propaganda poster
 
-- Image: `docs/typography-posters/propaganda-poster.png`
-
-  <img src="../../../docs/typography-posters/propaganda-poster.png" alt="propaganda poster" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @akokoi1 · Source: [X](https://x.com/akokoi1)
 
 ```text
@@ -43,9 +37,6 @@ Generate a 1980s propaganda poster. Use the exact slogan "热烈庆祝GPT-Image-
 
 ### No. 35 · Saul-Bass-style thriller movie poster
 
-- Image: `docs/typography-posters/saul-bass-poster.png`
-
-  <img src="../../../docs/typography-posters/saul-bass-poster.png" alt="saul bass poster" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -61,19 +52,10 @@ Exact typography:
 Palette: cream, charcoal black, crimson red, mustard-yellow accent. Pure flat graphic design, no photo elements, no gradients, no 3D — in the lineage of Bass's "Anatomy of a Murder", "Vertigo", and "The Man with the Golden Arm".
 ```
 
-- Sunburst output using the same prompt: `docs/typography-posters/saul-bass-sunburst.png`
-
-  <img src="../../../docs/typography-posters/saul-bass-sunburst.png" alt="Sunburst thriller poster with the title THE LAST HEIR" width="420"/>
-- Output metadata: `gpt-image-2.5-sunburst` · `high` · `768x1024` · `2026-09-09`
 - Prompt attribution: Curated
-- Visual QA: The title, tagline, and credit wording are readable and correct; the knife-shaped shadow points down-right rather than up into the title as requested.
-- Run evidence: [Sunburst sample runs](../../../docs/sunburst-samples.md).
 
 ### No. 36 · Vogue-style fashion magazine cover
 
-- Image: `docs/typography-posters/vogue-cover.png`
-
-  <img src="../../../docs/typography-posters/vogue-cover.png" alt="vogue cover" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -99,9 +81,6 @@ Lighting: classic fashion editorial — soft single-source key, subtle fill, dee
 
 ### No. 37 · 1950s Astounding Stories pulp cover
 
-- Image: `docs/typography-posters/pulp-scifi-cover.png`
-
-  <img src="../../../docs/typography-posters/pulp-scifi-cover.png" alt="pulp scifi cover" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -119,9 +98,6 @@ Art direction: painted gouache with visible brush strokes, saturated pulp palett
 
 ### No. 38 · Boston Spring 2026 city poster
 
-- Image: `docs/typography-posters/boston-poster.png`
-
-  <img src="../../../docs/typography-posters/boston-poster.png" alt="boston poster" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @BubbleBrain · Source: [X](https://x.com/BubbleBrain)
 
 ```text
@@ -130,9 +106,6 @@ A striking Spring 2026 city poster for Boston with an elegant celebratory mood a
 
 ### No. 39 · Epic silhouette worldbuilding poster
 
-- Image: `docs/typography-posters/epic-silhouette-poster.png`
-
-  <img src="../../../docs/typography-posters/epic-silhouette-poster.png" alt="epic silhouette poster" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e324cd0000000021039ca9)
 
 ```text
@@ -141,9 +114,6 @@ Design a collector's-edition epic poster for an original fantasy theme called "T
 
 ### No. 40 · Dual-exposure narrative poster
 
-- Image: `docs/typography-posters/dual-exposure-poster.png`
-
-  <img src="../../../docs/typography-posters/dual-exposure-poster.png" alt="dual exposure poster" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e7a01700000000230153f3)
 
 ```text
@@ -152,9 +122,6 @@ Create a high-aesthetic collector poster in a "silhouette universe / dual-exposu
 
 ### No. 41 · Journey to the West silhouette epic poster
 
-- Image: `docs/typography-posters/journey-west-silhouette.png`
-
-  <img src="../../../docs/typography-posters/journey-west-silhouette.png" alt="journey west silhouette" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e78cd4000000002103bdd3)
 
 ```text
@@ -163,9 +130,6 @@ Create a collector-edition epic narrative poster for 《西游记》. Use a gian
 
 ### No. 42 · Japanese pachinko rainbow flyer
 
-- Image: `docs/typography-posters/japanese-pachinko-flyer.png`
-
-  <img src="../../../docs/typography-posters/japanese-pachinko-flyer.png" alt="japanese pachinko flyer" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @midori_tatsuta · Source: [X](https://x.com/midori_tatsuta/status/2045441358530498797)
 
 ```text
@@ -174,9 +138,6 @@ Create a collector-edition epic narrative poster for 《西游记》. Use a gian
 
 ### No. 43 · Spanish fantasy film mobile poster
 
-- Image: `docs/typography-posters/spanish-fantasy-mobile-poster.png`
-
-  <img src="../../../docs/typography-posters/spanish-fantasy-mobile-poster.png" alt="spanish fantasy mobile poster" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @palabraseca · Source: [X](https://x.com/palabraseca/status/2047079358326849911)
 
 ```text
@@ -185,9 +146,6 @@ Haz un póster vertical 4:5 para una película fantástica inexistente llamada "
 
 ### No. 44 · Chongqing rainy-night city promo poster
 
-- Image: `docs/typography-posters/city-tourism-promo-poster.png`
-
-  <img src="../../../docs/typography-posters/city-tourism-promo-poster.png" alt="city tourism promo poster" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e5cb85000000001a027aa8)
 
 ```text
@@ -196,9 +154,6 @@ Haz un póster vertical 4:5 para una película fantástica inexistente llamada "
 
 ### No. 45 · Athlete journey poster: Aya Navarro
 
-- Image: `docs/typography-posters/athlete-journey-poster-aya-navarro.png`
-
-  <img src="../../../docs/typography-posters/athlete-journey-poster-aya-navarro.png" alt="athlete journey poster aya navarro" width="420"/>
 - Metadata: Typography & Posters · `portrait` · `1024x1536` · Author: @aleenaamiir · Source: [X](https://x.com/aleenaamiir/status/2047325329052823996)
 
 ```text

@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 52 · Pixel art car sprite sheet
 
-- Image: `docs/pixel-art/pixel-sprite-cars.png`
-
-  <img src="../../../docs/pixel-art/pixel-sprite-cars.png" alt="pixel sprite cars" width="420"/>
 - Metadata: Pixel Art · `square` · `1024x1024` · Author: @RoundtableSpace · Source: [X](https://x.com/RoundtableSpace)
 
 ```text
@@ -17,9 +14,6 @@ A 10x10 pixel art sprite sheet of retro video game cars, 16-bit era aesthetic. T
 
 ### No. 53 · Pixel art breakfast still life
 
-- Image: `docs/pixel-art/pixel-breakfast.png`
-
-  <img src="../../../docs/pixel-art/pixel-breakfast.png" alt="pixel breakfast" width="420"/>
 - Metadata: Pixel Art · `square` · `1024x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1jmodcx/animated_pixel_art_food_prompts_included/)
 
 ```text

@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 1 · MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)
 
-- Image: `docs/anime-manga/anime-jjk-action.png`
-
-  <img src="../../../docs/anime-manga/anime-jjk-action.png" alt="anime jjk action" width="420"/>
 - Metadata: Anime & Manga · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -23,9 +20,6 @@ Art direction: MAPPA-style digital 2D animation — heavy cel shading, crisp lin
 
 ### No. 2 · Shōnen battle key-visual (Naruto-Shippuden aesthetic)
 
-- Image: `docs/anime-manga/anime-naruto-clash.png`
-
-  <img src="../../../docs/anime-manga/anime-naruto-clash.png" alt="anime naruto clash" width="420"/>
 - Metadata: Anime & Manga · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -42,9 +36,6 @@ Art direction: Studio Pierrot Naruto-Shippuden aesthetic — dynamic perspective
 
 ### No. 3 · Shōnen manga two-page spread (basketball slam dunk)
 
-- Image: `docs/anime-manga/manga-spread.png`
-
-  <img src="../../../docs/anime-manga/manga-spread.png" alt="manga spread" width="420"/>
 - Metadata: Anime & Manga · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -66,9 +57,6 @@ Dialogue balloons intentionally blank; only the two sound effects are visible.
 
 ### No. 4 · Manga relationship map — *A Tale of Two Cities*
 
-- Image: `docs/anime-manga/manga-relationship.png`
-
-  <img src="../../../docs/anime-manga/manga-relationship.png" alt="manga relationship" width="420"/>
 - Metadata: Anime & Manga · `portrait` · `1024x1536` · Author: @cht0001 · Source: [X](https://x.com/cht0001)
 
 ```text
@@ -88,9 +76,6 @@ Title "A TALE OF TWO CITIES" in elegant serif at top. Decorative border echoes 1
 
 ### No. 5 · 16-panel anime expression grid
 
-- Image: `docs/anime-manga/anime-expression-grid.png`
-
-  <img src="../../../docs/anime-manga/anime-expression-grid.png" alt="anime expression grid" width="420"/>
 - Metadata: Anime & Manga · `square` · `1024x1024` · Author: Unknown · Source: [source article](https://mp.weixin.qq.com/s/ASxig6mFVYxrIE8-8Fthew)
 
 ```text
@@ -99,9 +84,6 @@ Create a 16-panel expression grid of a silver-haired, blue-eyed anime girl. Her 
 
 ### No. 6 · Elegant cafe anime fashion portrait
 
-- Image: `docs/anime-manga/anime-cafe-stockings-fashion.png`
-
-  <img src="../../../docs/anime-manga/anime-cafe-stockings-fashion.png" alt="anime cafe stockings fashion" width="420"/>
 - Metadata: Anime & Manga · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -110,9 +92,6 @@ Create a tasteful portrait-oriented anime fashion illustration of an adult woman
 
 ### No. 7 · Neon arcade anime fashion portrait
 
-- Image: `docs/anime-manga/anime-arcade-stockings-fashion.png`
-
-  <img src="../../../docs/anime-manga/anime-arcade-stockings-fashion.png" alt="anime arcade stockings fashion" width="420"/>
 - Metadata: Anime & Manga · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -121,9 +100,6 @@ Create a portrait-oriented anime fashion illustration of an adult woman, age 25,
 
 ### No. 8 · Spring cafe anime ensemble
 
-- Image: `docs/anime-manga/anime-girls-sweet-group.png`
-
-  <img src="../../../docs/anime-manga/anime-girls-sweet-group.png" alt="anime girls sweet group" width="420"/>
 - Metadata: Anime & Manga · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -132,9 +108,6 @@ Create a landscape anime ensemble key visual featuring six distinct adult young 
 
 ### No. 9 · Ten-panel anime character grid
 
-- Image: `docs/anime-manga/anime-ten-panel-character-grid.png`
-
-  <img src="../../../docs/anime-manga/anime-ten-panel-character-grid.png" alt="anime ten panel character grid" width="420"/>
 - Metadata: Anime & Manga · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -143,9 +116,6 @@ Create a single landscape image containing a clean 2×5 ten-panel anime characte
 
 ### No. 10 · Tide Brothers 19-page manga proof sheet
 
-- Image: `docs/anime-manga/tide-brothers-19-page-manga.png`
-
-  <img src="../../../docs/anime-manga/tide-brothers-19-page-manga.png" alt="tide brothers 19 page manga" width="420"/>
 - Metadata: Anime & Manga · `tall` · `2160x3840` · Curated
 
 ```text
@@ -154,9 +124,6 @@ Create one tall manga chapter proof sheet containing 19 numbered miniature pages
 
 ### No. 11 · Roadside mirror anime fashion selfie
 
-- Image: `docs/anime-manga/anime-roadside-mirror-fashion.png`
-
-  <img src="../../../docs/anime-manga/anime-roadside-mirror-fashion.png" alt="anime roadside mirror fashion" width="420"/>
 - Metadata: Anime & Manga · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -165,9 +132,6 @@ Create a portrait-oriented anime fashion illustration of an adult woman, age 24,
 
 ### No. 12 · Rainy bus-stop mirror anime portrait
 
-- Image: `docs/anime-manga/anime-rainy-bus-stop-mirror.png`
-
-  <img src="../../../docs/anime-manga/anime-rainy-bus-stop-mirror.png" alt="anime rainy bus stop mirror" width="420"/>
 - Metadata: Anime & Manga · `portrait` · `1024x1536` · Curated
 
 ```text

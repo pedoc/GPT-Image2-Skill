@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 50 · Chinese ink-wash mountain landscape
 
-- Image: `docs/ink-chinese/ink-landscape.png`
-
-  <img src="../../../docs/ink-chinese/ink-landscape.png" alt="ink landscape" width="420"/>
 - Metadata: Ink & Chinese · `portrait` · `1024x1536` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
 
 ```text
@@ -17,9 +14,6 @@ A traditional Chinese ink-wash (水墨) landscape painting of mist-shrouded moun
 
 ### No. 51 · Song dynasty night-market handscroll
 
-- Image: `docs/ink-chinese/song-night-market-scroll.png`
-
-  <img src="../../../docs/ink-chinese/song-night-market-scroll.png" alt="song night market scroll" width="420"/>
 - Metadata: Ink & Chinese · `landscape` · `1536x1024` · Curated
 
 ```text

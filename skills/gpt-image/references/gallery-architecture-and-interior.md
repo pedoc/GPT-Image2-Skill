@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 118 · Japanese Minimalist Living Room
 
-- Image: `docs/architecture-interior/japanese-minimalist-living-room-render.png`
-
-  <img src="../../../docs/architecture-interior/japanese-minimalist-living-room-render.png" alt="japanese minimalist living room render" width="420"/>
 - Metadata: Architecture & Interior · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -17,9 +14,6 @@ Render a serene Japanese minimalist living room interior in photorealistic archi
 
 ### No. 119 · Brutalist Concrete Museum Atrium
 
-- Image: `docs/architecture-interior/brutalist-concrete-museum-atrium.png`
-
-  <img src="../../../docs/architecture-interior/brutalist-concrete-museum-atrium.png" alt="brutalist concrete museum atrium" width="420"/>
 - Metadata: Architecture & Interior · `wide` · `2048x1152` · Curated
 
 ```text
@@ -28,9 +22,6 @@ Create a photorealistic interior render of a monumental brutalist museum atrium 
 
 ### No. 120 · Mid-Century Modern Office
 
-- Image: `docs/architecture-interior/mid-century-modern-office-studio.png`
-
-  <img src="../../../docs/architecture-interior/mid-century-modern-office-studio.png" alt="mid century modern office studio" width="420"/>
 - Metadata: Architecture & Interior · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -39,9 +30,6 @@ Render a sophisticated mid-century modern creative office in photorealistic inte
 
 ### No. 121 · Biophilic Biotech Lab
 
-- Image: `docs/architecture-interior/biophilic-biotech-lab-render.png`
-
-  <img src="../../../docs/architecture-interior/biophilic-biotech-lab-render.png" alt="biophilic biotech lab render" width="420"/>
 - Metadata: Architecture & Interior · `wide` · `2048x1152` · Curated
 
 ```text
@@ -50,9 +38,6 @@ Generate a high-end photorealistic render of a future-facing biotech laboratory 
 
 ### No. 122 · Gothic Cathedral Interior
 
-- Image: `docs/architecture-interior/gothic-cathedral-interior-render.png`
-
-  <img src="../../../docs/architecture-interior/gothic-cathedral-interior-render.png" alt="gothic cathedral interior render" width="420"/>
 - Metadata: Architecture & Interior · `tall` · `2160x3840` · Curated
 
 ```text

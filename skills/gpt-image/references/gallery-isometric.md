@@ -6,20 +6,17 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 54 · Isometric miniature cafe district
 
-- Image: `docs/isometric/isometric-cafe.png`
-
-  <img src="../../../docs/isometric/isometric-cafe.png" alt="isometric cafe" width="420"/>
 - Metadata: Isometric · `square` · `1024x1024` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
 
 ```text
 A detailed isometric 3D miniature scene of a two-block cafe district, clean geometric forms, precise 30° isometric perspective alignment. A corner cafe with outdoor umbrella seating, a bookstore next door with stacks of books visible through the window, a bakery with a window display of pastries, a bicycle parked at the curb, a small fountain in a mini-plaza, planter boxes with tiny trees, a food cart on the corner selling coffee, stylised miniature pedestrians in various poses, tiled roof tops with ventilation details. Soft ambient lighting from upper-left, no harsh shadows, pastel-plus-muted palette (terracotta rooftops, cream walls, sage greens, dusty blue accents), slight atmospheric haze, subtle ambient occlusion in corners, high-detail miniature texturing. Professional rendering quality, suitable for editorial or marketing materials. Flat colored background in a single soft cream tone, no ground plane shadow, scene floating like a diorama.
 ```
 
-- Sunburst cutaway adaptation: `docs/isometric/cafe-cutaway-sunburst.png`
+#### Cutaway edit variation
 
-  <img src="../../../docs/isometric/cafe-cutaway-sunburst.png" alt="Sunburst night cafe district with cutaway interiors and rooftop greenhouse" width="420"/>
-- Output metadata: `gpt-image-2.5-sunburst` · `high` · `2048x2048` · `2026-09-09` · `/v1/images/edits`
-- Input reference: `docs/isometric/isometric-cafe.png` · Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
+Provide an isometric cafe district image as the input reference.
+
+- Reference attribution: Author: EvoLinkAI · Source: [GitHub archive](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts)
 - Adapted edit prompt: Curated
 
 ```text
@@ -30,14 +27,8 @@ Open the front-facing walls to reveal the cafe espresso bar and upstairs jazz lo
 Use warm amber interiors against deep teal evening shadows, tactile brick, glazed tiles, glass and brushed brass. Preserve crisp detail throughout the scene, with a clean dark navy background and room around the floating diorama. Give the scene depth through cutaway rooms and layered architecture. Use restrained, readable storefront lettering: "NIGHT OWL CAFE", "OPEN BOOKS", and "DAWN BAKERY". Keep the composition square and visually balanced.
 ```
 
-- Visual QA: The main street layout, fountain and three requested shop names remain clear. Cutaway rooms, jazz lounge, spiral staircase and rooftop greenhouse appear. The result has two enclosed storeys plus roof space, short of the requested three enclosed storeys.
-- Run evidence: [Sunburst sample runs](../../../docs/sunburst-samples.md).
-
 ### No. 55 · Isometric fantasy village map
 
-- Image: `docs/isometric/isometric-fantasy-village.png`
-
-  <img src="../../../docs/isometric/isometric-fantasy-village.png" alt="isometric fantasy village" width="420"/>
 - Metadata: Isometric · `square` · `1024x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1hkqr4x/isometric_maps_prompts_included/)
 
 ```text

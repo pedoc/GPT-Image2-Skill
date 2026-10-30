@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 63 · RAW iPhone — 42nd Street subway
 
-- Image: `docs/photography/photoreal-subway.png`
-
-  <img src="../../../docs/photography/photoreal-subway.png" alt="photoreal subway" width="420"/>
 - Metadata: Photography · `landscape` · `1536x1024` · Author: @WolfRiccardo · Source: [X](https://x.com/WolfRiccardo)
 
 ```text
@@ -17,9 +14,6 @@ Create a completely RAW quality, unprocessed, unedited image with full iPhone ca
 
 ### No. 64 · Handwritten notebook flatlay
 
-- Image: `docs/photography/handwritten-notebook.png`
-
-  <img src="../../../docs/photography/handwritten-notebook.png" alt="handwritten notebook" width="420"/>
 - Metadata: Photography · `landscape` · `1536x1024` · Author: @patrickassale · Source: [X](https://x.com/patrickassale)
 
 ```text
@@ -28,9 +22,6 @@ Amateur photo of an open notebook lying flat, filled with handwritten notes in b
 
 ### No. 65 · Chess board mid-tournament game
 
-- Image: `docs/photography/chess-midgame.png`
-
-  <img src="../../../docs/photography/chess-midgame.png" alt="chess midgame" width="420"/>
 - Metadata: Photography · `landscape` · `1536x1024` · Author: @EddGorenstein · Source: [X](https://x.com/EddGorenstein)
 
 ```text
@@ -41,9 +32,6 @@ Materials: polished wooden staunton-style pieces — dark side in rosewood, ligh
 
 ### No. 66 · 360° equirectangular jungle panorama
 
-- Image: `docs/photography/panorama-jungle.png`
-
-  <img src="../../../docs/photography/panorama-jungle.png" alt="panorama jungle" width="420"/>
 - Metadata: Photography · `wide` · `2048x1152` · Author: @AIimagined · Source: [X](https://x.com/AIimagined)
 
 ```text
@@ -56,9 +44,6 @@ Lighting: late-afternoon golden hour, warm directional backlight through the can
 
 ### No. 67 · Natural SNS portrait
 
-- Image: `docs/photography/natural-sns-portrait.png`
-
-  <img src="../../../docs/photography/natural-sns-portrait.png" alt="Natural upper-body mirror selfie" width="420"/>
 - Metadata: Photography · `portrait` · `1087x1447` · Author: @LunarXuan · Source: [GitHub](https://github.com/LunarXuan/natural-sns-portrait)
 
 English realism guidelines from the source skill, paired with a contributor-selected mirror-selfie example. Use these guidelines alongside a scene, outfit, pose, and framing request; they are not the complete generation prompt for this image.

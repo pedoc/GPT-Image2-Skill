@@ -2,7 +2,7 @@
 
 Keep Image 2's [gallery](gallery.md), [craft](craft.md) and
 [historical Cookbook](openai-cookbook.md) available; do not preload them for 2.5.
-A precise 2.5 brief can go straight to preflight and the CLI after model confirmation.
+A precise 2.5 brief can go straight to preflight and the bundled script after model confirmation.
 
 ## Choose only what is missing
 

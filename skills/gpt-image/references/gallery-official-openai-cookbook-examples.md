@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 97 · Automatic coffee machine infographic
 
-- Image: `docs/official-openai-cookbook/coffee-infographic.png`
-
-  <img src="../../../docs/official-openai-cookbook/coffee-infographic.png" alt="coffee infographic" width="420"/>
 - Metadata: Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
 
 ```text
@@ -19,9 +16,6 @@ I'd like to understand technically and visually the flow.
 
 ### No. 98 · Photorealistic elderly sailor
 
-- Image: `docs/official-openai-cookbook/sailor.png`
-
-  <img src="../../../docs/official-openai-cookbook/sailor.png" alt="sailor" width="420"/>
 - Metadata: Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
 
 ```text
@@ -34,9 +28,6 @@ The image should feel honest and unposed, with real skin texture, worn materials
 
 ### No. 99 · Minimalist bakery logo — Field & Flour
 
-- Image: `docs/official-openai-cookbook/logo-bakery.png`
-
-  <img src="../../../docs/official-openai-cookbook/logo-bakery.png" alt="logo bakery" width="420"/>
 - Metadata: Official OpenAI Cookbook Examples · `square` · `1024x1024` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
 
 ```text
@@ -48,9 +39,6 @@ Plain background. Deliver a single centered logo with generous padding. No water
 
 ### No. 100 · 4-panel pet comic strip
 
-- Image: `docs/official-openai-cookbook/comic-pet.png`
-
-  <img src="../../../docs/official-openai-cookbook/comic-pet.png" alt="comic pet" width="420"/>
 - Metadata: Official OpenAI Cookbook Examples · `portrait` · `1024x1536` · Author: OpenAI · Source: [OpenAI Cookbook](https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb)
 
 ```text

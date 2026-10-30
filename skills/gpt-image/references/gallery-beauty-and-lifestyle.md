@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 154 · Quiet-luxury skincare morning tray
 
-- Image: `docs/beauty-lifestyle/skincare-morning-routine-tray.png`
-
-  <img src="../../../docs/beauty-lifestyle/skincare-morning-routine-tray.png" alt="skincare morning routine tray" width="420"/>
 - Metadata: Beauty & Lifestyle · `portrait` · `1024x1536` · Curated
 
 ```text
@@ -17,9 +14,6 @@ Create a 3:4 vertical beauty lifestyle photograph for a premium skincare morning
 
 ### No. 155 · Fragrance evening ritual vanity
 
-- Image: `docs/beauty-lifestyle/fragrance-evening-ritual-vanity.png`
-
-  <img src="../../../docs/beauty-lifestyle/fragrance-evening-ritual-vanity.png" alt="fragrance evening ritual vanity" width="420"/>
 - Metadata: Beauty & Lifestyle · `portrait` · `1024x1536` · Curated
 
 ```text

@@ -16,13 +16,6 @@ __pycache__/
 *.jpg
 *.jpeg
 *.webp
-!docs/**/
-!docs/*.png
-!docs/*.jpg
-!docs/**/*.png
-!docs/**/*.jpg
-!docs/**/*.jpeg
-!docs/**/*.webp
 
 # macOS
 .DS_Store

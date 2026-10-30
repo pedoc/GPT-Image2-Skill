@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 31 · Official character reference sheet
 
-- Image: `docs/character-design/character-sheet.png`
-
-  <img src="../../../docs/character-design/character-sheet.png" alt="character sheet" width="420"/>
 - Metadata: Character Design · `landscape` · `1536x1024` · Author: @MANISH1027512 · Source: [X](https://x.com/MANISH1027512)
 
 ```text
@@ -23,9 +20,6 @@ Based on this character and background, please create a character reference shee
 
 ### No. 32 · Elven archer sketchbook concept sheet
 
-- Image: `docs/character-design/elven-archer-sheet.png`
-
-  <img src="../../../docs/character-design/elven-archer-sheet.png" alt="elven archer sheet" width="420"/>
 - Metadata: Character Design · `portrait` · `1024x1536` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/midjourney/comments/1jrcpan/fantasy_concept_arts_with_v7_prompts_included/)
 
 ```text

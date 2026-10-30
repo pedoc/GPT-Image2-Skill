@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 156 · Zoo visitor wayfinding map
 
-- Image: `docs/events-experience/zoo-visitor-wayfinding-map.png`
-
-  <img src="../../../docs/events-experience/zoo-visitor-wayfinding-map.png" alt="zoo visitor wayfinding map" width="420"/>
 - Metadata: Events & Experience · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -17,9 +14,6 @@ Design a polished visitor wayfinding map for a fictional modern city zoo named "
 
 ### No. 157 · Huashan 5A scenic wayfinding map
 
-- Image: `docs/events-experience/huashan-5a-scenic-wayfinding-map.png`
-
-  <img src="../../../docs/events-experience/huashan-5a-scenic-wayfinding-map.png" alt="huashan 5a scenic wayfinding map" width="420"/>
 - Metadata: Events & Experience · `landscape` · `1536x1024` · Curated
 
 ```text

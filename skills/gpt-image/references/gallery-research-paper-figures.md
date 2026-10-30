@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 76 · Patient cohort and multimodal biomarker workflow
 
-- Image: `docs/research-paper-figures/clinical-cohort-flow.png`
-
-  <img src="../../../docs/research-paper-figures/clinical-cohort-flow.png" alt="clinical cohort flow" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -27,9 +24,6 @@ Style requirements: white background, light gray axes, thin lines, ample margins
 
 ### No. 77 · Single-cell immune atlas reveals treatment-response states
 
-- Image: `docs/research-paper-figures/single-cell-immune-atlas.png`
-
-  <img src="../../../docs/research-paper-figures/single-cell-immune-atlas.png" alt="single cell immune atlas" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -48,9 +42,6 @@ Style requirements: literature-science design, white background, thin gray axes,
 
 ### No. 78 · Multimodal medical-AI method figure
 
-- Image: `docs/research-paper-figures/multimodal-medical-ai-method.png`
-
-  <img src="../../../docs/research-paper-figures/multimodal-medical-ai-method.png" alt="multimodal medical ai method" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -68,9 +59,6 @@ Style requirements: soft Nature/Science palette (muted teal, dusty blue, sage gr
 
 ### No. 79 · Therapeutic response bar and forest plot
 
-- Image: `docs/research-paper-figures/therapeutic-response-bar-forest.png`
-
-  <img src="../../../docs/research-paper-figures/therapeutic-response-bar-forest.png" alt="therapeutic response bar forest" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -89,9 +77,6 @@ Style requirements: literature-science aesthetic, white background, soft desatur
 
 ### No. 80 · Transformer encoder–decoder architecture
 
-- Image: `docs/research-paper-figures/transformer-arch.png`
-
-  <img src="../../../docs/research-paper-figures/transformer-arch.png" alt="transformer arch" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Vaswani et al., 2017
 
 ```text
@@ -106,9 +91,6 @@ Title: "Transformer: encoder–decoder with multi-head attention". Subtitle: "Va
 
 ### No. 81 · Retrieval-Augmented Generation pipeline
 
-- Image: `docs/research-paper-figures/rag-pipeline.png`
-
-  <img src="../../../docs/research-paper-figures/rag-pipeline.png" alt="rag pipeline" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Lewis et al., 2020
 
 ```text
@@ -128,9 +110,6 @@ Title: "Retrieval-Augmented Generation pipeline". Subtitle: "Lewis et al., 2020"
 
 ### No. 82 · Multi-agent LLM system architecture
 
-- Image: `docs/research-paper-figures/agent-architecture.png`
-
-  <img src="../../../docs/research-paper-figures/agent-architecture.png" alt="agent architecture" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** AutoGen (Wu 2023), LangGraph, Anthropic Managed Agents
 
 ```text
@@ -151,9 +130,6 @@ Title: "Agentic LLM system: planner orchestrates specialised workers over a shar
 
 ### No. 83 · Denoising diffusion forward/reverse chain
 
-- Image: `docs/research-paper-figures/diffusion-chain.png`
-
-  <img src="../../../docs/research-paper-figures/diffusion-chain.png" alt="diffusion chain" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Ho et al., 2020
 
 ```text
@@ -170,9 +146,6 @@ Title: "Denoising Diffusion: forward corruption and learned reverse". Subtitle: 
 
 ### No. 84 · Empirical scaling laws plot
 
-- Image: `docs/research-paper-figures/scaling-curves.png`
-
-  <img src="../../../docs/research-paper-figures/scaling-curves.png" alt="scaling curves" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Kaplan 2020 / Chinchilla (Hoffmann 2022)
 
 ```text
@@ -190,9 +163,6 @@ Title: "Empirical scaling laws: loss vs training compute". Subtitle: "four model
 
 ### No. 85 · Benchmark comparison heatmap
 
-- Image: `docs/research-paper-figures/benchmark-heatmap.png`
-
-  <img src="../../../docs/research-paper-figures/benchmark-heatmap.png" alt="benchmark heatmap" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** HELM (Liang 2023)
 
 ```text
@@ -210,9 +180,6 @@ Title: "Benchmark comparison across 10 frontier LLMs". Subtitle: "zero-shot accu
 
 ### No. 86 · Ablation bar chart with error bars
 
-- Image: `docs/research-paper-figures/ablation-bars.png`
-
-  <img src="../../../docs/research-paper-figures/ablation-bars.png" alt="ablation bars" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -233,9 +200,6 @@ Title: "Ablation of core reasoning components across 5 benchmarks". Subtitle: "e
 
 ### No. 87 · LLM pretraining data-mixture sankey
 
-- Image: `docs/research-paper-figures/data-sankey.png`
-
-  <img src="../../../docs/research-paper-figures/data-sankey.png" alt="data sankey" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -254,9 +218,6 @@ Title: "LLM pretraining data mixture and downstream splits". Subtitle: "token co
 
 ### No. 88 · Multi-head attention heatmaps
 
-- Image: `docs/research-paper-figures/attention-heatmap.png`
-
-  <img src="../../../docs/research-paper-figures/attention-heatmap.png" alt="attention heatmap" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Clark et al., 2019
 
 ```text
@@ -277,9 +238,6 @@ Title: "Representative multi-head attention patterns in a 16-layer Transformer".
 
 ### No. 89 · Frontier LLM family tree (2018–2026)
 
-- Image: `docs/research-paper-figures/model-timeline.png`
-
-  <img src="../../../docs/research-paper-figures/model-timeline.png" alt="model timeline" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -298,9 +256,6 @@ Title: "Frontier LLM lineage, 2018 – 2026". Subtitle: "chips = model releases;
 
 ### No. 90 · ReAct reasoning trace
 
-- Image: `docs/research-paper-figures/react-trace.png`
-
-  <img src="../../../docs/research-paper-figures/react-trace.png" alt="react trace" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Yao et al., 2022
 
 ```text
@@ -326,9 +281,6 @@ Title: "ReAct trace: interleaved reasoning and tool-use on a factual-QA task". S
 
 ### No. 91 · Memory Router for Multimodal Agents
 
-- Image: `docs/research-paper-figures/memory-router-figure.png`
-
-  <img src="../../../docs/research-paper-figures/memory-router-figure.png" alt="memory router figure" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -337,9 +289,6 @@ Design a premium conference-paper figure for an imaginary method called Memory R
 
 ### No. 92 · Frontier Safety Eval Loop
 
-- Image: `docs/research-paper-figures/frontier-safety-eval-loop.png`
-
-  <img src="../../../docs/research-paper-figures/frontier-safety-eval-loop.png" alt="frontier safety eval loop" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -348,9 +297,6 @@ Create a beautiful research flowchart for an AI safety benchmark pipeline called
 
 ### No. 93 · ICLR-style method figure
 
-- Image: `docs/research-paper-figures/hmr-iclr-figure.png`
-
-  <img src="../../../docs/research-paper-figures/hmr-iclr-figure.png" alt="hmr iclr figure" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69d396140000000023012282)
 
 ```text
@@ -359,9 +305,6 @@ Create a polished ICLR-style Figure 1 for an imaginary method called "Hierarchic
 
 ### No. 94 · LLM Persona Atlas
 
-- Image: `docs/research-paper-figures/llm-persona-atlas.png`
-
-  <img src="../../../docs/research-paper-figures/llm-persona-atlas.png" alt="llm persona atlas" width="420"/>
 - Metadata: Research Paper Figures · `wide` · `2048x1152` · Curated
 
 ```text
@@ -376,9 +319,6 @@ Keep typography sparse, crisp, and clean. Add a small title "LLM Persona Atlas" 
 
 ### No. 95 · Multimodal agent experiment workflow figure
 
-- Image: `docs/research-paper-figures/multimodal-agent-experiment-workflow.png`
-
-  <img src="../../../docs/research-paper-figures/multimodal-agent-experiment-workflow.png" alt="multimodal agent experiment workflow" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Author: Unknown · Source: [Xiaohongshu](https://www.xiaohongshu.com/explore/69e997a90000000022027c30)
 
 ```text
@@ -387,9 +327,6 @@ Create a polished research workflow figure for a multimodal agent evaluation exp
 
 ### No. 96 · Indirect prompt-injection attack flow
 
-- Image: `docs/research-paper-figures/prompt-injection-flow.png`
-
-  <img src="../../../docs/research-paper-figures/prompt-injection-flow.png" alt="prompt injection flow" width="420"/>
 - Metadata: Research Paper Figures · `landscape` · `1536x1024` · Curated · **Cites:** Greshake et al., 2023
 
 ```text

@@ -16,7 +16,7 @@ Improved preservation is not a pixel lock. Repeated edits can drift; exact
 unchanged regions require compositing rather than relying on prompts alone.
 [Official migration caution](https://developers.openai.com/api/docs/guides/image-prompting?model=gpt-image-2.5#migrate-an-existing-workflow)
 
-## Local workflow using the existing CLI
+## Local workflow using the existing bundled script
 
 1. Inspect the actual inputs. Assign each a role: base scene, identity, garment,
    style or inserted object. Keep this order consistent with repeated `-i` flags.
@@ -25,7 +25,7 @@ unchanged regions require compositing rather than relying on prompts alone.
 3. Keep the selected model explicit. Use [models.md](models.md#parameters) for
    API settings; do not infer that 2.5 requires `--input-fidelity high`.
 4. Compare the changed region and the rest of the image. For another authorized
-   edit, pass the actual approved output through `-i`; the CLI does not retain
+   edit, pass the actual approved output through `-i`; the bundled script does not retain
    a conversation or attach an image merely because its filename is in the prompt.
 
 | Task | Inspect before accepting |

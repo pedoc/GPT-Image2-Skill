@@ -1,13 +1,21 @@
 """Offline credential precedence with temporary files and fake keys only."""
 import os
 from pathlib import Path
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
 
+import openai
 from openai import OpenAI
 
-from gpt_image_cli import cli
+if int(openai.__version__.split('.')[0]) >= 3:
+    import httpx2 as httpx
+else:
+    import httpx
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'skills/gpt-image/scripts'))
+import generate
 
 
 class CredentialTests(unittest.TestCase):
@@ -19,18 +27,19 @@ class CredentialTests(unittest.TestCase):
         self.cwd.mkdir()
         self.home.mkdir()
         self.enterContext(patch.dict(os.environ, {}, clear=True))
-        self.enterContext(patch.object(cli.Path, 'cwd', return_value=self.cwd))
-        self.enterContext(patch.object(cli.Path, 'home', return_value=self.home))
+        self.enterContext(patch.object(generate.Path, 'cwd', return_value=self.cwd))
+        self.enterContext(patch.object(generate.Path, 'home', return_value=self.home))
 
     def write_key(self, folder, value):
         (folder / '.env').write_text(f'OPENAI_API_KEY={value}\n', encoding='utf-8')
 
     def assert_selected_key(self, expected):
-        cli._load_env_chain()
+        generate._load_env_chain()
         self.assertEqual(os.environ.get('OPENAI_API_KEY'), expected)
         if expected:
             # Construction reads the selected environment value; no HTTP is sent.
-            with OpenAI(max_retries=0) as client:
+            transport = httpx.MockTransport(lambda request: self.fail('Unexpected HTTP request'))
+            with OpenAI(max_retries=0, http_client=httpx.Client(transport=transport)) as client:
                 self.assertEqual(client.api_key, expected)
                 self.assertEqual(client.max_retries, 0)
 

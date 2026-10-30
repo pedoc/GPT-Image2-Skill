@@ -6,9 +6,6 @@ Load this file only when the request matches this category. For cross-cutting wr
 
 ### No. 26 · Pixar-style 3D animation still (kitten)
 
-- Image: `docs/cinematic-animation/pixar-kitchen.png`
-
-  <img src="../../../docs/cinematic-animation/pixar-kitchen.png" alt="pixar kitchen" width="420"/>
 - Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -23,9 +20,6 @@ Art direction: full-CG Pixar aesthetic — subsurface scattering on ears and whi
 
 ### No. 27 · 1940s film-noir still
 
-- Image: `docs/cinematic-animation/noir-detective.png`
-
-  <img src="../../../docs/cinematic-animation/noir-detective.png" alt="noir detective" width="420"/>
 - Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -38,9 +32,6 @@ Lighting: classic chiaroscuro — single hard key light above right, venetian-bl
 
 ### No. 28 · Professional 6-panel film storyboard
 
-- Image: `docs/cinematic-animation/storyboard.png`
-
-  <img src="../../../docs/cinematic-animation/storyboard.png" alt="storyboard" width="420"/>
 - Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -60,9 +51,6 @@ Art direction: classic animation-school storyboard — pencil line-work, grey ma
 
 ### No. 29 · Studio-Ghibli-style animation still
 
-- Image: `docs/cinematic-animation/ghibli-cottage.png`
-
-  <img src="../../../docs/cinematic-animation/ghibli-cottage.png" alt="ghibli cottage" width="420"/>
 - Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Curated
 
 ```text
@@ -73,9 +61,6 @@ Art direction: classic Miyazaki / Studio Ghibli watercolor-gouache style. Soft p
 
 ### No. 30 · VHS grocery-store chaos still
 
-- Image: `docs/cinematic-animation/vhs-grocery-chaos.png`
-
-  <img src="../../../docs/cinematic-animation/vhs-grocery-chaos.png" alt="vhs grocery chaos" width="420"/>
 - Metadata: Cinematic & Animation · `landscape` · `1536x1024` · Author: Unknown · Source: [Reddit](https://www.reddit.com/r/ChatGPT/comments/1jk0p3v/tried_to_push_the_new_image_model_with_an/)
 
 ```text

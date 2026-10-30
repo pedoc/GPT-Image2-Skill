@@ -1,13 +1,12 @@
 ---
 name: gpt-image
-description: "Generate or edit images with GPT Image 2 or 2.5 through the packaged CLI and Reference Gallery. Use for image requests including imprecise 'GPT 2.5' model names, posters, typography, reference edits, and inpainting; resolve the model choice before generation."
-compatibility: "Requires Python 3.11+ and either `gpt-image`, `uv`, or `uvx`. CLI/API calls read `OPENAI_API_KEY` and may incur OpenAI API charges."
-metadata: {"openclaw":{"requires":{"anyBins":["gpt-image","uv","uvx"]},"primaryEnv":"OPENAI_API_KEY","homepage":"https://github.com/wuyoscar/gpt_image_2_skill"}}
+description: "Generate or edit images with GPT Image 2 or 2.5 through the bundled uv script and Reference Gallery. Use for image requests including imprecise 'GPT 2.5' model names, posters, typography, reference edits, and inpainting; resolve the model choice before generation."
+metadata: {"openclaw":{"requires":{"bins":["uv"]},"primaryEnv":"OPENAI_API_KEY","homepage":"https://github.com/wuyoscar/gpt_image_2_skill"}}
 ---
 
 # gpt-image
 
-Agent runbook for GPT Image 2 / 2.5 generation/editing. Use the prompt library + packaged CLI. Do not reimplement image API code.
+Generate/edit with the prompt library and bundled `scripts/generate.py`. Requires `uv` and Python 3.11+; script dependencies are declared inline. Do not reimplement image API code.
 
 ## Operating loop
 
@@ -15,12 +14,10 @@ Agent runbook for GPT Image 2 / 2.5 generation/editing. Use the prompt library +
 2. **Choose the reference path**: Image 2 keeps the gallery-first workflow below. For 2.5, a precise brief needs no reference loading; otherwise choose one short task slice.
 3. **Refine only as needed**: preserve the brief. Add a specific gallery case, craft section or template only to fill a concrete gap; do not load them as a bundle for 2.5.
 4. **Confer when useful**: before costly/ambiguous/high-polish calls, present 1–3 matched directions plus planned size/quality; ask at most one concise question at a time. Skip long discussion for precise “generate now” requests with a resolved model.
-5. **Preflight, no side effects**: use existing CLI/skill if present. Check command availability (`command -v gpt-image`), installed tool lists when the tool manager exists, or the runtime’s own skill registry when available. Do not assume a local home path in cloud/hosted runtimes.
-6. **No blind setup**: do not reinstall, overwrite skill folders, create/modify `.env`, or write API keys unless the user explicitly requested setup. Global/shared installs are opt-in only.
-7. **Execute via CLI only**: call `gpt-image` or `scripts/generate.py` with an explicit `--model`. Do not create a new `generate.py`, SDK wrapper, or ad-hoc script for normal image requests.
-8. **Report**: output file path(s), key flags, and one concise refinement suggestion if useful.
+5. **Execute the bundled script**: use the runtime-provided skill path and an explicit `--model`. Check reference/mask paths and agreed flags. Do not probe or install a separate CLI, overwrite skills, modify `.env`, or write API keys for normal image requests.
+6. **Report**: output file path(s), key flags, and one concise refinement suggestion if useful.
 
-Fast path: confirmed 2.5 model + precise prompt + “generate now” → preflight and CLI, without a mandatory reference/craft pass. Do not reconfirm an exact valid model.
+Fast path: confirmed 2.5 model + precise prompt + “generate now” → bundled script, without a mandatory reference/craft pass. Do not reconfirm an exact valid model.
 
 ## Model choice and prompt adaptation
 
@@ -32,32 +29,23 @@ Fast path: confirmed 2.5 model + precise prompt + “generate now” → preflig
 
 - If the model is absent, ambiguous (such as “GPT 2.5”), or misspelled, ask one clear question offering **Flare, Sunburst, and Image 2** with these trade-offs, then wait. For a typo, suggest the likely intended choice without silently correcting it. Do not treat `gpt-image-2.5` as an API model ID.
 - Use an exact supported model ID, an unambiguous choice from this menu, or the user's already confirmed choice for the current task without asking again. If the user explicitly says “you choose,” explain the pick briefly and proceed; consider their task and budget rather than always selecting the most expensive settings.
-- Always pass the chosen ID through `--model`. The CLI retains `gpt-image-2` as its backward-compatible default, but that default is not a substitute for the agent resolving the user's choice.
+- Always pass the chosen ID through `--model`. The script retains `gpt-image-2` as its default; the agent must still resolve the user's choice.
 - Keep model confirmation, cost discussion, and API flags separate from the final image prompt. Use the model-specific reference path below only when it helps the task. Preserve the user's exact text, intended content, reference identity, and edit invariants; obtain confirmation before material prompt changes.
 - Generate one image unless the user requested more. Do not silently switch models, change material prompt content, or run multiple model/prompt variants or comparisons. Ask before additional paid variants. For an authorized same-prompt comparison, keep the prompt, size, and quality identical unless the user asks to vary them.
 - Consult `references/models.md` when parameter support or validation status needs checking. On an invalid-model, access/403, quota, or policy failure, report the failure and stop; do not switch models or rewrite the prompt to retry automatically.
 
-## CLI resolution
-
-Preferred call order:
+## Run the bundled script
 
 ```bash
-# Existing CLI on PATH
-gpt-image --model MODEL_ID -p "PROMPT" [-f OUT] [-i REF...] [-m MASK] [options]
-
-# Installed skill folder; use runtime-provided skill path when available
 uv run "$SKILL_DIR/scripts/generate.py" --model MODEL_ID -p "PROMPT" [-f OUT] [-i REF...] [-m MASK] [options]
-
-# Direct transient CLI when the user requested setup/one-off CLI execution
-uvx --from git+https://github.com/wuyoscar/gpt_image_2_skill gpt-image --model MODEL_ID -p "PROMPT" [options]
 ```
 
-`scripts/generate.py` is a launcher: repo-local `src/gpt_image_cli` → installed `gpt-image` → PATH `gpt-image` → transient `uvx`/`uv` fallback.
+`SKILL_DIR` is the installed skill folder supplied by the runtime. The script contains the complete implementation and works when only this skill folder is copied; it needs no repository package or PATH command. `uv` prepares dependencies from its inline metadata and adjacent lockfile.
 
 ## Key and cost rules
 
-- CLI reads `OPENAI_API_KEY` from process env, then `.env`, then `~/.env` without overriding existing env; successful API calls may bill the user’s OpenAI account.
-- If host/runtime has native platform-managed image generation and the user wants that path, use the host tool instead of this CLI.
+- The script reads `OPENAI_API_KEY` from process env, then `.env`, then `~/.env` without overriding existing env; successful API calls may bill the user’s OpenAI account.
+- If host/runtime has native platform-managed image generation and the user wants that path, use the host tool instead of this script.
 - If `OPENAI_API_KEY` is unset, report missing key or use host-native generation when requested; do not write secrets.
 - If user wants to avoid local-key use, respect `unset OPENAI_API_KEY`; if a key exists in `.env`/`~/.env`, tell them to remove/rename it for the session rather than working around it.
 - Never print secret values.
@@ -84,7 +72,7 @@ uvx --from git+https://github.com/wuyoscar/gpt_image_2_skill gpt-image --model M
 Quality starting points (not guarantees; keep the user's agreed setting). For 2.5, these take precedence over fixed quality advice in older craft references:
 - `low`: cheap drafts and broad exploration; multiple variants require user authorization.
 - `medium`: normal exploration, style probing, balanced cost.
-- `high`: CLI default and a candidate for final assets, dense text, diagrams and UI. On 2.5, evaluate against the task requirements; do not assume `medium` fails or a higher setting always wins.
+- `high`: script default and a candidate for final assets, dense text, diagrams and UI. On 2.5, evaluate against the task requirements; do not assume `medium` fails or a higher setting always wins.
 - `xhigh` / `max`: 2.5-only options for higher-quality work; discuss the cost trade-off before increasing an already agreed quality. Do not use them automatically for budget-conscious requests.
 
 Size policy:
@@ -117,7 +105,7 @@ Load the smallest useful slice, not both model routes. Add a second task slice o
 ## Verification
 
 - Before API call: check the resolved model and explicit `--model`, endpoint mode, size, quality, output path, and required reference/mask files. Omit `--input-fidelity` unless explicitly needed; do not assume 2.5 always uses or accepts `high`.
-- After CLI call: report path(s) printed by the CLI and surface stderr on failure.
+- After execution: report path(s) printed by the script and surface stderr on failure.
 - For edits/inpaints: verify `-i` paths exist; verify `-m` exists when used.
 
-Preserve `Curated` vs `Author + Source` metadata when adapting examples. Add new collected prompts to the Reference Gallery before README promotion.
+Preserve `Curated` vs `Author + Source` metadata when adapting examples. Add new prompts to the matching reference category. For edit examples, obtain the input image from the user.

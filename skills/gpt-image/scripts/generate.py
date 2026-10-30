@@ -8,27 +8,31 @@
 # ///
 """Generate or edit images with the skill's self-contained uv script.
 
-Reads OPENAI_API_KEY from process env, ./.env, then ~/.env without
-replacing an existing variable. Saves PNG/JPEG/WebP and prints output paths.
+Reads image-specific settings from GPT_IMAGE_* or ~/.config/gpt-image/config.toml.
+Falls back to OPENAI_* from process env, ./.env, then ~/.env without replacing
+an existing variable. Saves PNG/JPEG/WebP and prints output paths.
 Exit codes: 0 success, 1 API error, 2 bad arguments or missing key.
 
 Run from the repository root:
     uv run skills/gpt-image/scripts/generate.py --model MODEL_ID -p "PROMPT"
 
 Installed skills use their runtime-provided path:
-    uv run "$SKILL_DIR/scripts/generate.py" --model MODEL_ID -p "PROMPT"
+    uv run "/actual/installed/gpt-image/scripts/generate.py" -p "PROMPT"
 """
 from __future__ import annotations
 
 import argparse
 import base64
+import math
 import os
 import re
 import sys
+import tomllib
 import urllib.request
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 from openai import APIError, OpenAI
@@ -56,8 +60,50 @@ SIZE_SHORTCUTS: dict[str, str] = {
 }
 
 DEFAULT_MODEL = "gpt-image-2"
+DEFAULT_BASE_URL = "https://api.openai.com/v1"
+DEFAULT_TIMEOUT = 600.0
 DEFAULT_SIZE = "1024x1024"
 DEFAULT_MODERATION = "low"
+
+
+def positive_timeout(value: Any) -> float:
+    if isinstance(value, bool):
+        raise ValueError
+    timeout = float(value)
+    if not math.isfinite(timeout) or timeout <= 0:
+        raise ValueError
+    return timeout
+
+
+def read_config(parser: argparse.ArgumentParser, path: Path | None) -> dict[str, Any]:
+    if path is None:
+        configured_path = os.environ.get("GPT_IMAGE_CONFIG")
+        if configured_path is not None:
+            if not configured_path.strip():
+                parser.error("GPT_IMAGE_CONFIG must not be empty")
+            path = Path(configured_path)
+    required = path is not None
+    path = path.expanduser() if path is not None else Path.home() / ".config/gpt-image/config.toml"
+    try:
+        config = tomllib.loads(path.read_text(encoding="utf-8-sig"))
+    except FileNotFoundError:
+        if required:
+            parser.error(f"config file not found: {path}")
+        return {}
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
+        # Parser exceptions may include credential-bearing source lines.
+        parser.error(f"cannot read valid TOML config: {path}")
+    for name, value in config.items():
+        if name not in ("api_key", "base_url", "model", "timeout"):
+            parser.error(f"unknown config option: {name}")
+        if name != "timeout" and (not isinstance(value, str) or not value.strip()):
+            parser.error(f"config {name} must be a nonempty string")
+    if "timeout" in config:
+        try:
+            config["timeout"] = positive_timeout(config["timeout"])
+        except (TypeError, ValueError, OverflowError):
+            parser.error("config timeout must be a positive finite number of seconds")
+    return config
 
 
 def slugify(text: str, max_len: int = 30) -> str:
@@ -84,7 +130,7 @@ def model_rejects_input_fidelity(model: str) -> bool:
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(
         prog="generate.py",
-        description="Call OpenAI GPT Image 2/2.5 (generations or edits) via the official openai Python SDK.",
+        description="Call an OpenAI-compatible Images API (generations or edits) via the official openai Python SDK.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     p.add_argument("-p", "--prompt", required=True, help="Text prompt / edit instruction.")
@@ -103,7 +149,10 @@ def parse_args() -> argparse.Namespace:
         help="Alpha-channel PNG mask (opaque = preserved, transparent = regenerated). "
              "Edits endpoint only; requires -i.",
     )
-    p.add_argument("--model", default=DEFAULT_MODEL, help=f"Model ID: gpt-image-2.5-flare, gpt-image-2.5-sunburst, or {DEFAULT_MODEL} (compatibility default).")
+    p.add_argument("--config", type=Path, help="TOML config path. Default GPT_IMAGE_CONFIG or ~/.config/gpt-image/config.toml.")
+    p.add_argument("--base-url", help="Images API base URL, including its API prefix (for example https://gateway.example/v1). Overrides saved settings.")
+    p.add_argument("--timeout", type=float, help=f"API request timeout in seconds. Default GPT_IMAGE_TIMEOUT, config timeout, or {DEFAULT_TIMEOUT:g}.")
+    p.add_argument("--model", help=f"Model ID or gateway alias. Default GPT_IMAGE_MODEL, config model, or {DEFAULT_MODEL}.")
     p.add_argument(
         "--size", default=DEFAULT_SIZE,
         help="Image size. Accepts literals (1024x1024, 1536x1024, 2048x2048, 3840x2160, "
@@ -142,6 +191,29 @@ def parse_args() -> argparse.Namespace:
         help="Optional end-user identifier forwarded to OpenAI for abuse tracking.",
     )
     args = p.parse_args()
+    _load_env_chain()
+    config = read_config(p, args.config)
+    args.api_key = os.environ.get("GPT_IMAGE_API_KEY", config.get("api_key", os.environ.get("OPENAI_API_KEY")))
+    if args.base_url is None:
+        args.base_url = os.environ.get("GPT_IMAGE_BASE_URL", config.get("base_url", os.environ.get("OPENAI_BASE_URL", DEFAULT_BASE_URL)))
+    if args.model is None:
+        args.model = os.environ.get("GPT_IMAGE_MODEL", config.get("model", DEFAULT_MODEL))
+    if args.timeout is None:
+        args.timeout = os.environ.get("GPT_IMAGE_TIMEOUT", config.get("timeout", DEFAULT_TIMEOUT))
+    if not isinstance(args.model, str) or not args.model.strip():
+        p.error("model must be a nonempty string")
+    try:
+        args.timeout = positive_timeout(args.timeout)
+    except (TypeError, ValueError, OverflowError):
+        p.error("timeout must be a positive finite number of seconds")
+    try:
+        url = urlsplit(args.base_url)
+        if (any(char.isspace() for char in args.base_url)
+                or url.scheme not in ("http", "https") or not url.hostname or url.port == 0
+                or url.username is not None or url.password is not None or url.query or url.fragment):
+            raise ValueError
+    except ValueError:
+        p.error("base URL must be an absolute HTTP(S) URL without credentials, query, or fragment")
     image25 = re.fullmatch(r"gpt-image-2\.5-(?:flare|sunburst)(?:-\d{4}-\d{2}-\d{2})?", args.model) is not None
     if args.quality in ("xhigh", "max") and not image25:
         p.error("--quality xhigh/max requires --model gpt-image-2.5-flare or gpt-image-2.5-sunburst")
@@ -255,10 +327,9 @@ def write_outputs(data: list[Any], out_path: Path, n: int) -> list[Path]:
 def main() -> int:
     args = parse_args()
 
-    _load_env_chain()
-    if not os.environ.get("OPENAI_API_KEY"):
+    if not args.api_key or not args.api_key.strip():
         print(
-            "error: OPENAI_API_KEY not set. Add it to env / .env / ~/.env, or use your host agent's native image tool.",
+            "error: image API key not set. Set GPT_IMAGE_API_KEY, config api_key, or OPENAI_API_KEY.",
             file=sys.stderr,
         )
         return 2
@@ -266,7 +337,8 @@ def main() -> int:
     ext = args.output_format or "png"
     out_path = Path(args.file).expanduser().resolve() if args.file else default_output_path(args.prompt, ext)
 
-    client = OpenAI(max_retries=0)  # No hidden retries of potentially billable generation requests.
+    # Explicit connection settings keep the host agent's text-model endpoint separate.
+    client = OpenAI(api_key=args.api_key, base_url=args.base_url, timeout=args.timeout, max_retries=0)
 
     try:
         result = call_edit(client, args) if args.image else call_generate(client, args)

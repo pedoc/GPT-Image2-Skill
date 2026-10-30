@@ -1,6 +1,6 @@
 ---
 name: gpt-image
-description: "Generate or edit images with GPT Image 2 or 2.5 through the bundled uv script and Reference Gallery. Use for image requests including imprecise 'GPT 2.5' model names, posters, typography, reference edits, and inpainting; resolve the model choice before generation."
+description: "Generate or edit images with GPT Image 2 or 2.5 through the bundled uv script, saved image-service connection, and Reference Gallery. Use for image requests including imprecise 'GPT 2.5' model names, posters, typography, reference edits, and inpainting."
 metadata: {"openclaw":{"requires":{"bins":["uv"]},"primaryEnv":"OPENAI_API_KEY","homepage":"https://github.com/wuyoscar/gpt_image_2_skill"}}
 ---
 
@@ -14,7 +14,7 @@ Generate/edit with the prompt library and bundled `scripts/generate.py`. Require
 2. **Choose the reference path**: Image 2 keeps the gallery-first workflow below. For 2.5, a precise brief needs no reference loading; otherwise choose one short task slice.
 3. **Refine only as needed**: preserve the brief. Add a specific gallery case, craft section or template only to fill a concrete gap; do not load them as a bundle for 2.5.
 4. **Confer when useful**: before costly/ambiguous/high-polish calls, present 1–3 matched directions plus planned size/quality; ask at most one concise question at a time. Skip long discussion for precise “generate now” requests with a resolved model.
-5. **Execute the bundled script**: use the runtime-provided skill path and an explicit `--model`. Check reference/mask paths and agreed flags. Do not probe or install a separate CLI, overwrite skills, modify `.env`, or write API keys for normal image requests.
+5. **Execute the bundled script**: resolve the installed skill's actual script path. Pass `--model` for the user's explicit model choice; otherwise let the script use its configured/default model. Check reference/mask paths and agreed flags. Do not probe or install a separate CLI, overwrite skills, modify config/`.env`, or write API keys for normal image requests.
 6. **Report**: output file path(s), key flags, and one concise refinement suggestion if useful.
 
 Fast path: confirmed 2.5 model + precise prompt + “generate now” → bundled script, without a mandatory reference/craft pass. Do not reconfirm an exact valid model.
@@ -27,9 +27,9 @@ Fast path: confirmed 2.5 model + precise prompt + “generate now” → bundled
 | Sunburst | `gpt-image-2.5-sunburst` | Precise reference edits and detailed control |
 | Image 2 | `gpt-image-2` | Existing Image 2 workflows and compatibility |
 
-- If the model is absent, ambiguous (such as “GPT 2.5”), or misspelled, ask one clear question offering **Flare, Sunburst, and Image 2** with these trade-offs, then wait. For a typo, suggest the likely intended choice without silently correcting it. Do not treat `gpt-image-2.5` as an API model ID.
+- If the user does not specify a model, omit `--model` to use the configured/default model. If the user supplies an ambiguous name (such as “GPT 2.5”) or a probable typo, ask one clear question offering **Flare, Sunburst, and Image 2**, then wait. Do not treat `gpt-image-2.5` as an official API model ID.
 - Use an exact supported model ID, an unambiguous choice from this menu, or the user's already confirmed choice for the current task without asking again. If the user explicitly says “you choose,” explain the pick briefly and proceed; consider their task and budget rather than always selecting the most expensive settings.
-- Always pass the chosen ID through `--model`. The script retains `gpt-image-2` as its default; the agent must still resolve the user's choice.
+- Pass an explicitly chosen ID through `--model`. Preserve an exact gateway model alias configured or supplied by the user; do not replace it with an official ID. The script defaults to `gpt-image-2` only when no model is configured.
 - Keep model confirmation, cost discussion, and API flags separate from the final image prompt. Use the model-specific reference path below only when it helps the task. Preserve the user's exact text, intended content, reference identity, and edit invariants; obtain confirmation before material prompt changes.
 - Generate one image unless the user requested more. Do not silently switch models, change material prompt content, or run multiple model/prompt variants or comparisons. Ask before additional paid variants. For an authorized same-prompt comparison, keep the prompt, size, and quality identical unless the user asks to vary them.
 - Consult `references/models.md` when parameter support or validation status needs checking. On an invalid-model, access/403, quota, or policy failure, report the failure and stop; do not switch models or rewrite the prompt to retry automatically.
@@ -37,17 +37,34 @@ Fast path: confirmed 2.5 model + precise prompt + “generate now” → bundled
 ## Run the bundled script
 
 ```bash
-uv run "$SKILL_DIR/scripts/generate.py" --model MODEL_ID -p "PROMPT" [-f OUT] [-i REF...] [-m MASK] [options]
+uv run "/actual/installed/gpt-image/scripts/generate.py" -p "PROMPT" [--model MODEL_ID] [-f OUT] [-i REF...] [-m MASK] [options]
 ```
 
-`SKILL_DIR` is the installed skill folder supplied by the runtime. The script contains the complete implementation and works when only this skill folder is copied; it needs no repository package or PATH command. `uv` prepares dependencies from its inline metadata and adjacent lockfile.
+Replace the example path with the installed skill's actual location; no standard `SKILL_DIR` environment variable is assumed. The script contains the complete implementation and works when only this skill folder is copied; it needs no repository package or PATH command. `uv` prepares dependencies from its inline metadata and adjacent lockfile.
+
+## Saved image connection
+
+The script automatically reads `~/.config/gpt-image/config.toml` for the user running the agent. This location is independent of the agent's project and skill installation directory. Use the bundled `config.example.toml` as a setup template; never overwrite a real config during image requests or display its credential contents.
+
+```toml
+base_url = "https://gateway.example/v1"
+api_key = "your-image-service-key"
+model = "gpt-image-2"
+timeout = 600
+```
+
+Precedence per field: explicit `--base-url` / `--model` / `--timeout` → `GPT_IMAGE_BASE_URL` / `GPT_IMAGE_MODEL` / `GPT_IMAGE_TIMEOUT` → matching TOML field → compatibility defaults. Key precedence: `GPT_IMAGE_API_KEY` → TOML `api_key` → `OPENAI_API_KEY`. Base URL falls back to `OPENAI_BASE_URL`, then the official OpenAI API. Model defaults to `gpt-image-2`; API request timeout defaults to 600 seconds. Existing env values are kept while loading current-directory `.env`, then `~/.env`.
+
+`--config PATH` overrides `GPT_IMAGE_CONFIG` and the default config path. Explicitly selected missing files and invalid config stop execution; a missing default file permits compatibility fallbacks. The script does not import the host agent's main-model settings. Containers and remote agents need the config in their own user directory or an explicitly selected path.
+
+A custom base URL must include the gateway's API prefix, for example `/v1`. The SDK appends `/images/generations` or `/images/edits`. The service must support OpenAI Images API, including multipart edits; Chat/Responses compatibility alone is insufficient. Settings resolve independently, so configure the image key and address together. Gateway aliases use the gateway's parameter contract; do not assume an alias proves support for model-specific quality levels.
 
 ## Key and cost rules
 
-- The script reads `OPENAI_API_KEY` from process env, then `.env`, then `~/.env` without overriding existing env; successful API calls may bill the user’s OpenAI account.
+- Use the configured image key and base URL as one connection. Image-specific settings take precedence over generic `OPENAI_*` settings; requests may bill the selected image service.
 - If host/runtime has native platform-managed image generation and the user wants that path, use the host tool instead of this script.
-- If `OPENAI_API_KEY` is unset, report missing key or use host-native generation when requested; do not write secrets.
-- If user wants to avoid local-key use, respect `unset OPENAI_API_KEY`; if a key exists in `.env`/`~/.env`, tell them to remove/rename it for the session rather than working around it.
+- If no image API key is configured, report the missing key or use host-native generation when requested; do not write secrets.
+- If the user wants to avoid local-key use, do not run this script. Unsetting only `OPENAI_API_KEY` does not disable saved image credentials. An explicitly empty `GPT_IMAGE_API_KEY` blocks fallback keys.
 - Never print secret values.
 
 ## Flags
@@ -58,7 +75,10 @@ uv run "$SKILL_DIR/scripts/generate.py" --model MODEL_ID -p "PROMPT" [-f OUT] [-
 | `-f, --file` | path | Output path; auto-named if omitted |
 | `-i, --image` | repeatable path | Use edits endpoint; supports multiple references |
 | `-m, --mask` | PNG path | Inpaint with alpha mask; requires `-i` |
-| `--model` | `gpt-image-2`, `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst` | Agent must pass the resolved choice explicitly |
+| `--config` | TOML path | Select another image connection; missing explicit files fail |
+| `--base-url` | HTTP(S) API base URL | Override the saved gateway for this request |
+| `--timeout` | positive seconds | Override the API request timeout |
+| `--model` | official image model ID or exact gateway alias | Override the configured/default model |
 | `--size` | `1k`, `2k`, `4k`, `portrait`, `landscape`, `square`, `wide`, `tall`, or literal | Canvas size |
 | `--quality` | `low`, `medium`, `high`, `auto`; 2.5 also `xhigh`, `max` | Cost/quality dial; check model-specific limits |
 | `-n, --n` | integer | Number of images |
@@ -87,9 +107,9 @@ Size policy:
 
 | Mode | Trigger | Endpoint |
 |---|---|---|
-| Text-to-image | no `-i` | `/v1/images/generations` |
-| Reference edit | one or more `-i` | `/v1/images/edits` |
-| Inpaint | `-i` + `-m` | `/v1/images/edits` with mask |
+| Text-to-image | no `-i` | `{base_url}/images/generations` |
+| Reference edit | one or more `-i` | `{base_url}/images/edits` |
+| Inpaint | `-i` + `-m` | `{base_url}/images/edits` with mask |
 
 Surface API errors verbatim enough for debugging; exit codes: `0` success, `1` API/refusal, `2` bad args/missing key.
 
@@ -104,7 +124,7 @@ Load the smallest useful slice, not both model routes. Add a second task slice o
 
 ## Verification
 
-- Before API call: check the resolved model and explicit `--model`, endpoint mode, size, quality, output path, and required reference/mask files. Omit `--input-fidelity` unless explicitly needed; do not assume 2.5 always uses or accepts `high`.
+- Before API call: respect the configured connection/model or the user's explicit overrides; check endpoint mode, size, quality, output path, and required reference/mask files. Do not print the config's secret contents. Omit `--input-fidelity` unless explicitly needed; do not assume 2.5 always uses or accepts `high`.
 - After execution: report path(s) printed by the script and surface stderr on failure.
 - For edits/inpaints: verify `-i` paths exist; verify `-m` exists when used.
 

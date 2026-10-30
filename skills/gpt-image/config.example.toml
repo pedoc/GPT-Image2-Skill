@@ -1,0 +1,6 @@
+# Copy to ~/.config/gpt-image/config.toml for all agents running as your user.
+# Keep the real file outside the skill/repository. Never commit credentials.
+base_url = "https://gateway.example/v1"
+api_key = "replace-with-your-image-service-key"
+model = "gpt-image-2"
+timeout = 600

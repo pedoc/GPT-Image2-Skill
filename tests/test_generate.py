@@ -38,6 +38,12 @@ class GenerateTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.folder = Path(self.tmp.name)
+        # Windows child interpreters need SystemRoot to load networking DLLs.
+        runtime_env = {name: value for name, value in os.environ.items()
+                       if name.upper() in ('SYSTEMROOT', 'WINDIR')}
+        self.enterContext(patch.dict(os.environ, runtime_env, clear=True))
+        self.enterContext(patch.object(generate.Path, 'cwd', return_value=self.folder))
+        self.enterContext(patch.object(generate.Path, 'home', return_value=self.folder))
         self.image = self.folder / 'reference.png'
         self.image.write_bytes(PNG)
         self.requests = []
@@ -161,7 +167,8 @@ class GenerateTests(unittest.TestCase):
                  patch.object(generate, '_load_env_chain'), patch.dict(os.environ, {'OPENAI_API_KEY': 'offline-test'}), \
                  patch.object(generate, 'OpenAI', return_value=self.client) as constructor, contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(generate.main(), 0)
-                constructor.assert_called_once_with(max_retries=0)
+                constructor.assert_called_once_with(api_key='offline-test', base_url=generate.DEFAULT_BASE_URL,
+                                                    timeout=generate.DEFAULT_TIMEOUT, max_retries=0)
             self.assertEqual(path.read_bytes(), PNG)
             self.assertEqual(self.requests[-1].url.path, '/v1/images/' + endpoint)
 
@@ -196,6 +203,9 @@ class GenerateTests(unittest.TestCase):
                                        cwd=self.folder, capture_output=True, text=True)
             self.assertEqual(completed.returncode, 0, completed.stderr)
             self.assertIn('--model', completed.stdout)
+            self.assertIn('--config', completed.stdout)
+            self.assertIn('--base-url', completed.stdout)
+            self.assertIn('--timeout', completed.stdout)
             self.assertIn('xhigh', completed.stdout)
 
 

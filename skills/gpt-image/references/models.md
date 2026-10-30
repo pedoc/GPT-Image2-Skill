@@ -17,14 +17,17 @@ The 2.5 models also have snapshots ending in `-2026-09-08`. There is no document
 bare `gpt-image-2.5` API alias. A name such as “GPT 2.5” is a request to clarify,
 not a reason to silently choose a model or send an invented ID.
 
-Ask one short model-choice question if the user has not chosen, supplied an
-ambiguous name, or made a probable typo. Do not ask again when an exact model was
-already supplied. If the user delegates the choice, explain the selection and
+If the user has not selected a model, omit `--model` and use `GPT_IMAGE_MODEL`,
+the saved connection's `model`, or the script default. Ask one short question for
+an ambiguous name or probable typo. Do not ask again when an exact model was
+already supplied. If the user delegates a new choice, explain the selection and
 proceed. Model selection belongs in the conversation, never inside the image
-prompt. Always pass the selected ID explicitly with `--model`.
+prompt. Pass explicit choices with `--model`; preserve exact user-configured
+gateway aliases rather than replacing them with an official ID.
 
-The noninteractive script keeps `gpt-image-2` as its compatibility default. This
-is not permission for an agent to skip the model-choice step. Do not generate
+The script keeps `gpt-image-2` as its compatibility default when no model is
+configured. See the [configuration template](../config.example.toml) for the
+saved connection fields. Do not generate
 multiple models or prompt variants without authorization. Do not change models
 or materially rewrite the prompt in response to permission, quota, or policy
 errors. The script disables automatic SDK retries; report errors rather than

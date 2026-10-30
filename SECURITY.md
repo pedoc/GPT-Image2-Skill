@@ -19,6 +19,7 @@ When reporting, include:
 
 ## Secret handling
 
-- Never commit `OPENAI_API_KEY`, `.env`, or other credentials.
-- The script reads `OPENAI_API_KEY` from process env, then `.env`, then `~/.env` without overriding an already-set env var.
+- Never commit real `GPT_IMAGE_API_KEY`, `OPENAI_API_KEY`, `.env`, image config credentials, or other secrets. Keep the real `~/.config/gpt-image/config.toml` outside the repository and skill folder.
+- Image settings resolve from explicit flags, `GPT_IMAGE_*`, then the selected TOML config before generic `OPENAI_*` fallbacks. Existing `.env` loading remains process env, then current-directory `.env`, then `~/.env`, without overriding an already-set variable. Configure the image key and base URL together to avoid mixing connections.
+- Configuration parse errors must not print credential-bearing source lines. An empty `GPT_IMAGE_API_KEY` blocks fallback credentials; unsetting only `OPENAI_API_KEY` does not disable saved image credentials.
 - Generated examples and issue reports should not include private prompts, private images, or API response bodies containing secrets.
